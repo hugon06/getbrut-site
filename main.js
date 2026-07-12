@@ -62,7 +62,7 @@
       var btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       var data = new FormData(form);
-      fetch('https://formsubmit.co/ajax/ugdu06@gmail.com', {
+      fetch('https://formsubmit.co/ajax/1928ea550bd26afd427f7f1be5a94f50', {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: data
