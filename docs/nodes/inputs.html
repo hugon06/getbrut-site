@@ -105,11 +105,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>A freeform text node. Type a prompt; its output flows down text wires to any node that takes a prompt — Text→Image, Image→Image, the cinema agents, and so on. Prompts are the most-reused currency in a graph.</p>
 <h2 id="refine-prompt-helper"><a class="anchor" href="#refine-prompt-helper" aria-hidden="true">#</a>Refine (Prompt Helper)</h2>
 <p>An AI prompt-rewriter. Wire a Prompt (or any text) into Refine, choose a <strong>preset</strong>, and it rewrites the text through a text model (Gemini) — sharpening a vague idea into a precise, photorealistic prompt without changing your intent.</p>
-<p>Presets are data (ten ship by default), including:</p>
+<p>Presets are data (eleven ship by default), including:</p>
 <ul>
 <li><strong>Enhance prompt</strong> — the general-purpose sharpener.</li>
 <li><strong>Screenshot → photoreal</strong>, <strong>Cinematic relight</strong>, <strong>Camera language</strong>, <strong>Scene dressing</strong>, and more.</li>
 <li><strong>Scenario maker</strong> — writes a brief for a Multi-Shot <code>custom</code> scenario (chain Prompt → Refine → Multi-Shot notes).</li>
+<li><strong>Kling video prompt</strong> — structures a loose motion idea into Kling&#39;s five-part video prompt (scene / subject motion / explicit camera / atmosphere / negative constraints), with the stillness discipline the cinema crew uses. Tell it in the notes which pipeline stage you&#39;re at (look test vs final render).</li>
 <li><strong>Refine shot</strong> — plan-aware: feed a shot-plan JSON in and it edits one shot.</li>
 </ul>
 <p>Some presets are multimodal — wire an image in and the model sees it. Refine&#39;s output is editable text: hand-tweak it and your edits flow downstream; change an input or roll again and it regenerates over them.</p>

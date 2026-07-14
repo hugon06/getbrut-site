@@ -125,6 +125,8 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Nothing while signed out.</strong> If you&#39;re not signed in, no heartbeat is sent at all.</li>
 <li>You can see this exact JSON any time in <strong>⚙ Keys → Account &amp; privacy</strong>.</li>
 </ul>
+<h2 id="feedback-only-what-you-type-only-when-you-click-send"><a class="anchor" href="#feedback-only-what-you-type-only-when-you-click-send" aria-hidden="true">#</a>Feedback — only what you type, only when you click send</h2>
+<p>The <strong>💬 Send feedback</strong> button is the one other thing that can send data, and it&#39;s entirely user-initiated: nothing is ever sent until you press <em>Send</em>. A report carries your message, your account email (so we can reply), and — <strong>only if you leave the checkbox on</strong> — a diagnostics block: the same seven heartbeat fields plus the last few <em>error messages</em> from the Activity panel. The modal shows that block <strong>byte for byte</strong> before you send it (&quot;Show exactly what will be sent&quot;). Never your graphs, images, prompts or keys.</p>
 <h2 id="sign-in"><a class="anchor" href="#sign-in" aria-hidden="true">#</a>Sign-in</h2>
 <p>Identity runs through <strong>Supabase</strong> (magic link or Google/GitHub). It&#39;s used <em>only</em> to know who&#39;s using a seat — never to store your work. The <strong>engine holds your session</strong>, not the browser: your refresh token is kept in your OS keychain, and access tokens are verified locally against a cached public key (so it works offline). This is identity only.</p>
 <h2 id="the-website"><a class="anchor" href="#the-website" aria-hidden="true">#</a>The website</h2>
@@ -134,7 +136,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/faq.html"><span>← Previous</span><b>FAQ</b></a><span></span></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#what-never-leaves-your-machine">What never leaves your machine</a></li><li class="lvl2"><a href="#the-only-thing-brut-ever-sends">The only thing Brut ever sends</a></li><li class="lvl2"><a href="#sign-in">Sign-in</a></li><li class="lvl2"><a href="#the-website">The website</a></li><li class="lvl2"><a href="#in-short">In short</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#what-never-leaves-your-machine">What never leaves your machine</a></li><li class="lvl2"><a href="#the-only-thing-brut-ever-sends">The only thing Brut ever sends</a></li><li class="lvl2"><a href="#feedback-only-what-you-type-only-when-you-click-send">Feedback — only what you type, only when you click send</a></li><li class="lvl2"><a href="#sign-in">Sign-in</a></li><li class="lvl2"><a href="#the-website">The website</a></li><li class="lvl2"><a href="#in-short">In short</a></li></ul></nav>
 </div>
 </body>
 </html>

@@ -104,6 +104,9 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="image-video"><a class="anchor" href="#image-video" aria-hidden="true">#</a>Image → Video</h2>
 <p>Animate a single image into a clip. Wire an image into the node, pick a provider and model, set duration/resolution and (where supported) audio and an <strong>end frame</strong>, and run.</p>
 <p>Providers: <strong>Kling</strong> (REST and subscription), <strong>Google Veo</strong>, and <strong>Seedance</strong> — see <a href="/docs/providers/index.html">Providers</a>. Some models do text-to-video too. The node shows a <strong>cost estimate before you run</strong>, derived from Brut&#39;s data-driven pricing.</p>
+<h3 id="reference-images"><a class="anchor" href="#reference-images" aria-hidden="true">#</a>Reference images</h3>
+<p>Some models accept extra <strong>reference images</strong> alongside the start frame — a character, a product, a style plate — and keep them consistent in the clip. When the selected model supports them, the node grows a <strong>references inlet</strong> and its info line says so (&quot;✓ takes reference images (up to N)&quot;); models that don&#39;t say that too, so you never guess. A <a href="/docs/nodes/multishot-and-boards.html">Reference Board</a> plugs straight in — its numbered tiles (or the whole curated pool) wire onto the inlet.</p>
+<p>Current support: <strong>Kling o1 / 3.0 Omni</strong> (subscription, up to 6), <strong>Seedance 2.0</strong>, <strong>Veo 3.1 / 3.1 Fast</strong> (up to 3). Wiring references into a model that can&#39;t take them fails with a clear message — Brut never silently drops an image you wired.</p>
 <h2 id="film-shots-the-cinema-batch-executor"><a class="anchor" href="#film-shots-the-cinema-batch-executor" aria-hidden="true">#</a>Film Shots — the cinema batch executor</h2>
 <p>Film Shots takes a shot plan (from the <a href="/docs/nodes/cinema-crew.html">DoP / Storyboard</a>) and shoots the whole sequence. Its defining feature is the <strong>cost guard</strong>:</p>
 <ul>
@@ -126,7 +129,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/cinema-crew.html"><span>← Previous</span><b>The cinema crew</b></a><a class="pn next" href="/docs/nodes/utility.html"><span>Next →</span><b>Utility</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#image-video">Image → Video</a></li><li class="lvl2"><a href="#film-shots-the-cinema-batch-executor">Film Shots — the cinema batch executor</a></li><li class="lvl2"><a href="#clip-board">Clip Board</a></li><li class="lvl2"><a href="#sequence-local-assembly-free">Sequence — local assembly, free</a></li><li class="lvl2"><a href="#the-full-flow">The full flow</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#image-video">Image → Video</a></li><li class="lvl3"><a href="#reference-images">Reference images</a></li><li class="lvl2"><a href="#film-shots-the-cinema-batch-executor">Film Shots — the cinema batch executor</a></li><li class="lvl2"><a href="#clip-board">Clip Board</a></li><li class="lvl2"><a href="#sequence-local-assembly-free">Sequence — local assembly, free</a></li><li class="lvl2"><a href="#the-full-flow">The full flow</a></li></ul></nav>
 </div>
 </body>
 </html>

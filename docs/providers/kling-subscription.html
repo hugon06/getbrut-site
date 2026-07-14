@@ -110,9 +110,14 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </ol>
 <p>Brut talks to Kling through the CLI (an MCP client) and <strong>never keychains those tokens</strong> — the vault just reports a <code>cli-oauth</code> sentinel when the session file exists. The engine downloads the <strong>watermark-free master</strong> (result URLs expire in 24 h).</p>
 <h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
-<p>The subscription model ids differ from REST — <code>kling-video-v2_5</code>, <code>…-v3_0</code>, <code>…-v3_0_omni</code>, <code>…-v3_0_turbo</code>, <code>…-v2_6</code>, <code>…-o1</code> — and cover both image-to-video and text-to-video. End frame = the tail image.</p>
-<h2 id="pricing"><a class="anchor" href="#pricing" aria-hidden="true">#</a>Pricing</h2>
+<p>The subscription model ids differ from REST — <code>kling-video-v2_5</code>, <code>…-v3_0</code>, <code>…-v3_0_omni</code>, <code>…-v3_0_turbo</code>, <code>…-v2_6</code>, <code>…-o1</code> — and cover both image-to-video and text-to-video.</p>
+<ul>
+<li><strong>End frame</strong> (tail image): v2.5, v2.6 and 3.0. The omni family (o1, 3.0 Omni) and 3.0 Turbo have <strong>no end-frame input</strong>.</li>
+<li><strong>Reference images</strong>: <strong>o1</strong> and <strong>3.0 Omni</strong> take up to <strong>6 extra references</strong> besides the start frame — the <a href="/docs/nodes/video.html">Image → Video node</a> grows a references inlet when you pick them.</li>
+</ul>
+<h2 id="pricing-your-plan-balance"><a class="anchor" href="#pricing-your-plan-balance" aria-hidden="true">#</a>Pricing &amp; your plan balance</h2>
 <p>Only <strong>v2.5</strong> currently carries a measured price (15 credits / 5s / 720p, ~3× cheaper than API list). Other tiers show <strong>no estimate until measured</strong> — Brut never invents a price it hasn&#39;t confirmed.</p>
+<p>When this provider is selected on an <strong>Image → Video</strong> or <strong>Film Shots</strong> node, the node shows your <strong>live plan balance</strong> (&quot;🎟 Plan balance: 5,786 credits · Pro&quot;) read from the CLI — refreshed after every run — and Film Shots repeats it in the paid-run confirmation, so you always know where your credits stand before and after a batch.</p>
 <h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
 <li><strong>5 QPS</strong>, <strong>Personal workspace only</strong>, and tasks <strong>can&#39;t be cancelled</strong> provider-side.</li>
@@ -122,7 +127,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/kling.html"><span>← Previous</span><b>Kling</b></a><a class="pn next" href="/docs/providers/veo.html"><span>Next →</span><b>Google Veo</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing">Pricing</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing-your-plan-balance">Pricing &amp; your plan balance</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
 </div>
 </body>
 </html>
