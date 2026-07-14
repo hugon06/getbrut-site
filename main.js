@@ -81,6 +81,21 @@
       var btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       var data = new FormData(form);
+      // Store the signup in Supabase (the tracked list) — best-effort; the
+      // FormSubmit email below is the notification + fallback if this fails.
+      fetch('https://stakdmbdkhavrklwetal.supabase.co/rest/v1/beta_signups', {
+        method: 'POST',
+        headers: {
+          apikey: 'sb_publishable_Nzh9GMr7SKJA8meKmKzetw_VPY2DlGF',
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({
+          email: data.get('email'),
+          studio: data.get('studio') || null,
+          first_run: data.get('first_run') || null
+        })
+      }).catch(function () {});
       fetch('https://formsubmit.co/ajax/1928ea550bd26afd427f7f1be5a94f50', {
         method: 'POST',
         headers: { Accept: 'application/json' },
