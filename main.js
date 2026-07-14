@@ -25,6 +25,25 @@
     if (nav) nav.style.borderBottomColor = window.scrollY > 40 ? '#262421' : 'transparent';
   }, { passive: true });
 
+  // --- Mobile burger menu ---
+  var burger = document.querySelector('.nav-burger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Tapping any menu link closes the sheet.
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   // --- Provider chip flips ---
   document.querySelectorAll('[data-chip]').forEach(function (ch) {
     var front = ch.querySelector('[data-front]');
