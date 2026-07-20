@@ -110,7 +110,10 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <ul>
 <li><strong><code>gpt-image-2</code></strong> — text-to-image (<code>/images/generations</code>) and image-to-image (<code>/images/edits</code>). Set the aspect ratio and quality on the node.</li>
 <li><strong>Text/planning</strong> — <code>gpt-5.4-mini</code>, <code>gpt-5.5</code> for Refine and the cinema agents when you choose OpenAI as the planner.</li>
+<li><strong>GPT-5.6 family</strong> — three text tiers with a <strong>reasoning dial</strong>: <strong>Sol</strong> ($5/M in · $30/M out, the deepest), <strong>Terra</strong> ($2.50/M in · $15/M out, balanced), <strong>Luna</strong> ($1/M in · $6/M out, cheap and fast). Available everywhere text models are picked: <a href="/docs/nodes/inputs.html">Text → Text</a>, the cinema agents, and <a href="/docs/concepts/marcel.html">Marcel&#39;s</a> model lanes.</li>
 </ul>
+<h2 id="the-reasoning-dial-gpt-56"><a class="anchor" href="#the-reasoning-dial-gpt-56" aria-hidden="true">#</a>The reasoning dial (GPT-5.6)</h2>
+<p>GPT-5.6 models can think before answering, and Brut exposes the dial: <strong>none · low · medium · high · xhigh</strong> (leave it on <em>default</em> to let OpenAI pick). Higher settings give deeper answers and cost more — reasoning tokens are billed <strong>as output tokens</strong>, so an <code>xhigh</code> answer can spend several times the tokens of the visible text. The dial appears on the Text → Text node, on each <a href="/docs/nodes/cinema-crew.html">cinema agent</a> (Scenarist, Artistic Director, DoP, Script Supervisor), and — for Marcel&#39;s brain lane — in ⚙ Settings; always only when the selected model actually supports it. Changing it re-plans (cache miss), like any input change.</p>
 <h2 id="native-inpainting"><a class="anchor" href="#native-inpainting" aria-hidden="true">#</a>Native inpainting</h2>
 <p>OpenAI is the provider that applies an <a href="/docs/nodes/image-generation.html">Inpaint</a> mask <strong>natively</strong> — a true masked edit, where only the painted region changes and the rest is pixel-faithful. (Gemini treats the mask as strong guidance instead.) If precise local edits matter, inpaint on OpenAI.</p>
 <h2 id="notes"><a class="anchor" href="#notes" aria-hidden="true">#</a>Notes</h2>
@@ -121,7 +124,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/gemini.html"><span>← Previous</span><b>Google Gemini</b></a><a class="pn next" href="/docs/providers/kling.html"><span>Next →</span><b>Kling</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#native-inpainting">Native inpainting</a></li><li class="lvl2"><a href="#notes">Notes</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#the-reasoning-dial-gpt-56">The reasoning dial (GPT-5.6)</a></li><li class="lvl2"><a href="#native-inpainting">Native inpainting</a></li><li class="lvl2"><a href="#notes">Notes</a></li></ul></nav>
 </div>
 </body>
 </html>

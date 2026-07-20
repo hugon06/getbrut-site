@@ -102,12 +102,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Kling (subscription)</h1>
 <p>The <strong>same Kling models</strong>, billed to your <strong>kling.ai subscription plan</strong> instead of API credit packs — measured at roughly <strong>3× cheaper</strong> than the REST API, with no 30-day pack expiry. This is the recommended way to run Kling for steady studio work.</p>
 <h2 id="how-it39s-authenticated-no-key-to-paste"><a class="anchor" href="#how-it39s-authenticated-no-key-to-paste" aria-hidden="true">#</a>How it&#39;s authenticated (no key to paste)</h2>
-<p>There&#39;s <strong>no API key</strong> here. Auth is an <strong>OAuth session owned by Kling&#39;s official CLI</strong>:</p>
+<p>There&#39;s <strong>no API key</strong> here. Auth is an <strong>OAuth session owned by Kling&#39;s official CLI</strong> — and setup is two buttons in Brut&#39;s ⚙ Keys wizard:</p>
 <ol>
-<li>Install Node/npm, then the CLI: <code>npm i -g @klingai/cli-global</code></li>
-<li>Sign in: <code>kling login</code> (opens a browser). Tokens are stored by the CLI in <code>~/.kling/.credentials</code>.</li>
-<li>In Brut&#39;s setup wizard, the Kling (subscription) card has a <strong>&quot;Check login&quot;</strong> button — click it and Brut confirms the CLI session.</li>
+<li><strong>Install Kling CLI</strong> — one click. Brut fetches the official CLI (<code>@klingai/cli-global</code>, about 1 MB) straight from Kling&#39;s npm registry channel and runs it on the Node runtime that ships inside the Brut installer. Nothing else to install, no admin rights.</li>
+<li><strong>Log in to Kling</strong> — your browser opens on kling.ai; sign in there. Tokens are stored by the CLI itself in <code>~/.kling/.credentials</code>.</li>
+<li><strong>Check login</strong> confirms the session any time.</li>
 </ol>
+<p>If you run Brut from source instead of the installer, the classic route still works and takes precedence: <code>npm i -g @klingai/cli-global</code>, then <code>kling login</code> — a CLI already on your PATH is always used as-is.</p>
 <p>Brut talks to Kling through the CLI (an MCP client) and <strong>never keychains those tokens</strong> — the vault just reports a <code>cli-oauth</code> sentinel when the session file exists. The engine downloads the <strong>watermark-free master</strong> (result URLs expire in 24 h).</p>
 <h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
 <p>The subscription model ids differ from REST — <code>kling-video-v2_5</code>, <code>…-v3_0</code>, <code>…-v3_0_omni</code>, <code>…-v3_0_turbo</code>, <code>…-v2_6</code>, <code>…-o1</code> — and cover both image-to-video and text-to-video.</p>
@@ -121,7 +122,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
 <li><strong>5 QPS</strong>, <strong>Personal workspace only</strong>, and tasks <strong>can&#39;t be cancelled</strong> provider-side.</li>
-<li>Needs Node/npm + the CLI installed and logged in on each seat.</li>
+<li>Each seat signs in once (the CLI session lives per-machine, per-user).</li>
 </ul>
 <p>For higher throughput or Team workspaces, use the <strong><a href="/docs/providers/kling.html">REST API</a></strong> instead.</p>
 

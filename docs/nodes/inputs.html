@@ -114,15 +114,33 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Refine shot</strong> — plan-aware: feed a shot-plan JSON in and it edits one shot.</li>
 </ul>
 <p>Some presets are multimodal — wire an image in and the model sees it. Refine&#39;s output is editable text: hand-tweak it and your edits flow downstream; change an input or roll again and it regenerates over them.</p>
+<h2 id="text-text"><a class="anchor" href="#text-text" aria-hidden="true">#</a>Text → Text</h2>
+<p>A free-form LLM call — a ChatGPT/Claude turn as a graph node. Pick any text model from your providers (<strong>Gemini, GPT or Claude</strong> — your keys, like everywhere in Brut), optionally give it a role in the <strong>System</strong> field (&quot;you are a harsh photography critic&quot;), type a message, run.</p>
+<ul>
+<li><strong>Wired text is prepended</strong> to your message — chain Prompt → Text→Text, or feed one node&#39;s answer into the next. A chain of Text→Text nodes is a conversation materialized on the canvas: every turn editable, cached, and re-runnable.</li>
+<li><strong>Wired images are seen</strong> — connect renders or photos and ask &quot;what&#39;s wrong with this composition?&quot;, &quot;describe this scene for a video prompt&quot;, &quot;compare these two options&quot;. Images are downscaled for the model&#39;s request cap; nothing is uploaded anywhere but to your chosen provider.</li>
+<li>The <strong>answer is editable text</strong> — hand-tweak it and your edits flow downstream on the next run; <strong>🎲 Re-ask</strong> requests a fresh answer.</li>
+<li>On <strong>GPT-5.6</strong> models (Sol / Terra / Luna) a <strong>Reasoning</strong> select appears — none to xhigh, how long the model thinks before answering (<a href="/docs/providers/openai.html">details</a>). Changing it is a new answer (cache miss), like any input change.</li>
+<li>The node is <strong>width-resizable</strong> — select it and drag the right edge; long answers get room while height follows the content.</li>
+</ul>
+<p>Unlike Refine (which rewrites prompts through fixed presets), Text→Text is open-ended: analysis, critique, translation, naming, alt-text, brainstorming — anything a chat assistant does, with the result flowing down a text wire. One-shot by design: for an ongoing conversation with memory, talk to <a href="/docs/concepts/marcel.html">Marcel</a>. Calls are token-priced (typically well under a cent) and land in the ledger like every paid call.</p>
+<h2 id="text-board"><a class="anchor" href="#text-board" aria-hidden="true">#</a>Text Board</h2>
+<p>The Shot Board for text: wire one long text in — a Text → Text answer, an agent plan, any pasted script — and it splits into <strong>numbered, editable blocks</strong>, each with its <strong>own output plug</strong> (<code>#3</code> routes straight into a Text→Image while <code>#4</code> feeds an Image→Video). Free and local: the splitting is deterministic code, never a paid model call.</p>
+<ul>
+<li><strong>Split modes</strong>: <em>Auto-detect</em> tries <code>SHOT X</code> fenced blocks (the script format many studios use), then JSON arrays, numbered lists, and finally blank-line paragraphs; or pick a mode explicitly, including a custom separator.</li>
+<li>Blocks are <strong>editable in place</strong> — tweaks flow out the plugs immediately on the next run. Changing the wired text or the split mode <strong>re-splits</strong> (edits belong to the old content and reset with it).</li>
+<li><strong>✕ hides</strong> a block from the combined bottom output (its number and plug stay stable); ↺ restores it.</li>
+</ul>
+<p>The killer combo: a scripted Text → Text (your reel/script prompt in its System field, renders wired to its images inlet) → Text Board → per-shot prompts fanned out to your image and video nodes. One click from &quot;one long ChatGPT answer&quot; to a wired production board. (For the specific case of cinematic reels, the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>&#39;s <strong>Cinematic Reel (flourish)</strong> brief now folds this whole flow into one node chain — the Text → Text front-end stays the flexible, roll-your-own route.)</p>
 <h2 id="image-in"><a class="anchor" href="#image-in" aria-hidden="true">#</a>Image In</h2>
-<p>Loads images into the graph. Add them by <strong>file picker</strong>, <strong>drag &amp; drop</strong>, or <strong>paste</strong> — all append, so one Image In can hold several images. Dropping image files anywhere on the canvas creates a ready-filled Image In node right where they land.</p>
-<p>Image In is the entry point for image-to-image work, composition, inpainting, and the stills that ground the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>.</p>
+<p>Loads images into the graph. Add them by <strong>file picker</strong>, <strong>drag &amp; drop</strong>, or <strong>paste</strong> — all append, so one Image In can hold several images. Dropping image files anywhere on the canvas creates a ready-filled Image In node right where they land — and so does pressing <code>Ctrl+V</code> over the canvas with an image on the clipboard (copy from Photoshop, a render buffer, or any browser image; a new Image In appears at your cursor). To <em>append</em> a pasted image to an existing Image In instead, click that node first and then paste, or use its <strong>Paste</strong> button.</p>
+<p>Image In is the entry point for image-to-image work, composition, inpainting, and the stills that ground the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>. For the crew, your stills are the project&#39;s <strong>identity anchors, not a shot list</strong> — the film can hold more shots than you have stills: invented compositions generate their start frames <em>from</em> these anchors, so every frame stays your building.</p>
 <h2 id="next"><a class="anchor" href="#next" aria-hidden="true">#</a>Next</h2>
 <p>→ <strong><a href="/docs/nodes/image-generation.html">Image generation</a></strong> — turn these into pictures.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/concepts/brutpack.html"><span>← Previous</span><b>.brutpack & portability</b></a><a class="pn next" href="/docs/nodes/image-generation.html"><span>Next →</span><b>Image generation</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#prompt">Prompt</a></li><li class="lvl2"><a href="#refine-prompt-helper">Refine (Prompt Helper)</a></li><li class="lvl2"><a href="#image-in">Image In</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#prompt">Prompt</a></li><li class="lvl2"><a href="#refine-prompt-helper">Refine (Prompt Helper)</a></li><li class="lvl2"><a href="#text-text">Text → Text</a></li><li class="lvl2"><a href="#text-board">Text Board</a></li><li class="lvl2"><a href="#image-in">Image In</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
 </body>
 </html>

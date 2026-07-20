@@ -114,6 +114,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li>Cached and pinned clips cost <strong>$0</strong> and are never re-quoted.</li>
 <li>It fans out on a worker pool (staggered to respect provider rate limits), with the same per-clip semantics as Multi-Shot: <strong>cache / ↻ re-roll / ✓✗ verdicts / 📌 pins</strong>.</li>
 <li>An anti-shake <strong>stability clause</strong> is appended to every clip, and audio is an explicit AND-gate.</li>
+<li>An <strong>invented shot</strong> whose keyframe hasn&#39;t been generated on the Storyboard is a <strong>per-clip error</strong> — that clip is blocked (and counted in the confirm), never silently downgraded to text-to-video. The rest of the batch rolls normally.</li>
 </ul>
 <p>Nothing is generated until you confirm the total. That confirm no longer freezes the rest of a running graph — other branches keep working while it waits.</p>
 <h2 id="clip-board"><a class="anchor" href="#clip-board" aria-hidden="true">#</a>Clip Board</h2>

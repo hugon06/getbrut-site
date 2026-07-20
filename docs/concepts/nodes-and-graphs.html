@@ -103,11 +103,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>Brut is a node canvas. You build a <strong>graph</strong> — nodes connected by wires — and run it. Nodes are <em>shots and decisions</em>, not samplers and latents: a node is &quot;generate an image,&quot; &quot;animate this clip,&quot; &quot;plan the film,&quot; not a low-level knob.</p>
 <h2 id="the-canvas"><a class="anchor" href="#the-canvas" aria-hidden="true">#</a>The canvas</h2>
 <ul>
-<li><strong>Add a node</strong> — press <code>Tab</code> over the canvas for a searchable palette at your cursor, or click <strong>+ Node</strong>. Type to filter, <code>↑/↓</code> + <code>Enter</code> to place.</li>
+<li><strong>Add a node</strong> — the <strong>+</strong> on the left rail opens the <strong>node browser</strong>: every node by category (in workflow order), with a hover card showing what it does, what flows in and out, and whether it costs money. Click places it at the canvas center; drag drops it where you let go. Or press <code>Tab</code> over the canvas for the quick palette at your cursor — type to filter, <code>↑/↓</code> + <code>Enter</code> to place.</li>
 <li><strong>Pan</strong> — middle-drag. <strong>Box-select</strong> — left-drag. <strong>Zoom</strong> — scroll wheel.</li>
 <li><strong>Wire</strong> — drag from an output port to an input port. Drop a wire on empty canvas and the add menu opens, filtered to compatible nodes — pick one and it&#39;s placed <em>and</em> wired. Double-click a wire to splice a node into it.</li>
 <li><strong>Run</strong> — <strong>▶ Run</strong> executes the whole graph; the ▶ on a node runs just that node and everything it depends on.</li>
-<li><strong>Tidy</strong> — the <strong>⌗</strong> toolbar button auto-arranges the whole graph into columns that follow the wiring (nodes stack top-down within a column). It&#39;s one undo step — <code>Ctrl+Z</code> puts everything back.</li>
+<li><strong>Copy, paste, duplicate</strong> — <code>Ctrl+C</code> copies the selected nodes, <code>Ctrl+V</code> pastes fresh copies, <code>Ctrl+D</code> duplicates in one step. Copies keep their <strong>incoming wires</strong>: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds).</li>
+<li><strong>Paste an image</strong> — <code>Ctrl+V</code> with an image on the OS clipboard (Photoshop <code>Ctrl+A</code>+<code>Ctrl+C</code>, a render buffer&#39;s Copy button, a browser image) drops a ready-filled <strong>Image In</strong> node at your cursor. If you copied both, whichever you copied <em>last</em> wins the shortcut.</li>
+<li><strong>Tidy</strong> — the grid button on the left rail auto-arranges the whole graph into columns that follow the wiring (nodes stack top-down within a column). It&#39;s one undo step — <code>Ctrl+Z</code> puts everything back.</li>
 <li><strong>Node ids</strong> — every node&#39;s title bar shows its id in small type (<code>multi_shot-21</code>). That&#39;s the name <a href="/docs/concepts/marcel.html">Marcel</a> and the ledger use when they refer to a node — click the id to copy it.</li>
 </ul>
 <h2 id="ports-and-wires"><a class="anchor" href="#ports-and-wires" aria-hidden="true">#</a>Ports and wires</h2>
@@ -130,7 +132,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </thead>
 <tbody><tr>
 <td><strong>Inputs</strong></td>
-<td>Prompt, Refine (Prompt Helper), Image In</td>
+<td>Prompt, Refine (Prompt Helper), Text→Text, Text Board, Image In</td>
 </tr>
 <tr>
 <td><strong>Image generation</strong></td>
