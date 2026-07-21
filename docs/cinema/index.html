@@ -20,6 +20,14 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--body);font-family:var(--font-body);-webkit-font-smoothing:antialiased;line-height:1.65}
+/* --- scrollbars: thin + themed everywhere (the Windows default was a bright
+   gray slab against the dark theme); scrollbar-color inherits from html,
+   ::-webkit-* covers older engines --- */
+html{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--muted-2)}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code{font-family:var(--font-mono);font-size:.88em;background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--text)}
@@ -36,7 +44,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .top .menu-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);padding:5px 9px;cursor:pointer;font-size:13px}
 /* --- layout --- */
 .layout{display:grid;grid-template-columns:250px minmax(0,1fr) 200px;gap:0;max-width:1240px;margin:0 auto}
-.side{border-right:1px solid var(--border-soft);padding:26px 18px;height:calc(100vh - 56px);position:sticky;top:56px;overflow-y:auto}
+.side{border-right:1px solid var(--border-soft);padding:26px 18px;height:calc(100vh - 56px);position:sticky;top:56px;overflow-y:auto;scrollbar-gutter:stable}
+/* nav + toc scrollbars stay invisible until hovered — the rail reads as a
+   clean menu, the affordance appears exactly when you can use it */
+.side,.toc{scrollbar-color:transparent transparent}
+.side:hover,.toc:hover{scrollbar-color:var(--border) transparent}
+.side::-webkit-scrollbar-thumb,.toc::-webkit-scrollbar-thumb{background:transparent;border:none}
+.side:hover::-webkit-scrollbar-thumb,.toc:hover::-webkit-scrollbar-thumb{background:var(--border);border:2px solid var(--bg)}
 .nav-section{margin-bottom:18px}
 .nav-head{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:8px}
 .side ul{list-style:none;margin:0;padding:0}
