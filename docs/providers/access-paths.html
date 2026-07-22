@@ -67,9 +67,9 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content li{margin:5px 0}
 .content strong{color:var(--text)}
 .content blockquote{margin:18px 0;padding:2px 16px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 8px 8px 0;color:var(--body)}
-.content table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:14px;display:block;overflow-x:auto}
-.content th,.content td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
-.content th{background:var(--panel);color:var(--text);font-family:var(--font-mono);font-size:12px;letter-spacing:.03em}
+.content table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:13px;line-height:1.45;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}
+.content th{background:var(--panel);color:var(--text);font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;white-space:nowrap}
 .content h2 .anchor,.content h3 .anchor{opacity:0;margin-left:-18px;padding-right:6px;color:var(--muted-2);font-weight:400;text-decoration:none}
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
@@ -166,90 +166,94 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <th>+ OpenRouter</th>
 <th>+ fal.ai</th>
 <th>+ Replicate</th>
-<th>Higgsfield only</th>
+<th>Higgsfield</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Images — Nano Banana family</strong> (Text→Image, Image→Image, Compose, Multi-Shot tiles, keyframes)</td>
-<td>✓ (Gemini)</td>
-<td>✓ Pro/2/original — Brut&#39;s own size+aspect menus</td>
-<td>✓ Pro/2/original</td>
-<td>✓ Pro/2</td>
-<td>✓ Nano Banana 2</td>
+<td><strong>Nano Banana images</strong>¹</td>
+<td>✓ Gemini</td>
+<td>✓ all 3, native menus</td>
+<td>✓ all 3</td>
+<td>✓ Pro + 2</td>
+<td>✓ NB2 only</td>
 </tr>
 <tr>
-<td><strong>Images — GPT Image 2</strong></td>
-<td>✓ (OpenAI)</td>
-<td>✓ quality only (no sizing)</td>
-<td>✓ (fal&#39;s own size presets)</td>
-<td>✓ (sizes ride the aspect menu)</td>
+<td><strong>GPT Image 2</strong></td>
+<td>✓ OpenAI</td>
+<td>✓ no sizing</td>
+<td>✓ fal presets</td>
+<td>✓ via aspect menu</td>
 <td>✗</td>
 </tr>
 <tr>
-<td><strong>Inpaint (masks)</strong></td>
-<td>✓ exact (OpenAI) · ≈ approximate (Gemini)</td>
-<td>≈ approximate (Nano Banana models)</td>
-<td>≈ approximate (Nano Banana models)</td>
-<td>≈ approximate (Nano Banana models)</td>
+<td><strong>Inpaint masks</strong></td>
+<td>✓ exact · ≈ Gemini</td>
+<td>≈ approximate</td>
+<td>≈ approximate</td>
+<td>≈ approximate</td>
 <td>✗</td>
 </tr>
 <tr>
-<td><strong>Video — Kling 3.0</strong></td>
-<td>✓ (key or kling.ai sub)</td>
-<td>✓ v3 std/pro</td>
-<td>✓ v3 std/pro</td>
+<td><strong>Kling 3.0</strong></td>
+<td>✓ key or sub</td>
+<td>✓ std/pro</td>
+<td>✓ std/pro</td>
 <td>✓ Omni</td>
-<td>pending verification</td>
+<td>pending</td>
 </tr>
 <tr>
-<td><strong>Video — Seedance 2.0</strong></td>
-<td>✓ (BytePlus)</td>
-<td>✓ i2v+t2v</td>
+<td><strong>Seedance 2.0</strong></td>
+<td>✓ BytePlus</td>
+<td>✓ i2v + t2v</td>
 <td>✓ i2v</td>
-<td>✓ i2v+t2v, ≤720p</td>
+<td>✓ ≤720p</td>
 <td>✓ i2v</td>
 </tr>
 <tr>
-<td><strong>Video — Veo 3.1 / Fast / Lite</strong></td>
-<td>✓ (Gemini key)</td>
-<td>✓ incl. end frames (only route Lite has)</td>
-<td>✓ 3.1+Fast (no end frame)</td>
-<td>✓ 3.1+Fast incl. end frame</td>
+<td><strong>Veo 3.1 / Fast / Lite</strong></td>
+<td>✓ Gemini key</td>
+<td>✓ + end frames, incl. Lite</td>
+<td>✓ 3.1 + Fast</td>
+<td>✓ + end frames</td>
 <td>✗</td>
 </tr>
 <tr>
-<td><strong>Planning</strong> — Refine, Multi-Shot planner, the cinema crew, Text→Text</td>
-<td>✓ (Gemini/OpenAI/Anthropic)</td>
-<td>✓ all 11 models, vision + reasoning dial</td>
-<td>✓ text-only (no image grounding)</td>
-<td>✗</td>
-<td>✗</td>
-</tr>
-<tr>
-<td><strong>Marcel</strong> (chat, narrator, acting)</td>
-<td>✓ (native text key)</td>
-<td>✓ full — chat, narrator, acting, prompt caching included</td>
-<td>✗ (no streaming)</td>
+<td><strong>Planning agents</strong>²</td>
+<td>✓</td>
+<td>✓ vision + dial</td>
+<td>✓ text-only</td>
 <td>✗</td>
 <td>✗</td>
 </tr>
 <tr>
-<td><strong>Upscalers</strong> (Magnific / Topaz)</td>
-<td>own keys, or the free local Topaz app</td>
-<td>✗</td>
+<td><strong>Marcel</strong></td>
+<td>✓</td>
+<td>✓ full, cached</td>
 <td>✗</td>
 <td>✗</td>
 <td>✗</td>
 </tr>
 <tr>
-<td><strong>Free &amp; local</strong> — Sequence, Conform, boards, library, Storyboard editing</td>
-<td>✓ always</td>
+<td><strong>Upscalers</strong></td>
+<td>✓ keys / free local Topaz</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Free &amp; local nodes</strong></td>
+<td>✓</td>
 <td>✓</td>
 <td>✓</td>
 <td>✓</td>
 <td>✓</td>
 </tr>
 </tbody></table>
+<p><small>¹ Nano Banana Pro / 2 / original — everywhere images are made: Text→Image,
+Image→Image, Compose, Multi-Shot tiles, storyboard keyframes. ² Refine, the Multi-Shot
+planner, the cinema crew, Text→Text — all 11 text models. &quot;Free &amp; local&quot; = Sequence,
+Conform, the boards, the library, Storyboard editing.</small></p>
 <h2 id="which-path-should-you-pick"><a class="anchor" href="#which-path-should-you-pick" aria-hidden="true">#</a>Which path should you pick?</h2>
 <p>Three setups cover almost everyone. Pick by what you care about most:</p>
 <h3 id="1-native-keys-pick-this-if-you-care-about-price-and-control"><a class="anchor" href="#1-native-keys-pick-this-if-you-care-about-price-and-control" aria-hidden="true">#</a>1. Native keys — pick this if you care about <strong>price and control</strong></h3>
