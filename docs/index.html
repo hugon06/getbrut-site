@@ -128,8 +128,8 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>If you work under NDA, this matters: your renders never leave your machine.</p>
 <h2 id="how-it-works"><a class="anchor" href="#how-it-works" aria-hidden="true">#</a>How it works</h2>
 <p>Two processes, one machine:</p>
-<pre><code>Brut app (React canvas)  ──HTTP──▶  Brut engine (local)  ──HTTPS, your keys──▶  the providers
-   the node graph                     adapters + job queue                        Gemini · OpenAI · …
+<pre><code>Brut app  ──HTTP──▶  Brut engine  ──HTTPS, your keys──▶  the providers
+the node canvas      adapters + job queue (local)        Gemini · OpenAI · …
 </code></pre>
 <p>The <strong>app</strong> is the node canvas you work in. The <strong>engine</strong> is a small local server that holds your keys, talks to each provider, and writes outputs to your disk. When you launch Brut, the engine serves the app to your browser at <code>http://127.0.0.1:8723/app/</code> — there is no hosted version, by design.</p>
 <h2 id="what-you-can-make"><a class="anchor" href="#what-you-can-make" aria-hidden="true">#</a>What you can make</h2>
