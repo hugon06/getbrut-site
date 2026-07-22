@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keys vs aggregators · Brut docs</title>
+<meta name="description" content="Keys vs aggregators — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://getbrut.app/docs/providers/access-paths.html">
+<style>
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/JetBrainsMono.woff2) format("woff2");}
+:root{
+  --bg:#141311;--panel:#1c1a17;--panel-2:#211f1b;--border:#35322c;--border-soft:#262421;
+  --text:#eae7e0;--body:#b9b4ab;--muted:#94908a;--muted-2:#6d6961;--accent:#4f9dff;
+  --font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--body);font-family:var(--font-body);-webkit-font-smoothing:antialiased;line-height:1.65}
+/* --- scrollbars: thin + themed everywhere (the Windows default was a bright
+   gray slab against the dark theme); scrollbar-color inherits from html,
+   ::-webkit-* covers older engines --- */
+html{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--muted-2)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--text)}
+pre{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;color:var(--body)}
+/* --- top bar --- */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;height:56px;padding:0 20px;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-soft)}
+.wordmark{display:flex;align-items:baseline;gap:5px;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--text)}
+.wordmark .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.top .docs-label{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.top .spacer{flex:1}
+.top .home{font-size:13.5px;color:var(--muted)}
+.top .menu-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);padding:5px 9px;cursor:pointer;font-size:13px}
+/* --- layout --- */
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr) 200px;gap:0;max-width:1240px;margin:0 auto}
+.side{border-right:1px solid var(--border-soft);padding:26px 18px;height:calc(100vh - 56px);position:sticky;top:56px;overflow-y:auto;scrollbar-gutter:stable}
+/* nav + toc scrollbars stay invisible until hovered — the rail reads as a
+   clean menu, the affordance appears exactly when you can use it */
+.side,.toc{scrollbar-color:transparent transparent}
+.side:hover,.toc:hover{scrollbar-color:var(--border) transparent}
+.side::-webkit-scrollbar-thumb,.toc::-webkit-scrollbar-thumb{background:transparent;border:none}
+.side:hover::-webkit-scrollbar-thumb,.toc:hover::-webkit-scrollbar-thumb{background:var(--border);border:2px solid var(--bg)}
+.nav-section{margin-bottom:18px}
+.nav-head{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:8px}
+.side ul{list-style:none;margin:0;padding:0}
+.side li a{display:block;padding:4px 10px;border-radius:6px;font-size:14px;color:var(--muted)}
+.side li a:hover{color:var(--text);background:var(--panel);text-decoration:none}
+.side li a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);font-weight:600}
+/* --- content --- */
+.content{padding:38px 44px;min-width:0;max-width:820px}
+.content h1{font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.02em;color:var(--text);margin:0 0 6px;line-height:1.1}
+.content h2{font-family:var(--font-display);font-weight:600;font-size:24px;letter-spacing:-.01em;color:var(--text);margin:42px 0 12px;padding-top:8px;border-top:1px solid var(--border-soft)}
+.content h3{font-family:var(--font-display);font-weight:600;font-size:18px;color:var(--text);margin:28px 0 8px}
+.content p{margin:0 0 15px}
+.content ul,.content ol{margin:0 0 15px;padding-left:22px}
+.content li{margin:5px 0}
+.content strong{color:var(--text)}
+.content blockquote{margin:18px 0;padding:2px 16px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 8px 8px 0;color:var(--body)}
+.content table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+.content th{background:var(--panel);color:var(--text);font-family:var(--font-mono);font-size:12px;letter-spacing:.03em}
+.content h2 .anchor,.content h3 .anchor{opacity:0;margin-left:-18px;padding-right:6px;color:var(--muted-2);font-weight:400;text-decoration:none}
+.content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
+.content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
+.content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+.lead{font-size:17px;line-height:1.6;color:var(--body)}
+/* callouts via blockquote starting with **Note** etc handled by authors */
+/* --- right TOC --- */
+.toc{padding:32px 14px;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;font-size:12.5px}
+.toc-head{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:10px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:4px 0}
+.toc li.lvl3{padding-left:12px}
+.toc a{color:var(--muted)}
+.toc a:hover{color:var(--text);text-decoration:none}
+/* --- prev/next --- */
+.prevnext{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--border-soft)}
+.pn{display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:0;max-width:48%}
+.pn:hover{border-color:var(--accent);text-decoration:none}
+.pn.next{margin-left:auto;text-align:right;align-items:flex-end}
+.pn span{font-size:12px;color:var(--muted)}
+.pn b{color:var(--text);font-size:14.5px}
+/* --- responsive --- */
+@media(max-width:1080px){.layout{grid-template-columns:230px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .side{position:fixed;top:56px;left:0;right:0;bottom:0;z-index:15;background:var(--bg);height:auto;display:none}
+  .side.open{display:block}
+  .top .menu-btn{display:inline-block}
+  .content{padding:26px 20px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
+  <a class="wordmark" href="/">BRUT<span class="dot"></span></a>
+  <span class="docs-label">DOCS</span>
+  <span class="spacer"></span>
+  <a class="home" href="/">getbrut.app ↗</a>
+</header>
+<div class="layout">
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html" class="active">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <main class="content">
+<h1>Direct keys or aggregators? — choosing your access path</h1>
+<p>Brut is <strong>bring-your-own-key</strong> at heart: the cheapest, highest-fidelity way to run it is a
+handful of native provider keys, and nothing Brut does ever adds a markup to them. But not
+everyone wants to open four provider consoles — so Brut also speaks to <strong>aggregators</strong>, as
+<strong><a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">routes</a></strong>: your
+aggregator credential serves models you have no native key for, visibly, at the aggregator&#39;s
+own prices. This page is the honest comparison.</p>
+<h2 id="the-trade-off-in-one-table"><a class="anchor" href="#the-trade-off-in-one-table" aria-hidden="true">#</a>The trade-off in one table</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Native keys</strong></th>
+<th><strong>Aggregator key(s)</strong></th>
+<th><strong>Higgsfield subscription</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Setup</td>
+<td>~5 min per provider console (billing on)</td>
+<td>One key (OpenRouter and/or fal/Replicate)</td>
+<td>Browser sign-in, no key at all</td>
+</tr>
+<tr>
+<td>Price</td>
+<td><strong>Cheapest</strong> — provider list rates, zero middlemen</td>
+<td>List rates + the aggregator&#39;s margin or fee (Seedance via fal ≈2× native; OpenRouter ≈ list + ~5.5% credit fee)</td>
+<td>Plan credits — opaque per-unit cost, no USD estimates shown</td>
+</tr>
+<tr>
+<td>Fidelity</td>
+<td>Every knob every model has</td>
+<td>Most knobs; the missing ones <strong>fail loud</strong>, never silently</td>
+<td>Narrowest — evolving as it&#39;s verified</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td><strong>Always wins</strong> when the key exists</td>
+<td>Used only where no native key exists</td>
+<td>Last resort in the route order</td>
+</tr>
+</tbody></table>
+<p>Whatever you pick, routing is never silent: routed nodes show <strong>⇄ runs via …</strong>, the paid-run
+confirm says who bills, and the spend ledger records it per generation.</p>
+<h2 id="how-much-of-brut-works-with-what"><a class="anchor" href="#how-much-of-brut-works-with-what" aria-hidden="true">#</a>How much of Brut works with what</h2>
+<table>
+<thead>
+<tr>
+<th>Brut surface</th>
+<th>Native keys</th>
+<th>+ OpenRouter</th>
+<th>+ fal.ai</th>
+<th>+ Replicate</th>
+<th>Higgsfield only</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Images — Nano Banana family</strong> (Text→Image, Image→Image, Compose, Multi-Shot tiles, keyframes)</td>
+<td>✓ (Gemini)</td>
+<td>—</td>
+<td>✓ Pro/2/original</td>
+<td>✓ Pro/2</td>
+<td>✓ Nano Banana 2</td>
+</tr>
+<tr>
+<td><strong>Images — GPT Image 2</strong></td>
+<td>✓ (OpenAI)</td>
+<td>—</td>
+<td>✗ (size fidelity)</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Inpaint (masks)</strong></td>
+<td>✓ (OpenAI/Gemini)</td>
+<td>—</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Video — Kling 3.0</strong></td>
+<td>✓ (key or kling.ai sub)</td>
+<td>—</td>
+<td>✓ v3 std/pro</td>
+<td>✓ Omni</td>
+<td>pending verification</td>
+</tr>
+<tr>
+<td><strong>Video — Seedance 2.0</strong></td>
+<td>✓ (BytePlus)</td>
+<td>—</td>
+<td>✓ i2v</td>
+<td>✓ i2v+t2v, ≤720p</td>
+<td>✓ i2v</td>
+</tr>
+<tr>
+<td><strong>Video — Veo 3.1 / Fast</strong></td>
+<td>✓ (Gemini key)</td>
+<td>—</td>
+<td>✓ (no end frame)</td>
+<td>✓ incl. end frame</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Planning</strong> — Refine, Multi-Shot planner, the cinema crew, Text→Text</td>
+<td>✓ (Gemini/OpenAI/Anthropic)</td>
+<td>✓ all 11 models, vision + reasoning dial</td>
+<td>✓ text-only (no image grounding)</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Marcel</strong> (chat, narrator, acting)</td>
+<td>✓ (native text key)</td>
+<td>✗ for now</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Upscalers</strong> (Magnific / Topaz)</td>
+<td>own keys, or the free local Topaz app</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Free &amp; local</strong> — Sequence, Conform, boards, library, Storyboard editing</td>
+<td>✓ always</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<h2 id="three-sensible-setups"><a class="anchor" href="#three-sensible-setups" aria-hidden="true">#</a>Three sensible setups</h2>
+<ol>
+<li><strong>The studio setup — native keys.</strong> Gemini + OpenAI + one video provider (+ Anthropic for
+Marcel&#39;s best brain). Cheapest per generation, every feature, every knob. This is what
+Brut is built around.</li>
+<li><strong>The 5-minute setup — OpenRouter + fal.ai.</strong> Two keys cover images, video, and all
+planning. Add <strong>one</strong> native Gemini key on top (2 more minutes) and you gain Marcel,
+Gemini-native images/Veo at direct prices, and vision everywhere — genuinely hard to tell
+from the full setup, minus the aggregator margin on video.</li>
+<li><strong>The zero-key setup — a Higgsfield subscription.</strong> Sign in, generate Nano Banana 2
+images and Seedance clips billed to plan credits. The narrowest slice — no planning
+models, no Marcel, no upscalers — but it&#39;s real work from a consumer subscription.</li>
+</ol>
+<p>The pattern to remember: <strong>keys you add later always take over their models automatically</strong> —
+start lazy, upgrade to direct billing whenever a provider starts costing you real money.</p>
+
+<div class="prevnext"><a class="pn prev" href="/docs/providers/index.html"><span>← Previous</span><b>Overview</b></a><a class="pn next" href="/docs/providers/gemini.html"><span>Next →</span><b>Google Gemini</b></a></div>
+  </main>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-trade-off-in-one-table">The trade-off in one table</a></li><li class="lvl2"><a href="#how-much-of-brut-works-with-what">How much of Brut works with what</a></li><li class="lvl2"><a href="#three-sensible-setups">Three sensible setups</a></li></ul></nav>
+</div>
+</body>
+</html>

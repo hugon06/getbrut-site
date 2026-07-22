@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your first image · Brut docs</title>
-<meta name="description" content="Your first image — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
+<title>Replicate (routes) · Brut docs</title>
+<meta name="description" content="Replicate (routes) — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://getbrut.app/docs/first-image.html">
+<link rel="canonical" href="https://getbrut.app/docs/providers/replicate.html">
 <style>
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
@@ -111,46 +111,52 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html" class="active">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html" class="active">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
-<h1>Your first image</h1>
-<p>Let&#39;s make one image end to end. This takes about a minute and costs roughly <strong>$0.04</strong> on Gemini&#39;s cheapest image model.</p>
-<h2 id="the-fastest-path-the-starter-graph"><a class="anchor" href="#the-fastest-path-the-starter-graph" aria-hidden="true">#</a>The fastest path: the starter graph</h2>
-<p>The setup wizard offers a <strong>starter graph</strong> on its last step — a ready-wired <strong>Prompt → Refine → Text→Image → Preview</strong> chain on <code>gemini-2.5-flash-image</code>. Click <strong>Add starter graph</strong>, then hit <strong>▶ Run</strong> in the toolbar. Done. (Re-open the wizard any time from <strong>File ▾ → Setup wizard…</strong>.)</p>
-<p>If you&#39;d rather build it by hand, here&#39;s the same thing in three nodes.</p>
-<h2 id="build-it-by-hand"><a class="anchor" href="#build-it-by-hand" aria-hidden="true">#</a>Build it by hand</h2>
+<h1>Replicate</h1>
+<p><strong>Replicate</strong> is the third aggregator <strong><a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a></strong>
+in Brut — a plain API-token, pay-per-use service that resells official builds of many models.
+Like every route, it never adds a model to the menu: it serves models Brut already carries
+when you hold <strong>no native key</strong> (and no earlier route credential — fal.ai and Higgsfield are
+checked first), always visibly marked <strong>⇄ runs via Replicate</strong> on the node.</p>
+<p>Current mirror set: <strong>Nano Banana Pro &amp; 2</strong> (text→image and image→image), <strong>Kling 3.0 Omni</strong>,
+<strong>Veo 3.1 &amp; 3.1 Fast</strong> (image→video <em>and</em> text→video), <strong>Seedance 2.0</strong> (image→video and
+text→video).</p>
+<h2 id="get-a-token"><a class="anchor" href="#get-a-token" aria-hidden="true">#</a>Get a token</h2>
+<p>Create a token at <strong><a href="https://replicate.com/account/api-tokens">replicate.com/account/api-tokens</a></strong>
+(<code>r8_…</code>) and paste it into <strong>⚙ Keys → Replicate</strong> (or set <code>REPLICATE_API_TOKEN</code>). Billing must
+be enabled on the Replicate account before the first run — errors come back verbatim, as
+always.</p>
+<h2 id="the-route-rules-as-everywhere"><a class="anchor" href="#the-route-rules-as-everywhere" aria-hidden="true">#</a>The route rules, as everywhere</h2>
 <ol>
-<li><strong>Add a Prompt node.</strong> Press <code>Tab</code> over the canvas (or <strong>+ Node</strong>) and pick <strong>Prompt</strong>. Type a description:<blockquote>
-<p>A sunlit modern villa at golden hour, floor-to-ceiling glass, a calm reflecting pool, photographic</p>
-</blockquote>
-</li>
-<li><strong>Add a Text→Image node.</strong> Drag from the Prompt node&#39;s output onto empty canvas — the add menu opens filtered to compatible nodes; pick <strong>Text → Image</strong>. It wires up automatically. In the node, choose provider <strong>Gemini</strong> and model <strong>Nano Banana</strong> (<code>gemini-2.5-flash-image</code>).</li>
-<li><strong>Add a Preview node</strong> the same way, wired from the Text→Image output.</li>
-<li><strong>Run.</strong> Click <strong>▶ Run</strong> (or the ▶ on the Text→Image node to run just it). The engine calls Gemini with your key, downloads the image to your project&#39;s outputs folder, and shows it inline. The node badge reports the cost.</li>
+<li><strong>Your direct key always wins</strong>, and fal.ai / Higgsfield credentials outrank Replicate when
+present (catalog order). Replicate is the redundancy door.</li>
+<li><strong>Routing is always visible</strong> — node chip, run confirm, spend ledger.</li>
+<li><strong>No invented prices</strong>: Replicate&#39;s per-unit rates aren&#39;t pinned yet, so routed runs show
+no estimate rather than a wrong one. The ledger records every run.</li>
 </ol>
-<p>That&#39;s the whole loop: <strong>prompt → generate → preview.</strong></p>
-<h2 id="what-just-happened"><a class="anchor" href="#what-just-happened" aria-hidden="true">#</a>What just happened</h2>
+<h2 id="what-this-route-can-do-that-fal39s-can39t"><a class="anchor" href="#what-this-route-can-do-that-fal39s-can39t" aria-hidden="true">#</a>What this route can do that fal&#39;s can&#39;t</h2>
 <ul>
-<li>The engine made <strong>one call to Gemini on your key</strong> and saved the result to <code>outputs/</code> in your active project.</li>
-<li>The node cached the result against a hash of its inputs. <strong>Run again and it&#39;s free</strong> — nothing changed, so nothing is re-billed. Change the prompt and only that node re-pays. See <a href="/docs/concepts/never-pay-twice.html">Never pay twice</a>.</li>
-<li>The generation was recorded in your project <strong>ledger</strong> — click the 🕘 on the node to see its history and re-pin any past result.</li>
+<li><strong>Veo end frames work</strong> (<code>last_frame</code> is a real input on Replicate&#39;s Veo 3.1).</li>
+<li><strong>Seedance text→video</strong> is available.</li>
+<li><strong>Reference images</strong> ride on Veo 3.1, Seedance 2.0, and Kling 3.0 Omni.</li>
 </ul>
-<h2 id="troubleshooting"><a class="anchor" href="#troubleshooting" aria-hidden="true">#</a>Troubleshooting</h2>
+<h2 id="and-its-own-limits-all-fail-loud-never-silent"><a class="anchor" href="#and-its-own-limits-all-fail-loud-never-silent" aria-hidden="true">#</a>And its own limits (all fail loud, never silent)</h2>
 <ul>
-<li><strong><code>429 RESOURCE_EXHAUSTED</code> on the first call</strong> → your Gemini key isn&#39;t billing-enabled (the free tier has zero image quota). Enable billing in Google AI Studio. See <a href="/docs/providers/gemini.html">Google Gemini</a>.</li>
-<li><strong>A ⚠ &quot;Add your … key&quot; button on the node</strong> → that provider isn&#39;t configured; click it to jump to the wizard.</li>
-<li><strong><code>finishReason: OTHER</code> on an image edit</strong> → a silent content refusal, usually triggered by an input image (a real person&#39;s name in facade lettering, a face, a logo) rather than the prompt. Remove or crop the offending image.</li>
+<li><strong>Seedance tops out at 720p</strong> on Replicate — 1080p/4K need your BytePlus key. Smart Length
+isn&#39;t available either.</li>
+<li><strong>Nano Banana 2 has no size knob</strong> — 1K only; pick Nano Banana Pro for 2K/4K.</li>
+<li><strong>Kling 4K master tier</strong> doesn&#39;t exist on Replicate (std/pro only), and the Kling route is
+the Omni model.</li>
+<li>Inpaint masks don&#39;t route; audio always follows your node toggle, never Replicate&#39;s default.</li>
 </ul>
-<h2 id="next"><a class="anchor" href="#next" aria-hidden="true">#</a>Next</h2>
-<ul>
-<li><strong><a href="/docs/nodes/inputs.html">Refine</a></strong> your prompts with the Prompt Helper.</li>
-<li><strong><a href="/docs/nodes/image-generation.html">Image generation</a></strong> — editing, inpainting, composing.</li>
-<li><strong><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot</a></strong> — a contact sheet of viewpoints from one scene.</li>
-</ul>
+<p>Large input images (multi-MB keyframes) are uploaded through Replicate&#39;s Files API
+automatically; outputs are downloaded to your project&#39;s disk immediately — restart-safe,
+journaled, in the ledger.</p>
 
-<div class="prevnext"><a class="pn prev" href="/docs/install.html"><span>← Previous</span><b>Install & first run</b></a><a class="pn next" href="/docs/concepts/nodes-and-graphs.html"><span>Next →</span><b>Nodes & graphs</b></a></div>
+<div class="prevnext"><a class="pn prev" href="/docs/providers/higgsfield.html"><span>← Previous</span><b>Higgsfield (subscription)</b></a><a class="pn next" href="/docs/providers/openrouter.html"><span>Next →</span><b>OpenRouter (text routes)</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-fastest-path-the-starter-graph">The fastest path: the starter graph</a></li><li class="lvl2"><a href="#build-it-by-hand">Build it by hand</a></li><li class="lvl2"><a href="#what-just-happened">What just happened</a></li><li class="lvl2"><a href="#troubleshooting">Troubleshooting</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-token">Get a token</a></li><li class="lvl2"><a href="#the-route-rules-as-everywhere">The route rules, as everywhere</a></li><li class="lvl2"><a href="#what-this-route-can-do-that-fal39s-can39t">What this route can do that fal&#39;s can&#39;t</a></li><li class="lvl2"><a href="#and-its-own-limits-all-fail-loud-never-silent">And its own limits (all fail loud, never silent)</a></li></ul></nav>
 </div>
 </body>
 </html>

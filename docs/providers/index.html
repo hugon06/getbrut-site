@@ -111,7 +111,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html" class="active">Overview</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html" class="active">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
 <h1>Providers overview</h1>
 <p>Brut is <strong>bring-your-own-key</strong>. You add a key for each provider you want to use; the engine calls that provider directly, on your key, at their price. Brut never holds a key that bills anyone but you, and never marks up a token.</p>
@@ -178,14 +178,63 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <td>Video upscaling on <strong>your own GPU</strong> — free</td>
 <td>no key; the desktop app&#39;s license</td>
 </tr>
+<tr>
+<td><strong><a href="/docs/providers/fal.html">fal.ai</a></strong></td>
+<td><em>Route only</em> — serves Nano Banana / Kling 3.0 / Seedance / Veo when you hold no native key</td>
+<td>fal.ai dashboard key</td>
+</tr>
+<tr>
+<td><strong><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></strong></td>
+<td><em>Route only</em> — serves Nano Banana 2 / Seedance 2.0 on your higgsfield.ai plan credits</td>
+<td>CLI login, no key</td>
+</tr>
+<tr>
+<td><strong><a href="/docs/providers/replicate.html">Replicate</a></strong></td>
+<td><em>Route only</em> — Nano Banana Pro/2, Kling Omni, Veo 3.1 (+end frames), Seedance (+t2v)</td>
+<td>replicate.com token</td>
+</tr>
+<tr>
+<td><strong><a href="/docs/providers/openrouter.html">OpenRouter</a></strong></td>
+<td><em>Text route</em> — runs ALL planning models (Refine, crew, Text→Text) at pass-through rates</td>
+<td>openrouter.ai key</td>
+</tr>
 </tbody></table>
+<h2 id="model-routes-native-first-aggregator-fallback"><a class="anchor" href="#model-routes-native-first-aggregator-fallback" aria-hidden="true">#</a>Model routes — native first, aggregator fallback</h2>
+<p>Some models can also run through an <strong>aggregator</strong> — a third-party service (like an
+aggregator subscription or a multi-model API) that resells the same model under its own
+billing. Brut treats those as <em>routes</em>, with three hard rules:</p>
+<ol>
+<li><strong>Your direct key always wins.</strong> If you hold the native provider&#39;s key, the generation
+goes straight to the provider, exactly as before. Routes only activate for a model when
+you have <strong>no</strong> native key but <em>do</em> hold the aggregator&#39;s credential.</li>
+<li><strong>Routing is always visible.</strong> A routed model shows a <strong>⇄ runs via …</strong> chip on the node,
+the run confirm says who bills, and the ledger records it. Nothing routes silently.</li>
+<li><strong>The catalog stays curated.</strong> An aggregator credential never adds models to Brut — the
+model list is exactly the one Brut ships, whatever route serves it. Estimates for routed
+runs come from the route&#39;s own <strong>measured</strong> price, or are absent; aggregators typically
+charge a margin over the direct API, and the node says so.</li>
+</ol>
+<p>Availability is resolved once at engine start and re-resolved the moment you add or remove
+a key — adding an aggregator credential mid-session lights up the routed models
+immediately. Three route providers ship today: <strong><a href="/docs/providers/fal.html">fal.ai</a></strong> (API
+key — Nano Banana family, Kling 3.0, Seedance 2.0, Veo 3.1),
+<strong><a href="/docs/providers/higgsfield.html">Higgsfield</a></strong> (subscription plan credits, browser
+sign-in — Nano Banana 2, Seedance 2.0) and <strong><a href="/docs/providers/replicate.html">Replicate</a></strong>
+(API token — Nano Banana Pro/2, Kling Omni, Veo 3.1 incl. end frames, Seedance incl.
+text→video). When several credentials exist, that same order decides.</p>
+<p><strong>Text models route too</strong>: with an <strong><a href="/docs/providers/openrouter.html">OpenRouter</a></strong> key (or,
+text-only, a fal.ai key) the planning models — Refine, the Multi-Shot planner, the cinema
+crew, Text→Text — run at pass-through token rates when no native text key exists. Marcel&#39;s
+chat still needs a native Gemini/OpenAI/Anthropic key for now.</p>
+<p>Deciding between direct keys and an aggregator? The full pros/cons and a feature-by-feature
+capability matrix live on <strong><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></strong>.</p>
 <h2 id="text-vs-generation"><a class="anchor" href="#text-vs-generation" aria-hidden="true">#</a>Text vs generation</h2>
 <p><strong>Gemini, OpenAI and Anthropic</strong> double as <strong>planning</strong> models — they power the Refine node and the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>, where you pick which LLM writes your treatment or shot plan. Text models never enter the paid generation queue; they&#39;re cheap and separate.</p>
 <p>Provider errors (4xx/429) are surfaced <strong>verbatim</strong> on the node — Brut never masks them, so what the provider says is what you see.</p>
 
-<div class="prevnext"><a class="pn prev" href="/docs/nodes/utility.html"><span>← Previous</span><b>Utility</b></a><a class="pn next" href="/docs/providers/gemini.html"><span>Next →</span><b>Google Gemini</b></a></div>
+<div class="prevnext"><a class="pn prev" href="/docs/nodes/utility.html"><span>← Previous</span><b>Utility</b></a><a class="pn next" href="/docs/providers/access-paths.html"><span>Next →</span><b>Keys vs aggregators</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#adding-keys">Adding keys</a></li><li class="lvl2"><a href="#the-one-rule-that-trips-everyone-up">The one rule that trips everyone up</a></li><li class="lvl2"><a href="#the-providers-at-a-glance">The providers at a glance</a></li><li class="lvl2"><a href="#text-vs-generation">Text vs generation</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#adding-keys">Adding keys</a></li><li class="lvl2"><a href="#the-one-rule-that-trips-everyone-up">The one rule that trips everyone up</a></li><li class="lvl2"><a href="#the-providers-at-a-glance">The providers at a glance</a></li><li class="lvl2"><a href="#model-routes-native-first-aggregator-fallback">Model routes — native first, aggregator fallback</a></li><li class="lvl2"><a href="#text-vs-generation">Text vs generation</a></li></ul></nav>
 </div>
 </body>
 </html>
