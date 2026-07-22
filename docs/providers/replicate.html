@@ -119,9 +119,9 @@ in Brut — a plain API-token, pay-per-use service that resells official builds 
 Like every route, it never adds a model to the menu: it serves models Brut already carries
 when you hold <strong>no native key</strong> (and no earlier route credential — fal.ai and Higgsfield are
 checked first), always visibly marked <strong>⇄ runs via Replicate</strong> on the node.</p>
-<p>Current mirror set: <strong>Nano Banana Pro &amp; 2</strong> (text→image and image→image), <strong>Kling 3.0 Omni</strong>,
-<strong>Veo 3.1 &amp; 3.1 Fast</strong> (image→video <em>and</em> text→video), <strong>Seedance 2.0</strong> (image→video and
-text→video).</p>
+<p>Current mirror set: <strong>Nano Banana Pro &amp; 2</strong> (text→image and image→image), <strong>GPT Image 2</strong>
+(text→image and image→image), <strong>Kling 3.0 Omni</strong>, <strong>Veo 3.1 &amp; 3.1 Fast</strong> (image→video <em>and</em>
+text→video), <strong>Seedance 2.0</strong> (image→video and text→video).</p>
 <h2 id="get-a-token"><a class="anchor" href="#get-a-token" aria-hidden="true">#</a>Get a token</h2>
 <p>Create a token at <strong><a href="https://replicate.com/account/api-tokens">replicate.com/account/api-tokens</a></strong>
 (<code>r8_…</code>) and paste it into <strong>⚙ Keys → Replicate</strong> (or set <code>REPLICATE_API_TOKEN</code>). Billing must
@@ -132,13 +132,18 @@ always.</p>
 <li><strong>Your direct key always wins</strong>, and fal.ai / Higgsfield credentials outrank Replicate when
 present (catalog order). Replicate is the redundancy door.</li>
 <li><strong>Routing is always visible</strong> — node chip, run confirm, spend ledger.</li>
-<li><strong>No invented prices</strong>: Replicate&#39;s per-unit rates aren&#39;t pinned yet, so routed runs show
-no estimate rather than a wrong one. The ledger records every run.</li>
+<li><strong>No invented prices</strong>: image routes carry Replicate&#39;s own billing-table rates (Nano
+Banana 2 $0.067 · Pro $0.15/$0.30 at 4K · GPT Image 2 $0.012/$0.047/$0.128 by quality);
+video rates aren&#39;t pinned yet, so those runs show no estimate rather than a wrong one.
+The ledger records every run.</li>
 </ol>
 <h2 id="what-this-route-can-do-that-fal39s-can39t"><a class="anchor" href="#what-this-route-can-do-that-fal39s-can39t" aria-hidden="true">#</a>What this route can do that fal&#39;s can&#39;t</h2>
 <ul>
 <li><strong>Veo end frames work</strong> (<code>last_frame</code> is a real input on Replicate&#39;s Veo 3.1).</li>
 <li><strong>Seedance text→video</strong> is available.</li>
+<li><strong>GPT Image 2 sizes ride Replicate&#39;s aspect menu</strong> — ratios plus explicit sizes like
+2048x1152 up to 3840x2160; the node&#39;s Aspect select shows exactly that menu (the entries
+above 2560x1440 are marked experimental by the schema).</li>
 <li><strong>Reference images</strong> ride on Veo 3.1, Seedance 2.0, and Kling 3.0 Omni.</li>
 </ul>
 <h2 id="and-its-own-limits-all-fail-loud-never-silent"><a class="anchor" href="#and-its-own-limits-all-fail-loud-never-silent" aria-hidden="true">#</a>And its own limits (all fail loud, never silent)</h2>
@@ -148,7 +153,10 @@ isn&#39;t available either.</li>
 <li><strong>Nano Banana 2 has no size knob</strong> — 1K only; pick Nano Banana Pro for 2K/4K.</li>
 <li><strong>Kling 4K master tier</strong> doesn&#39;t exist on Replicate (std/pro only), and the Kling route is
 the Omni model.</li>
-<li>Inpaint masks don&#39;t route; audio always follows your node toggle, never Replicate&#39;s default.</li>
+<li>Inpaint masks route <strong>approximately</strong> on the Nano Banana models (the Gemini convention:
+the painted region is strong guidance, not a hard guarantee). <strong>GPT Image 2 masks don&#39;t
+route</strong> — exact masking needs your OpenAI key. Audio always follows your node toggle,
+never Replicate&#39;s default.</li>
 </ul>
 <p>Large input images (multi-MB keyframes) are uploaded through Replicate&#39;s Files API
 automatically; outputs are downloaded to your project&#39;s disk immediately — restart-safe,

@@ -119,8 +119,8 @@ one key. Brut uses it as a <strong><a href="/docs/providers/index.html#model-rou
 not a provider in its own right: it never adds a single model to the menu, it just serves
 models Brut already carries when you hold <strong>no native key</strong> for them.</p>
 <p>If you keep exactly one key on this machine, a fal.ai key is the widest single door: it can
-serve the Nano Banana image family, Kling 3.0, Seedance 2.0, and Veo 3.1 — each visibly marked
-<strong>⇄ runs via fal.ai</strong> on the node whenever the route is active.</p>
+serve the Nano Banana image family, GPT Image 2, Kling 3.0, Seedance 2.0, and Veo 3.1 — each
+visibly marked <strong>⇄ runs via fal.ai</strong> on the node whenever the route is active.</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
 <p>Create a key on the <strong><a href="https://fal.ai/dashboard/keys">fal.ai dashboard</a></strong> (it&#39;s an <code>id:secret</code>
 string) and paste it into <strong>⚙ Keys → fal.ai</strong> (or set <code>FAL_KEY</code>). fal has <strong>no free generation
@@ -133,15 +133,24 @@ provider error (shown verbatim, as always).</p>
 <li><strong>Routing is always visible.</strong> The node chip, the paid-run confirm, and the spend ledger all
 say &quot;via fal.ai&quot;. Nothing routes silently.</li>
 <li><strong>Honest prices only.</strong> Estimates for routed runs use fal&#39;s own list prices where pinned,
-and show none at all otherwise — never the native provider&#39;s numbers. Expect a margin over
-the direct API (Seedance via fal is roughly <strong>2×</strong> the native BytePlus rate).</li>
+and show none at all otherwise — never the native provider&#39;s numbers. Image routes are
+pinned from fal&#39;s model cards and cross-checked against real dashboard charges (Nano
+Banana $0.0398 — essentially the native rate; Nano Banana 2 $0.06–$0.16 by size; Pro
+$0.15/$0.30 at 4K; GPT Image 2 per size × quality, e.g. square_hd high $0.211, square
+low $0.0053 measured). Expect a margin over the direct API elsewhere
+(Seedance via fal is roughly <strong>2×</strong> the native BytePlus rate; video rates unpinned).</li>
 </ol>
 <h2 id="what-the-routes-can-and-can39t-do"><a class="anchor" href="#what-the-routes-can-and-can39t-do" aria-hidden="true">#</a>What the routes can and can&#39;t do</h2>
 <p>A route carries exactly the knobs fal&#39;s endpoint declares — anything else <strong>fails loudly</strong>
 instead of being quietly dropped. Current limits worth knowing:</p>
 <ul>
 <li><strong>Veo via fal takes no end frame</strong> — unwire it or add your Gemini/Veo key.</li>
-<li><strong>Inpaint masks don&#39;t route</strong> — mask editing needs the native OpenAI/Gemini paths.</li>
+<li><strong>Inpaint masks route APPROXIMATELY on the Nano Banana models</strong> — the same convention as
+Gemini native (the painted region is strong guidance, not a hard guarantee; verified live).
+<strong>GPT Image 2 masks don&#39;t route</strong> — exact masking needs your OpenAI key.</li>
+<li><strong>GPT Image 2 uses fal&#39;s own size presets</strong> (square, landscape 4:3/16:9, portrait, auto) —
+the node&#39;s Size menu shows exactly those instead of Brut&#39;s aspect + 1K/2K/4K pair. No
+silent mapping: the menu is the contract.</li>
 <li><strong>Nano Banana (original) renders 1K only</strong> via fal; pick 2K/4K models or add your Gemini key.</li>
 <li><strong>Kling 3.0&#39;s 4K master tier</strong> isn&#39;t on fal — std/pro only.</li>
 <li>Audio on video models is <strong>always sent explicitly</strong> (fal defaults it ON and bills extra —

@@ -190,12 +190,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </tr>
 <tr>
 <td><strong><a href="/docs/providers/replicate.html">Replicate</a></strong></td>
-<td><em>Route only</em> — Nano Banana Pro/2, Kling Omni, Veo 3.1 (+end frames), Seedance (+t2v)</td>
+<td><em>Route only</em> — Nano Banana Pro/2, GPT Image 2, Kling Omni, Veo 3.1 (+end frames), Seedance (+t2v)</td>
 <td>replicate.com token</td>
 </tr>
 <tr>
 <td><strong><a href="/docs/providers/openrouter.html">OpenRouter</a></strong></td>
-<td><em>Text route</em> — runs ALL planning models (Refine, crew, Text→Text) at pass-through rates</td>
+<td><em>The near-total route</em> — all text (planning + Marcel), the image family with native knobs, and the video set (Kling/Veo/Seedance) with per-job billed cost</td>
 <td>openrouter.ai key</td>
 </tr>
 </tbody></table>
@@ -216,16 +216,19 @@ charge a margin over the direct API, and the node says so.</li>
 </ol>
 <p>Availability is resolved once at engine start and re-resolved the moment you add or remove
 a key — adding an aggregator credential mid-session lights up the routed models
-immediately. Three route providers ship today: <strong><a href="/docs/providers/fal.html">fal.ai</a></strong> (API
-key — Nano Banana family, Kling 3.0, Seedance 2.0, Veo 3.1),
+immediately. Four route providers ship today: <strong><a href="/docs/providers/openrouter.html">OpenRouter</a></strong> (one key
+for text + images with Brut&#39;s native menus + the whole video set — billed cost recorded per
+job), <strong><a href="/docs/providers/fal.html">fal.ai</a></strong> (API
+key — Nano Banana family, GPT Image 2, Kling 3.0, Seedance 2.0, Veo 3.1),
 <strong><a href="/docs/providers/higgsfield.html">Higgsfield</a></strong> (subscription plan credits, browser
 sign-in — Nano Banana 2, Seedance 2.0) and <strong><a href="/docs/providers/replicate.html">Replicate</a></strong>
-(API token — Nano Banana Pro/2, Kling Omni, Veo 3.1 incl. end frames, Seedance incl.
-text→video). When several credentials exist, that same order decides.</p>
+(API token — Nano Banana Pro/2, GPT Image 2, Kling Omni, Veo 3.1 incl. end frames,
+Seedance incl. text→video). When several credentials exist, that same order decides.</p>
 <p><strong>Text models route too</strong>: with an <strong><a href="/docs/providers/openrouter.html">OpenRouter</a></strong> key (or,
 text-only, a fal.ai key) the planning models — Refine, the Multi-Shot planner, the cinema
-crew, Text→Text — run at pass-through token rates when no native text key exists. Marcel&#39;s
-chat still needs a native Gemini/OpenAI/Anthropic key for now.</p>
+crew, Text→Text — run at pass-through token rates when no native text key exists. <strong>Marcel
+routes through OpenRouter too</strong> — chat, ambient narration and acting, with Anthropic prompt
+caching passing through (verified live), so one OpenRouter key is a complete text seat.</p>
 <p>Deciding between direct keys and an aggregator? The full pros/cons and a feature-by-feature
 capability matrix live on <strong><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></strong>.</p>
 <h2 id="text-vs-generation"><a class="anchor" href="#text-vs-generation" aria-hidden="true">#</a>Text vs generation</h2>

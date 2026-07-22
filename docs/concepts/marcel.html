@@ -189,6 +189,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p><strong>The first hello.</strong> The first time Marcel can run (once you&#39;ve added a text key), he offers a quick, entirely optional five-question intro — what you make, references you love, pet peeves, preferred vibe. Answer it and he starts with real context; skip it and he simply learns as you go. Either way, everything he writes lands in the profile you can open and edit.</p>
 <h2 id="bring-your-own-brain"><a class="anchor" href="#bring-your-own-brain" aria-hidden="true">#</a>Bring your own brain</h2>
 <p>Marcel runs on <strong>your own text-model key</strong>, like everything else in Brut — there is no Brut server in the conversation. Add a Gemini, OpenAI or Anthropic key and chat works; without one, the panel remains a fully working journal and the composer shows a quiet <em>add a key</em> link.</p>
+<p><strong>One OpenRouter key also works.</strong> If you hold no native text key but have an
+<a href="/docs/providers/openrouter.html">OpenRouter</a> key, Marcel&#39;s lanes route through it —
+chat, ambient narration, acting, everything — visibly (the composer shows <em>⇄ runs via
+OpenRouter</em>), at pass-through token rates, with Anthropic prompt caching intact so long
+conversations stay as cheap as on a native key. A native key added later takes over
+automatically.</p>
 <p>Two model lanes, both pickable in <strong>⚙ Keys → Marcel</strong>:</p>
 <ul>
 <li><strong>Brain</strong> — the model behind chat and advice. Auto picks your best configured model (Claude Sonnet 5 when an Anthropic key exists).</li>

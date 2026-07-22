@@ -114,35 +114,63 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html" class="active">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
 <h1>OpenRouter</h1>
-<p><strong>OpenRouter</strong> is Brut&#39;s <strong>text-route</strong> aggregator: one key that can run the <em>planning</em> side
-of Brut — Refine, the Multi-Shot planner, the cinema crew (Scenarist, Artistic Director, DoP,
-Script Supervisor) and Text→Text — when you hold no native Gemini / OpenAI / Anthropic key.
+<p><strong>OpenRouter</strong> is the one aggregator key that can hold <strong>almost the whole of Brut</strong>: every
+text model (planning <strong>and Marcel</strong> — chat, ambient narration, acting), the full Nano Banana
+image family, GPT Image 2, and the video models — Kling 3.0, Veo 3.1 / Fast / Lite, Seedance
+2.0. Only the upscalers stay outside (they aren&#39;t resold anywhere, by design).
 Like every <a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a>,
-it adds no models to the menu and is always visible: routed planning nodes show
-<strong>⇄ runs via OpenRouter</strong>.</p>
-<p>Every text model in Brut&#39;s catalog is covered, at <strong>pass-through provider list rates</strong> — the
-same per-token prices as the native APIs (OpenRouter&#39;s revenue is a ~5.5% fee when you buy
-credits, not a token markup). Vision-grounded planning works (agents that look at your
-stills), and the GPT-5.6 reasoning dial rides along.</p>
+it adds no models to the menu and is always visible: routed nodes show
+<strong>⇄ runs via OpenRouter</strong>, and Marcel&#39;s composer says so too.</p>
+<p>If you want the simplest possible seat: <strong>one OpenRouter key is a working studio.</strong> Native
+keys added later always take their models back automatically, usually at slightly better
+prices.</p>
+<h2 id="text-planning-and-marcel"><a class="anchor" href="#text-planning-and-marcel" aria-hidden="true">#</a>Text — planning and Marcel</h2>
+<p>Every text model in Brut&#39;s catalog runs at <strong>pass-through provider list rates</strong> — the same
+per-token prices as the native APIs (OpenRouter&#39;s revenue is a ~5.5% fee when you buy
+credits, not a token markup). Vision-grounded planning works, the GPT-5.6 reasoning dial
+rides along, and <strong>Anthropic prompt caching passes through</strong> — Marcel&#39;s long system context
+caches exactly as on a native Anthropic key (write premiums and 0.1× reads verified live),
+so routed conversations cost the same as native ones.</p>
+<h2 id="images-native-knobs-no-compromises"><a class="anchor" href="#images-native-knobs-no-compromises" aria-hidden="true">#</a>Images — native knobs, no compromises</h2>
+<p>The Nano Banana family runs with <strong>Brut&#39;s own menus</strong> — the real 512/1K/2K/4K sizes and the
+full aspect list, unlike fal&#39;s preset system — which is why OpenRouter sits <em>first</em> in those
+models&#39; route order. Approximate inpaint masks work (the Gemini convention, verified live).
+Billing is pass-through per image (~$0.069 measured for Nano Banana 2 at 1K, essentially the
+native token price), and <strong>every image job records its exact billed amount</strong> on the ledger.</p>
+<p>The one exception: <strong>GPT Image 2 via OpenRouter has no size or aspect control</strong> (quality
+only) — so for that model fal and Replicate outrank it. It still works ($0.005 measured at
+low quality), just without sizing.</p>
+<h2 id="video-the-whole-set-with-billing-truth"><a class="anchor" href="#video-the-whole-set-with-billing-truth" aria-hidden="true">#</a>Video — the whole set, with billing truth</h2>
+<p>Kling 3.0 (std/pro), Veo 3.1 / Fast / <strong>Lite</strong> (OpenRouter is the first route Lite has ever
+had), and Seedance 2.0 — image-to-video <strong>with end frames</strong>, text-to-video, reference
+images. Per-second rates (2026-07-22): Kling std $0.084 / pro $0.112 (audio +$0.042–0.056),
+Veo 3.1 $0.20 (audio doubles it), Fast $0.08–0.10, Lite $0.03–0.05; Seedance bills per
+video token. Where a surcharge can&#39;t be estimated up front the node says so — and it
+matters less than usual here, because <strong>OpenRouter reports the exact billed cost on every
+job</strong>, which lands on the ledger row verbatim (a 4s Lite clip billed $0.12 = 4 × $0.03,
+verified live to the cent).</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
 <p>Create a key at <strong><a href="https://openrouter.ai/keys">openrouter.ai/keys</a></strong> (<code>sk-or-…</code>), buy a few
 dollars of credits, and paste it into <strong>⚙ Keys → OpenRouter</strong> (or set <code>OPENROUTER_API_KEY</code>).</p>
 <h2 id="the-fine-print"><a class="anchor" href="#the-fine-print" aria-hidden="true">#</a>The fine print</h2>
 <ul>
-<li><strong>Your native key always wins.</strong> Add a Gemini/OpenAI/Anthropic key later and those models
+<li><strong>Your native key always wins.</strong> Add a Gemini/OpenAI/Kling/… key later and those models
 bill direct again automatically.</li>
 <li><strong>A fal.ai key can also run text</strong> (fal resells the same router) — but fal&#39;s text lane
-takes <strong>no images</strong> and no reasoning dial, so OpenRouter outranks it when both keys exist.
-Vision-grounded calls on a fal-only seat fail with a clear message.</li>
-<li><strong>Marcel still needs a native text key for now.</strong> The companion&#39;s streaming chat and
-prompt-cache lanes don&#39;t route yet — this is the one honest gap in the single-key story.</li>
-<li>Every routed planning call lands in the spend ledger with provider-reported token counts,
-marked &quot;via openrouter&quot;.</li>
+takes <strong>no images</strong> and no reasoning dial, so OpenRouter outranks it when both keys exist.</li>
+<li><strong>Marcel routes here and only here</strong>: his lanes stream, and OpenRouter is the one
+aggregator whose wire supports Brut&#39;s streaming + tool-call + prompt-cache contract.</li>
+<li><strong>Kling&#39;s 4K master tier and Seedance&#39;s Smart Length aren&#39;t on OpenRouter</strong>; for video,
+fal outranks OpenRouter when both keys exist (fal&#39;s Kling rates run cheaper). Missing
+knobs always fail loud, never silently.</li>
+<li>Every routed call — text, image, or video — lands in the spend ledger with
+provider-reported figures (token counts, cache activity, billed cost), marked
+&quot;via openrouter&quot;.</li>
 </ul>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/replicate.html"><span>← Previous</span><b>Replicate (routes)</b></a><a class="pn next" href="/docs/cinema/index.html"><span>Next →</span><b>Full walkthrough</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#the-fine-print">The fine print</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-planning-and-marcel">Text — planning and Marcel</a></li><li class="lvl2"><a href="#images-native-knobs-no-compromises">Images — native knobs, no compromises</a></li><li class="lvl2"><a href="#video-the-whole-set-with-billing-truth">Video — the whole set, with billing truth</a></li><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#the-fine-print">The fine print</a></li></ul></nav>
 </div>
 </body>
 </html>

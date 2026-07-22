@@ -133,7 +133,7 @@ own prices. This page is the honest comparison.</p>
 <tbody><tr>
 <td>Setup</td>
 <td>~5 min per provider console (billing on)</td>
-<td>One key (OpenRouter and/or fal/Replicate)</td>
+<td>One key (OpenRouter covers nearly everything; fal/Replicate optional)</td>
 <td>Browser sign-in, no key at all</td>
 </tr>
 <tr>
@@ -172,7 +172,7 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <tbody><tr>
 <td><strong>Images — Nano Banana family</strong> (Text→Image, Image→Image, Compose, Multi-Shot tiles, keyframes)</td>
 <td>✓ (Gemini)</td>
-<td>—</td>
+<td>✓ Pro/2/original — Brut&#39;s own size+aspect menus</td>
 <td>✓ Pro/2/original</td>
 <td>✓ Pro/2</td>
 <td>✓ Nano Banana 2</td>
@@ -180,23 +180,23 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <tr>
 <td><strong>Images — GPT Image 2</strong></td>
 <td>✓ (OpenAI)</td>
-<td>—</td>
-<td>✗ (size fidelity)</td>
-<td>✗</td>
+<td>✓ quality only (no sizing)</td>
+<td>✓ (fal&#39;s own size presets)</td>
+<td>✓ (sizes ride the aspect menu)</td>
 <td>✗</td>
 </tr>
 <tr>
 <td><strong>Inpaint (masks)</strong></td>
-<td>✓ (OpenAI/Gemini)</td>
-<td>—</td>
-<td>✗</td>
-<td>✗</td>
+<td>✓ exact (OpenAI) · ≈ approximate (Gemini)</td>
+<td>≈ approximate (Nano Banana models)</td>
+<td>≈ approximate (Nano Banana models)</td>
+<td>≈ approximate (Nano Banana models)</td>
 <td>✗</td>
 </tr>
 <tr>
 <td><strong>Video — Kling 3.0</strong></td>
 <td>✓ (key or kling.ai sub)</td>
-<td>—</td>
+<td>✓ v3 std/pro</td>
 <td>✓ v3 std/pro</td>
 <td>✓ Omni</td>
 <td>pending verification</td>
@@ -204,17 +204,17 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <tr>
 <td><strong>Video — Seedance 2.0</strong></td>
 <td>✓ (BytePlus)</td>
-<td>—</td>
+<td>✓ i2v+t2v</td>
 <td>✓ i2v</td>
 <td>✓ i2v+t2v, ≤720p</td>
 <td>✓ i2v</td>
 </tr>
 <tr>
-<td><strong>Video — Veo 3.1 / Fast</strong></td>
+<td><strong>Video — Veo 3.1 / Fast / Lite</strong></td>
 <td>✓ (Gemini key)</td>
-<td>—</td>
-<td>✓ (no end frame)</td>
-<td>✓ incl. end frame</td>
+<td>✓ incl. end frames (only route Lite has)</td>
+<td>✓ 3.1+Fast (no end frame)</td>
+<td>✓ 3.1+Fast incl. end frame</td>
 <td>✗</td>
 </tr>
 <tr>
@@ -228,8 +228,8 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <tr>
 <td><strong>Marcel</strong> (chat, narrator, acting)</td>
 <td>✓ (native text key)</td>
-<td>✗ for now</td>
-<td>✗</td>
+<td>✓ full — chat, narrator, acting, prompt caching included</td>
+<td>✗ (no streaming)</td>
 <td>✗</td>
 <td>✗</td>
 </tr>
@@ -250,25 +250,47 @@ confirm says who bills, and the spend ledger records it per generation.</p>
 <td>✓</td>
 </tr>
 </tbody></table>
-<h2 id="three-sensible-setups"><a class="anchor" href="#three-sensible-setups" aria-hidden="true">#</a>Three sensible setups</h2>
-<ol>
-<li><strong>The studio setup — native keys.</strong> Gemini + OpenAI + one video provider (+ Anthropic for
-Marcel&#39;s best brain). Cheapest per generation, every feature, every knob. This is what
-Brut is built around.</li>
-<li><strong>The 5-minute setup — OpenRouter + fal.ai.</strong> Two keys cover images, video, and all
-planning. Add <strong>one</strong> native Gemini key on top (2 more minutes) and you gain Marcel,
-Gemini-native images/Veo at direct prices, and vision everywhere — genuinely hard to tell
-from the full setup, minus the aggregator margin on video.</li>
-<li><strong>The zero-key setup — a Higgsfield subscription.</strong> Sign in, generate Nano Banana 2
-images and Seedance clips billed to plan credits. The narrowest slice — no planning
-models, no Marcel, no upscalers — but it&#39;s real work from a consumer subscription.</li>
-</ol>
-<p>The pattern to remember: <strong>keys you add later always take over their models automatically</strong> —
-start lazy, upgrade to direct billing whenever a provider starts costing you real money.</p>
+<h2 id="which-path-should-you-pick"><a class="anchor" href="#which-path-should-you-pick" aria-hidden="true">#</a>Which path should you pick?</h2>
+<p>Three setups cover almost everyone. Pick by what you care about most:</p>
+<h3 id="1-native-keys-pick-this-if-you-care-about-price-and-control"><a class="anchor" href="#1-native-keys-pick-this-if-you-care-about-price-and-control" aria-hidden="true">#</a>1. Native keys — pick this if you care about <strong>price and control</strong></h3>
+<p>Gemini + OpenAI + one video provider (+ Anthropic for Marcel&#39;s best brain). This is what
+Brut is built around, and it wins on every axis except setup time:</p>
+<ul>
+<li><strong>Cheapest per generation, structurally.</strong> You pay each provider&#39;s list rate, full stop —
+no reseller margin, no credit fee. At studio volume (hundreds of images, dozens of clips a
+week) the difference is real money.</li>
+<li><strong>Every knob of every model</strong>: exact inpaint masks (OpenAI), Kling&#39;s 4K master tier,
+Seedance Smart Length, native 4K rates — none of which any aggregator carries.</li>
+<li>The cost: ~5 minutes per provider console, each with billing enabled.</li>
+</ul>
+<h3 id="2-one-openrouter-key-pick-this-if-you-care-about-simplicity"><a class="anchor" href="#2-one-openrouter-key-pick-this-if-you-care-about-simplicity" aria-hidden="true">#</a>2. One OpenRouter key — pick this if you care about <strong>simplicity</strong></h3>
+<p>The 2-minute setup, and since v1.0.8 it&#39;s a genuinely complete studio: images with Brut&#39;s
+own size/aspect menus, the whole video set (Kling std/pro, Veo 3.1/Fast/Lite with end
+frames, Seedance), every planning model, <strong>and Marcel</strong> — chat, ambient narration and
+acting, with Anthropic prompt caching passing through so long conversations cost the same
+as on a native key. A unique honesty bonus: OpenRouter reports the <strong>exact billed cost of
+every job</strong>, and Brut writes it straight onto your ledger.</p>
+<p>What you give up: GPT Image 2 sizing (quality knob only), Kling 4K, Smart Length, exact
+inpaint masks (approximate ones work), and the upscalers. Prices are pass-through list
+rates for text and images; video carries a modest margin.</p>
+<h3 id="3-openrouter-falai-pick-this-if-you-want-aggregator-simplicity-at-better-video-rates"><a class="anchor" href="#3-openrouter-falai-pick-this-if-you-want-aggregator-simplicity-at-better-video-rates" aria-hidden="true">#</a>3. OpenRouter + fal.ai — pick this if you want <strong>aggregator simplicity at better video rates</strong></h3>
+<p>Two keys instead of one, and the route table quietly picks the better door per model:
+OpenRouter keeps text, Marcel, and images (its native-menu fidelity wins there); fal takes
+over video — its Kling rates run noticeably cheaper — and adds GPT Image 2 sizing via its
+own presets. This is the setup we&#39;d suggest to most people who don&#39;t want provider consoles:
+one evening of video work typically pays for the second key&#39;s two minutes of setup.</p>
+<h3 id="the-pattern-to-remember"><a class="anchor" href="#the-pattern-to-remember" aria-hidden="true">#</a>The pattern to remember</h3>
+<p><strong>Keys you add later always take over their models automatically.</strong> Start with OpenRouter
+today, add fal when video volume grows, add native keys whenever one provider starts
+costing real money — nothing to reconfigure, the routes just step aside.</p>
+<p><em>Also supported, for narrower cases:</em> a <strong><a href="/docs/providers/higgsfield.html">Higgsfield subscription</a></strong>
+(no key at all — Nano Banana 2 + Seedance billed to plan credits; no planning, no Marcel)
+and a <strong><a href="/docs/providers/replicate.html">Replicate</a></strong> token (a redundancy door covering
+roughly what fal covers, incl. Veo end frames). Both work, neither is where we&#39;d start.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/index.html"><span>← Previous</span><b>Overview</b></a><a class="pn next" href="/docs/providers/gemini.html"><span>Next →</span><b>Google Gemini</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-trade-off-in-one-table">The trade-off in one table</a></li><li class="lvl2"><a href="#how-much-of-brut-works-with-what">How much of Brut works with what</a></li><li class="lvl2"><a href="#three-sensible-setups">Three sensible setups</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-trade-off-in-one-table">The trade-off in one table</a></li><li class="lvl2"><a href="#how-much-of-brut-works-with-what">How much of Brut works with what</a></li><li class="lvl2"><a href="#which-path-should-you-pick">Which path should you pick?</a></li><li class="lvl3"><a href="#1-native-keys-pick-this-if-you-care-about-price-and-control">1. Native keys — pick this if you care about price and control</a></li><li class="lvl3"><a href="#2-one-openrouter-key-pick-this-if-you-care-about-simplicity">2. One OpenRouter key — pick this if you care about simplicity</a></li><li class="lvl3"><a href="#3-openrouter-falai-pick-this-if-you-want-aggregator-simplicity-at-better-video-rates">3. OpenRouter + fal.ai — pick this if you want aggregator simplicity at better video rates</a></li><li class="lvl3"><a href="#the-pattern-to-remember">The pattern to remember</a></li></ul></nav>
 </div>
 </body>
 </html>
