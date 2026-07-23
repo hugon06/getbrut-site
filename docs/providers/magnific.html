@@ -122,11 +122,21 @@ node. Brut deliberately uses only the upscalers, not Magnific&#39;s other genera
 paste it into <strong>⚙ Keys → Magnific</strong> (or set <code>MAGNIFIC_API_KEY</code>).</p>
 <p>You do <strong>not</strong> need the webhook secret: Brut runs on your machine and polls Magnific for results
 directly — no webhooks, no third-party relay, nothing in the call path but you and Magnific.</p>
-<h2 id="billing"><a class="anchor" href="#billing" aria-hidden="true">#</a>Billing</h2>
-<p>The API bills <strong>Magnific credits</strong> by output pixel area (input size × the scale factor you pick).
-The key needs an active credit balance; Brut shows an approximate $ estimate on the node before
-each run and records the cost per generation in the spend ledger. Rates are documented in EUR —
-Brut&#39;s figures are close approximations, and your Magnific dashboard is the billing truth.</p>
+<h2 id="billing-subscription-credits"><a class="anchor" href="#billing-subscription-credits" aria-hidden="true">#</a>Billing — subscription credits</h2>
+<p>The API bills <strong>credits from your Magnific subscription&#39;s allocation</strong> (for example, Premium+
+includes 600K credits per year), consumed by output pixel area. Two things worth knowing:</p>
+<ul>
+<li><strong>A credit&#39;s dollar value depends on your tier</strong>, so Brut doesn&#39;t pretend to convert: the ≈$
+figure on the node is Magnific&#39;s own doc-derived <em>pay-as-you-go equivalent</em> — a rough ceiling,
+not what your plan actually charges you. On a yearly plan, your effective cost is simply your
+plan price spread over your usage; at studio volume upscales barely dent the allocation
+(a few hundred credits each against hundreds of thousands per year).</li>
+<li><strong>&quot;Unlimited&quot; plans are unlimited in the web app only</strong> — API calls always consume credits.</li>
+</ul>
+<p>Brut would happily show your credit balance and per-run points instead — but Magnific&#39;s API
+exposes neither on individual plans (the analytics endpoints are reserved for team tiers, and
+task responses carry no credit field). If Magnific ships a balance endpoint, Brut will pick it
+up. Until then: your Magnific dashboard is the billing truth.</p>
 <h2 id="behavior-notes"><a class="anchor" href="#behavior-notes" aria-hidden="true">#</a>Behavior notes</h2>
 <ul>
 <li>Brut sends the <strong>original file bytes</strong> — never a re-encode, never a downscale. If an image
@@ -139,7 +149,7 @@ is never output lost.</li>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/seedance.html"><span>← Previous</span><b>Seedance</b></a><a class="pn next" href="/docs/providers/topaz.html"><span>Next →</span><b>Topaz Labs</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#billing">Billing</a></li><li class="lvl2"><a href="#behavior-notes">Behavior notes</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#billing-subscription-credits">Billing — subscription credits</a></li><li class="lvl2"><a href="#behavior-notes">Behavior notes</a></li></ul></nav>
 </div>
 </body>
 </html>
