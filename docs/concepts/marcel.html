@@ -195,12 +195,12 @@ chat, ambient narration, acting, everything — visibly (the composer shows <em>
 OpenRouter</em>), at pass-through token rates, with Anthropic prompt caching intact so long
 conversations stay as cheap as on a native key. A native key added later takes over
 automatically.</p>
-<p>Two model lanes, both pickable in <strong>⚙ Keys → Marcel</strong>:</p>
+<p>Two model lanes, both pickable in <strong>⚙ Settings → Marcel</strong>:</p>
 <ul>
 <li><strong>Brain</strong> — the model behind chat and advice. Auto picks your best configured model (Claude Sonnet 5 when an Anthropic key exists).</li>
 <li><strong>Narrator</strong> — the cheap lane behind everything ambient: failure diagnoses, run commentary, session recaps, and the quiet taste passes. Auto picks Claude Haiku or Gemini Flash, whichever key exists.</li>
 </ul>
-<p>Running the brain on a <strong>GPT-5.6</strong> model (Sol / Terra / Luna) adds a <strong>Reasoning</strong> dial next to the lane picker — none to xhigh, deeper answers for more output tokens (<a href="/docs/providers/openai.html">details</a>). The dial only appears when the selected brain model supports it, and each chat&#39;s ledger row records the setting it ran with.</p>
+<p><strong>Both lanes</strong> carry a <strong>Reasoning</strong> dial and a <strong>Thinking</strong> switch under their pickers — full control over speed and cost, per lane. The dial (how deeply the model reasons before answering; deeper = more output tokens) is live on the <strong>GPT-5.6</strong> family (none → xhigh, <a href="/docs/providers/openai.html">details</a>) and on <strong>Claude Sonnet 5 / Opus 4.8</strong> (low → max, Claude&#39;s default is high — <a href="/docs/providers/anthropic.html">details</a>); on models without a declared dial the row shows <em>not supported</em> rather than hiding. The Thinking switch is Claude-specific: Sonnet 5 thinks adaptively by default and bills those tokens as output, so <strong>off</strong> is the faster/cheaper setting when you don&#39;t need deep deliberation. Every call&#39;s ledger row records the settings it ran with.</p>
 <h2 id="what-it-costs-honestly"><a class="anchor" href="#what-it-costs-honestly" aria-hidden="true">#</a>What it costs — honestly</h2>
 <p>Every Marcel call is <strong>ledgered</strong> like a generation: provider, model, exact token counts reported by the provider, and a dollar estimate from the catalog&#39;s per-token prices. <strong>Click the spend readout</strong> in the toolbar to open the full ledger — per-lane totals up top, then every call newest-first, Marcel&#39;s rows tagged with what kind of turn they were.</p>
 <p>Real numbers from a measured full-day session (your ledger will show yours):</p>

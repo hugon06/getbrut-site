@@ -130,6 +130,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <ul>
 <li><strong>Per-node history &amp; re-pin.</strong> Click the <strong>🕘</strong> on any generation node to see everything it ever produced, and pin a past result as the active output. See <a href="/docs/concepts/never-pay-twice.html">Never pay twice</a>.</li>
 <li><strong>Spend.</strong> The toolbar readout aggregates the ledger into a running total, broken down by provider — and <strong>clicking it opens the full ledger</strong>: per-lane totals (generations vs Marcel&#39;s own calls) and every row newest-first with its model, status, and estimated cost.</li>
+<li><strong>Budgets.</strong> <strong>File ▾ → Project budget…</strong> sets a spend ceiling for the project. The readout shows <code>$spent / $budget</code> and tints as you approach it (amber past 80%, red past 100%), and every paid confirmation dialog adds an honest budget line near the cap. Budgets are <strong>soft by default</strong> — they inform, you still hold the OK. Tick <strong>hard cap</strong> and paid confirmations refuse instead until you raise or clear the budget. Comparisons use the ledger&#39;s estimates; leave the amount empty to remove the budget.</li>
 </ul>
 <p>Because the ledger is written at the moment a job <em>finalizes</em> (not when it&#39;s submitted), jobs that were reattached after an engine restart still price and record correctly — paid work is never lost.</p>
 <h2 id="durability"><a class="anchor" href="#durability" aria-hidden="true">#</a>Durability</h2>

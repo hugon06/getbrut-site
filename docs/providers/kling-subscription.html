@@ -116,11 +116,11 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Kling (subscription)</h1>
 <p>The <strong>same Kling models</strong>, billed to your <strong>kling.ai subscription plan</strong> instead of API credit packs — measured at roughly <strong>3× cheaper</strong> than the REST API, with no 30-day pack expiry. This is the recommended way to run Kling for steady studio work.</p>
 <h2 id="how-it39s-authenticated-no-key-to-paste"><a class="anchor" href="#how-it39s-authenticated-no-key-to-paste" aria-hidden="true">#</a>How it&#39;s authenticated (no key to paste)</h2>
-<p>There&#39;s <strong>no API key</strong> here. Auth is an <strong>OAuth session owned by Kling&#39;s official CLI</strong> — and setup is two buttons in Brut&#39;s ⚙ Keys wizard:</p>
+<p>There&#39;s <strong>no API key</strong> here. Auth is an <strong>OAuth session owned by Kling&#39;s official CLI</strong> — and setup is two buttons on the <strong>⚙ Settings → Kling (subscription)</strong> card (or in the setup wizard):</p>
 <ol>
 <li><strong>Install Kling CLI</strong> — one click. Brut fetches the official CLI (<code>@klingai/cli-global</code>, about 1 MB) straight from Kling&#39;s npm registry channel and runs it on the Node runtime that ships inside the Brut installer. Nothing else to install, no admin rights.</li>
 <li><strong>Log in to Kling</strong> — your browser opens on kling.ai; sign in there. Tokens are stored by the CLI itself in <code>~/.kling/.credentials</code>.</li>
-<li><strong>Check login</strong> confirms the session any time.</li>
+<li><strong>Check login</strong> confirms the session any time, and <strong>Log out</strong> (shown while signed in) drops it — switch accounts by logging out, then logging back in with the other one. Finished generations stay on disk.</li>
 </ol>
 <p>If you run Brut from source instead of the installer, the classic route still works and takes precedence: <code>npm i -g @klingai/cli-global</code>, then <code>kling login</code> — a CLI already on your PATH is always used as-is.</p>
 <p>Brut talks to Kling through the CLI (an MCP client) and <strong>never keychains those tokens</strong> — the vault just reports a <code>cli-oauth</code> sentinel when the session file exists. The engine downloads the <strong>watermark-free master</strong> (result URLs expire in 24 h).</p>

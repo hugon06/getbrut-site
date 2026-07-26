@@ -116,9 +116,16 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Anthropic</h1>
 <p>Anthropic&#39;s <strong>Claude</strong> joins Brut as a <strong>planning model — text only</strong>. It generates no images or video; it&#39;s there to be your <strong>scenarist</strong>: writing treatments, art direction and shot plans for the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>, and powering the Refine node.</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
-<p>Create a key in the <strong><a href="https://console.anthropic.com/">Anthropic Console</a></strong> and paste it into <strong>⚙ Keys → Anthropic (Claude)</strong>. Brut validates it by listing models.</p>
+<p>Create a key in the <strong><a href="https://console.anthropic.com/">Anthropic Console</a></strong> and paste it into <strong>⚙ Settings → Anthropic (Claude)</strong>. Brut validates it by listing models.</p>
 <h2 id="how-it39s-used"><a class="anchor" href="#how-it39s-used" aria-hidden="true">#</a>How it&#39;s used</h2>
 <p>Anywhere Brut asks &quot;which LLM should plan this?&quot; — each cinema agent (Scenarist, Artistic Director, DoP, Script Supervisor) and the Refine presets — you can pick <strong>Claude</strong>, <strong>Gemini</strong> or <strong>GPT</strong>. Claude reads your stills (multimodal, downscaled to fit the request cap; generation always uses full-resolution images) and returns the strict JSON plan the chain expects.</p>
+<h2 id="reasoning-dial-thinking-switch"><a class="anchor" href="#reasoning-dial-thinking-switch" aria-hidden="true">#</a>Reasoning dial &amp; thinking switch</h2>
+<p>Claude Sonnet 5 and Opus 4.8 carry two knobs Brut exposes wherever these models run — the Text→Text node, the cinema agents, and <a href="/docs/concepts/marcel.html">Marcel&#39;s brain lane</a>:</p>
+<ul>
+<li><strong>Reasoning effort</strong> (<code>low</code> → <code>max</code>): how deeply the model reasons before answering. Deeper = better on hard treatments, more output tokens billed. Claude&#39;s own default is <strong>high</strong>.</li>
+<li><strong>Thinking switch</strong> (Marcel&#39;s brain, ⚙ Settings): Claude Sonnet 5 <strong>thinks adaptively by default</strong>, and those thinking tokens bill as output tokens — so if Marcel feels slow or a chat turn costs more than expected, switching thinking <strong>off</strong> is the lever: faster, cheaper, a little shallower. The switch needs your native Anthropic key (turns routed through an aggregator can&#39;t carry it — Brut refuses loudly rather than silently thinking anyway).</li>
+</ul>
+<p>Haiku 4.5 supports neither knob (it&#39;s the cheap narrator lane — that&#39;s fine).</p>
 <h2 id="notes"><a class="anchor" href="#notes" aria-hidden="true">#</a>Notes</h2>
 <ul>
 <li>Truncation is handled loudly: a <code>stop_reason: max_tokens</code> triggers one retry with more headroom, then a clear failure — never a silently cut-off plan.</li>
@@ -128,7 +135,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/veo.html"><span>← Previous</span><b>Google Veo</b></a><a class="pn next" href="/docs/providers/seedance.html"><span>Next →</span><b>Seedance</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#how-it39s-used">How it&#39;s used</a></li><li class="lvl2"><a href="#notes">Notes</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#how-it39s-used">How it&#39;s used</a></li><li class="lvl2"><a href="#reasoning-dial-thinking-switch">Reasoning dial &amp; thinking switch</a></li><li class="lvl2"><a href="#notes">Notes</a></li></ul></nav>
 </div>
 </body>
 </html>

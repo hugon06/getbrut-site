@@ -126,11 +126,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </ul>
 <p>Composites are how the four-agent <a href="/docs/nodes/cinema-crew.html">cinema crew</a> becomes one droppable &quot;Cinema Team&quot; node.</p>
 <h2 id="the-global-library"><a class="anchor" href="#the-global-library" aria-hidden="true">#</a>The global library</h2>
-<p>Composites and whole-graph <strong>templates</strong> can be saved to a <strong>global library</strong> — deliberately cross-project, so the same shelf appears on every project.</p>
+<p>Composites, whole-graph <strong>templates</strong> and <strong>presets</strong> can be saved to a <strong>global library</strong> — deliberately cross-project, so the same shelf appears on every project.</p>
 <ul>
 <li><strong>Save a composite</strong> — 💾 <strong>Save to library</strong> on the composite node. Same name = a new version (everything is versioned; any past version is retrievable).</li>
 <li><strong>Save a graph as a template</strong> — <strong>File ▾ → Save graph as template…</strong>.</li>
-<li><strong>Browse</strong> — <strong>File ▾ → Browse library…</strong>, or find saved composites right in the <code>Tab</code> add-node menu under <strong>Library</strong>. Dropping one in gives it fresh ids (separate caches, no collisions).</li>
+<li><strong>Save a preset</strong> — 💾 on the node that owns the settings: the <a href="/docs/nodes/inputs.html">Prompt node</a> and Multi-Shot notes save <strong>prompt presets</strong> (reusable brief texts), the <a href="/docs/nodes/upscale.html">Upscale Image node</a> saves <strong>upscaling presets</strong> (model + dials).</li>
+<li><strong>Browse</strong> — <strong>File ▾ → Browse library…</strong>, or find saved composites right in the <code>Tab</code> add-node menu under <strong>Library</strong>. Dropping one in gives it fresh ids (separate caches, no collisions). The Library panel also lists every <strong>preset</strong>, grouped by what it belongs to — presets are <em>applied</em> from their node, and <em>deleted</em> here.</li>
 </ul>
 <p>Library items carry an optional <strong>category</strong> (a shelf label you pick on save) and hold <strong>sanitized recipes only</strong> — prompts, models and wiring. <strong>No images, no caches, no keys</strong> are ever written into a library item, so they&#39;re safe to share.</p>
 <p>Some items <strong>ship with Brut</strong> — like the <strong>Cinema Crew</strong> template (the whole <a href="/docs/cinema/index.html">cinema pipeline</a>, pre-wired). Built-ins can&#39;t be deleted; saving your own item under the same name shadows the shipped one.</p>

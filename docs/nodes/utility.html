@@ -121,10 +121,11 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li>Choose a target aspect ratio and a method — <strong>crop</strong> or <strong>pad</strong>.</li>
 <li>Per-image <strong>✂ crop editor</strong>: drag an aspect-locked rectangle to choose <em>which</em> part of each still survives the conform (the default is a center cut — architecture rarely sits dead-center). The crop is stored per image; the engine crops the <strong>original at full resolution</strong>.</li>
 <li>Each image gets its own output plug, so you can route conformed stills individually.</li>
+<li>Each row&#39;s <strong>🔍</strong> opens the lightbox on the conformed result — <strong>←/→ pages the whole set</strong>, so you can flip through the batch and check every cut.</li>
 </ul>
 <p>Conform runs entirely on your machine (local PIL) — <strong>free</strong>, never metered.</p>
 <h2 id="preview"><a class="anchor" href="#preview" aria-hidden="true">#</a>Preview</h2>
-<p>Inspect any output at full size. Wire an image or video into a Preview node and it shows inline on a resizable frame; the <code>image</code> inlet displays video too. Click to open the original; hover to magnify. Preview is the &quot;show me the result&quot; node you&#39;ll drop at the end of most branches.</p>
+<p>Inspect any output at screen size. Wire an image or video into a Preview node and it shows inline on a resizable frame; the <code>image</code> inlet displays video too. Hover a tile and its <strong>🔍</strong> opens the lightbox — wheel-zoom, and <strong>←/→ pages through everything on the node</strong>. When several images are shown, the <strong>‹ ›</strong> buttons on each tile reorder them. Preview is the &quot;show me the result&quot; node you&#39;ll drop at the end of most branches; the full-resolution files live in the project&#39;s output folder.</p>
 <hr>
 <p>That&#39;s the whole palette. Back to <strong><a href="/docs/concepts/nodes-and-graphs.html">Nodes &amp; graphs</a></strong> for how they run together, or on to the <strong><a href="/docs/providers/index.html">Providers</a></strong>.</p>
 

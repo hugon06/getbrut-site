@@ -115,10 +115,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <main class="content">
 <h1>Multi-Shot &amp; boards</h1>
 <p>Where Brut stops being a one-image-at-a-time tool. Multi-Shot explores a scene from many angles at once; the boards are the surfaces where you review, curate and route the results.</p>
+<p>Every board shares one review gesture: hover a tile and click its <strong>🔍</strong> to open the <strong>lightbox</strong> — the image fitted to your screen, wheel-zoom into the pixels, and <strong>←/→ (or the on-screen arrows) paging through the whole board</strong> like a classical gallery. Clicking the image itself does nothing (no accidental tabs while panning the canvas); the full-resolution files live in the project&#39;s output folder.</p>
 <h2 id="multi-shot"><a class="anchor" href="#multi-shot" aria-hidden="true">#</a>Multi-Shot</h2>
 <p>A POV/composition explorer. Wire your base image(s) into a Multi-Shot node, pick an <strong>exploration scenario</strong> and a shot <strong>count</strong>, and a planner (Gemini, seeing all your base images) writes N distinct shot prompts. Then N image-to-image jobs fill a <strong>contact sheet</strong> on a resizable node — a worker pool runs several at a time.</p>
 <ul>
-<li><strong>Scenarios</strong> ship as data — viewpoints, moods, compositions, and a <strong><code>custom</code></strong> scenario that takes its brief from the node&#39;s notes input (pair it with the <em>Scenario maker</em> Refine preset).</li>
+<li><strong>Scenarios</strong> ship as data — viewpoints, moods, compositions, and a <strong><code>custom</code></strong> scenario that takes its brief from the node&#39;s <strong>Notes</strong> field.</li>
+<li><strong>Notes live on the node</strong> — a text box right under the scenario picker steers the planner on any scenario, and for <code>custom</code> it <em>is</em> the brief. Wired text (a Prompt or Refine node into the notes input) still works and both flow to the planner — wire when the text has a life of its own, type when it&#39;s a one-off. Pair <code>custom</code> with the <em>Scenario maker</em> Refine preset for a strong brief.</li>
+<li><strong>💾 Save as preset</strong> appears under non-empty notes — it saves the text as a <strong>prompt preset</strong> in the global library, loadable from any Prompt node in any project.</li>
 <li><strong>Plan caching</strong> — the shot list is cached on its own hash, so stable prompts keep per-shot caches working. <strong>🎲</strong> rolls a new shot list.</li>
 <li><strong>Per-tile controls</strong> — <strong>↻</strong> re-rolls one tile (only that tile re-pays), <strong>✓ / ✗</strong> mark keepers and misses, <strong>🕘</strong> re-pins a past result for that specific tile.</li>
 <li><strong>Curation flows downstream</strong> — ✓ shots flow out the main port (or all non-✗ if none are ticked), taking effect on the next cached run.</li>

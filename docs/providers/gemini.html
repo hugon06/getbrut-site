@@ -116,7 +116,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Google Gemini</h1>
 <p>Google&#39;s Gemini powers Brut&#39;s images (the <strong>Nano Banana</strong> family) and doubles as a <strong>text/planning</strong> model for Refine and the cinema crew. It&#39;s the cheapest place to start — a Nano Banana render is about <strong>$0.04</strong>.</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
-<p>Create an API key at <strong><a href="https://aistudio.google.com/apikey">aistudio.google.com/apikey</a></strong>, then paste it into <strong>⚙ Keys → Google Gemini</strong>.</p>
+<p>Create an API key at <strong><a href="https://aistudio.google.com/apikey">aistudio.google.com/apikey</a></strong>, then paste it into <strong>⚙ Settings → Google Gemini</strong>.</p>
 <blockquote>
 <p><strong>Enable billing.</strong> The free tier has <strong>0 image quota</strong> — a first-call <code>429 RESOURCE_EXHAUSTED</code> means billing isn&#39;t on, not that you&#39;re being throttled.</p>
 </blockquote>
@@ -130,22 +130,27 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </tr>
 </thead>
 <tbody><tr>
-<td><code>gemini-2.5-flash-image</code></td>
-<td>Nano Banana</td>
-<td>Fast, great for iteration (~$0.04)</td>
+<td><code>gemini-3.1-flash-lite-image</code></td>
+<td>Nano Banana 2 Lite</td>
+<td>Fastest &amp; cheapest (~$0.034, 1K) — <strong>text-to-image only</strong></td>
 </tr>
 <tr>
 <td><code>gemini-3.1-flash-image</code></td>
 <td>Nano Banana 2</td>
-<td>Fast, extended resolution (512 → 4K)</td>
+<td>Fast, extended resolution (512 → 4K), edits &amp; references</td>
 </tr>
 <tr>
 <td><code>gemini-3-pro-image</code></td>
 <td>Nano Banana Pro</td>
 <td>Studio-quality up to 4K, precise text</td>
 </tr>
+<tr>
+<td><code>gemini-2.5-flash-image</code></td>
+<td>Nano Banana (legacy)</td>
+<td>Kept for <strong>image edits only</strong> — still the cheapest edit (~$0.04)</td>
+</tr>
 </tbody></table>
-<p>All do <strong>text-to-image</strong> and <strong>image-to-image</strong>. Set the aspect ratio and image size on the node.</p>
+<p>Nano Banana 2 Lite replaced the legacy model on the Text→Image menu (2026-07-25): newer, faster, slightly cheaper. The legacy model can&#39;t be picked for new text-to-image runs but stays on the Image→Image / Inpaint menus, because Lite cannot edit images. Set the aspect ratio and image size on the node.</p>
 <h2 id="text-planning-models"><a class="anchor" href="#text-planning-models" aria-hidden="true">#</a>Text / planning models</h2>
 <p>Gemini also serves planning (Refine presets, Multi-Shot&#39;s planner, and any cinema agent set to Gemini): <code>gemini-2.5-flash</code>, plus preview tiers. These are text-only and never enter the generation queue.</p>
 <h2 id="gotchas"><a class="anchor" href="#gotchas" aria-hidden="true">#</a>Gotchas</h2>
