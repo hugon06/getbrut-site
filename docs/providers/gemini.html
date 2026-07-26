@@ -152,7 +152,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </tbody></table>
 <p>Nano Banana 2 Lite replaced the legacy model on the Text→Image menu (2026-07-25): newer, faster, slightly cheaper. The legacy model can&#39;t be picked for new text-to-image runs but stays on the Image→Image / Inpaint menus, because Lite cannot edit images. Set the aspect ratio and image size on the node.</p>
 <h2 id="text-planning-models"><a class="anchor" href="#text-planning-models" aria-hidden="true">#</a>Text / planning models</h2>
-<p>Gemini also serves planning (Refine presets, Multi-Shot&#39;s planner, and any cinema agent set to Gemini): <code>gemini-2.5-flash</code>, plus preview tiers. These are text-only and never enter the generation queue.</p>
+<p>Gemini also serves planning (Refine presets, Multi-Shot&#39;s planner, and any cinema agent set to Gemini): <strong><code>gemini-3.5-flash-lite</code></strong> is the default (2.5 Flash&#39;s successor — same price, measurably faster), <strong><code>gemini-3.6-flash</code></strong> the stronger code/agentic tier, with <code>gemini-2.5-flash</code> kept for continuity, plus preview tiers. These are text-only and never enter the generation queue.</p>
 <h2 id="gotchas"><a class="anchor" href="#gotchas" aria-hidden="true">#</a>Gotchas</h2>
 <ul>
 <li><strong>Silent content refusals.</strong> An image edit returning <code>finishReason: OTHER</code> is a content refusal, usually caused by an <em>input image</em> (a real person&#39;s name in facade text, a face, a logo), not the prompt. Deterministic — Brut won&#39;t auto-retry. Remove or crop the offending image.</li>
