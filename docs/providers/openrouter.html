@@ -137,6 +137,20 @@ full aspect list, unlike fal&#39;s preset system — which is why OpenRouter sit
 models&#39; route order. Approximate inpaint masks work (the Gemini convention, verified live).
 Billing is pass-through per image (~$0.069 measured for Nano Banana 2 at 1K, essentially the
 native token price), and <strong>every image job records its exact billed amount</strong> on the ledger.</p>
+<p>Two OpenRouter-specific limits worth knowing:</p>
+<ul>
+<li><strong>Requests cap at ~52 MB</strong>, and a full-resolution PNG render can eat that alone once
+base64-encoded. When an image stack wouldn&#39;t fit, Brut transcodes the largest PNG inputs
+to <strong>full-resolution JPEG (q95) for that request only</strong> — never downscaled, never touching
+your files, logged in the engine console. If even that can&#39;t fit, the run fails loudly;
+export the source smaller or use a native key.</li>
+<li><strong>Heavy 4K image jobs can be slow.</strong> OpenRouter&#39;s image endpoint is synchronous, and its
+queue sometimes stalls on large 4K multi-image jobs (measured in the field: a 4K edit that
+takes ~55 s on a native Gemini key can exceed Brut&#39;s 570 s route timeout entirely — that&#39;s
+on their end, not yours). If you hit the timeout: retry, pick a smaller size, or use the
+native key — which is the first-class lane anyway and takes over automatically the moment
+it&#39;s configured.</li>
+</ul>
 <p>The one exception: <strong>GPT Image 2 via OpenRouter has no size or aspect control</strong> (quality
 only) — so for that model fal and Replicate outrank it. It still works ($0.005 measured at
 low quality), just without sizing.</p>

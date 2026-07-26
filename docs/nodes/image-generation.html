@@ -131,16 +131,61 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li>Type a prompt describing the change and run.</li>
 </ol>
 <p>The mask convention is white-on-transparent = editable. Brut converts it per provider: <strong>OpenAI</strong> applies it natively (a true masked edit); <strong>Gemini</strong> gets it as strong guidance (a confine-the-edit preamble plus the mask image) — strong, not a hard guarantee. The same approximate convention rides the <strong>fal.ai / Replicate routes</strong> for the Nano Banana models (verified live), so a fal-only or Replicate-only seat can still inpaint — the node says &quot;approximate&quot; whenever that&#39;s what you&#39;re getting. GPT Image 2 masks never route: exact masking is an OpenAI-key feature, and the node tells you so instead of guessing. The mask remembers which image it was painted on; changing the input fails the run loudly (&quot;repaint&quot;) rather than applying a stale region.</p>
+<h2 id="annotate-correct"><a class="anchor" href="#annotate-correct" aria-hidden="true">#</a>Annotate &amp; Correct</h2>
+<p>Point at things on the image and say what changes — Inpaint&#39;s smarter sibling, and the way clients already brief: markup on a picture.</p>
+<ol>
+<li><p>Wire an image into the Annotate node and run upstream once so it has an output.</p>
+</li>
+<li><p>Click <strong>✏ Annotate</strong> to open the editor. Draw <strong>arrows</strong> (point at the exact object), <strong>boxes / circles</strong> (hold <strong>Alt</strong> to draw from the center), a freehand <strong>lasso</strong> or a click-placed <strong>polygon</strong> (click corners; close on the first corner or double-click — Backspace undoes a corner, Esc cancels), or drop a numbered <strong>point</strong> marker. Give each mark a note (&quot;change this chair to a deep red&quot;, &quot;remove this lamp&quot;) and, optionally:</p>
+<ul>
+<li>a <strong>color chip</strong> — pick on the color wheel, browse the <strong>RAL Classic</strong> swatch grid (216 colors with search — the archviz-native vocabulary clients actually speak; approximate sRGB, since RAL is a physical standard), or use the <strong>eyedropper</strong> to sample a color straight from the image (&quot;make it THIS color&quot;);</li>
+<li>a <strong>reference image</strong> — drop or browse an image onto the mark&#39;s card: &quot;replace THIS with the object shown&quot;. References are lettered (A, B, …) and sent to the model alongside the original. Exotic formats (AVIF from a Google Images drag, for instance) are converted automatically.</li>
+</ul>
+<p><strong>Wheel zooms, middle-drag pans</strong> — for detailed work at native resolution. In <strong>Select</strong>, a selected lasso or polygon shows a handle on every corner, so the outline can be refined point by point.</p>
+</li>
+<li><p>Run. No prompt needed — the marks <em>are</em> the prompt. A wired <code>prompt</code> is optional and rides along as a global instruction (&quot;keep the late-afternoon light&quot;).</p>
+</li>
+</ol>
+<p>Under the hood the node is a compiler: your marks are <strong>burned into a copy of the image</strong> (numbered red markers, arrows, outlines, color swatches) and the model receives <em>both</em> images — the untouched original and the annotated copy — plus a numbered instruction per mark. Drawn-on-image pointing is spatially unambiguous in a way prose never is, and Nano Banana follows it remarkably well. The output is a clean edited image, no markers.</p>
+<p>Notes:</p>
+<ul>
+<li><strong>Nano Banana 2 &amp; Pro and GPT Image 2</strong> — all live-verified drawn-instruction performers (reference images verified too). The original Nano Banana (<code>gemini-2.5-flash-image</code>) failed the same live test (it applied only some edits and left markup in the output), so it&#39;s deliberately not on this node&#39;s menu. In the field, <strong>Nano Banana Pro is the strongest multi-mark performer</strong>; GPT Image 2 is best with a handful of marks at a time.</li>
+<li>Aspect <strong>auto</strong> pins the input image&#39;s measured ratio explicitly on Gemini — reference images would otherwise be allowed to sway the output&#39;s aspect.</li>
+<li>Reference images go through the same content filters as everything else — a photo of a real person (children especially) can trigger Gemini&#39;s <code>IMAGE_SAFETY</code> refusal. The node surfaces it loudly; swap the reference.</li>
+<li>Marks are strong guidance, not a hard mask. When you need pixel-exact confinement, use <strong>Inpaint</strong>.</li>
+<li>Annotations remember which image they were drawn on. If the input changes, the run fails loudly (&quot;re-anchor&quot;) instead of applying stale geometry — reopen the editor and mark the new image.</li>
+<li>Marks stay fully editable: reopen the editor and use <strong>Select</strong> — drag a mark&#39;s number to move it (for arrows the number moves just the <strong>tail</strong>, the tip has its own handle to re-aim, and dragging the shaft moves the whole arrow), edit notes/colors, or delete (✕ or the Delete key). Any edit is an honest cache miss — the next run re-bills.</li>
+<li>Annotations never travel in library recipes — they&#39;re anchored to a specific image.</li>
+<li><strong>Correcting a result you mostly like:</strong> don&#39;t re-roll the same node — every mark would regenerate and the parts you approved come back <em>similar, not identical</em>. Click <strong>↳ Correct result</strong> instead: it spawns a new Annotate node wired to this result, so the approved image becomes the frozen input and only the correction re-bills. And when the fix is &quot;put the original back here&quot; — an added object you don&#39;t want, a region that drifted — click <strong>🗇 Reconcile with input</strong>: it spawns a <strong>Layers</strong> node with the result as base and your input image as a masked layer. Paint where the original should return. Local, free, pixel-exact.</li>
+</ul>
+<h2 id="layers"><a class="anchor" href="#layers" aria-hidden="true">#</a>Layers</h2>
+<p>Photoshop-style compositing, <strong>local and free</strong> — the node never calls a provider.</p>
+<p>Wire two or more images in (the bottom wire is the <strong>base</strong>), then open <strong>🗇 Edit layers &amp; masks</strong>. The layer tray speaks Photoshop:</p>
+<ul>
+<li>A layer has <strong>no mask until you add one</strong> — <strong>＋ mask</strong> on its row (click = white, reveal-all; <strong>Alt+click</strong> = black, hide-all). The brush <strong>paints the mask</strong>: white reveals, black hides — the dual swatch shows both colors (active one outlined), <strong>X</strong> swaps. <strong>Ctrl+Backspace</strong> fills the mask black, <strong>Alt+Backspace</strong> white.</li>
+<li><strong>Brush opacity is per-stroke</strong> (1–100%): overlapping segments inside one stroke never build up. Set it with the slider or <strong>digit keys</strong> — <code>5</code> = 50%, <code>1</code> then <code>2</code> quickly = 12%, <code>0</code> = 100%.</li>
+<li><strong>Alt + right-drag</strong> adjusts the brush — horizontal = <strong>size</strong>, vertical = <strong>softness</strong> — with the cursor pinned in place while you drag (pointer-locked, like Photoshop). Size, softness and opacity all have sliders too, and the live brush cursor shows the soft edge as a dashed ring.</li>
+<li>Each row: <strong>eye</strong> toggle (<strong>Alt+click = solo</strong> — hides the others; again restores), layer thumbnail, <strong>B&amp;W mask chip</strong> — <strong>Shift+click</strong> (or Tab+click / right-click) the chip to <em>disable</em> the mask (red ✕, layer shows fully), <strong>Alt+click</strong> to <em>view</em> the mask full-frame — and the layer <strong>name</strong> (double-click to rename). Below: <strong>feather</strong>, <strong>invert</strong>, remove mask. <strong>Drag rows</strong> to reorder; the <strong>tray</strong> under the stack duplicates (<strong>Ctrl+J</strong>), deletes (duplicates) and moves the selected layer.</li>
+<li><strong>Pen pressure</strong> (Wacom &amp; co) scales the stroke width automatically.</li>
+<li><strong>Wheel zooms</strong> (past ~1.5× the preview switches to full native resolution), <strong>middle-drag pans</strong>.</li>
+</ul>
+<p>Why it matters beyond convenience: generative edits keep &quot;everything else unchanged&quot; only <em>approximately</em> — the whole frame regenerates and untouched regions drift subtly. Layers clamps every unpainted region back to the <strong>source pixels</strong>. Stack the original under a generation, mask in just the part you wanted changed, and the deliverable is pixel-faithful everywhere else.</p>
+<p>Notes:</p>
+<ul>
+<li>The <strong>base defines the canvas</strong>. A layer of another size <strong>auto-fits</strong>: scaled to cover and center-cropped — never distorted (the editor labels it &quot;auto-fit&quot;). This is the common case: a 4K generation never exactly matches its source&#39;s dimensions. Masks stay strict — a stale mask fails loudly, never applies misaligned.</li>
+<li>Masks remember which image they belong to. If an upstream node re-generates (new output), the run fails loudly instead of silently applying or dropping a stale mask — reopen the editor to repaint.</li>
+<li>The composite is cached like any node output, and re-runs are free anyway.</li>
+</ul>
 <h2 id="compose"><a class="anchor" href="#compose" aria-hidden="true">#</a>Compose</h2>
 <p>Blend a <strong>scene</strong> with one or more <strong>reference</strong> images. Wire the base image into <code>scene</code>, the sources you want to pull from into <code>reference</code>, and a prompt describing the blend. Compose is handy for dropping entourage, materials or mood from references into a render.</p>
 <h2 id="choosing-a-model"><a class="anchor" href="#choosing-a-model" aria-hidden="true">#</a>Choosing a model</h2>
-<p>Every model and its default parameters come from Brut&#39;s catalog, so the menu is always current. Cheapest-to-richest on Gemini: <code>gemini-2.5-flash-image</code> (Nano Banana, ~$0.04) → <code>gemini-3.1-flash-image</code> (Nano Banana 2) → <code>gemini-3-pro-image</code> (Nano Banana Pro, up to 4K). See <a href="/docs/providers/index.html">Providers</a> for the full list and billing notes.</p>
+<p>Every model and its default parameters come from Brut&#39;s catalog, so the menu is always current. Cheapest-to-richest on Gemini: <code>gemini-3.1-flash-lite-image</code> (Nano Banana 2 Lite, ~$0.03, <strong>text-to-image only</strong> — it can&#39;t edit) → <code>gemini-3.1-flash-image</code> (Nano Banana 2) → <code>gemini-3-pro-image</code> (Nano Banana Pro, up to 4K). For <strong>edits</strong>, the legacy <code>gemini-2.5-flash-image</code> (Nano Banana, ~$0.04) is still the cheapest and stays on the edit menus. See <a href="/docs/providers/index.html">Providers</a> for the full list and billing notes.</p>
 <h2 id="next"><a class="anchor" href="#next" aria-hidden="true">#</a>Next</h2>
 <p>→ <strong><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot &amp; boards</a></strong> — explore many viewpoints at once.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/inputs.html"><span>← Previous</span><b>Inputs</b></a><a class="pn next" href="/docs/nodes/multishot-and-boards.html"><span>Next →</span><b>Multi-Shot & boards</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-image">Text → Image</a></li><li class="lvl2"><a href="#image-image">Image → Image</a></li><li class="lvl2"><a href="#inpaint">Inpaint</a></li><li class="lvl2"><a href="#compose">Compose</a></li><li class="lvl2"><a href="#choosing-a-model">Choosing a model</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-image">Text → Image</a></li><li class="lvl2"><a href="#image-image">Image → Image</a></li><li class="lvl2"><a href="#inpaint">Inpaint</a></li><li class="lvl2"><a href="#annotate-correct">Annotate &amp; Correct</a></li><li class="lvl2"><a href="#layers">Layers</a></li><li class="lvl2"><a href="#compose">Compose</a></li><li class="lvl2"><a href="#choosing-a-model">Choosing a model</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
 </body>
 </html>
