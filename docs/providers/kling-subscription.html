@@ -133,6 +133,14 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="pricing-your-plan-balance"><a class="anchor" href="#pricing-your-plan-balance" aria-hidden="true">#</a>Pricing &amp; your plan balance</h2>
 <p>Only <strong>v2.5</strong> currently carries a measured price (15 credits / 5s / 720p, ~3× cheaper than API list). Other tiers show <strong>no estimate until measured</strong> — Brut never invents a price it hasn&#39;t confirmed.</p>
 <p>When this provider is selected on an <strong>Image → Video</strong> or <strong>Film Shots</strong> node, the node shows your <strong>live plan balance</strong> (&quot;🎟 Plan balance: 5,786 credits · Pro&quot;) read from the CLI — refreshed after every run — and Film Shots repeats it in the paid-run confirmation, so you always know where your credits stand before and after a batch.</p>
+<h2 id="no-kling-sign-in-the-menu-still-works"><a class="anchor" href="#no-kling-sign-in-the-menu-still-works" aria-hidden="true">#</a>No Kling sign-in? The menu still works</h2>
+<p>If you pick a Kling (subscription) model <strong>without</strong> the CLI sign-in, Brut falls back to an
+aggregator you <em>do</em> hold: <strong>Kling v3 / v3 Turbo / v2.6</strong> route through your
+<a href="/docs/providers/openrouter.html">OpenRouter</a> or
+<a href="/docs/providers/higgsfield.html">Higgsfield</a> credential, visibly marked
+<strong>⇄ runs via …</strong> on the node (the provider and model pickers say so before you pick).
+Models with no aggregator anywhere (v2.5, o1, 3.0 Omni) say exactly that — they need the
+Kling sign-in or the REST key.</p>
 <h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
 <li><strong>5 QPS</strong>, <strong>Personal workspace only</strong>, and tasks <strong>can&#39;t be cancelled</strong> provider-side.</li>
@@ -142,7 +150,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/kling.html"><span>← Previous</span><b>Kling</b></a><a class="pn next" href="/docs/providers/veo.html"><span>Next →</span><b>Google Veo</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing-your-plan-balance">Pricing &amp; your plan balance</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing-your-plan-balance">Pricing &amp; your plan balance</a></li><li class="lvl2"><a href="#no-kling-sign-in-the-menu-still-works">No Kling sign-in? The menu still works</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
 </div>
 </body>
 </html>

@@ -119,8 +119,19 @@ an API key — which makes it the door into Brut for people who hold a higgsfiel
 nothing else. Brut uses it as a <strong><a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a></strong>:
 it never adds a model to the menu, it serves models Brut already carries when you hold <strong>no
 native key</strong> for them, always visibly marked <strong>⇄ runs via Higgsfield</strong> on the node.</p>
-<p>Current mirror set: <strong>Nano Banana 2</strong> (images, text→image and image→image) and
-<strong>Seedance 2.0</strong> (image→video). More follow as they&#39;re verified against real accounts.</p>
+<p>Current mirror set (verified against the official tool&#39;s own model catalog):</p>
+<ul>
+<li><strong>Images</strong> — Nano Banana (image→image), Nano Banana 2 (text/image→image), Nano Banana 2
+Lite (text→image, 1K), Nano Banana Pro (text/image→image, up to 4K), GPT Image 2
+(text/image→image, sizes as Higgsfield&#39;s 1k/2k/4k resolutions).</li>
+<li><strong>Video</strong> — Kling v3 (with end frames), Kling v3 Turbo, Kling v2.6, Veo 3.1, Veo 3.1
+Fast, Veo 3.1 Lite (with end frames, 8-second clips), Seedance 2.0 — including the
+<strong>Kling (subscription)</strong> menu entries, so a seat without the Kling sign-in falls back
+here instead of dead-ending.</li>
+</ul>
+<p>Where Higgsfield lacks a knob the native API has, the node hides it and says so in the
+price note — the common ones: <strong>no inpaint masks</strong>, <strong>no end frame</strong> on Kling 2.6 / v3
+Turbo / Veo 3.1 (non-Lite), and <strong>no audio switch on Veo 3.1</strong> (clips come with audio).</p>
 <h2 id="setup-no-key-two-buttons"><a class="anchor" href="#setup-no-key-two-buttons" aria-hidden="true">#</a>Setup — no key, two buttons</h2>
 <p>Higgsfield has no API key. Auth is a browser sign-in owned by Higgsfield&#39;s official
 command-line tool, which Brut manages for you. In <strong>⚙ Settings → Higgsfield (subscription)</strong> (or
