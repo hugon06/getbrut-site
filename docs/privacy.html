@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -156,7 +173,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="sign-in"><a class="anchor" href="#sign-in" aria-hidden="true">#</a>Sign-in</h2>
 <p>Identity runs through <strong>Supabase</strong> (magic link or Google/GitHub). It&#39;s used <em>only</em> to know who&#39;s using a seat — never to store your work. The <strong>engine holds your session</strong>, not the browser: your refresh token is kept in your OS keychain, and access tokens are verified locally against a cached public key (so it works offline). This is identity only.</p>
 <h2 id="the-website"><a class="anchor" href="#the-website" aria-hidden="true">#</a>The website</h2>
-<p><strong>getbrut.app</strong> and this documentation load <strong>nothing from third parties</strong> — fonts are self-hosted, and there are no analytics scripts or trackers. The beta sign-up form is the one place you hand us an email, and only if you choose to. When your seat is approved we send <strong>one approval email</strong> to that address, and the <a href="https://getbrut.app/download/">download page</a> asks you to sign in with the same Supabase account the app uses — that sign-in is checked against the approved list to serve the installer, and nothing else is recorded.</p>
+<p><strong>getbrut.app</strong> and this documentation load <strong>nothing from third parties</strong> — fonts are self-hosted, and there are no analytics scripts or trackers. The site has its own short notice covering the beta form, sign-in and emails: <a href="https://getbrut.app/privacy/">getbrut.app/privacy</a>. The beta sign-up form is the one place you hand us an email, and only if you choose to. When your seat is approved we send <strong>one approval email</strong> to that address, and the <a href="https://getbrut.app/download/">download page</a> asks you to sign in with the same Supabase account the app uses — that sign-in is checked against the approved list to serve the installer, and nothing else is recorded.</p>
 <h2 id="in-short"><a class="anchor" href="#in-short" aria-hidden="true">#</a>In short</h2>
 <p>Your keys, your work, your machine. The only thing we ever learn is that a version of Brut is running on some install, on some OS — and only while you&#39;re signed in.</p>
 

@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -122,10 +139,11 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </ul>
 <h2 id="refine-prompt-helper"><a class="anchor" href="#refine-prompt-helper" aria-hidden="true">#</a>Refine (Prompt Helper)</h2>
 <p>An AI prompt-rewriter. Wire a Prompt (or any text) into Refine, choose a <strong>preset</strong>, and it rewrites the text through a text model (Gemini) — sharpening a vague idea into a precise, photorealistic prompt without changing your intent.</p>
-<p>Presets are data (fourteen ship by default), including:</p>
+<p>Presets are data (fifteen ship by default), including:</p>
 <ul>
 <li><strong>Enhance prompt</strong> — the general-purpose sharpener.</li>
 <li><strong>Screenshot → photoreal</strong>, <strong>Cinematic relight</strong>, <strong>Camera language</strong>, <strong>Scene dressing</strong>, and more.</li>
+<li><strong>Character turnaround sheet</strong> and <strong>Character expressions</strong> — wire a character image in and get an image-editing prompt for a 4-view orthographic turnaround, or a grid of facial expressions, both identity-anchored to the image with hard don&#39;t-change constraints. (The same recipes come pre-wired in the <strong>Character Lab</strong> <a href="/docs/concepts/library-and-composites.html">library composite</a>.)</li>
 <li><strong>Scenario maker</strong> — writes a brief for a Multi-Shot <code>custom</code> scenario (chain Prompt → Refine → Multi-Shot notes).</li>
 <li><strong>Kling video prompt</strong> — structures a loose motion idea into Kling&#39;s five-part video prompt (scene / subject motion / explicit camera / atmosphere / negative constraints), with the stillness discipline the cinema crew uses. Tell it in the notes which pipeline stage you&#39;re at (look test vs final render).</li>
 <li><strong>Seedance video prompt</strong> — the same job in Seedance 2.0&#39;s grammar: shot-storyboard structure, one camera move per shot, controlled motion, and Seedance&#39;s native audio symbols (（…） ambience, <code>&lt;…&gt;</code> sound effects, <code>{…}</code> dialogue).</li>
@@ -149,10 +167,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Split modes</strong>: <em>Auto-detect</em> tries <code>SHOT X</code> fenced blocks (the script format many studios use), then JSON arrays, numbered lists, and finally blank-line paragraphs; or pick a mode explicitly, including a custom separator.</li>
 <li>Blocks are <strong>editable in place</strong> — tweaks flow out the plugs immediately on the next run. Changing the wired text or the split mode <strong>re-splits</strong> (edits belong to the old content and reset with it).</li>
 <li><strong>✕ hides</strong> a block from the combined bottom output (its number and plug stay stable); ↺ restores it.</li>
+<li>The board <strong>grows to fit its blocks</strong> — every tile (and its plug) stays visible, so wires always attach where you see them. Shrink it by hand if you prefer; it only re-grows when the content changes.</li>
 </ul>
 <p>The killer combo: a scripted Text → Text (your reel/script prompt in its System field, renders wired to its images inlet) → Text Board → per-shot prompts fanned out to your image and video nodes. One click from &quot;one long ChatGPT answer&quot; to a wired production board. (For the specific case of cinematic reels, the <a href="/docs/nodes/cinema-crew.html">cinema crew</a>&#39;s <strong>Cinematic Reel (flourish)</strong> brief now folds this whole flow into one node chain — the Text → Text front-end stays the flexible, roll-your-own route.)</p>
 <h2 id="image-in"><a class="anchor" href="#image-in" aria-hidden="true">#</a>Image In</h2>
 <p>Loads images into the graph. Add them by <strong>file picker</strong>, <strong>drag &amp; drop</strong>, or <strong>paste</strong> — all append, so one Image In can hold several images. Each thumbnail&#39;s <strong>🔍</strong> opens the lightbox at screen resolution — <strong>←/→ pages through the node&#39;s images</strong>, wheel-zoom loads the original pixels only when you actually zoom. Dropping image files anywhere on the canvas creates a ready-filled Image In node right where they land — and so does pressing <code>Ctrl+V</code> over the canvas with an image on the clipboard (copy from Photoshop, a render buffer, or any browser image; a new Image In appears at your cursor). To <em>append</em> a pasted image to an existing Image In instead, click that node first and then paste, or use its <strong>Paste</strong> button.</p>
+<p>Results can be <strong>detached</strong> the same way: drag any image off a node — a generation preview, a Multi-Shot or Shot Board tile, a Reference Board still, a Storyboard card frame — and drop it on empty canvas to get a ready-filled Image In right there (drop it on an existing Image In to append instead). No re-upload, no copy: the new node points at the same project file, now frozen as a base for further exploration even if the source node later re-rolls or is deleted from the plan.</p>
 <blockquote>
 <p><strong>File vs. paste, for big renders:</strong> adding a <em>file</em> (picker or drag &amp; drop) keeps its <strong>original bytes</strong> — a 12 MB JPEG stays a 12 MB JPEG. <em>Pasting</em> can&#39;t: the clipboard carries decoded pixels, not your file, so Brut stores them <strong>losslessly as PNG</strong> (never a silent re-compression) — a 20-megapixel render lands around 38 MB that way. Same pixels, bigger container. Paste is perfect for screenshots and quick grabs; for production renders, prefer the file — smaller payloads and the exact encoding you delivered.</p>
 </blockquote>

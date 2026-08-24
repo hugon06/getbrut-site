@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -114,8 +131,9 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html" class="active">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
 <h1>What Brut is</h1>
-<p>Brut is a <strong>local-first, bring-your-own-key node canvas</strong> for orchestrating generative-AI providers — Google Gemini, OpenAI, Anthropic, Kling, Veo, Seedance and more to come — built for architectural visualization production work.</p>
+<p>Brut is a <strong>local-first, bring-your-own-key node canvas</strong> for orchestrating generative-AI providers — Google Gemini, OpenAI, Anthropic, Kling, Veo, Seedance for generation; Magnific and Topaz for upscaling; OpenRouter, fal, Higgsfield and Replicate as <a href="/docs/providers/access-paths.html">aggregator routes</a> when you&#39;d rather hold one key than six — built for architectural visualization production work.</p>
 <p class="lead">Your keys. Your machine. Zero markup. Brut never sits between you and the provider — every generation call goes straight from your computer to the provider, billed to your own account at their price.</p>
+
 
 <h2 id="the-idea-in-one-breath"><a class="anchor" href="#the-idea-in-one-breath" aria-hidden="true">#</a>The idea in one breath</h2>
 <p>Most AI tools are a website that holds your key, runs the model on their servers, and marks up the price. Brut inverts that:</p>
@@ -134,15 +152,19 @@ the node canvas      adapters + job queue (local)        Gemini · OpenAI · …
 <p>The <strong>app</strong> is the node canvas you work in. The <strong>engine</strong> is a small local server that holds your keys, talks to each provider, and writes outputs to your disk. When you launch Brut, the engine serves the app to your browser at <code>http://127.0.0.1:8723/app/</code> — there is no hosted version, by design.</p>
 <h2 id="what-you-can-make"><a class="anchor" href="#what-you-can-make" aria-hidden="true">#</a>What you can make</h2>
 <ul>
-<li><strong>Images</strong> — text-to-image, image-to-image, inpainting, composition, and multi-shot exploration (a whole contact sheet of viewpoints from one scene).</li>
+<li><strong>Images</strong> — text-to-image, image-to-image, inpainting, composition, and multi-shot exploration (a whole contact sheet of viewpoints from one scene, with a deck of surprise cards so the takes never repeat).</li>
+<li><strong>Corrections</strong> — <a href="/docs/nodes/image-generation.html">Annotate &amp; Correct</a>: draw arrows and notes on a render, attach a reference, and the model applies exactly those changes; <a href="/docs/nodes/image-generation.html">Layers</a> paints the original back wherever the model overreached — local and free.</li>
 <li><strong>Video</strong> — animate stills into clips with Kling, Veo or Seedance, with an itemized cost quote before a cent is spent.</li>
 <li><strong>Whole films</strong> — the <a href="/docs/cinema/index.html">Cinema Sessions</a>: a crew of AI agents (scenarist, art director, DoP, script supervisor) that plan a sequence from your stills, which you then shoot and cut locally with ffmpeg.</li>
+<li><strong>Delivery resolution</strong> — <a href="/docs/nodes/upscale.html">upscale</a> stills and clips to 4K/8K with Magnific or Topaz (or your own local Topaz Video AI, free).</li>
+<li><strong>A studio companion</strong> — <a href="/docs/concepts/marcel.html">Marcel</a> reads your canvas, narrates what happened, advises on models and looks, and can build graphs for you on request — on your own key, every call in the ledger.</li>
 </ul>
 <h2 id="next-steps"><a class="anchor" href="#next-steps" aria-hidden="true">#</a>Next steps</h2>
 <ul>
 <li><strong><a href="/docs/install.html">Install &amp; first run</a></strong> — get Brut running and sign in.</li>
 <li><strong><a href="/docs/first-image.html">Your first image</a></strong> — a three-node graph, start to finish.</li>
 <li><strong><a href="/docs/concepts/nodes-and-graphs.html">Nodes &amp; graphs</a></strong> — how the canvas thinks.</li>
+<li><strong><a href="/docs/concepts/marcel.html">Marcel</a></strong> — the companion that lives beside the canvas.</li>
 </ul>
 
 <div class="prevnext"><span></span><a class="pn next" href="/docs/install.html"><span>Next →</span><b>Install & first run</b></a></div>

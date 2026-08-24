@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -126,6 +143,9 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>Conform runs entirely on your machine (local PIL) — <strong>free</strong>, never metered.</p>
 <h2 id="preview"><a class="anchor" href="#preview" aria-hidden="true">#</a>Preview</h2>
 <p>Inspect any output at screen size. Wire an image or video into a Preview node and it shows inline on a resizable frame; the <code>image</code> inlet displays video too. Hover a tile and its <strong>🔍</strong> opens the lightbox — wheel-zoom, and <strong>←/→ pages through everything on the node</strong>. When several images are shown, the <strong>‹ ›</strong> buttons on each tile reorder them. Preview is the &quot;show me the result&quot; node you&#39;ll drop at the end of most branches; the full-resolution files live in the project&#39;s output folder.</p>
+<h2 id="compare"><a class="anchor" href="#compare" aria-hidden="true">#</a>Compare</h2>
+<p><strong>Two images, one verdict.</strong> Wire any two takes into the <strong>A</strong> and <strong>B</strong> inlets — a Gemini attempt against a GPT attempt, an original against an Annotate correction, yesterday&#39;s keeper against today&#39;s re-roll — and the node shows them side by side, live, without running anything. Hover it and the <strong>🔍</strong> opens the real thing: the <strong>before/after wipe slider</strong>, both layers sharing one zoom and pan, so you can drag the divider across a facade while zoomed into the brickwork. The slider labels pick up the source nodes&#39; names, so it reads &quot;Image → Image vs Annotate &amp; Correct&quot;, not &quot;before vs after&quot;.</p>
+<p>Compare is a <strong>viewing surface, not a processor</strong> — free, local, no output port and no ▶ (there is nothing to run; the tiles follow the wires live — route the winner onward from its source node). It&#39;s the generalization of the Upscale node&#39;s built-in input-vs-result compare: same slider, any two wires you choose.</p>
 <h2 id="note"><a class="anchor" href="#note" aria-hidden="true">#</a>Note</h2>
 <p>A <strong>sticky note</strong> for the canvas — annotate your graph the way you&#39;d annotate a whiteboard: intent for future-you, instructions for a teammate opening the project later, review remarks next to the branch they&#39;re about.</p>
 <p>Notes aren&#39;t nodes — they&#39;re <strong>placement tools</strong>, living in the rail&#39;s Organize section (with Stamp, Group and Composite). Click the rail&#39;s sticky-note icon and the note rides your cursor: <strong>click</strong> the canvas to place it at the default size, or <strong>click-and-drag to draw its size</strong> (Shift places several, Esc or right-click cancels). While you&#39;re placing, the nodes underneath freeze — you can drop a note <strong>on top of anything</strong>.</p>
@@ -150,7 +170,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/upscale.html"><span>← Previous</span><b>Upscale</b></a><a class="pn next" href="/docs/providers/index.html"><span>Next →</span><b>Overview</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#conform">Conform</a></li><li class="lvl2"><a href="#preview">Preview</a></li><li class="lvl2"><a href="#note">Note</a></li><li class="lvl2"><a href="#stamp">Stamp</a></li><li class="lvl2"><a href="#pen">Pen</a></li><li class="lvl2"><a href="#text">Text</a></li><li class="lvl2"><a href="#the-ring-menu">The ring menu</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#conform">Conform</a></li><li class="lvl2"><a href="#preview">Preview</a></li><li class="lvl2"><a href="#compare">Compare</a></li><li class="lvl2"><a href="#note">Note</a></li><li class="lvl2"><a href="#stamp">Stamp</a></li><li class="lvl2"><a href="#pen">Pen</a></li><li class="lvl2"><a href="#text">Text</a></li><li class="lvl2"><a href="#the-ring-menu">The ring menu</a></li></ul></nav>
 </div>
 </body>
 </html>

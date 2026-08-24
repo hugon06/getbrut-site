@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brut changelog</title>
+<meta name="description" content="Every Brut beta release, newest first: what shipped, what it costs, what changed. Updating is one installer over the old one; projects and keys stay put.">
+<link rel="canonical" href="https://getbrut.app/changelog/">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getbrut.app/changelog/">
+<meta property="og:title" content="Brut changelog">
+<meta property="og:description" content="Every Brut beta release, newest first: what shipped, what it costs, what changed.">
+<meta property="og:image" content="https://getbrut.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brut changelog">
+<meta name="twitter:description" content="Every Brut beta release, newest first: what shipped, what it costs, what changed.">
+<meta name="twitter:image" content="https://getbrut.app/og.png">
+<style>
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/JetBrainsMono.woff2) format("woff2");}
+:root { --accent: #4f9dff; --bg: #141311; --card: #1c1a17; --line: #35322c; --line-soft: #262421; --text: #eae7e0; --muted: #b9b4ab; --faint: #94908a; --dim: #6d6961; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--text);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+  background-image: repeating-linear-gradient(0deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px),
+                    repeating-linear-gradient(90deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px);
+}
+a { color: var(--text); } a:hover { color: var(--accent); }
+::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+
+nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, #141311 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav-in { max-width: 1240px; margin: 0 auto; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 28px; }
+.wordmark { text-decoration: none; display: flex; align-items: baseline; gap: 5px; }
+.wordmark b { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: var(--text); }
+.wordmark i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.nav-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--faint); }
+.nav-side { flex: 1; display: flex; justify-content: flex-end; gap: 22px; font-size: 13.5px; }
+.nav-side a { text-decoration: none; color: var(--faint); }
+.nav-side a.cta { color: var(--accent); }
+
+main { flex: 1; padding: 64px 20px 96px; }
+.stage { width: 100%; max-width: 720px; margin: 0 auto; }
+.kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 16px; }
+h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 5.4vw, 46px); letter-spacing: -0.025em; line-height: 1.06; margin: 0 0 18px; }
+.sub { font-size: 17.5px; line-height: 1.6; color: var(--muted); margin: 0 0 40px; max-width: 62ch; }
+
+.prose p { font-size: 16.5px; line-height: 1.75; color: var(--muted); margin: 0 0 18px; }
+.prose h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 48px 0 14px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+.prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.prose ul, .prose ol { margin: 0 0 18px; padding-left: 22px; }
+.prose li { font-size: 16px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose a { color: var(--accent); text-decoration: none; } .prose a:hover { text-decoration: underline; }
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; color: var(--text); }
+.prose pre { background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
+.prose pre code { background: none; border: none; padding: 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+.pull { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 30px 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 21px; line-height: 1.4; color: var(--text); }
+.receipt { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; background: var(--card); border: 1px solid var(--line); padding: 16px 18px; margin: 0 0 22px; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px dashed var(--line-soft); color: var(--faint); }
+.receipt div:last-child { border-bottom: none; color: var(--text); }
+.receipt b { color: var(--accent); font-weight: 500; }
+.sig { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.8; color: var(--faint); }
+.sig b { color: var(--text); font-weight: 500; }
+.note { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--card); padding: 14px 18px; margin: 0 0 30px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.note a { color: var(--accent); text-decoration: none; } .note a:hover { text-decoration: underline; }
+
+.rel { border-top: 1px solid var(--line); padding: 34px 0 14px; }
+.rel-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.ver { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 0.06em; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); padding: 3px 9px; border-radius: 3px; }
+.ver.next { color: var(--faint); border-style: dashed; border-color: var(--faint); }
+.date { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--dim); }
+.rel h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 4px 0 12px; }
+.rel p { font-size: 16px; line-height: 1.7; color: var(--muted); margin: 0 0 14px; }
+.rel ul { margin: 0 0 12px; padding-left: 20px; }
+.rel li { font-size: 15.5px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.rel li b, .rel p b { color: var(--text); font-weight: 600; }
+.rel a { color: var(--accent); text-decoration: none; } .rel a:hover { text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); padding: 22px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: var(--accent); }
+@media (max-width: 640px) { .nav-in { padding: 0 20px; gap: 16px; } .nav-label { display: none; } main { padding: 44px 18px 72px; } footer { padding: 20px 18px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="wordmark" href="/"><b>BRUT</b><i></i></a>
+    <span class="nav-label">CHANGELOG</span>
+    <div class="nav-side">
+      <a href="/docs/">Docs</a>
+      <a href="/download/">Log in</a>
+      <a class="cta" href="/#beta">Beta access</a>
+    </div>
+  </div>
+</nav>
+
+
+<main>
+  <div class="stage">
+    <div class="kicker">CHANGELOG · FREE PRIVATE BETA</div>
+    <h1>What shipped,<br>newest first.</h1>
+    <p class="sub">Brut is a Windows app in private beta. Approved seats get every release by email and download it from the same page they signed in on.</p>
+
+    <div class="note">
+      <b>To update:</b> sign in at <a href="/download/">getbrut.app/download</a> and run the new installer over the old one. It upgrades in place; your projects, outputs and keys stay where they are. Between the versions listed here, smaller builds went to individual testers; they are folded into the release that followed.
+    </div>
+
+    <section class="rel" id="v1-1-0">
+      <div class="rel-head"><span class="ver next">1.1.0</span><span class="date">NEXT BUILD · PACKING NOW</span></div>
+      <h2>The surprise deck, the review desk, and a character lab</h2>
+      <p>Everything landed since 1.0.9, bundled into one installer.</p>
+      <ul>
+        <li><b>Multi-Shot V2.</b> The planner used to reach for the same props on every set. Now each run draws a hand of cards from a scenario's deck (a Surprise dial: Classic, Fresh, Crazy), you can redraw the hand or pick cards yourself, and a studio memory of recent motifs keeps the next set from repeating the last one. The planner model is selectable per node, with its reasoning dial. Climate scenarios are retired: climate is a card now, not a scenario.</li>
+        <li><b>Review, on every crew node.</b> The Scenarist, Artistic Director, DoP and Supervisor documents open as documents: headline, prose, style bible, shot cards. Edit any field in place, leave margin notes on a section or a shot, and <b>Revise</b> applies your notes in one planning call, on the node's own model. Structure can't drift; unknown fields survive untouched.</li>
+        <li><b>Storyboard keyframe history.</b> Every past take of a card's keyframe is browsable (the 🕘 button) and re-pinnable, conformed to the film's current aspect for free. Each card also gained a prompt plug, so a shot's text can feed anything downstream.</li>
+        <li><b>Character Lab</b>, the first built-in composite: wire a character image in, get an expression grid, a full-body studio portrait and an orthographic turnaround sheet out. The character presets were rewritten to anchor identity to the wired image instead of re-describing it in words.</li>
+        <li><b>Compare node:</b> any two wires, side by side, one click into the wipe slider. Drag an image off any node's preview straight onto the canvas or into another node. Multi-Shot grids grow to fit their content.</li>
+        <li><b>Marcel places new nodes where you're looking:</b> wired additions land next to what they connect to, detached ones center on your viewport, never buried under existing work.</li>
+        <li><b>Catalog:</b> Gemini 3.7 Flash and Claude Opus 5 in the planning roster, GPT-5.6 price cuts applied, GPT Image 2 native prices measured and pinned per size and quality (no more "$?" on the 4K tiers).</li>
+        <li><b>Fixes from the field:</b> a dropped connection now reads as a network error with the recovery spelled out instead of a blank <code>ReadError</code>; planner replies that arrive slightly malformed are repaired instead of failing; crew-node selects no longer overflow the card; Scenarist shot counts display truthfully.</li>
+        <li><b>Docs:</b> illustrated with short video loops, refreshed FAQ.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-9">
+      <div class="rel-head"><span class="ver">1.0.9</span><span class="date">2026-07-28</span></div>
+      <h2>Draw on the canvas</h2>
+      <p>The canvas became a studio wall, and organizing a big graph stopped being a chore.</p>
+      <ul>
+        <li><b>Sticky notes, stamps, pen and text.</b> Notes with light markdown, four fonts and five colors (Marcel reads them as context). Emoji stamps for the keeper and the work-in-progress. A pen that honors Wacom pressure and smooths strokes. Text labels for titling regions. All free, all local, all saved with the graph.</li>
+        <li><b>The ring menu.</b> Right-click empty canvas: every organize tool under your hand, and the center flips it to your most-used nodes and recent stamps. Press, drag onto a slice, release.</li>
+        <li><b>Groups with identity:</b> six frame colors, labels readable zoomed all the way out, and a frame adopts any node dropped inside it. Zoom out for real: big canvases fit on screen. Node search is ranked ("fil" finds Film Shots first).</li>
+        <li><b>Right-click any image or clip → Reveal in Explorer.</b> Outputs belong to the project that was active when they were generated; this is how you find them.</li>
+        <li><b>Higgsfield routes:</b> 24 job types wired from an authenticated recon of the real parameter sets, so the subscription route falls back cleanly when a native key is missing. Routed video nodes now hide the knobs a route doesn't declare instead of dying on them.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-87">
+      <div class="rel-head"><span class="ver">1.0.87</span><span class="date">2026-07-26</span></div>
+      <h2>Point at things and say what changes</h2>
+      <p>Two new nodes that work the way clients already brief you: markup on a picture.</p>
+      <ul>
+        <li><b>Annotate &amp; Correct.</b> Draw arrows, boxes, circles, lassos and numbered points on an image, write what changes at each mark, attach a RAL color chip (all 216 classic colors, or eyedrop one from the image) or a reference image per mark. One run applies every marked edit. Live-verified on Nano Banana 2, Pro and GPT Image 2.</li>
+        <li><b>Layers.</b> Photoshop-style masked compositing, local and free: stack a generation over your original, paint the mask (soft brush, opacity, pen pressure, the shortcuts your hands know) and keep every untouched pixel of the source. Generative "nothing else changed" is approximate; Layers makes it exact.</li>
+        <li><b>The correction loop.</b> "Correct result" annotates a result in one click; "Reconcile with input" paints the original back where a generation overshot.</li>
+        <li><b>Per-project budget caps:</b> a soft or hard dollar limit, live spend in the toolbar, the line on every paid confirm.</li>
+        <li><b>Settings, redesigned:</b> provider cards in three tabs, each with an on/off switch. Flip a native key off and your aggregator routes take over.</li>
+        <li><b>Marcel's taste interview</b>, re-runnable any time, with clickable style chips; Claude 5 reasoning and thinking dials on both his voices.</li>
+        <li><b>Nano Banana 2 Lite</b> replaces the legacy banana for text-to-image (about $0.034 per render); new Gemini planning models, faster default at the same price.</li>
+        <li><b>One lightbox everywhere:</b> the magnifier pages any node's whole image set with the arrow keys, and the Clip Board plays your film in it.</li>
+        <li><b>Beta fixes:</b> keyframes on routed keys, Multi-Shot custom notes, savable prompt presets, Log out buttons for Kling and Higgsfield, modals that survive a stray click, oversized images on OpenRouter, and no more blank error messages.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-8">
+      <div class="rel-head"><span class="ver">1.0.8</span><span class="date">2026-07-23</span></div>
+      <h2>The whole studio on a single key</h2>
+      <ul>
+        <li><b>One OpenRouter key now runs almost all of Brut:</b> images (the Nano Banana family with real size and aspect menus), video (Kling 3.0, Veo 3.1 incl. Fast and Lite, Seedance 2.0, end frames included), every planning model, and Marcel. A working studio in about two minutes, for those who want simplicity over the last cent.</li>
+        <li><b>Native keys stay first class:</b> cheapest per generation, every knob, and they take over automatically the moment you add them.</li>
+        <li><b>Routing is never silent.</b> Routed nodes show a "runs via …" chip, and OpenRouter runs record the exact billed amount on the ledger, not an estimate.</li>
+        <li>Inpaint on aggregator keys for the Nano Banana models; GPT Image 2 via fal and Replicate with each backend's honest size menu.</li>
+        <li>New guide: <a href="/docs/providers/access-paths.html">which setup fits you</a>.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-7">
+      <div class="rel-head"><span class="ver">1.0.7</span><span class="date">2026-07-22</span></div>
+      <h2>Upscalers and routes</h2>
+      <ul>
+        <li><b>Upscale Image:</b> Magnific (Creative, Precision V2) and Topaz Labs (Gigapixel and generative models), with savable presets, a live cost estimate, batch upscaling, and a before/after wipe with wheel-zoom in the magnifier.</li>
+        <li><b>Upscale Video:</b> Topaz Proteus, Rhea and Gaia-CG in the cloud with an itemized confirm before any spend, HD/4K/8K targets, audio kept. And <b>Topaz Video AI, local:</b> if the desktop app is installed, upscales run on your own GPU, free, and the clip never leaves the machine.</li>
+        <li><b>Routes:</b> a model with no native key can run through an aggregator you subscribe to (fal, Higgsfield, Replicate, OpenRouter for text). Native first, always; the route is flagged on the node and on every ledger line.</li>
+        <li>The Cinema Crew template ends in a finish-in-4K tail.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-4">
+      <div class="rel-head"><span class="ver">1.0.4</span><span class="date">2026-07-20</span></div>
+      <h2>Invented shots</h2>
+      <ul>
+        <li><b>The cinema crew can invent.</b> A shot no longer has to be grounded in one of your stills: the Scenarist may invent it, the Storyboard generates its keyframe (per card, pinnable, re-rollable), and one clip animates one keyframe. Stills are reused with discipline, never twice in a row.</li>
+        <li>The film's aspect ratio is a dropdown on the Storyboard; switching it re-conforms every keyframe for free.</li>
+        <li><b>The activity rail:</b> tools and panels moved to the canvas's left edge, with a categorized node browser (search, hover cards, drag to place) and a new icon set on every node.</li>
+        <li><b>Text → Text node:</b> a free-form ask to any planning model, editable answer, re-askable.</li>
+        <li>Node clipboard (copy, paste, duplicate with wires), Marcel's prompt cache kept warm for an hour between turns.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-3">
+      <div class="rel-head"><span class="ver">1.0.3</span><span class="date">2026-07-19</span></div>
+      <h2>Kling subscription from a bare install</h2>
+      <ul>
+        <li>Two buttons set up the Kling (subscription) provider: <b>Install Kling CLI</b> fetches Kling's official client (a one-time ~1 MB download from the npm registry, integrity-checked) and <b>Log in to Kling</b> opens the browser sign-in. No Node, no terminal.</li>
+        <li>The same setup card lives in the onboarding wizard and in Settings; validation errors are visible instead of a dead button.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="v1-0-1">
+      <div class="rel-head"><span class="ver">1.0.1</span><span class="date">2026-07-17</span></div>
+      <h2>The first installer</h2>
+      <ul>
+        <li><b>One .exe.</b> Per-user install, no admin rights, engine and runtime bundled. A tray icon shows engine status; the engine log lives in <code>%LOCALAPPDATA%\Brut\logs</code>.</li>
+        <li><b>Beta delivery:</b> approved seats get an email and download from <a href="/download/">getbrut.app/download</a> after signing in.</li>
+        <li><b>Marcel, complete:</b> chat grounded in your project's timeline, acting on the canvas (every paid action stops at an itemized confirm), ambient narration behind a four-level Assist slider, a taste profile he proposes and you approve.</li>
+        <li>Spend ledger panel, unread badge on Marcel, hosted sign-in with a 30-day offline grace so the app never bricks without a connection.</li>
+      </ul>
+    </section>
+
+    <section class="rel" id="before">
+      <div class="rel-head"><span class="date">BEFORE 1.0.1</span></div>
+      <p>Brut ran from source inside the studio from June 2026: the node canvas, Gemini and OpenAI images, Kling video, input-hash caching, projects and the ledger, composites and the library, Multi-Shot and the Shot Board, inpaint, the cinema crew (Scenarist, Artistic Director, DoP, Script Supervisor), the Storyboard, Film Shots and the Sequence node. The first complete film shipped on 2026-07-12.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <span>BRUT: your keys, your machine, zero markup.</span>
+  <span><a href="/">getbrut.app</a> · <a href="/docs/">docs</a> · <a href="/manifesto/">manifesto</a> · <a href="/changelog/">changelog</a> · <a href="/privacy/">privacy</a></span>
+</footer>
+
+</body>
+</html>
+

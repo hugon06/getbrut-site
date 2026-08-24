@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -127,9 +144,18 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>The continuity pass: <strong>harmonizes speed, light and palette</strong> across all the clips so the sequence feels like one film, not a pile of clips. Grounding is code-locked so it can&#39;t drift off the stills.</p>
 <h2 id="storyboard-the-edit-bay"><a class="anchor" href="#storyboard-the-edit-bay" aria-hidden="true">#</a>Storyboard — the edit bay</h2>
 <p>Not an agent but the crew&#39;s review surface. The Storyboard turns the plan into an <strong>editable board of shot cards</strong>: per-clip <strong>start/end frame swaps</strong> with thumbnails, editable and lockable prompts, add/reorder/remove shots, dynamic position badges. It emits <em>concrete image paths</em>, so Film Shots downstream only needs the plan wire.</p>
-<p><strong>Invented shots arrive frameless</strong> with a <strong>🎨 Generate keyframe</strong> button: an image-to-image render on the shot&#39;s anchor stills (identity clause appended, conformed to the film&#39;s aspect — cents, priced on the board next to the image-model picker). Keyframes cache on their prompt + anchors, <strong>↻</strong> re-rolls, <strong>📌</strong> pins, a wired image overrides, and the start selector can still ground the shot on a real still instead. An invented shot with no keyframe <strong>blocks that clip</strong> in Film Shots — it is never silently sent as text-to-video.</p>
+<p><strong>Invented shots arrive frameless</strong> with a <strong>🎨 Generate keyframe</strong> button: an image-to-image render on the shot&#39;s anchor stills (identity clause appended, conformed to the film&#39;s aspect — cents, priced on the board next to the image-model picker). Keyframes cache on their prompt + anchors, <strong>↻</strong> re-rolls, <strong>📌</strong> pins, <strong>🕘</strong> opens the card&#39;s history — every keyframe it ever generated, from the project ledger, any past take re-pinnable as the start frame for free — a wired image overrides, and the start selector can still ground the shot on a real still instead. An invented shot with no keyframe <strong>blocks that clip</strong> in Film Shots — it is never silently sent as text-to-video.</p>
 <p>The board also owns the <strong>film&#39;s aspect ratio</strong>: a dropdown (defaulting to the DoP&#39;s format) that conforms every keyframe and travels in the emitted plan. Changing it re-crops the kept raw renders for free — no regeneration.</p>
 <p><strong>▶ on the board batch-renders every pending keyframe</strong> behind one itemized confirmation (count, per-frame price, total); the per-card 🎨 stays for one-offs. A <strong>prompts on/off</strong> switch declutters the cards, and the whole pre-wired chain ships as the <strong>Cinema Crew</strong> library template (File ▾ → Browse library…).</p>
+<p>Every card is also a <strong>source</strong>: the plug on its image edge carries the clip&#39;s resolved start frame (keyframe, wired image or grounded still — a pending card delivers nothing), and the plug at its bottom-right carries the clip&#39;s <strong>final prompt</strong> (overrides and wired prompts applied) for reuse or refinement anywhere. Card images can be <strong>dragged straight onto the canvas</strong> to detach into a ready-filled <a href="/docs/nodes/inputs.html">Image In</a>.</p>
+<h2 id="review-read-it-like-a-document-direct-it-like-a-director"><a class="anchor" href="#review-read-it-like-a-document-direct-it-like-a-director" aria-hidden="true">#</a>📖 Review — read it like a document, direct it like a director</h2>
+<p>The raw JSON on the node face is for the wire, not for you. Every crew node has a <strong>📖 Review</strong> button that opens the document <em>as a document</em>: the title as a headline, the analysis as prose, the style bible as labeled sections, every shot a numbered card with its prompt, camera, duration and grounding badges.</p>
+<p>Two verbs live in that modal, with two costs:</p>
+<ul>
+<li><strong>Edit — free.</strong> Every text field is editable in place. <strong>Save</strong> writes each field back into the same place in the document, so the structure the downstream chain depends on can never drift; it behaves exactly like hand-editing the node&#39;s text, just humane.</li>
+<li><strong>💬 Comment → Revise — one planning call (cents, ledgered).</strong> Every section and shot card takes a margin note (&quot;shot 4 slower&quot;, &quot;the whole film should feel like dusk&quot;), plus an overall-notes box. <strong>Revise with comments</strong> hands the agent its own document and your notes; it returns the same document revised — same shot ids, same structure, only what your notes require changed — and the comments clear once addressed. A revision that would break the document contract is rejected and your document stays untouched. Comments survive closing the modal, and the node&#39;s Review button shows how many are waiting.</li>
+</ul>
+<p>They compose: fix wording directly, comment the conceptual asks, revise — the revision starts from your edited text.</p>
 <h2 id="how-the-plan-flows"><a class="anchor" href="#how-the-plan-flows" aria-hidden="true">#</a>How the plan flows</h2>
 <p>Agent output is <strong>editable text</strong>. Hand-edit a plan and your changes flow downstream while inputs are unchanged; change an input or roll again (🎲) and the agent regenerates over your edits — deliberately. The planner sees your stills (downscaled for the model&#39;s request cap; generation always gets full resolution) and returns strict JSON, whose analysis is surfaced in the <strong>Activity</strong> panel.</p>
 <blockquote>
@@ -140,7 +166,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/multishot-and-boards.html"><span>← Previous</span><b>Multi-Shot & boards</b></a><a class="pn next" href="/docs/nodes/video.html"><span>Next →</span><b>Video</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#scenarist">Scenarist</a></li><li class="lvl2"><a href="#artistic-director">Artistic Director</a></li><li class="lvl2"><a href="#dop-director-of-photography">DoP (Director of Photography)</a></li><li class="lvl2"><a href="#script-supervisor">Script Supervisor</a></li><li class="lvl2"><a href="#storyboard-the-edit-bay">Storyboard — the edit bay</a></li><li class="lvl2"><a href="#how-the-plan-flows">How the plan flows</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#scenarist">Scenarist</a></li><li class="lvl2"><a href="#artistic-director">Artistic Director</a></li><li class="lvl2"><a href="#dop-director-of-photography">DoP (Director of Photography)</a></li><li class="lvl2"><a href="#script-supervisor">Script Supervisor</a></li><li class="lvl2"><a href="#storyboard-the-edit-bay">Storyboard — the edit bay</a></li><li class="lvl2"><a href="#review-read-it-like-a-document-direct-it-like-a-director">📖 Review — read it like a document, direct it like a director</a></li><li class="lvl2"><a href="#how-the-plan-flows">How the plan flows</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
 </body>
 </html>

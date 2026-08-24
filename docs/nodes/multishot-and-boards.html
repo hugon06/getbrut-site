@@ -74,6 +74,23 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
 .content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
 .content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
@@ -119,7 +136,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="multi-shot"><a class="anchor" href="#multi-shot" aria-hidden="true">#</a>Multi-Shot</h2>
 <p>A POV/composition explorer. Wire your base image(s) into a Multi-Shot node, pick an <strong>exploration scenario</strong> and a shot <strong>count</strong>, and a planner (Gemini, seeing all your base images) writes N distinct shot prompts. Then N image-to-image jobs fill a <strong>contact sheet</strong> on a resizable node — a worker pool runs several at a time.</p>
 <ul>
-<li><strong>Scenarios</strong> ship as data — viewpoints, moods, compositions, and a <strong><code>custom</code></strong> scenario that takes its brief from the node&#39;s <strong>Notes</strong> field.</li>
+<li><strong>Scenarios</strong> ship as data — Editorial, Ballsy, Morning → Evening, Four Seasons, Dutch Masters, and a <strong><code>custom</code></strong> scenario that takes its brief from the node&#39;s <strong>Notes</strong> field. (Older climate scenarios — Cold North, Mediterranean, Desert — are retired: their weather registers now live as V2 deck cards. A saved graph that used one keeps working and shows it honestly as <em>retired</em>.)</li>
 <li><strong>Notes live on the node</strong> — a text box right under the scenario picker steers the planner on any scenario, and for <code>custom</code> it <em>is</em> the brief. Wired text (a Prompt or Refine node into the notes input) still works and both flow to the planner — wire when the text has a life of its own, type when it&#39;s a one-off. Pair <code>custom</code> with the <em>Scenario maker</em> Refine preset for a strong brief.</li>
 <li><strong>💾 Save as preset</strong> appears under non-empty notes — it saves the text as a <strong>prompt preset</strong> in the global library, loadable from any Prompt node in any project.</li>
 <li><strong>Plan caching</strong> — the shot list is cached on its own hash, so stable prompts keep per-shot caches working. <strong>🎲</strong> rolls a new shot list.</li>
@@ -127,6 +144,16 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Curation flows downstream</strong> — ✓ shots flow out the main port (or all non-✗ if none are ticked), taking effect on the next cached run.</li>
 </ul>
 <p>The contact sheet uses a tidy, deterministic column count from the shot count (≤4 → 2×2, ≤9 → 3-wide, else 4-wide), so it stays neat at any node size.</p>
+<h3 id="v2-the-surprise-machinery"><a class="anchor" href="#v2-the-surprise-machinery" aria-hidden="true">#</a>V2 — the surprise machinery</h3>
+<p>New Multi-Shot nodes plan with <strong>V2</strong>; a small <strong>V1/V2 rollout next to the title</strong> switches generations (existing graphs stay on V1, the original planner frozen for honest comparison). V2 exists because static briefs make models repeat their favorite gags across projects — the same prop, the same weather trick, job after job. It answers with four pieces:</p>
+<ul>
+<li><strong>Grammar briefs.</strong> Each scenario&#39;s V2 brief describes <em>categories</em> of moves instead of listing example shots, tells the planner its examples are calibration rather than a menu, and carries a small <strong>banned list</strong> of motifs this studio has worn out. The lists are data (<code>multishot.json</code>) — extend them whenever a gag gets tired.</li>
+<li><strong>The card deck.</strong> Every plan draws a <strong>hand</strong> of ingredients from the scenario&#39;s pools (a light register, a life event, a prop <em>domain</em>, …) and must weave them through the set. The hand is shown as <strong>chips on the node</strong> before you ever run — visible surprise — and the little <strong>🎲 beside the chips redraws it</strong> without starting a run. Draws are deterministic, so caching stays honest.</li>
+<li><strong>Pick your hand.</strong> Random is the default, but the <strong>✎ beside the chips</strong> opens the picker: one row per pool, each set to <em>random</em> or a card of your choice. <strong>Pinned cards always ride the hand</strong> (shown as accent chips; wild cards are pickable at any dial level), the Surprise dial fills the remaining slots randomly, and 🎲 redraws only those. Pin everything — or pin on <strong>Classic</strong>, which draws nothing on its own — and the hand is fully yours. Picks belong to their scenario&#39;s deck, so switching scenario clears them.</li>
+<li><strong>The Surprise dial.</strong> <strong>Classic</strong> (no cards — the calm grammar brief alone) · <strong>Fresh</strong> (the default hand) · <strong>Crazy</strong> (a bigger hand including each pool&#39;s wild cards, plus a push toward the never-published).</li>
+<li><strong>Avoid recent motifs</strong> (off by default). Every V2 plan reports the distinctive ideas it used, and the engine remembers the last ~20 per scenario <strong>across all projects</strong>. Tick the box and the planner is told what the studio already did recently — the direct cure for &quot;the same idea on every job&quot;. The memory ages out, so retired classics eventually return.</li>
+</ul>
+<p>V2 also makes the <strong>planner model selectable</strong> — the text model that writes the shot list (the node&#39;s Provider/Model picks stay the <em>image</em> model that renders them). Different planners have different instincts, which is itself a variety lever; models with a reasoning dial expose it here too.</p>
 <h2 id="shot-board"><a class="anchor" href="#shot-board" aria-hidden="true">#</a>Shot Board</h2>
 <p>The <strong>review surface</strong> for a Multi-Shot node. Wire the Multi-Shot <code>shots</code> output into a Shot Board and get a large captioned grid — the prompt under each image, <code>✓ / ✗ / ↻</code> proxied to the source. Each tile has its <strong>own output plug</strong> (<code>shot-&lt;i&gt;</code>) so you can route <strong>one</strong> chosen shot into Compose or Image→Video. The board re-emits the curated pool from its bottom port.</p>
 <h2 id="reference-board"><a class="anchor" href="#reference-board" aria-hidden="true">#</a>Reference Board</h2>
@@ -140,7 +167,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/image-generation.html"><span>← Previous</span><b>Image generation</b></a><a class="pn next" href="/docs/nodes/cinema-crew.html"><span>Next →</span><b>The cinema crew</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#multi-shot">Multi-Shot</a></li><li class="lvl2"><a href="#shot-board">Shot Board</a></li><li class="lvl2"><a href="#reference-board">Reference Board</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#multi-shot">Multi-Shot</a></li><li class="lvl3"><a href="#v2-the-surprise-machinery">V2 — the surprise machinery</a></li><li class="lvl2"><a href="#shot-board">Shot Board</a></li><li class="lvl2"><a href="#reference-board">Reference Board</a></li></ul></nav>
 </div>
 </body>
 </html>

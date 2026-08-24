@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brut privacy</title>
+<meta name="description" content="This site sets no cookies and loads nothing from third parties. Everything getbrut.app does with data, and what the Brut app sends: a seven-field heartbeat, nothing else.">
+<link rel="canonical" href="https://getbrut.app/privacy/">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getbrut.app/privacy/">
+<meta property="og:title" content="Brut privacy">
+<meta property="og:description" content="This site sets no cookies and loads nothing from third parties. Everything getbrut.app does with data, and what the Brut app sends.">
+<meta property="og:image" content="https://getbrut.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brut privacy">
+<meta name="twitter:description" content="This site sets no cookies and loads nothing from third parties. Everything getbrut.app does with data, and what the Brut app sends.">
+<meta name="twitter:image" content="https://getbrut.app/og.png">
+<style>
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/JetBrainsMono.woff2) format("woff2");}
+:root { --accent: #4f9dff; --bg: #141311; --card: #1c1a17; --line: #35322c; --line-soft: #262421; --text: #eae7e0; --muted: #b9b4ab; --faint: #94908a; --dim: #6d6961; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--text);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+  background-image: repeating-linear-gradient(0deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px),
+                    repeating-linear-gradient(90deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px);
+}
+a { color: var(--text); } a:hover { color: var(--accent); }
+::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+
+nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, #141311 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav-in { max-width: 1240px; margin: 0 auto; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 28px; }
+.wordmark { text-decoration: none; display: flex; align-items: baseline; gap: 5px; }
+.wordmark b { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: var(--text); }
+.wordmark i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.nav-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--faint); }
+.nav-side { flex: 1; display: flex; justify-content: flex-end; gap: 22px; font-size: 13.5px; }
+.nav-side a { text-decoration: none; color: var(--faint); }
+.nav-side a.cta { color: var(--accent); }
+
+main { flex: 1; padding: 64px 20px 96px; }
+.stage { width: 100%; max-width: 720px; margin: 0 auto; }
+.kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 16px; }
+h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 5.4vw, 46px); letter-spacing: -0.025em; line-height: 1.06; margin: 0 0 18px; }
+.sub { font-size: 17.5px; line-height: 1.6; color: var(--muted); margin: 0 0 40px; max-width: 62ch; }
+
+.prose p { font-size: 16.5px; line-height: 1.75; color: var(--muted); margin: 0 0 18px; }
+.prose h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 48px 0 14px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+.prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.prose ul, .prose ol { margin: 0 0 18px; padding-left: 22px; }
+.prose li { font-size: 16px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose a { color: var(--accent); text-decoration: none; } .prose a:hover { text-decoration: underline; }
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; color: var(--text); }
+.prose pre { background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
+.prose pre code { background: none; border: none; padding: 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+.pull { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 30px 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 21px; line-height: 1.4; color: var(--text); }
+.receipt { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; background: var(--card); border: 1px solid var(--line); padding: 16px 18px; margin: 0 0 22px; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px dashed var(--line-soft); color: var(--faint); }
+.receipt div:last-child { border-bottom: none; color: var(--text); }
+.receipt b { color: var(--accent); font-weight: 500; }
+.sig { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.8; color: var(--faint); }
+.sig b { color: var(--text); font-weight: 500; }
+.note { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--card); padding: 14px 18px; margin: 0 0 30px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.note a { color: var(--accent); text-decoration: none; } .note a:hover { text-decoration: underline; }
+
+.rel { border-top: 1px solid var(--line); padding: 34px 0 14px; }
+.rel-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.ver { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 0.06em; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); padding: 3px 9px; border-radius: 3px; }
+.ver.next { color: var(--faint); border-style: dashed; border-color: var(--faint); }
+.date { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--dim); }
+.rel h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 4px 0 12px; }
+.rel p { font-size: 16px; line-height: 1.7; color: var(--muted); margin: 0 0 14px; }
+.rel ul { margin: 0 0 12px; padding-left: 20px; }
+.rel li { font-size: 15.5px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.rel li b, .rel p b { color: var(--text); font-weight: 600; }
+.rel a { color: var(--accent); text-decoration: none; } .rel a:hover { text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); padding: 22px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: var(--accent); }
+@media (max-width: 640px) { .nav-in { padding: 0 20px; gap: 16px; } .nav-label { display: none; } main { padding: 44px 18px 72px; } footer { padding: 20px 18px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="wordmark" href="/"><b>BRUT</b><i></i></a>
+    <span class="nav-label">PRIVACY</span>
+    <div class="nav-side">
+      <a href="/docs/">Docs</a>
+      <a href="/download/">Log in</a>
+      <a class="cta" href="/#beta">Beta access</a>
+    </div>
+  </div>
+</nav>
+
+
+<main>
+  <div class="stage">
+    <div class="kicker">PRIVACY</div>
+    <h1>This site sets no cookies.</h1>
+    <p class="sub">And loads nothing from third parties. Here is everything getbrut.app does with data, written to be read in five minutes, followed by the short version of what the app itself sends: almost nothing.</p>
+
+    <div class="prose">
+      <h2>The website</h2>
+      <p>getbrut.app is a set of static files. There are <strong>no cookies, no analytics, no trackers and no third-party scripts</strong>. The fonts are self-hosted; the demo video is served from here. Nothing on these pages reports your visit to anyone.</p>
+      <p>The files are served by GitHub Pages. Like any web host, its servers receive the standard connection data of a request (your IP address, the page asked for, your browser's user-agent string). We add nothing on top of that and we keep no logs of our own.</p>
+
+      <h2>The beta form</h2>
+      <p>The one place this site can learn anything about you is the beta application, and only when you press <strong>Apply</strong>. The form asks for an email address, an optional studio or artist name, a seat count, and what you would run through Brut first. There is also a checkbox to receive release announcements. A hidden decoy field catches bots; a human never sees it.</p>
+      <p>On Apply, your entries are delivered to our inbox through a form-relay service (FormSubmit). That is the only moment this site contacts a third party on your behalf, and it happens because you chose to send. We keep the list of applicants and approved seats in a database we operate (Supabase) so that seats can be approved and installers served. Nothing from the form is sold, shared, or used for anything but running the beta.</p>
+
+      <h2>Signing in and downloading</h2>
+      <p>The <a href="/download/">download page</a> asks you to sign in with the email your seat was approved on: a magic link, or Google, or GitHub, through Supabase, the identity service the app itself uses. The page keeps your session in your browser's local storage (not a cookie) until you sign out. The sign-in is checked against the approved list to hand you a short-lived link to the installer. Nothing else is recorded.</p>
+
+      <h2>Emails</h2>
+      <p>We send two kinds. <strong>One approval email</strong> when your seat opens, and <strong>release announcements</strong> to approved seats when a new build is out (the same content as the <a href="/changelog/">changelog</a>). Both come from <code>noreply@getbrut.app</code> through a transactional email service (Resend), and replies land with us. To stop receiving announcements, reply to any of them and say so; a person removes you.</p>
+
+      <h2>The app, in short</h2>
+      <p>Brut is built local-first, and privacy is the architecture rather than a policy. The full page is in the docs: <a href="/docs/privacy.html">what stays on your machine and what (very little) leaves it</a>. The summary:</p>
+      <ul>
+        <li><strong>Your prompts, images, renders, video, graphs and projects</strong> are written to your disk or your NAS. Brut has no server in the generation path and cannot see your work.</li>
+        <li><strong>Your API keys</strong> live in your operating system's keychain. Never logged, never sent to us, never written into a graph or a <code>.brutpack</code>.</li>
+        <li><strong>Generation calls go from your machine straight to the provider</strong> you picked, on your key, under that provider's terms. If you choose to route a model through an aggregator you subscribe to, the same holds for that service, and the node, the confirm dialog and the ledger say so.</li>
+        <li><strong>Marcel, the companion,</strong> talks to the text-model provider you chose, on your key. Every call is written to your local spend ledger. His memory of your taste is a plain-text file on your disk that is never synced.</li>
+        <li><strong>The only thing Brut ever sends us</strong> is a heartbeat while you are signed in, at startup and once a day, so we can count active seats during the beta. Seven fields, no content:</li>
+      </ul>
+      <pre><code>{
+  "install_id": "a uuid minted once on this machine",
+  "app_version": "…",
+  "engine_version": "…",
+  "os": "Windows",
+  "os_version": "…",
+  "arch": "…",
+  "ts": "…"
+}</code></pre>
+      <p>You can see this exact JSON any time in the app, under Settings → Account. The <strong>Send feedback</strong> button is the one other thing that can send data, and only when you press Send: your message, your account email so we can reply, and, only if you leave the checkbox on, the same seven fields plus the last few error messages. The dialog shows that block byte for byte before it goes.</p>
+
+      <h2>Your data, your call</h2>
+      <p>Write to <a href="mailto:contact@getbrut.app">contact@getbrut.app</a> to see or delete anything we hold about you: a beta application, an approved seat, an account. We answer as people, not as a form, and deletion is complete because there is so little to delete.</p>
+
+      <h2>Who</h2>
+      <p>Brut is made by ZUH Visuals, an architectural visualization studio, and Hugues Rebay is the person responsible for this site and its data. Questions about any of the above: the same address.</p>
+    </div>
+
+    <div class="sig">
+      Last updated <b>2026-08-24</b>. Changes to this page are listed in the <a href="/changelog/">changelog</a>.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>BRUT: your keys, your machine, zero markup.</span>
+  <span><a href="/">getbrut.app</a> · <a href="/docs/">docs</a> · <a href="/manifesto/">manifesto</a> · <a href="/changelog/">changelog</a> · <a href="/privacy/">privacy</a></span>
+</footer>
+
+</body>
+</html>
+

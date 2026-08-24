@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchestrator, not aggregator: the Brut manifesto</title>
+<meta name="description" content="The zero-markup essay. Why Brut never sits between you and the model provider, why caching is the feature an aggregator cannot ship, and what that decision costs us.">
+<link rel="canonical" href="https://getbrut.app/manifesto/">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://getbrut.app/manifesto/">
+<meta property="og:title" content="Orchestrator, not aggregator: the Brut manifesto">
+<meta property="og:description" content="The zero-markup essay. Why Brut never sits between you and the model provider, and what that decision costs us.">
+<meta property="og:image" content="https://getbrut.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orchestrator, not aggregator: the Brut manifesto">
+<meta name="twitter:description" content="The zero-markup essay. Why Brut never sits between you and the model provider, and what that decision costs us.">
+<meta name="twitter:image" content="https://getbrut.app/og.png">
+<style>
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/JetBrainsMono.woff2) format("woff2");}
+:root { --accent: #4f9dff; --bg: #141311; --card: #1c1a17; --line: #35322c; --line-soft: #262421; --text: #eae7e0; --muted: #b9b4ab; --faint: #94908a; --dim: #6d6961; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--text);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+  background-image: repeating-linear-gradient(0deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px),
+                    repeating-linear-gradient(90deg, rgba(234,231,224,0.02) 0 1px, transparent 1px 64px);
+}
+a { color: var(--text); } a:hover { color: var(--accent); }
+::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+
+nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, #141311 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav-in { max-width: 1240px; margin: 0 auto; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 28px; }
+.wordmark { text-decoration: none; display: flex; align-items: baseline; gap: 5px; }
+.wordmark b { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: var(--text); }
+.wordmark i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.nav-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--faint); }
+.nav-side { flex: 1; display: flex; justify-content: flex-end; gap: 22px; font-size: 13.5px; }
+.nav-side a { text-decoration: none; color: var(--faint); }
+.nav-side a.cta { color: var(--accent); }
+
+main { flex: 1; padding: 64px 20px 96px; }
+.stage { width: 100%; max-width: 720px; margin: 0 auto; }
+.kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 16px; }
+h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 5.4vw, 46px); letter-spacing: -0.025em; line-height: 1.06; margin: 0 0 18px; }
+.sub { font-size: 17.5px; line-height: 1.6; color: var(--muted); margin: 0 0 40px; max-width: 62ch; }
+
+.prose p { font-size: 16.5px; line-height: 1.75; color: var(--muted); margin: 0 0 18px; }
+.prose h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 48px 0 14px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+.prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.prose ul, .prose ol { margin: 0 0 18px; padding-left: 22px; }
+.prose li { font-size: 16px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose a { color: var(--accent); text-decoration: none; } .prose a:hover { text-decoration: underline; }
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; color: var(--text); }
+.prose pre { background: var(--card); border: 1px solid var(--line); border-radius: 3px; padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
+.prose pre code { background: none; border: none; padding: 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+.pull { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 30px 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 21px; line-height: 1.4; color: var(--text); }
+.receipt { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; background: var(--card); border: 1px solid var(--line); padding: 16px 18px; margin: 0 0 22px; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px dashed var(--line-soft); color: var(--faint); }
+.receipt div:last-child { border-bottom: none; color: var(--text); }
+.receipt b { color: var(--accent); font-weight: 500; }
+.sig { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.8; color: var(--faint); }
+.sig b { color: var(--text); font-weight: 500; }
+.note { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--card); padding: 14px 18px; margin: 0 0 30px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.note a { color: var(--accent); text-decoration: none; } .note a:hover { text-decoration: underline; }
+
+.rel { border-top: 1px solid var(--line); padding: 34px 0 14px; }
+.rel-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.ver { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: 0.06em; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); padding: 3px 9px; border-radius: 3px; }
+.ver.next { color: var(--faint); border-style: dashed; border-color: var(--faint); }
+.date { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--dim); }
+.rel h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin: 4px 0 12px; }
+.rel p { font-size: 16px; line-height: 1.7; color: var(--muted); margin: 0 0 14px; }
+.rel ul { margin: 0 0 12px; padding-left: 20px; }
+.rel li { font-size: 15.5px; line-height: 1.65; color: var(--muted); margin: 7px 0; }
+.rel li b, .rel p b { color: var(--text); font-weight: 600; }
+.rel a { color: var(--accent); text-decoration: none; } .rel a:hover { text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); padding: 22px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: var(--accent); }
+@media (max-width: 640px) { .nav-in { padding: 0 20px; gap: 16px; } .nav-label { display: none; } main { padding: 44px 18px 72px; } footer { padding: 20px 18px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="wordmark" href="/"><b>BRUT</b><i></i></a>
+    <span class="nav-label">MANIFESTO</span>
+    <div class="nav-side">
+      <a href="/docs/">Docs</a>
+      <a href="/download/">Log in</a>
+      <a class="cta" href="/#beta">Beta access</a>
+    </div>
+  </div>
+</nav>
+
+
+<main>
+  <article class="stage">
+    <div class="kicker">MANIFESTO · THE ZERO-MARKUP ESSAY</div>
+    <h1>Orchestrator,<br>not aggregator.</h1>
+    <p class="sub">Why Brut never touches your generation money, why that makes it a different kind of tool, and what the decision costs us.</p>
+
+    <div class="prose">
+      <h2>The default</h2>
+      <p>Almost every generative-AI tool for creative work makes its money the same way: it sits between you and the model, and it charges you for passing through. Credits. Compute units. "Images included." A subscription that folds a markup on every generation into one round monthly number.</p>
+      <p>It is a rational business. The model providers publish their prices; the tool buys at wholesale, sells at retail, and the difference pays for the product. Nobody is hiding anything. But look at what the arrangement does to incentives. A tool paid per generation earns more when you generate more. It earns on the re-run you did not need, on the twelfth variation you never opened, on the revision round that changed three shots and re-billed twelve. Its interest and yours point in opposite directions, and a product built on that foundation will, over time, be shaped by it.</p>
+      <p>We run an archviz studio. We bill clients per project, not per image. The gap between the two is our margin, and we watched it leak into somebody else's meter.</p>
+
+      <h2>What Brut does instead</h2>
+      <p>Brut never sits in the call path. You bring your own API keys: Google, OpenAI, Anthropic, Kling, the rest. They live in your operating system's keychain, on your machine. When you run a graph, each request goes from your computer straight to the provider, on your key, at the provider's published price. There is no server of ours in between. Not a proxy, not a relay, not a "convenience" endpoint. The engine that orchestrates everything runs on your own machine, on the loopback address, and could not forward your traffic through us if we wanted it to, because there is nothing of ours to forward to.</p>
+      <p>The ledger is the proof. Every project keeps one: every generation, which provider received the money, how much. The last line reads the same on every project we have ever run.</p>
+      <div class="receipt">
+        <div><span>12-shot dusk study · nano-banana-pro</span><span>€1.84</span></div>
+        <div><span>client revision round · 3 shots changed</span><span>€0.31</span></div>
+        <div><span>9 unchanged shots · served from cache</span><span>€0.00</span></div>
+        <div><span>paid to Google · OpenAI · Kling</span><span>€2.15</span></div>
+        <div><span>paid to Brut</span><b>€0.00</b></div>
+      </div>
+
+      <h2>Never pay twice</h2>
+      <p>Zero markup is the principle. Caching is where it turns into money.</p>
+      <p>Brut hashes every node's inputs. Re-run a graph after a client note and only the nodes whose inputs actually changed call a provider; everything else is served from your disk, for nothing. Re-roll one tile of a twelve-shot contact sheet and eleven stay cached. Pin a result you liked last Tuesday and it is free on every run until you unpin it.</p>
+      <p>This is the feature an aggregator cannot ship. Not technically: technically it is trivial. Commercially. A business that earns on volume cannot build a product whose first job is to reduce it. We can, because we sell the tool, not the tokens.</p>
+      <div class="pull">A business that earns on volume cannot build a product whose first job is to reduce it.</div>
+
+      <h2>What we sell, then</h2>
+      <p>Orchestration. The canvas where a render becomes a dusk study, becomes a curated set, becomes a film. The review loop: contact sheets, keep and reject marks, boards, the per-shot re-roll. The confirm dialog that itemizes every cent before it is spent. The catalog, kept current while providers rename their models every quarter. The companion that learns your taste and never bills a key without a human click.</p>
+      <p>A flat price for that, when the beta ends. Generation at cost, forever. The two numbers will never be blended into one, because the moment they are, you can no longer see which is which.</p>
+
+      <h2>Bright lines</h2>
+      <p>Things Brut will not do, under any pressure, at any stage:</p>
+      <ul>
+        <li><strong>Sell credits</strong>, meter generation, or mark up API resale.</li>
+        <li><strong>Host generation "for convenience"</strong> on a server we pay for.</li>
+        <li><strong>Hold your keys</strong> anywhere but your own machine.</li>
+        <li><strong>Cap generation itself.</strong> Your key is the only meter.</li>
+        <li><strong>Sell usage data.</strong> The only thing Brut ever sends home is a heartbeat: version, OS, an install id. Never content, never a prompt, never a file name.</li>
+        <li><strong>Turn the tool off remotely.</strong> A lapsed subscription stops updates. It never bricks the app.</li>
+      </ul>
+      <p>One honest footnote. Where a first-party API does not exist for you (payment rails, launch lag, a model only sold through a reseller), Brut lets you route that model through an aggregator you subscribe to yourself, on your own credential. It is explicit, chosen, and flagged on every node and every ledger line: "runs via …". Your own key takes over the moment you add one. We take nothing either way.</p>
+
+      <h2>What it costs us</h2>
+      <p>We should say plainly what this decision gives up. Onboarding is harder: you need provider accounts with billing enabled, and a free tier that answers your first call with a quota error is yours to fix. We cannot say "images included". We cannot smooth a first experience with tokens we bought in bulk. We earn nothing on your busiest month.</p>
+      <p>We accept all of it, because the alternative is a tool whose success depends on your waste, and we would not want to be its customer either.</p>
+
+      <h2>Why a studio</h2>
+      <p>Brut exists because we needed it on real deadlines, and every node in it answers a production pain we actually hit: the twelve-viewpoint study, the revision round, the facade lettering that silently blocked every shot until we bisected the inputs to find it, the client under NDA whose tower could not touch a cloud. It is built inside the work, on the work, and it will keep being built that way.</p>
+      <div class="pull">No cloud. No credits. No middleman.</div>
+    </div>
+
+    <div class="sig">
+      <b>Hugues Rebay</b><br>
+      ZUH Visuals, architectural visualization<br>
+      August 2026 · <a href="/#beta">apply for the beta</a> · <a href="/docs/">read the docs</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <span>BRUT: your keys, your machine, zero markup.</span>
+  <span><a href="/">getbrut.app</a> · <a href="/docs/">docs</a> · <a href="/manifesto/">manifesto</a> · <a href="/changelog/">changelog</a> · <a href="/privacy/">privacy</a></span>
+</footer>
+
+</body>
+</html>
+
