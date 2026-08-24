@@ -112,7 +112,7 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
       <h2>The default</h2>
       <p>Almost every generative-AI tool for creative work makes its money the same way: it sits between you and the model, and it charges you for passing through. Credits. Compute units. "Images included." A subscription that folds a markup on every generation into one round monthly number.</p>
       <p>It is a rational business. The model providers publish their prices; the tool buys at wholesale, sells at retail, and the difference pays for the product. Nobody is hiding anything. But look at what the arrangement does to incentives. A tool paid per generation earns more when you generate more. It earns on the re-run you did not need, on the twelfth variation you never opened, on the revision round that changed three shots and re-billed twelve. Its interest and yours point in opposite directions, and a product built on that foundation will, over time, be shaped by it.</p>
-      <p>We run an archviz studio. We bill clients per project, not per image. The gap between the two is our margin, and we watched it leak into somebody else's meter.</p>
+      <p>We run an archviz studio. We pay those meters ourselves, on real deadlines, and for a long time we could not tell what a revision round had actually cost us, or which tool had quietly re-billed what. That is where Brut started.</p>
 
       <h2>What Brut does instead</h2>
       <p>Brut never sits in the call path. You bring your own API keys: Google, OpenAI, Anthropic, Kling, the rest. They live in your operating system's keychain, on your machine. When you run a graph, each request goes from your computer straight to the provider, on your key, at the provider's published price. There is no server of ours in between. Not a proxy, not a relay, not a "convenience" endpoint. The engine that orchestrates everything runs on your own machine, on the loopback address, and could not forward your traffic through us if we wanted it to, because there is nothing of ours to forward to.</p>
@@ -135,6 +135,10 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
       <p>Orchestration. The canvas where a render becomes a dusk study, becomes a curated set, becomes a film. The review loop: contact sheets, keep and reject marks, boards, the per-shot re-roll. The confirm dialog that itemizes every cent before it is spent. The catalog, kept current while providers rename their models every quarter. The companion that learns your taste and never bills a key without a human click.</p>
       <p>A flat price for that, when the beta ends. Generation at cost, forever. The two numbers will never be blended into one, because the moment they are, you can no longer see which is which.</p>
 
+      <h2>What Brut is for</h2>
+      <p>Brut is an exploration tool. It runs in production, on client deliverables, every week; but its first job is not the final image. It is the twelve viewpoints you would not have had time to try, the dusk study before the client asks for it, the short film cut from stills that used to stay stills. It makes a working artist faster and braver. It does not make one unnecessary.</p>
+      <p>That deserves saying plainly, because the debate is loud. Nothing in Brut ships without a human choosing it: the contact sheet is curated by hand, every paid run stops at a confirm, the keep mark is yours. And the tool is only as good as what you feed it. Give it a careless render and a lazy prompt and you get careless results, faster. Give it the eye of someone who has spent years learning what a good image is, and it multiplies that eye. The craft was never the bottleneck we wanted to remove. The waiting was.</p>
+
       <h2>Bright lines</h2>
       <p>Things Brut will not do, under any pressure, at any stage:</p>
       <ul>
@@ -143,7 +147,7 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
         <li><strong>Hold your keys</strong> anywhere but your own machine.</li>
         <li><strong>Cap generation itself.</strong> Your key is the only meter.</li>
         <li><strong>Sell usage data.</strong> The only thing Brut ever sends home is a heartbeat: version, OS, an install id. Never content, never a prompt, never a file name.</li>
-        <li><strong>Turn the tool off remotely.</strong> A lapsed subscription stops updates. It never bricks the app.</li>
+        <li><strong>Hold your work hostage.</strong> Graphs, outputs, ledgers and keys are files on your own disk. Whatever happens to a subscription, they stay readable and yours.</li>
       </ul>
       <p>One honest footnote. Where a first-party API does not exist for you (payment rails, launch lag, a model only sold through a reseller), Brut lets you route that model through an aggregator you subscribe to yourself, on your own credential. It is explicit, chosen, and flagged on every node and every ledger line: "runs via …". Your own key takes over the moment you add one. We take nothing either way.</p>
 
