@@ -307,7 +307,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
       <!-- Row 1 -->
       <div data-reveal style="display: flex; flex-wrap: wrap; gap: 52px; align-items: center; margin-bottom: 96px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
+        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/9; position: relative;">
           <img src="./assets/feat-canvas.jpg" alt="The Brut node canvas: a graph of prompt, image and video nodes with labeled ports, wires and inline result previews" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="flex: 1 1 300px; min-width: 280px;">
@@ -319,7 +319,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
       <!-- Row 2 -->
       <div data-reveal style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; gap: 52px; align-items: center; margin-bottom: 96px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
+        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/9; position: relative;">
           <img src="./assets/feat-multishot.jpg" alt="Multi-Shot node: a contact sheet of generated viewpoints with per-tile checkmark and cross curation marks" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="flex: 1 1 300px; min-width: 280px;">
@@ -331,7 +331,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
       <!-- Row 3 -->
       <div data-reveal style="display: flex; flex-wrap: wrap; gap: 52px; align-items: center; margin-bottom: 96px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
+        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/9; position: relative;">
           <img src="./assets/feat-ledger.jpg" alt="The Brut spend ledger: per-generation history with costs itemized by provider, cached re-runs at €0.00" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="flex: 1 1 300px; min-width: 280px;">
@@ -343,7 +343,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
       <!-- Row 4 -->
       <div data-reveal style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; gap: 52px; align-items: center; margin-bottom: 96px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
+        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/9; position: relative;">
           <img src="./assets/feat-confirm.jpg" alt="Film Shots node: an itemized per-clip cost quote with model, duration and estimated price, awaiting confirmation" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="flex: 1 1 300px; min-width: 280px;">
@@ -355,7 +355,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 
       <!-- Row 5 -->
       <div data-reveal style="display: flex; flex-wrap: wrap; gap: 52px; align-items: center; margin-bottom: 96px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
+        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/9; position: relative;">
           <img src="./assets/feat-inpaint.jpg" alt="The mask editor: a red inpainting mask painted over a region of an architectural render" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="flex: 1 1 300px; min-width: 280px;">
@@ -365,12 +365,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
         </div>
       </div>
 
-      <!-- Row 6 -->
-      <div data-reveal style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; gap: 52px; align-items: center; margin-bottom: 70px;">
-        <div style="flex: 1.35 1 400px; min-width: 300px; border: 1px solid #35322c; background: #191713; aspect-ratio: 16/10; position: relative;">
-          <img src="./assets/feat-projects.jpg" alt="The File menu and project switcher: project and graph actions with a .brutpack export" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div style="flex: 1 1 300px; min-width: 280px;">
+      <!-- Row 6 (text only until the welcome screen ships — screenshot returns then) -->
+      <div data-reveal style="display: flex; flex-wrap: wrap; gap: 52px; align-items: center; margin-bottom: 70px;">
+        <div style="flex: 1 1 300px; min-width: 280px; max-width: 760px;">
           <h3 style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.015em; margin: 0 0 14px;">Projects that live where your work lives.</h3>
           <p style="font-size: 16.5px; line-height: 1.65; color: #b9b4ab; margin: 0 0 18px;">First-class projects with their own outputs, graphs and spend ledger — on your disk or your NAS, adoptable by every seat in the studio. Export a whole project as one <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">.brutpack</span> file, warm caches included. Reusable composites and templates travel in a global library.</p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #94908a;">NAS-rooted projects · .brutpack export · versioned template library</div>
