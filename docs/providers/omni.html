@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Topaz Labs · Brut docs</title>
-<meta name="description" content="Topaz Labs — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
+<title>Gemini Omni · Brut docs</title>
+<meta name="description" content="Gemini Omni — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://getbrut.app/docs/providers/topaz.html">
+<link rel="canonical" href="https://getbrut.app/docs/providers/omni.html">
 <style>
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
@@ -128,108 +128,30 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html" class="active">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html" class="active">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
-<h1>Topaz Labs</h1>
-<p><strong>Topaz Labs</strong> powers the precision side of the <a href="/docs/nodes/upscale.html">Upscale Image</a> node —
-the Gigapixel-class faithful upscalers (including a model tuned for <strong>renders and CGI</strong>) and the
-Wonder-class generative ones — plus the <strong><a href="/docs/nodes/upscale.html">Upscale Video</a></strong> node
-(Proteus / Rhea / Gaia CG, audio kept, itemized confirm before any spend). One key covers both.</p>
-<p>There are <strong>two ways to run Topaz video upscales</strong> in Brut:</p>
+<h1>Gemini Omni</h1>
+<p>Google&#39;s <strong>Gemini Omni Flash</strong> (<code>gemini-omni-1.1-flash</code>) is a fast natively-multimodal video model: picture and sound generated together, a clip in under a minute, about <strong>$1 per clip</strong>. Added 2026-08-28.</p>
+<h2 id="the-key-it-rides-your-gemini-key"><a class="anchor" href="#the-key-it-rides-your-gemini-key" aria-hidden="true">#</a>The key: it rides your Gemini key</h2>
+<p>Like <a href="/docs/providers/veo.html">Veo</a>, Omni uses the <strong>same Google key as <a href="/docs/providers/gemini.html">Gemini</a></strong> by default. If you&#39;ve added a Gemini key, Omni just works; Brut reports the source as <code>alias:gemini</code>. Add a dedicated key in <strong>⚙ Settings → Gemini Omni</strong> only to split the billing.</p>
+<h2 id="what-it-does-in-brut"><a class="anchor" href="#what-it-does-in-brut" aria-hidden="true">#</a>What it does in Brut</h2>
 <ul>
-<li><strong>Topaz Labs (cloud)</strong> — the API below. Credits per job, works on any machine.</li>
-<li><strong>Topaz Video AI (local)</strong> — if you own the <strong>Topaz Video</strong> desktop app and a capable GPU,
-Brut drives the app&#39;s own engine on your machine instead. <strong>No key, no credits, no cost per
-run</strong> — and the clip never leaves your computer. See <a href="#topaz-video-ai-local">local install</a>
-below.</li>
+<li><strong>Image-to-video</strong> from a start frame, optionally with an <strong>end frame</strong> (the two-image interpolation), and <strong>text-to-video</strong>.</li>
+<li><strong>3 to 10 seconds</strong>, <strong>16:9 or 9:16</strong>, output at <strong>360p, 720p, 1080p or 4k</strong>. Note that 1080p and 4k are <em>upscales</em> of the 720p render, not a sharper generation; if you plan a Topaz pass anyway, generate at 720p.</li>
+<li><strong>Reference images</strong> on the references inlet: extra images of a subject (a product, a character, a facade) the clip should stay faithful to. Name them in the prompt.</li>
+<li><strong>Audio is always on.</strong> There is no switch; describe the sound you want, or say &quot;no dialogue, no music, natural ambience only&quot;. Every clip carries Google&#39;s invisible <strong>SynthID</strong> watermark.</li>
+<li>No negative-prompt field exists on Omni: whatever you type in the node&#39;s negative prompt is folded into the prompt as &quot;Avoid: …&quot;, which is Google&#39;s own advice.</li>
 </ul>
-<h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
-<p>Create an API key on the <strong><a href="https://www.topazlabs.com/api">Topaz developer portal</a></strong> and paste it
-into <strong>⚙ Settings → Topaz Labs</strong> (or set <code>TOPAZ_API_KEY</code>).</p>
-<h2 id="models-in-brut"><a class="anchor" href="#models-in-brut" aria-hidden="true">#</a>Models in Brut</h2>
-<table>
-<thead>
-<tr>
-<th>Model</th>
-<th>Class</th>
-<th>When</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Gigapixel Standard 2</td>
-<td>precision</td>
-<td>the everyday default</td>
-</tr>
-<tr>
-<td>Gigapixel High Fidelity 2</td>
-<td>precision</td>
-<td>maximum source preservation</td>
-</tr>
-<tr>
-<td>Gigapixel Art &amp; CGI</td>
-<td>precision</td>
-<td><strong>archviz renders</strong>, illustrations, game assets</td>
-</tr>
-<tr>
-<td>Gigapixel Low Resolution 2</td>
-<td>precision</td>
-<td>tiny sources, thumbnails</td>
-</tr>
-<tr>
-<td>Redefine</td>
-<td>generative</td>
-<td>photoreal invented detail, prompt + creativity dial</td>
-</tr>
-<tr>
-<td>Standard MAX</td>
-<td>generative</td>
-<td>true-to-input generative restoration</td>
-</tr>
-<tr>
-<td>Recover 3</td>
-<td>generative</td>
-<td>damaged / heavily compressed sources</td>
-</tr>
-</tbody></table>
-<p>Generative models cap input around 24–256 MP and cost more per pixel; the node fails <strong>loudly</strong>
-if your input × scale exceeds a model&#39;s cap — it never downscales your work silently.</p>
-<h2 id="billing-credits"><a class="anchor" href="#billing-credits" aria-hidden="true">#</a>Billing — credits</h2>
-<p>Topaz bills <strong>credits by output megapixel</strong>: the standard class covers ~24 MP per credit, the
-generative class ~4 MP per credit, minimum one credit per job. Credits come from one-off packs or
-a subscription&#39;s monthly allowance — <strong>the per-credit price depends on how you buy</strong> (packs run
-roughly $0.195 down to $0.158 per credit; subscriptions less).</p>
-<p>Brut shows a pre-run estimate in credits (with an approximate $ at a representative rate), the
-node displays your <strong>live credit balance</strong>, and the spend ledger records the <strong>actual credits the
-API reports</strong> for each job. Your Topaz account page is the billing truth.</p>
-<h2 id="behavior-notes"><a class="anchor" href="#behavior-notes" aria-hidden="true">#</a>Behavior notes</h2>
-<ul>
-<li>Async like every upscaler: jobs survive an engine restart and reattach — money spent is never
-output lost.</li>
-<li>Results are downloaded to your project immediately (Topaz keeps files 7 days, links 1 hour —
-Brut never relies on either).</li>
-<li>Provider errors surface verbatim on the node; &quot;not enough credits&quot; says exactly that.</li>
-</ul>
-<h2 id="topaz-video-ai-local"><a class="anchor" href="#topaz-video-ai-local" aria-hidden="true">#</a>Topaz Video AI (local)</h2>
-<p>If <strong>Topaz Video</strong> (or the older <strong>Topaz Video AI</strong>) is installed and licensed on your machine,
-the Upscale Video node offers a second provider: <strong>Topaz Video AI (local)</strong>. It runs the same
-models — Proteus, Rhea, Gaia CG — through the app&#39;s own engine on <strong>your GPU</strong>.</p>
-<ul>
-<li><strong>No key and no account</strong> — Brut auto-detects the install (⚙ Settings shows &quot;installed · free&quot;);
-the app&#39;s own sign-in covers command-line use. If you install it mid-session, hit
-<strong>Check install</strong>.</li>
-<li><strong>Free</strong> — no credits, no confirm dialog; the ledger records the run at $0.</li>
-<li><strong>Private</strong> — the clip is processed entirely on your machine; nothing is uploaded.</li>
-<li>Missing model weights download automatically on first use (a one-time pause per model).</li>
-<li>Output is HEVC (H.265) with the clip&#39;s <strong>audio kept</strong>, like the cloud path.</li>
-<li>One run at a time — a second local upscale queues behind the first (one GPU).</li>
-<li>Local jobs don&#39;t survive an engine restart (nothing was billed, just re-run).</li>
-</ul>
-<p>The non-standard install location can be pointed at with <code>BRUT_TVAI_DIR</code> (the folder holding
-Topaz&#39;s <code>ffmpeg.exe</code>) and <code>BRUT_TVAI_MODEL_DIR</code> (its models folder).</p>
+<p>The <strong>Gemini Omni video prompt</strong> preset in <a href="/docs/nodes/utility.html">Refine</a> writes the flowing-prose prompt style Omni reads best.</p>
+<h2 id="how-brut-talks-to-it"><a class="anchor" href="#how-brut-talks-to-it" aria-hidden="true">#</a>How Brut talks to it</h2>
+<p>Omni lives on Google&#39;s <strong>Interactions API</strong>, a different endpoint from both Gemini images and Veo. Brut submits the interaction in the background, polls it, then downloads the finished file through Google&#39;s Files API. The ledger row is priced from the token usage Google reports (<code>$17.50</code> per million video tokens), so the spend readout shows the billed amount, not the estimate.</p>
+<h2 id="pricing-flat-per-clip-so-ask-for-10-seconds"><a class="anchor" href="#pricing-flat-per-clip-so-ask-for-10-seconds" aria-hidden="true">#</a>Pricing: flat per clip, so ask for 10 seconds</h2>
+<p>Google&#39;s page says &quot;about $0.10 per second at 720p&quot; (5,792 video tokens per second). What we measured on 2026-08-28 is that <strong>every clip is billed 57,920 video tokens</strong> — a 3-second 360p clip and an 8-second 720p clip cost exactly the same — which is the 10-second maximum × 5,792. So a generation is <strong>≈ $1.01 whatever its length or resolution</strong> (360p/720p measured; 1080p/4k upscales not yet, the node shows <code>$?</code> there). The practical rule: <strong>ask for 10 seconds</strong> — the node defaults to it — and trim in the Sequence node if you want less. If Google&#39;s billing page shows you something different, tell us; the ledger keeps the raw token counts.</p>
+<p>Google keeps the interaction (your prompt, inputs and the clip) on its side for a while after it completes; that is what lets Omni edit its own earlier clips. Brut doesn&#39;t use that yet: editing and extending clips arrive with the <strong>Video → Video</strong> node after the September conference, together with the region note that matters for European users (Google doesn&#39;t allow editing or extending <em>uploaded</em> videos from the EEA, Switzerland or the UK; editing clips Omni generated itself is allowed).</p>
 
-<div class="prevnext"><a class="pn prev" href="/docs/providers/magnific.html"><span>← Previous</span><b>Magnific</b></a><a class="pn next" href="/docs/providers/fal.html"><span>Next →</span><b>fal.ai (routes)</b></a></div>
+<div class="prevnext"><a class="pn prev" href="/docs/providers/veo.html"><span>← Previous</span><b>Google Veo</b></a><a class="pn next" href="/docs/providers/anthropic.html"><span>Next →</span><b>Anthropic</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models-in-brut">Models in Brut</a></li><li class="lvl2"><a href="#billing-credits">Billing — credits</a></li><li class="lvl2"><a href="#behavior-notes">Behavior notes</a></li><li class="lvl2"><a href="#topaz-video-ai-local">Topaz Video AI (local)</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-key-it-rides-your-gemini-key">The key: it rides your Gemini key</a></li><li class="lvl2"><a href="#what-it-does-in-brut">What it does in Brut</a></li><li class="lvl2"><a href="#how-brut-talks-to-it">How Brut talks to it</a></li><li class="lvl2"><a href="#pricing-flat-per-clip-so-ask-for-10-seconds">Pricing: flat per clip, so ask for 10 seconds</a></li></ul></nav>
 </div>
 </body>
 </html>

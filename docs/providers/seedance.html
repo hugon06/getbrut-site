@@ -128,53 +128,87 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html" class="active">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html" class="active">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
   <main class="content">
 <h1>Seedance</h1>
-<p><strong>Seedance 2.0</strong> (BytePlus ModelArk) is a video model with <strong>native audio</strong> — it can generate a clip with sound in one pass.</p>
+<p><strong>Seedance</strong> (BytePlus ModelArk) is ByteDance&#39;s video family with <strong>native audio</strong>: a clip comes with sound in one pass. Brut carries <strong>Seedance 2.5</strong> (the current flagship, added 2026-08-28) and <strong>Seedance 2.0</strong>.</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
-<p>Create a ModelArk key in the <strong><a href="https://console.byteplus.com/">BytePlus console</a></strong> and paste it into <strong>⚙ Settings → Seedance</strong> (or set <code>ARK_API_KEY</code>).</p>
-<h2 id="model-features"><a class="anchor" href="#model-features" aria-hidden="true">#</a>Model &amp; features</h2>
+<p>Create a ModelArk key in the <strong><a href="https://console.byteplus.com/">BytePlus console</a></strong> and paste it into <strong>⚙ Settings → Seedance</strong> (or set <code>ARK_API_KEY</code>). Pay-as-you-go needs an account balance above USD 30, or a resource pack for the model you&#39;ll run.</p>
+<p><strong>Activate the model first.</strong> ModelArk models are switched on per account: open the model&#39;s page in the console (Model Square → Dreamina Seedance 2.5) and click <em>Activate</em> before the first call. Until then every request fails with <em>&quot;Your account … has not activated the model dreamina-seedance-2-5-260628&quot;</em>; Brut shows that message verbatim on the node.</p>
+<h2 id="models-features"><a class="anchor" href="#models-features" aria-hidden="true">#</a>Models &amp; features</h2>
+<p><strong>Seedance 2.5</strong> (<code>dreamina-seedance-2-5-260628</code>, first in the menu):</p>
 <ul>
-<li>Model id <code>dreamina-seedance-2-0-260128</code>, image-to-video and text-to-video, with <strong>native audio</strong> (<code>generate_audio</code>).</li>
-<li>First/last frame support (roled image inputs), plus reference image/video/audio roles.</li>
-<li>Watermark is always off.</li>
+<li>Image-to-video from a <strong>start frame</strong>, or <strong>start + end frame</strong>, and text-to-video.</li>
+<li><strong>4 to 30 seconds</strong> in one clip, or <em>smart</em> length (the model picks). Long single takes are its headline.</li>
+<li><strong>480p, 720p, 1080p</strong> (1080p is 10-bit HEVC: it plays in VLC/mpv and modern browsers; older players may refuse it).</li>
+<li>Up to <strong>30 reference images</strong> on the references inlet (a <a href="/docs/nodes/multishot-and-boards.html">Reference Board</a> plugs in). Address them in the prompt as <code>@Image1</code>, <code>@Image2</code>… in wiring order and say what each supplies (&quot;@Image1 is the building, copy its materials exactly&quot;).</li>
+<li><strong>The clip&#39;s aspect ratio follows the start frame.</strong> Seedance 2.5 refuses a ratio on frame-to-video runs, so the node hides the aspect select and says so. Text-to-video keeps the full menu (16:9, 9:16, 4:3, 3:4, 21:9, 1:1).</li>
+<li>Native audio on by default (it costs nothing extra). Prompt grammar: integer-second beats (<code>0-3s: …</code>, <code>3-8s: …</code>), <code>()</code> for music, <code>&lt;&gt;</code> for sound effects, <code>{}</code> for dialogue, &quot;no BGM&quot; / &quot;no audio&quot; when you want silence. The <strong>Seedance 2.5 video prompt</strong> preset in <a href="/docs/nodes/utility.html">Refine</a> writes this structure for you; <strong>Seedance 2.5 shot plan</strong> rewrites a whole cinema plan in it.</li>
 </ul>
-<h2 id="pricing-read-this-before-you-buy-credits"><a class="anchor" href="#pricing-read-this-before-you-buy-credits" aria-hidden="true">#</a>Pricing — read this before you buy credits</h2>
+<p><strong>Seedance 2.0</strong> (<code>dreamina-seedance-2-0-260128</code>): 4 to 12 seconds, up to <strong>4K</strong>, first/last frame, reference images, and it accepts an explicit aspect ratio on frame-to-video runs. Still the choice when you need 4K straight out of the model. Its grammar is different (shot labels rather than timestamps, full-width audio symbols): use the <strong>Seedance 2.0 video prompt</strong> and <strong>Seedance 2.0 shot plan</strong> presets for it. Both generations stay in the menu; pick per job.</p>
+<p>Watermark is always off. Video editing, extension and video/audio references exist on 2.5&#39;s API and come to Brut as a <strong>Video → Video</strong> node after the September conference.</p>
+<h2 id="gotchas"><a class="anchor" href="#gotchas" aria-hidden="true">#</a>Gotchas</h2>
+<ul>
+<li><strong>A start frame and references can&#39;t travel together.</strong> Seedance refuses a request that carries both an exact <code>first_frame</code> and reference images. When you wire references into Image → Video, Brut switches to Seedance&#39;s <em>keyframe reference</em> mode: the start (and end) frame ride as reference <strong>Image 1 (and 2)</strong> with &quot;Image 1 is the first frame&quot; in the prompt, references numbered after them. The framing is then approximate rather than pixel-exact and the clip&#39;s aspect is measured from the start frame. The node says so on its references line; wire no references to keep the exact first-frame behaviour.</li>
+<li><strong>Photoreal faces are refused in reference images, generated or not.</strong> ModelArk&#39;s moderation blocks reference images or videos that look like they contain a real person, and it cannot tell an AI-generated face from a photograph (field-tested: a fully generated woman was refused as &quot;may contain real person&quot;). Only faces made by ModelArk&#39;s own models under your account, their preset digital characters, or authorized-person assets pass, none of which Brut carries yet. A populated archviz render can trip this too; crop people out of the references, keep them in the start frame only, or do character swaps on <strong><a href="/docs/providers/omni.html">Gemini Omni</a></strong> or Kling Omni, whose gates accept generated people.</li>
+<li><strong>Three concurrent tasks</strong> per individual account. Film Shots sends five at once; the extra ones queue on BytePlus&#39;s side and finish a little later, nothing fails.</li>
+<li>Output URLs live 24 hours on their side; Brut downloads every clip as soon as it&#39;s done.</li>
+</ul>
+<h2 id="pricing-read-this-before-you-buy-credits"><a class="anchor" href="#pricing-read-this-before-you-buy-credits" aria-hidden="true">#</a>Pricing, read this before you buy credits</h2>
 <p>Seedance&#39;s billing has two sharp edges:</p>
 <ul>
-<li><strong>Credit packs are model-bound.</strong> Seedance 2.0 credits <strong>don&#39;t</strong> cover the fast/mini tiers — buy the pack that matches the model you&#39;ll run.</li>
-<li><strong>Rates vary by resolution and input class.</strong> Per-second cost climbs with resolution, the 4K rate is discounted, and reference-<em>video</em> input is ~40% cheaper per token. Brut&#39;s catalog derives a per-second USD estimate from the console rates:</li>
+<li><strong>Credit packs are model-bound.</strong> A Seedance 2.5 pack does <strong>not</strong> cover 2.0 (or the fast/mini tiers), and vice versa. Buy the pack that matches the model you&#39;ll run, or use pay-as-you-go.</li>
+<li><strong>Rates are per token, and tokens depend on resolution and on whether the request contains video.</strong> Tokens ≈ width × height × 24 × seconds ÷ 1024. Brut&#39;s catalog turns BytePlus&#39;s list rates into per-second estimates:</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>Resolution</th>
-<th>~ per second (16:9, 24fps, no-video)</th>
+<th>Seedance 2.5</th>
+<th>~ per second (16:9, no video input)</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>480p</td>
-<td>$0.067</td>
+<td>$0.10</td>
 </tr>
 <tr>
 <td>720p</td>
-<td>$0.151</td>
+<td>$0.23</td>
 </tr>
 <tr>
 <td>1080p</td>
-<td>$0.374</td>
+<td>$0.57 list, <strong>$0.41 through 17 September 2026</strong> (BytePlus launch promo, applied automatically until that date)</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Seedance 2.0</th>
+<th>~ per second</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>480p</td>
+<td>$0.07</td>
+</tr>
+<tr>
+<td>720p</td>
+<td>$0.15</td>
+</tr>
+<tr>
+<td>1080p</td>
+<td>$0.37</td>
 </tr>
 <tr>
 <td>4K</td>
-<td>$0.778</td>
+<td>$0.78</td>
 </tr>
 </tbody></table>
-<p>The node shows the estimate before you run, and <a href="/docs/nodes/video.html">Film Shots</a> itemizes it per clip.</p>
+<p>The node shows the estimate before you run, and <a href="/docs/nodes/video.html">Film Shots</a> itemizes it per clip. <strong>The ledger row is priced from BytePlus&#39;s own token count</strong> (the <code>usage</code> the API returns), not from the estimate, so what you see in the spend readout is what you were billed. Failed generations cost nothing.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/anthropic.html"><span>← Previous</span><b>Anthropic</b></a><a class="pn next" href="/docs/providers/magnific.html"><span>Next →</span><b>Magnific</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#model-features">Model &amp; features</a></li><li class="lvl2"><a href="#pricing-read-this-before-you-buy-credits">Pricing — read this before you buy credits</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models-features">Models &amp; features</a></li><li class="lvl2"><a href="#gotchas">Gotchas</a></li><li class="lvl2"><a href="#pricing-read-this-before-you-buy-credits">Pricing, read this before you buy credits</a></li></ul></nav>
 </div>
 </body>
 </html>
