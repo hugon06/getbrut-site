@@ -138,7 +138,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Pan</strong> — middle-drag. <strong>Box-select</strong> — left-drag: anything the rectangle touches is selected, nodes <strong>and wires</strong> (a box drawn over a bundle of wires alone picks them up, wires light up as the box sweeps over them and when you hover them; Delete then removes everything selected). <strong>Zoom</strong> — scroll wheel, anywhere on the canvas, including over a board or contact sheet whose tiles all fit. Only a grid that actually <strong>overflows</strong> takes the wheel for itself, to scroll its tiles; text areas do the same.</li>
 <li><strong>Wire</strong> — drag from an output port to an input port. Drop a wire on empty canvas and the add menu opens, filtered to compatible nodes — pick one and it&#39;s placed <em>and</em> wired. Double-click a wire to splice a node into it.</li>
 <li><strong>Run</strong> — <strong>▶ Run</strong> executes the whole graph; the ▶ on a node runs just that node and everything it depends on.</li>
-<li><strong>Copy, paste, duplicate</strong> — <code>Ctrl+C</code> copies the selected nodes, <code>Ctrl+V</code> pastes fresh copies, <code>Ctrl+D</code> duplicates in one step. Copies keep their <strong>incoming wires</strong>: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds). Copies land just beside the originals — a node copied from inside a group pastes back into that group; pasted into another graph, it lands at the same spot on the canvas.</li>
+<li><strong>Copy, paste, duplicate</strong> — <code>Ctrl+C</code> copies the selected nodes, <code>Ctrl+V</code> pastes fresh copies, <code>Ctrl+D</code> duplicates in one step. Copies keep their <strong>incoming wires</strong>: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds). <code>Ctrl+V</code> pastes <strong>at your cursor</strong> — point where you want the copies and paste; a multi-node selection keeps its arrangement, and a copy pasted inside a group frame&#39;s area joins that group (exactly like dropping it there). <code>Ctrl+D</code> still lands the duplicate just beside the original.</li>
 <li><strong>Paste an image</strong> — <code>Ctrl+V</code> with an image on the OS clipboard (Photoshop <code>Ctrl+A</code>+<code>Ctrl+C</code>, a render buffer&#39;s Copy button, a browser image) drops a ready-filled <strong>Image In</strong> node at your cursor. If you copied both, whichever you copied <em>last</em> wins the shortcut.</li>
 <li><strong>Tidy</strong> — the grid button on the left rail auto-arranges the whole graph into columns that follow the wiring (nodes stack top-down within a column). It&#39;s one undo step — <code>Ctrl+Z</code> puts everything back.</li>
 <li><strong>Node ids</strong> — every node&#39;s title bar shows its id in small type (<code>multi_shot-21</code>). That&#39;s the name <a href="/docs/concepts/marcel.html">Marcel</a> and the ledger use when they refer to a node — click the id to copy it.</li>
@@ -174,8 +174,8 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <td>Multi-Shot, Shot Board, Reference Board</td>
 </tr>
 <tr>
-<td><strong>Cinema crew</strong></td>
-<td>Scenarist, Artistic Director, DoP, Script Supervisor, Storyboard</td>
+<td><strong>Cinema team</strong></td>
+<td>Director (plan + proof sheet), Storyboard</td>
 </tr>
 <tr>
 <td><strong>Video</strong></td>
