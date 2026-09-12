@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kling (subscription) · Brut docs</title>
-<meta name="description" content="Kling (subscription) — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
+<title>Beta license · Brut docs</title>
+<meta name="description" content="Beta license — Brut documentation. Local-first, bring-your-own-key AI orchestration for archviz.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://getbrut.app/docs/providers/kling-subscription.html">
+<link rel="canonical" href="https://getbrut.app/docs/beta-license.html">
 <style>
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
@@ -130,47 +130,103 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html" class="active">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html" class="active">Beta license</a></li></ul></div></aside>
   <main class="content">
-<h1>Kling (subscription)</h1>
-<p>The <strong>same Kling models</strong>, billed to your <strong>kling.ai subscription plan</strong> instead of API credit packs — measured at roughly <strong>3× cheaper</strong> than the REST API, with no 30-day pack expiry. This is the recommended way to run Kling for steady studio work.</p>
-<h2 id="how-it39s-authenticated-no-key-to-paste"><a class="anchor" href="#how-it39s-authenticated-no-key-to-paste" aria-hidden="true">#</a>How it&#39;s authenticated (no key to paste)</h2>
-<p>There&#39;s <strong>no API key</strong> here. Auth is an <strong>OAuth session owned by Kling&#39;s official CLI</strong> — and setup is two buttons on the <strong>⚙ Settings → Kling (subscription)</strong> card (or in the setup wizard):</p>
-<ol>
-<li><strong>Install Kling CLI</strong> — one click. Brut fetches the official CLI (<code>@klingai/cli-global</code>, about 1 MB) straight from Kling&#39;s npm registry channel and runs it on the Node runtime that ships inside the Brut installer. Nothing else to install, no admin rights.</li>
-<li><strong>Log in to Kling</strong> — your browser opens on kling.ai; sign in there. Tokens are stored by the CLI itself in <code>~/.kling/.credentials</code>.</li>
-<li><strong>Check login</strong> confirms the session any time, and <strong>Log out</strong> (shown while signed in) drops it — switch accounts by logging out, then logging back in with the other one. Finished generations stay on disk.</li>
-</ol>
-<p>If you run Brut from source instead of the installer, the classic route still works and takes precedence: <code>npm i -g @klingai/cli-global</code>, then <code>kling login</code> — a CLI already on your PATH is always used as-is.</p>
-<p>Brut talks to Kling through the CLI (an MCP client) and <strong>never keychains those tokens</strong> — the vault just reports a <code>cli-oauth</code> sentinel when the session file exists. The engine downloads the <strong>watermark-free master</strong> (result URLs expire in 24 h).</p>
-<h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
-<p>The subscription model ids differ from REST — <code>kling-video-v2_5</code>, <code>…-v3_0</code>, <code>…-v3_0_omni</code>, <code>…-v3_0_turbo</code>, <code>…-v2_6</code>, <code>…-o1</code> — and cover both image-to-video and text-to-video.</p>
-<ul>
-<li><strong>End frame</strong> (tail image): v2.5, v2.6 and 3.0. The omni family (o1, 3.0 Omni) and 3.0 Turbo have <strong>no end-frame input</strong>.</li>
-<li><strong>Reference images</strong>: <strong>o1</strong> and <strong>3.0 Omni</strong> take up to <strong>6 extra references</strong> besides the start frame — the <a href="/docs/nodes/video.html">Image → Video node</a> grows a references inlet when you pick them.</li>
-</ul>
-<h2 id="pricing-your-plan-balance"><a class="anchor" href="#pricing-your-plan-balance" aria-hidden="true">#</a>Pricing &amp; your plan balance</h2>
-<p>Only <strong>v2.5</strong> currently carries a measured price (15 credits / 5s / 720p, ~3× cheaper than API list). Other tiers show <strong>no estimate until measured</strong> — Brut never invents a price it hasn&#39;t confirmed.</p>
-<p>When this provider is selected on an <strong>Image → Video</strong> or <strong>Film Shots</strong> node, the node shows your <strong>live plan balance</strong> (&quot;🎟 Plan balance: 5,786 credits · Pro&quot;) read from the CLI — refreshed after every run — and Film Shots repeats it in the paid-run confirmation, so you always know where your credits stand before and after a batch.</p>
-<h2 id="no-kling-sign-in-the-menu-still-works"><a class="anchor" href="#no-kling-sign-in-the-menu-still-works" aria-hidden="true">#</a>No Kling sign-in? The menu still works</h2>
-<p>If you pick a Kling (subscription) model <strong>without</strong> the CLI sign-in, Brut falls back to an
-aggregator you <em>do</em> hold: <strong>Kling v3 / v3 Turbo / v2.6 / o1</strong> route through your
-<a href="/docs/providers/openrouter.html">OpenRouter</a> or
-<a href="/docs/providers/higgsfield.html">Higgsfield</a> credential, visibly marked
-<strong>⇄ runs via …</strong> on the node (the provider and model pickers say so before you pick).
-(o1 via OpenRouter takes 5 or 10 s at 720p, no reference images.) Models with no aggregator
-anywhere (v2.5, 3.0 Omni) say exactly that — they need the
-Kling sign-in or the REST key.</p>
-<h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
-<ul>
-<li><strong>5 QPS</strong>, <strong>Personal workspace only</strong>, and tasks <strong>can&#39;t be cancelled</strong> provider-side.</li>
-<li>Each seat signs in once (the CLI session lives per-machine, per-user).</li>
-</ul>
-<p>For higher throughput or Team workspaces, use the <strong><a href="/docs/providers/kling.html">REST API</a></strong> instead.</p>
+<h1>Beta license</h1>
+<p class="lead">Brut's beta is licensed, not sold, and every seat is personal. This is the full text of the beta license: the installer shows it, and the app asks you to accept it once after your first sign-in (again only when it changes). Licensor: Hugues REBAY, Antibes, France. Questions: <a href="mailto:contact@getbrut.app">contact@getbrut.app</a>.</p>
 
-<div class="prevnext"><a class="pn prev" href="/docs/providers/kling.html"><span>← Previous</span><b>Kling</b></a><a class="pn next" href="/docs/providers/veo.html"><span>Next →</span><b>Google Veo</b></a></div>
+<p>Someone you know wants to try Brut? Don&#39;t pass the installer around: ask them to <a href="https://getbrut.app/#beta">register on getbrut.app</a> and their application gets reviewed like yours was.</p>
+<pre class="license"><code>BRUT - BETA END USER LICENSE AGREEMENT
+
+Last updated: 2026-09-12
+Licensor: Hugues REBAY, Antibes, France ("I", "me")
+Software: Brut, the desktop application and its bundled engine ("the Software")
+Contact: contact@getbrut.app
+
+By installing or using the Software, or by clicking "I accept" in the
+application, you agree to the terms below. If you do not agree, do not
+install or use the Software.
+
+1. LICENSE GRANT
+I grant you a personal, non-exclusive, non-transferable, revocable license
+to install and use the Software on devices you own or control, for your own
+use during the beta program. The Software is licensed, not sold.
+
+2. YOUR SEAT IS PERSONAL
+Your beta seat is tied to the email address your approval was sent to. It
+is for you alone. Do not give the installer, your download link, or your
+account to anyone else. If someone you know wants to try Brut, ask them to
+register on getbrut.app and I will review their application.
+
+3. RESTRICTIONS
+You may NOT:
+  a) redistribute, publish, sell, rent, lease, sublicense, or otherwise
+     share the Software or your access to it, in whole or in part;
+  b) reverse engineer, decompile, disassemble, or otherwise attempt to
+     derive the source code of the Software, except to the extent such a
+     restriction is prohibited by applicable law;
+  c) modify the Software or create derivative works of it;
+  d) remove or alter any proprietary notices in the Software.
+
+4. YOUR KEYS, YOUR DATA
+The Software is bring-your-own-key and local-first. Your provider API keys
+are stored in your operating system's credential store and are only ever
+sent to the corresponding provider. Your projects, graphs, and generated
+outputs are stored on your own disk. You are solely responsible for the
+costs your provider accounts incur and for complying with each provider's
+terms of service. Uninstalling the Software does not delete your data.
+
+5. ACCOUNT AND TELEMETRY
+Use of the Software requires a Brut account. While you are signed in, the
+Software sends a small heartbeat: an install identifier, the application
+and engine versions, your operating system and its version, your CPU
+architecture, a timestamp, and the version of this license you accepted.
+Never your prompts, images, keys, or outputs. The exact payload is shown in
+the application under Settings &gt; Account.
+
+6. FEEDBACK
+If you send me suggestions, ideas, or bug reports about the Software, I may
+use them freely, without any obligation or compensation to you. That is how
+a beta improves.
+
+7. BETA SOFTWARE - NO WARRANTY
+The Software is pre-release software provided "AS IS" and "AS AVAILABLE",
+without warranty of any kind, express or implied, including merchantability,
+fitness for a particular purpose, and non-infringement. Features may change
+or be removed at any time.
+
+8. LIMITATION OF LIABILITY
+To the maximum extent permitted by law, I shall not be liable for any
+indirect, incidental, special, consequential, or exemplary damages, or for
+any loss of profits, data, or provider spend, arising from or related to
+your use of the Software. Nothing in this agreement limits liability that
+cannot be limited under applicable law.
+
+9. INTELLECTUAL PROPERTY
+The Software, including its code, prompts, presets, catalogs, and branding,
+is and remains the property of Hugues REBAY and is protected by copyright
+law. Copyright (c) 2026 Hugues REBAY. No rights are granted except as
+expressly stated in this agreement.
+
+10. GOVERNING LAW
+This agreement is governed by French law. Any dispute that cannot be
+settled amicably falls under the jurisdiction of the competent courts of
+the licensor's place of residence, Antibes, France, without prejudice to
+any mandatory consumer-protection rules that apply to you.
+
+11. TERMINATION
+This license terminates automatically if you breach it, or when the beta
+program ends. Upon termination you must uninstall the Software. Sections 4
+and 6 through 10 survive termination.
+
+12. GENERAL
+This agreement is the entire agreement regarding the beta Software. If any
+provision is held unenforceable, the remainder stays in effect. I may
+publish an updated version of this agreement; the application will ask you
+to accept it again before continuing.</code></pre>
+<div class="prevnext"><a class="pn prev" href="/docs/privacy.html"><span>← Previous</span><b>Privacy</b></a><span></span></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing-your-plan-balance">Pricing &amp; your plan balance</a></li><li class="lvl2"><a href="#no-kling-sign-in-the-menu-still-works">No Kling sign-in? The menu still works</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
+  
 </div>
 </body>
 </html>

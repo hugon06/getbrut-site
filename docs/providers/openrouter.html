@@ -92,6 +92,8 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
 @media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
 .lead{font-size:17px;line-height:1.6;color:var(--body)}
+.content pre.license{white-space:pre-wrap;word-break:break-word}
+.content pre.license code{font-size:12.5px;color:var(--body)}
 /* callouts via blockquote starting with **Note** etc handled by authors */
 /* --- right TOC --- */
 .toc{padding:32px 14px;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;font-size:12.5px}
@@ -128,13 +130,15 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html" class="active">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html" class="active">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
 <h1>OpenRouter</h1>
 <p><strong>OpenRouter</strong> is the one aggregator key that can hold <strong>almost the whole of Brut</strong>: every
 text model (planning <strong>and Marcel</strong> — chat, ambient narration, acting), the full Nano Banana
-image family, GPT Image 2, and the video models — Kling 3.0, Veo 3.1 / Fast / Lite, Seedance
-2.0. Only the upscalers stay outside (they aren&#39;t resold anywhere, by design).
+image family (incl. Nano Banana 2 Lite, the starter graph&#39;s model), GPT Image 2, and the video
+models — Kling 3.0 and O1, Veo 3.1 / Fast / Lite, Seedance 2.0 and 2.5. Outside it: the
+upscalers (they aren&#39;t resold anywhere, by design), Gemini Omni Flash and the other Kling tiers
+(3.0 Omni / Turbo / 2.6 / 2.5 and older), which OpenRouter doesn&#39;t carry.
 Like every <a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a>,
 it adds no models to the menu and is always visible: routed nodes show
 <strong>⇄ runs via OpenRouter</strong>, and Marcel&#39;s composer says so too.</p>
@@ -172,9 +176,12 @@ it&#39;s configured.</li>
 only) — so for that model fal and Replicate outrank it. It still works ($0.005 measured at
 low quality), just without sizing.</p>
 <h2 id="video-the-whole-set-with-billing-truth"><a class="anchor" href="#video-the-whole-set-with-billing-truth" aria-hidden="true">#</a>Video — the whole set, with billing truth</h2>
-<p>Kling 3.0 (std/pro), Veo 3.1 / Fast / <strong>Lite</strong> (OpenRouter is the first route Lite has ever
-had), and Seedance 2.0 — image-to-video <strong>with end frames</strong>, text-to-video, reference
-images. Per-second rates (2026-07-22): Kling std $0.084 / pro $0.112 (audio +$0.042–0.056),
+<p>Kling 3.0 (std/pro) and <strong>Kling O1</strong> (5 or 10 s, 720p, $0.112/s — the REST and subscription
+O1 entries both route here), Veo 3.1 / Fast / <strong>Lite</strong> (OpenRouter is the first route Lite
+has ever had), Seedance 2.0 and <strong>Seedance 2.5</strong> (480p/720p only, 4–30 s, first + last frame,
+no reference images there — the 30-reference and 1080p features need the BytePlus key) —
+image-to-video <strong>with end frames</strong>, text-to-video, reference images where the listing
+declares them. Per-second rates (2026-07-22): Kling std $0.084 / pro $0.112 (audio +$0.042–0.056),
 Veo 3.1 $0.20 (audio doubles it), Fast $0.08–0.10, Lite $0.03–0.05; Seedance bills per
 video token. Where a surcharge can&#39;t be estimated up front the node says so — and it
 matters less than usual here, because <strong>OpenRouter reports the exact billed cost on every
@@ -191,7 +198,8 @@ bill direct again automatically.</li>
 takes <strong>no images</strong> and no reasoning dial, so OpenRouter outranks it when both keys exist.</li>
 <li><strong>Marcel routes here and only here</strong>: his lanes stream, and OpenRouter is the one
 aggregator whose wire supports Brut&#39;s streaming + tool-call + prompt-cache contract.</li>
-<li><strong>Kling&#39;s 4K master tier and Seedance&#39;s Smart Length aren&#39;t on OpenRouter</strong>; for video,
+<li><strong>Kling&#39;s 4K master tier, Seedance&#39;s Smart Length, Seedance 2.5&#39;s 1080p and reference
+images aren&#39;t on OpenRouter</strong>; Kling O1 takes only 5 or 10 s there. For video,
 fal outranks OpenRouter when both keys exist (fal&#39;s Kling rates run cheaper). Missing
 knobs always fail loud, never silently.</li>
 <li>Every routed call — text, image, or video — lands in the spend ledger with

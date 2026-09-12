@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brut privacy</title>
-<meta name="description" content="This site sets no cookies and loads nothing from third parties. Everything getbrut.app does with data, and what the Brut app sends: a seven-field heartbeat, nothing else.">
+<meta name="description" content="This site sets no cookies and loads nothing from third parties. Everything getbrut.app does with data, and what the Brut app sends: an eight-field heartbeat, nothing else.">
 <link rel="canonical" href="https://getbrut.app/privacy/">
 <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -130,7 +130,7 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
         <li><strong>Your API keys</strong> live in your operating system's keychain. Never logged, never sent to us, never written into a graph or a <code>.brutpack</code>.</li>
         <li><strong>Generation calls go from your machine straight to the provider</strong> you picked, on your key, under that provider's terms. If you choose to route a model through an aggregator you subscribe to, the same holds for that service, and the node, the confirm dialog and the ledger say so.</li>
         <li><strong>Marcel, the companion,</strong> talks to the text-model provider you chose, on your key. Every call is written to your local spend ledger. His memory of your taste is a plain-text file on your disk that is never synced.</li>
-        <li><strong>The only thing Brut ever sends us</strong> is a heartbeat while you are signed in, at startup and once a day, so we can count active seats during the beta. Seven fields, no content:</li>
+        <li><strong>The only thing Brut ever sends us</strong> is a heartbeat while you are signed in, at startup and once a day, so we can count active seats during the beta. Eight fields, no content:</li>
       </ul>
       <pre><code>{
   "install_id": "a uuid minted once on this machine",
@@ -139,19 +139,20 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
   "os": "Windows",
   "os_version": "…",
   "arch": "…",
-  "ts": "…"
+  "ts": "…",
+  "eula_version": "the date of the beta license you accepted"
 }</code></pre>
-      <p>You can see this exact JSON any time in the app, under Settings → Account. The <strong>Send feedback</strong> button is the one other thing that can send data, and only when you press Send: your message, your account email so we can reply, and, only if you leave the checkbox on, the same seven fields plus the last few error messages. The dialog shows that block byte for byte before it goes.</p>
+      <p>You can see this exact JSON any time in the app, under Settings → Account. The <strong>Send feedback</strong> button is the one other thing that can send data, and only when you press Send: your message, your account email so we can reply, and, only if you leave the checkbox on, the same eight fields plus the last few error messages. The desktop app's quit-time prompt is the same form under the same rule: nothing leaves unless you press Send &amp; quit. The dialog shows that block byte for byte before it goes.</p>
 
       <h2>Your data, your call</h2>
       <p>Write to <a href="mailto:contact@getbrut.app">contact@getbrut.app</a> to see or delete anything we hold about you: a beta application, an approved seat, an account. We answer as people, not as a form, and deletion is complete because there is so little to delete.</p>
 
       <h2>Who</h2>
-      <p>Brut is made by ZUH Visuals, an architectural visualization studio, and Hugues Rebay is the person responsible for this site and its data. Questions about any of the above: the same address.</p>
+      <p>Brut is made by Hugues REBAY, Antibes, France, who is the person responsible for this site and its data. The <a href="/docs/beta-license.html">beta license</a> names the same person as licensor. Questions about any of the above: the same address.</p>
     </div>
 
     <div class="sig">
-      Last updated <b>2026-08-24</b>. Changes to this page are listed in the <a href="/changelog/">changelog</a>.
+      Last updated <b>2026-09-12</b>. Changes to this page are listed in the <a href="/changelog/">changelog</a>.
     </div>
   </div>
 </main>
