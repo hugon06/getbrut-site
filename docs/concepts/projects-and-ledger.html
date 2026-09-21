@@ -135,7 +135,14 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Projects &amp; the ledger</h1>
 <h2 id="projects"><a class="anchor" href="#projects" aria-hidden="true">#</a>Projects</h2>
 <p>A <strong>project</strong> is a first-class container: it owns its <strong>outputs</strong>, its saved <strong>graphs</strong>, and its <strong>ledger</strong>. Everything you make lives inside the active project on disk. Switch projects from the toolbar&#39;s project selector; the whole workspace swaps.</p>
-<p>Started building before creating one? <strong>File ▾ → Save as project…</strong> moves the current canvas into a brand-new project of its own — name it, pick its folder, and the graph travels with you (results you already generated stay valid). One thing to know: <strong>files never move</strong>. An output is written into the folder of whichever project was <em>active when it generated</em>, and saving as a project later doesn&#39;t relocate it — the new project&#39;s <code>outputs/</code> starts filling from that point on. To find any result on disk, <strong>right-click its preview → Reveal in Explorer</strong>.</p>
+<p>Started building in the wrong project? <strong>File ▾ → Save project as…</strong> takes the current canvas into a brand-new project of its own — name it, pick its folder, and <strong>everything moves with it</strong>:</p>
+<ul>
+<li>every image and clip the canvas references moves into the new project&#39;s <code>outputs/</code> (same subfolders). A file that another graph in the old project also uses stays there as a copy, so nothing else breaks;</li>
+<li>the <strong>ledger rows</strong> of the carried nodes move too, so <strong>🕘 history and spend</strong> show up in the new project, and the files those past takes reference come along;</li>
+<li>if the canvas was a saved graph, its file moves with it and keeps its name;</li>
+<li>the graph is rewritten to the new locations and <strong>stays warm</strong>: unchanged nodes replay from cache on the next Run instead of re-paying. The graph file remembers which outputs folder it moved from (<code>pathCompat</code>), and every cache check tries that former location before declaring a node stale — a real edit still misses, as it should.</li>
+</ul>
+<p>The old project is left with a fresh canvas. Rows that clearly belong to another graph there (they are tagged with its name) stay put. The log line under the action says how many files and rows moved and how many stayed as shared copies. Wait for a running generation to finish first — the action refuses while a job is in flight. To find any result on disk, <strong>right-click its preview → Reveal in Explorer</strong>.</p>
 <ul>
 <li><strong>Create</strong> a project (<strong>File ▾ → New project…</strong>) and choose where it lives — a local folder, or a share on your <strong>NAS</strong>.</li>
 <li><strong>NAS-rooted projects</strong> store their data at any absolute path (a <code>project.json</code> marker inside makes it portable). A second seat can <strong>Open project…</strong> on the same folder and adopt it — that&#39;s how a studio shares live work.</li>
