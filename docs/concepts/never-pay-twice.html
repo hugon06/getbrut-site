@@ -137,6 +137,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h2 id="how-it-works"><a class="anchor" href="#how-it-works" aria-hidden="true">#</a>How it works</h2>
 <p>When a node runs, Brut computes a <strong>stable hash</strong> of everything that affects its output — the prompt, the model, the parameters, the input images, the mask. If that hash matches the last successful run <em>and</em> the node still holds that output, the node is <strong>skipped</strong>: status <code>cached</code>, cost <code>$0</code>.</p>
 <p>Change any input and the hash changes, so that node — and only that node — re-pays. A revision round that touches three shots costs you three shots, not the whole graph.</p>
+<p>Moving a graph is not a change. The hash includes the input files&#39; paths, so a project that moves (<strong>Save project as…</strong>, a <code>.brutpack</code> opened on another machine, a NAS share under a different drive letter) would look entirely stale — Brut remembers the former location in the graph file and checks each node against it before calling it stale, so a move stays free.</p>
 <blockquote>
 <p>Re-run a finished graph and everything shows <code>cached</code>. That&#39;s the point: your outputs are already on disk, and replaying them is free.</p>
 </blockquote>

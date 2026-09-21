@@ -151,6 +151,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <blockquote>
 <p>The same discipline is what <code>.brutpack</code> reuses — it&#39;s why a packed project&#39;s warm caches still resolve after you import it on a different computer.</p>
 </blockquote>
+<p>Since 2026-09-21 the warmth is real across machines, not just the previews: every graph file records which outputs folder it was saved against, and when another machine opens it under a different folder (a pack import, a NAS share mounted as another letter), Brut notes the pair of locations in the graph and lets every cache check try the former one. Unchanged nodes replay free on the new machine; the first Run upgrades their keys, and a real edit still re-runs honestly.</p>
 <h2 id="export-vs-pack"><a class="anchor" href="#export-vs-pack" aria-hidden="true">#</a>Export vs pack</h2>
 <ul>
 <li><strong>Export project to folder</strong> — a live copy into an empty folder; the copy is itself openable and shareable (great for a NAS).</li>

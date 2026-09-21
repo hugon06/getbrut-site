@@ -135,7 +135,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <h1>Your first image</h1>
 <p>Let&#39;s make one image end to end. This takes about a minute and costs roughly <strong>$0.03</strong> on Gemini&#39;s cheapest image model.</p>
 <h2 id="the-fastest-path-the-starter-graph"><a class="anchor" href="#the-fastest-path-the-starter-graph" aria-hidden="true">#</a>The fastest path: the starter graph</h2>
-<p>The setup wizard offers a <strong>starter graph</strong> on its last step — a ready-wired <strong>Prompt → Refine → Text→Image → Preview</strong> chain on <code>gemini-3.1-flash-lite-image</code> (Nano Banana 2 Lite). Click <strong>Add starter graph</strong>, then hit <strong>▶ Run</strong> in the toolbar. Done. (Re-open the wizard any time from <strong>File ▾ → Setup wizard…</strong>.)</p>
+<p>The setup wizard offers a <strong>starter graph</strong> on its last step, right after it has you create your first project — a ready-wired <strong>Prompt → Refine → Text→Image → Preview</strong> chain on <code>gemini-3.1-flash-lite-image</code> (Nano Banana 2 Lite). Click <strong>Add starter graph</strong>, then hit <strong>▶ Run</strong> in the toolbar. Done. (Re-open the wizard any time from <strong>File ▾ → Setup wizard…</strong>.)</p>
 <p>If you&#39;d rather build it by hand, here&#39;s the same thing in three nodes.</p>
 <h2 id="build-it-by-hand"><a class="anchor" href="#build-it-by-hand" aria-hidden="true">#</a>Build it by hand</h2>
 <ol>
@@ -158,7 +158,7 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <ul>
 <li><strong><code>429 RESOURCE_EXHAUSTED</code> on the first call</strong> → your Gemini key isn&#39;t billing-enabled (the free tier has zero image quota). Enable billing in Google AI Studio. See <a href="/docs/providers/gemini.html">Google Gemini</a>.</li>
 <li><strong>A ⚠ &quot;Add your … key&quot; button on the node</strong> → that provider isn&#39;t configured; click it to jump to the wizard.</li>
-<li><strong><code>finishReason: OTHER</code> on an image edit</strong> → a silent content refusal, usually triggered by an input image (a real person&#39;s name in facade lettering, a face, a logo) rather than the prompt. Remove or crop the offending image.</li>
+<li><strong><code>finishReason: OTHER</code> (or <code>IMAGE_OTHER</code>) on an image edit</strong> → a silent content refusal, usually triggered by an input image (a real person&#39;s name in facade lettering, a face, a logo) rather than the prompt. Remove or crop the offending image.</li>
 </ul>
 <h2 id="next"><a class="anchor" href="#next" aria-hidden="true">#</a>Next</h2>
 <ul>
