@@ -103,6 +103,32 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .toc li.lvl3{padding-left:12px}
 .toc a{color:var(--muted)}
 .toc a:hover{color:var(--text);text-decoration:none}
+/* anchors land below the sticky top bar, not under it */
+.content [id]{scroll-margin-top:72px}
+/* --- search (docs-search.js) --- */
+.search{position:relative;width:340px;max-width:100%}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted-2);pointer-events:none}
+.search input{width:100%;height:34px;padding:0 34px 0 32px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font-body);font-size:13.5px;outline:none;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted-2)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search-key{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none}
+.search input:focus~.search-key,.search input:not(:placeholder-shown)~.search-key{display:none}
+kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 5px}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;width:560px;max-width:calc(100vw - 32px);max-height:min(70vh,560px);overflow-y:auto;overflow-x:hidden;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:6px}
+.search-results[hidden]{display:none}
+.sr{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:7px;color:var(--body);min-width:0}
+.sr:hover{text-decoration:none}
+.sr.active{background:color-mix(in srgb,var(--accent) 13%,transparent)}
+.sr-path{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-title{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--text);line-height:1.3}
+.sr.active .sr-title{color:var(--accent)}
+.sr-snip{font-size:12.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sr mark{background:none;color:var(--text);font-weight:600;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--accent) 70%,transparent)}
+.sr-empty{padding:14px 12px;font-size:13px;color:var(--muted)}
+.sr-foot{display:flex;gap:16px;padding:8px 12px 4px;margin-top:4px;border-top:1px solid var(--border-soft);font-size:11.5px;color:var(--muted-2)}
+.sr-foot kbd{margin-right:3px}
+.content mark.hit{background:color-mix(in srgb,var(--accent) 26%,transparent);color:var(--text);border-radius:3px;padding:0 1px}
 /* --- prev/next --- */
 .prevnext{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--border-soft)}
 .pn{display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:0;max-width:48%}
@@ -118,7 +144,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   .side.open{display:block}
   .top .menu-btn{display:inline-block}
   .content{padding:26px 20px}
+  .top{gap:12px;padding:0 16px}
+  .top .docs-label,.top .spacer{display:none}
+  .search{flex:1;width:auto;min-width:0}
+  .search-results{position:fixed;top:62px;left:16px;right:16px;width:auto;max-width:none}
+  .sr-foot{display:none}
 }
+@media(max-width:560px){.top .home{display:none}}
 </style>
 </head>
 <body>
@@ -126,6 +158,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
   <a class="wordmark" href="/">BRUT<span class="dot"></span></a>
   <span class="docs-label">DOCS</span>
+  <div class="search" role="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-label="Search the docs" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="docs-results">
+    <kbd class="search-key">/</kbd>
+    <div id="docs-results" class="search-results" role="listbox" aria-label="Search results" hidden></div>
+  </div>
   <span class="spacer"></span>
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
@@ -136,25 +174,47 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <p>Brut is a node canvas. You build a <strong>graph</strong> — nodes connected by wires — and run it. Nodes are <em>shots and decisions</em>, not samplers and latents: a node is &quot;generate an image,&quot; &quot;animate this clip,&quot; &quot;plan the film,&quot; not a low-level knob.</p>
 <h2 id="the-canvas"><a class="anchor" href="#the-canvas" aria-hidden="true">#</a>The canvas</h2>
 <ul>
-<li><strong>Add a node</strong> — the <strong>+</strong> on the left rail opens the <strong>node browser</strong>: every node by category (in workflow order), with a hover card showing what it does, what flows in and out, and whether it costs money. Click places it at the canvas center; drag drops it where you let go. Or press <code>Tab</code> over the canvas for the quick palette at your cursor — type to filter, <code>↑/↓</code> + <code>Enter</code> to place.</li>
-<li><strong>Pan</strong> — middle-drag. <strong>Box-select</strong> — left-drag: anything the rectangle touches is selected, nodes <strong>and wires</strong> (a box drawn over a bundle of wires alone picks them up, wires light up as the box sweeps over them and when you hover them; Delete then removes everything selected). <strong>Zoom</strong> — scroll wheel, anywhere on the canvas, including over a board or contact sheet whose tiles all fit. Only a grid that actually <strong>overflows</strong> takes the wheel for itself, to scroll its tiles; text areas do the same.</li>
-<li><strong>Wire</strong> — drag from an output port to an input port. Drop a wire on empty canvas and the add menu opens, filtered to compatible nodes — pick one and it&#39;s placed <em>and</em> wired. Double-click a wire to splice a node into it.</li>
-<li><strong>Wire style</strong> — the three wire buttons on the left rail (curved, straight, stepped) set how every wire in the graph is drawn. One style per graph: it&#39;s saved in the graph file and <code>Ctrl+Z</code> undoes a switch. Old graphs open curved, exactly as before.<figure class="media"><video src="/docs/media/concepts/snap-grid.mp4" poster="/docs/media/concepts/snap-grid.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Magnet off, a node stops between dots; magnet on, it lands on them and lines up with its neighbor</figcaption></figure></li>
-<li><strong>Snap to grid</strong> — the <strong>magnet</strong> on the left rail. On, a dragged node lands on the canvas dots (the dots <em>are</em> the grid, 24 units apart); off, nodes go exactly where you drop them. It&#39;s a preference of this computer, not of the graph, and it stays as you left it.</li>
-<li><strong>Reroutes</strong> — <code>Alt</code>-click a wire to drop a small <strong>dot</strong> on it at that point, then drag the dot to route the wire around things (Substance style). A dot has one inlet and one outlet and can feed several nodes (drag more wires off it). It&#39;s purely cosmetic: nothing downstream re-runs or re-pays, and Marcel doesn&#39;t even see it. Delete a dot and the wire <strong>heals</strong> — its input reconnects to every output, nothing is left dangling.</li>
-<li><strong>Wire menu</strong> — right-click a wire: <strong>Color</strong> (Auto follows the node the wire leaves, None keeps it plain, or one of the six hues — applied to every selected wire when the clicked one is part of a selection), <strong>Add reroute here</strong>, <strong>Insert node…</strong> (the double-click splice), <strong>Delete wire</strong>.</li>
-<li><strong>Node menu</strong> — right-click a node: <strong>Color</strong>, <strong>Run</strong>, <strong>Duplicate</strong>, <strong>Group</strong>, <strong>Collapse to composite</strong>, <strong>Delete</strong>. With several nodes selected, Duplicate and Delete act on all of them, and Group / Collapse light up. Text fields and image previews keep their own menus.</li>
-<li><strong>Node color</strong> — pick one of six hues (the same ones group frames use) from the node menu. The whole node takes the color (body, outline and title — readable zoomed far out), and so does <strong>every wire leaving it</strong> — the fastest way to read a dense graph. Right-click one node of a selection and the color lands on all of them. Reroute dots pass the color along; a wire can also be given its own color from the wire menu; a hovered or selected wire still shows the accent.</li>
-<li><strong>Run</strong> — <strong>▶ Run</strong> executes the whole graph; the ▶ on a node runs just that node and everything it depends on.</li>
-<li><strong>Copy, paste, duplicate</strong> — <code>Ctrl+C</code> copies the selected nodes, <code>Ctrl+V</code> pastes fresh copies, <code>Ctrl+D</code> duplicates in one step. Copies keep their <strong>incoming wires</strong>: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds). <code>Ctrl+V</code> pastes <strong>at your cursor</strong> — point where you want the copies and paste; a multi-node selection keeps its arrangement, and a copy pasted inside a group frame&#39;s area joins that group (exactly like dropping it there). <code>Ctrl+D</code> still lands the duplicate just beside the original.</li>
-<li><strong>Paste an image</strong> — <code>Ctrl+V</code> with an image on the OS clipboard (Photoshop <code>Ctrl+A</code>+<code>Ctrl+C</code>, a render buffer&#39;s Copy button, a browser image) drops a ready-filled <strong>Image In</strong> node at your cursor. If you copied both, whichever you copied <em>last</em> wins the shortcut.</li>
-<li><strong>Tidy</strong> — the grid button on the left rail auto-arranges the whole graph into columns that follow the wiring (nodes stack top-down within a column). It&#39;s one undo step — <code>Ctrl+Z</code> puts everything back.</li>
-<li><strong>Node ids</strong> — every node&#39;s title bar shows its id in small type (<code>multi_shot-21</code>). That&#39;s the name <a href="/docs/concepts/marcel.html">Marcel</a> and the ledger use when they refer to a node — click the id to copy it.</li>
+<li><p><strong>Add a node</strong> — the <strong>+</strong> on the left rail opens the <strong>node browser</strong>: every node by category (in workflow order), with a hover card showing what it does, what flows in and out, and whether it costs money. Click places it at the canvas center; drag drops it where you let go. Or press <code>Tab</code> over the canvas for the quick palette at your cursor — type to filter, <code>↑/↓</code> + <code>Enter</code> to place.</p>
+</li>
+<li><p><strong>Pan</strong> — middle-drag. <strong>Box-select</strong> — left-drag: anything the rectangle touches is selected, nodes <strong>and wires</strong> (a box drawn over a bundle of wires alone picks them up, wires light up as the box sweeps over them and when you hover them; Delete then removes everything selected). <strong>Zoom</strong> — scroll wheel, anywhere on the canvas, including over a board or contact sheet whose tiles all fit. Only a grid that actually <strong>overflows</strong> takes the wheel for itself, to scroll its tiles; text areas do the same.</p>
+</li>
+<li><p><strong>Wire</strong> — drag from an output port to an input port. Drop a wire on empty canvas and the add menu opens, filtered to compatible nodes — pick one and it&#39;s placed <em>and</em> wired. Three gestures work on wires you already have, all explained under <a href="#ports-and-wires">Ports and wires</a>: <strong>double-click a wire</strong> to splice a node into it, <strong><code>Alt</code>-click a wire</strong> to split it with a dot and send it to more nodes, <strong><code>Alt</code>-click a pin</strong> to move all its wires to another pin.</p>
+</li>
+<li><p><strong>Wire style</strong> — the three wire buttons on the left rail (curved, straight, stepped) set how every wire in the graph is drawn. One style per graph: it&#39;s saved in the graph file and <code>Ctrl+Z</code> undoes a switch. Old graphs open curved, exactly as before.</p>
+</li>
+<li><p><strong>Snap to grid</strong> — the <strong>magnet</strong> on the left rail. On, a dragged node lands on the canvas dots (the dots <em>are</em> the grid, 24 units apart); off, nodes go exactly where you drop them. It&#39;s a preference of this computer, not of the graph, and it stays as you left it.</p>
+</li>
 </ul>
+<figure class="media"><video src="/docs/media/concepts/snap-grid.mp4" poster="/docs/media/concepts/snap-grid.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Magnet off, a node stops between dots; magnet on, it lands on them and lines up with its neighbor</figcaption></figure>
+- **Wire menu** — right-click a wire: **Color** (Auto follows the node the wire leaves, None keeps it plain, or one of the six hues — applied to every selected wire when the clicked one is part of a selection), **Add reroute here** (the `Alt`-click split), **Insert node…** (the double-click splice), **Delete wire**.
+- **Node menu** — right-click a node: **Color**, **Run**, **Duplicate**, **Group**, **Collapse to composite**, **Delete**. With several nodes selected, Duplicate and Delete act on all of them, and Group / Collapse light up. Text fields and image previews keep their own menus.
+- **Node color** — pick one of six hues (the same ones group frames use) from the node menu. The whole node takes the color (body, outline and title — readable zoomed far out), and so does **every wire leaving it** — the fastest way to read a dense graph. Right-click one node of a selection and the color lands on all of them. Reroute dots pass the color along; a wire can also be given its own color from the wire menu; a hovered or selected wire still shows the accent.
+- **Run** — **▶ Run** executes the whole graph; the ▶ on a node runs just that node and everything it depends on.
+- **Copy, paste, duplicate** — `Ctrl+C` copies the selected nodes, `Ctrl+V` pastes fresh copies, `Ctrl+D` duplicates in one step. Copies keep their **incoming wires**: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds). `Ctrl+V` pastes **at your cursor** — point where you want the copies and paste; a multi-node selection keeps its arrangement, and a copy pasted inside a group frame's area joins that group (exactly like dropping it there). `Ctrl+D` still lands the duplicate just beside the original.
+- **Paste an image** — `Ctrl+V` with an image on the OS clipboard (Photoshop `Ctrl+A`+`Ctrl+C`, a render buffer's Copy button, a browser image) drops a ready-filled **Image In** node at your cursor. If you copied both, whichever you copied *last* wins the shortcut.
+- **Tidy** — the grid button on the left rail auto-arranges the graph into columns that follow the wiring, **one row per chain**: nodes connected to each other form a chain laid out left to right (Prompt → Multi-Shot → Shot Board stays one row), independent chains stack top-down in the order they were, and they never interleave. Inside a chain, a pool of siblings (several nodes with the same parents and the same children, like eight Image Inputs feeding one board) wraps into a compact grid, a 3×3 contact sheet rather than a tower; nodes fed by the same upstream node sit together. **With two or more nodes selected, only those are tidied**, in place: the block keeps the selection's top-left corner and nothing outside it moves (select a group frame to tidy its inside). It's one undo step — `Ctrl+Z` puts everything back.
+- **Node ids** — every node's title bar shows its id in small type (`multi_shot-21`). That's the name [Marcel](/docs/concepts/marcel.html) and the ledger use when they refer to a node — click the id to copy it.
+
 <h2 id="ports-and-wires"><a class="anchor" href="#ports-and-wires" aria-hidden="true">#</a>Ports and wires</h2>
-<p>Every node exposes typed <strong>ports</strong>. Wires carry one of three things: <strong>images</strong>, <strong>text</strong> (prompts and plans), or <strong>video</strong>. Ports are labeled by role — a Compose node has <code>scene</code> and <code>reference</code> image inlets; a Multi-Shot node has <code>base</code> and <code>reference</code>. Brut only lets you connect compatible types, and picks the right inlet automatically when you drag-to-connect.</p>
+<p>Every node exposes typed <strong>ports</strong>. Wires carry one of three things: <strong>images</strong>, <strong>text</strong> (prompts and plans), or <strong>video</strong>. Ports are labeled by role — a Compose node has <code>scene</code> and <code>reference</code> image inlets. Brut only lets you connect compatible types, and picks the right inlet automatically when you drag-to-connect.</p>
 <p>Some nodes expose <strong>per-tile output plugs</strong> — a Shot Board tile has its own handle so you can route <em>one</em> chosen shot downstream, a Clip Board tile has one per clip.</p>
-<p>A <strong>reroute dot</strong> (Alt-click a wire) takes whatever the wire carries and re-emits it, so drag-to-connect from a dot still filters the menu to compatible nodes. Dots are cosmetic — execution, caching and pins all see straight through them.</p>
+<h3 id="splice-a-node-into-a-wire"><a class="anchor" href="#splice-a-node-into-a-wire" aria-hidden="true">#</a>Splice a node into a wire</h3>
+<p><strong>Double-click a wire</strong> (or right-click it → <strong>Insert node…</strong>): the add menu opens, filtered to the nodes that fit between the two ends. Pick one and it lands on the wire, wired in and out — an Upscale between a generator and its Preview, a Conform in front of a board, without redrawing anything.</p>
+<h3 id="split-a-wire-with-a-reroute-dot"><a class="anchor" href="#split-a-wire-with-a-reroute-dot" aria-hidden="true">#</a>Split a wire with a reroute dot</h3>
+<p><strong><code>Alt</code>-click a wire</strong> and a small <strong>dot</strong> drops on it at that point: the wire now runs <em>through</em> the dot, and the dot is a branch point.</p>
+<ul>
+<li><strong>Send the same output to more nodes</strong> — drag a new wire off the dot to any compatible input. Drop it on empty canvas and the add menu opens, filtered to what the wire carries; the node you pick arrives already wired. One output feeds as many nodes as you like, and you branch from where you are instead of going back to the source node.</li>
+<li><strong>Route the wire</strong> around things — drag the dot (Substance style). Add more dots for more bends.</li>
+</ul>
+<p>Right-click a wire → <strong>Add reroute here</strong> does the same. A dot has one inlet and as many outlets as you drag off it, and it carries the color of its wire along. It&#39;s purely cosmetic: execution, caching and pins see straight through it, so nothing downstream re-runs or re-pays, and Marcel doesn&#39;t see it. Delete a dot and the wire <strong>heals</strong>: its input reconnects to every wire that left it, nothing is left dangling.</p>
+<h3 id="move-wires-between-pins-alt-click-a-pin"><a class="anchor" href="#move-wires-between-pins-alt-click-a-pin" aria-hidden="true">#</a>Move wires between pins (<code>Alt</code>-click a pin)</h3>
+<p>To re-plumb a graph without redrawing it, <strong><code>Alt</code>-click a pin</strong>. Every pin on the canvas starts pulsing: a rewire is armed on that pin (the Activity panel says so). Then click the destination pin (<code>Alt</code> no longer needed):</p>
+<ul>
+<li><strong>Same kind</strong> (an output, then another output; or an input, then another input): <strong>every wire on the first pin moves to the second</strong>, and their other ends stay where they are. Five nodes fed by one Prompt? Alt-click its output, click the output of a new Prompt, and all five are fed by the new one.</li>
+<li><strong>An input, then an output</strong>: whatever fed that input now comes from that output — &quot;feed this from there instead&quot;.</li>
+<li><strong>An output, then an input</strong>: the wires leaving that output are pulled onto that single input.</li>
+</ul>
+<p>Click the armed pin again, press <code>Esc</code> or click empty canvas to cancel. Two wires that would end up on the same two pins merge into one. The Activity panel logs what moved, and <code>Ctrl+Z</code> undoes it like any other edit.</p>
 <h2 id="the-execution-model"><a class="anchor" href="#the-execution-model" aria-hidden="true">#</a>The execution model</h2>
 <p>When you run, Brut topologically sorts the graph and executes on a <strong>promise-graph scheduler</strong>: each node starts the moment its inputs are ready, so independent branches run concurrently. Two things make this cheap and fast:</p>
 <ul>
@@ -201,7 +261,8 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 
 <div class="prevnext"><a class="pn prev" href="/docs/first-image.html"><span>← Previous</span><b>Your first image</b></a><a class="pn next" href="/docs/concepts/projects-and-ledger.html"><span>Next →</span><b>Projects & the ledger</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-canvas">The canvas</a></li><li class="lvl2"><a href="#ports-and-wires">Ports and wires</a></li><li class="lvl2"><a href="#the-execution-model">The execution model</a></li><li class="lvl2"><a href="#node-families">Node families</a></li><li class="lvl2"><a href="#saving-undo">Saving &amp; undo</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-canvas">The canvas</a></li><li class="lvl2"><a href="#ports-and-wires">Ports and wires</a></li><li class="lvl3"><a href="#splice-a-node-into-a-wire">Splice a node into a wire</a></li><li class="lvl3"><a href="#split-a-wire-with-a-reroute-dot">Split a wire with a reroute dot</a></li><li class="lvl3"><a href="#move-wires-between-pins-alt-click-a-pin">Move wires between pins (Alt-click a pin)</a></li><li class="lvl2"><a href="#the-execution-model">The execution model</a></li><li class="lvl2"><a href="#node-families">Node families</a></li><li class="lvl2"><a href="#saving-undo">Saving &amp; undo</a></li></ul></nav>
 </div>
+<script src="/docs/search.js?v=f9acdbd486" data-index="/docs/search-index.json?v=f681de0ebb" defer></script>
 </body>
 </html>
