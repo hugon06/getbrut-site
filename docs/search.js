@@ -5,7 +5,8 @@
 // loads it with `defer`. The index is fetched on the first focus of the box and
 // ranked here, in the browser. Keys: "/" or Ctrl+K focus the box, arrows move,
 // Enter opens, Esc closes. A result link carries ?q= so the landing page marks
-// the matched words (Esc clears the marks).
+// the matched words inside the section it points at (never page-wide), then
+// drops ?q= from the address bar; editing the box or Esc clears the marks.
 (function (root) {
   'use strict';
 
@@ -302,7 +303,12 @@
     paintActive();
   }
 
-  input.addEventListener('input', render);
+  // The landing marks belong to the query that brought the reader here: any
+  // edit of the box (emptying it included) takes them away.
+  input.addEventListener('input', function () {
+    clearMarks();
+    render();
+  });
   input.addEventListener('focus', function () {
     load().catch(function () {});
     if (input.value.trim()) render();
@@ -326,6 +332,7 @@
       if (!panel.hidden) closePanel();
       else {
         input.value = '';
+        clearMarks();
         input.blur();
       }
     }
@@ -364,16 +371,41 @@
   // --- landing: mark the words the reader searched for --------------------
   var MAX_MARKS = 400;
 
-  function markPage(container, terms) {
-    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
-      acceptNode: function (node) {
-        var el = node.parentElement;
-        if (!el || el.closest('script,style,.anchor,mark,.faq-controls')) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      },
-    });
+  // The section a result points at, as the index cut it: the target heading and
+  // what follows up to the next h2/h3 (a FAQ entry is its own <details>; no
+  // target = the page intro, before the first section). Marks stay there, never
+  // across the whole page.
+  function sectionOf(content, target) {
+    var kids = Array.prototype.slice.call(content.children);
+    var start = 0;
+    if (target) {
+      var unit = target.closest('details') || target;
+      while (unit && unit.parentElement !== content) unit = unit.parentElement;
+      if (!unit) return [];
+      if (unit.tagName === 'DETAILS') return [unit];
+      start = kids.indexOf(unit);
+    }
+    var out = [];
+    for (var i = start; i < kids.length; i++) {
+      var el = kids[i];
+      if (i > start && (el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'DETAILS')) break;
+      out.push(el);
+    }
+    return out;
+  }
+
+  function markPage(elements, terms) {
     var nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (var e = 0; e < elements.length; e++) {
+      var walker = document.createTreeWalker(elements[e], NodeFilter.SHOW_TEXT, {
+        acceptNode: function (node) {
+          var el = node.parentElement;
+          if (!el || el.closest('script,style,.anchor,mark,.faq-controls,.prevnext')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        },
+      });
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+    }
     var total = 0;
     for (var n = 0; n < nodes.length && total < MAX_MARKS; n++) {
       var node = nodes[n];
@@ -406,19 +438,25 @@
     }
   }
 
+  // Landing from a result: mark the section it points at, then drop ?q= from
+  // the address bar, so a reload, a shared link or the back button shows the
+  // page clean. The query stays in the box to refine; editing it clears.
   var landed = new URLSearchParams(location.search).get('q');
   if (landed) {
     input.value = landed;
     var content = document.querySelector('.content');
+    var target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
     var terms = termsOf(landed).filter(function (t) { return t.length > 1; });
-    if (content && terms.length) markPage(content, terms);
-    if (location.hash) {
-      var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if (target) {
-        var details = target.closest('details');
-        if (details) details.open = true;
-        target.scrollIntoView();
-      }
+    if (content && terms.length && (target || !location.hash)) markPage(sectionOf(content, target), terms);
+    if (target) {
+      var details = target.closest('details');
+      if (details) details.open = true;
+      target.scrollIntoView();
+    }
+    try {
+      history.replaceState(history.state, '', location.pathname + location.hash);
+    } catch (err) {
+      /* a sandboxed frame may refuse; the marks still work */
     }
   }
 })(typeof window !== 'undefined' ? window : globalThis);
