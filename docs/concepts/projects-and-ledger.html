@@ -103,6 +103,32 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .toc li.lvl3{padding-left:12px}
 .toc a{color:var(--muted)}
 .toc a:hover{color:var(--text);text-decoration:none}
+/* anchors land below the sticky top bar, not under it */
+.content [id]{scroll-margin-top:72px}
+/* --- search (docs-search.js) --- */
+.search{position:relative;width:340px;max-width:100%}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted-2);pointer-events:none}
+.search input{width:100%;height:34px;padding:0 34px 0 32px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font-body);font-size:13.5px;outline:none;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted-2)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search-key{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none}
+.search input:focus~.search-key,.search input:not(:placeholder-shown)~.search-key{display:none}
+kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 5px}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;width:560px;max-width:calc(100vw - 32px);max-height:min(70vh,560px);overflow-y:auto;overflow-x:hidden;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:6px}
+.search-results[hidden]{display:none}
+.sr{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:7px;color:var(--body);min-width:0}
+.sr:hover{text-decoration:none}
+.sr.active{background:color-mix(in srgb,var(--accent) 13%,transparent)}
+.sr-path{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-title{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--text);line-height:1.3}
+.sr.active .sr-title{color:var(--accent)}
+.sr-snip{font-size:12.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sr mark{background:none;color:var(--text);font-weight:600;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--accent) 70%,transparent)}
+.sr-empty{padding:14px 12px;font-size:13px;color:var(--muted)}
+.sr-foot{display:flex;gap:16px;padding:8px 12px 4px;margin-top:4px;border-top:1px solid var(--border-soft);font-size:11.5px;color:var(--muted-2)}
+.sr-foot kbd{margin-right:3px}
+.content mark.hit{background:color-mix(in srgb,var(--accent) 26%,transparent);color:var(--text);border-radius:3px;padding:0 1px}
 /* --- prev/next --- */
 .prevnext{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--border-soft)}
 .pn{display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:0;max-width:48%}
@@ -118,7 +144,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   .side.open{display:block}
   .top .menu-btn{display:inline-block}
   .content{padding:26px 20px}
+  .top{gap:12px;padding:0 16px}
+  .top .docs-label,.top .spacer{display:none}
+  .search{flex:1;width:auto;min-width:0}
+  .search-results{position:fixed;top:62px;left:16px;right:16px;width:auto;max-width:none}
+  .sr-foot{display:none}
 }
+@media(max-width:560px){.top .home{display:none}}
 </style>
 </head>
 <body>
@@ -126,6 +158,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
   <a class="wordmark" href="/">BRUT<span class="dot"></span></a>
   <span class="docs-label">DOCS</span>
+  <div class="search" role="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-label="Search the docs" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="docs-results">
+    <kbd class="search-key">/</kbd>
+    <div id="docs-results" class="search-results" role="listbox" aria-label="Search results" hidden></div>
+  </div>
   <span class="spacer"></span>
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
@@ -169,10 +207,97 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   project.json    the portability marker (for rooted/NAS projects)
 </code></pre>
 <p>Keys are <strong>never</strong> here — they live in your OS keychain.</p>
+<h2 id="what-a-filename-tells-you"><a class="anchor" href="#what-a-filename-tells-you" aria-hidden="true">#</a>What a filename tells you</h2>
+<p>Every file Brut writes into <code>outputs/</code> is named so the folder reads on its own, without opening anything:</p>
+<pre><code>&lt;project&gt;_&lt;graph&gt;_&lt;node&gt;_&lt;provider&gt;_&lt;model&gt;_&lt;date&gt;_&lt;job&gt;.&lt;ext&gt;
+
+tournesol_facade-study_t2i-12_openai_GI25F_260923_a3f91c2e.png
+tournesol_facade-study_film-3-c02_kling_K30_260923_0c77e4b1.mp4
+tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
+</code></pre>
+<ul>
+<li><strong>project</strong> and <strong>graph</strong> are the names you gave them, shortened to a slug (<code>untitled</code> while the canvas is not saved as a graph).</li>
+<li><strong>node</strong> is the node&#39;s id with its kind abbreviated (<code>t2i</code> Text → Image, <code>i2i</code> Image → Image, <code>i2v</code> Image → Video, <code>ms</code> Multi-Shot, <code>up</code> Upscale Image, <code>sb</code> Storyboard, <code>film</code> Film Shots, <code>dir</code> Director …) and, for the nodes that make several files, which one: <code>ms-4-s07</code> is Multi-Shot 4&#39;s shot 7, <code>film-3-c02</code> is Film Shots 3&#39;s clip 2, <code>sb-2-kf-s3</code> the keyframe of card s3 on Storyboard 2 (<code>-end</code> for a generated end frame), <code>dir-1-proof</code> a proof sheet.</li>
+<li><strong>provider</strong> is who made it: the provider that actually served the call (a routed job names the aggregator, <code>fal</code> or <code>openrouter</code>), or the free local tool for its own results (<code>conform</code>, <code>layers</code>, <code>sketch</code>, <code>sequence</code>, <code>tvai</code>).</li>
+<li><strong>model</strong> is the model&#39;s short code, in capitals so it stands out, for model tracking at a glance. A routed job still names the model you picked; the provider segment says who served it. Free tools have no model, so the segment is simply absent.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Model</th>
+<th>Code</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NBP</code></td>
+<td>Nano Banana Pro</td>
+<td><code>K30</code> <code>K30O</code> <code>K30T</code></td>
+<td>Kling 3.0 · 3.0 Omni · 3.0 Turbo</td>
+</tr>
+<tr>
+<td><code>NB2</code></td>
+<td>Nano Banana 2</td>
+<td><code>K26</code> <code>K25T</code> <code>KO1</code></td>
+<td>Kling 2.6 · 2.5 Turbo · o1</td>
+</tr>
+<tr>
+<td><code>NB2L</code></td>
+<td>Nano Banana 2 Lite</td>
+<td><code>K21</code> <code>K21M</code> <code>K20M</code> <code>K16</code> <code>K15</code> <code>K10</code></td>
+<td>the older Kling tiers</td>
+</tr>
+<tr>
+<td><code>NB</code></td>
+<td>Nano Banana (original)</td>
+<td><code>V31</code> <code>V31F</code> <code>V31L</code></td>
+<td>Veo 3.1 · Fast · Lite</td>
+</tr>
+<tr>
+<td><code>GI2</code></td>
+<td>GPT Image 2</td>
+<td><code>OMNI</code></td>
+<td>Gemini Omni Flash</td>
+</tr>
+<tr>
+<td><code>GI25F</code></td>
+<td>GPT Image 2.5 Flare</td>
+<td><code>SD25</code> <code>SD20</code></td>
+<td>Seedance 2.5 · 2.0</td>
+</tr>
+<tr>
+<td><code>GI25SB</code></td>
+<td>GPT Image 2.5 Sunburst</td>
+<td><code>MGC</code> <code>MGP2</code></td>
+<td>Magnific Creative · Precision V2</td>
+</tr>
+<tr>
+<td><code>TS2</code> <code>THF2</code> <code>TCGI</code> <code>TLR2</code></td>
+<td>Gigapixel Standard 2 · High Fidelity 2 · Art &amp; CGI · Low Resolution 2</td>
+<td><code>TVP4</code> <code>TVR</code> <code>TVG</code></td>
+<td>Topaz video Proteus 4 · Rhea · Gaia CG (cloud and local alike)</td>
+</tr>
+<tr>
+<td><code>TRD</code> <code>TSMX</code> <code>TRC3</code></td>
+<td>Topaz Redefine · Standard MAX · Recover 3</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>date</strong> is the day it was written, <code>yymmdd</code>.</li>
+<li><strong>job</strong> is the first eight characters of the ledger&#39;s job id: the traceability key. It is what makes every name unique (two graphs called the same thing collide on nothing), and it is how a file finds its row: <strong>right-click any picture → Find in ledger</strong> shows the run that made it — model, node, graph, prompt, parameters, cost, date — and opens the node&#39;s 🕘 history on that row when the node is on the canvas. It works for files with the older random names too, as long as a ledger row lists them.</li>
+</ul>
+<p>Files you bring in (<code>outputs/inputs/</code>) keep your own filename: <code>tournesol_facade-study_facade-photo_in_260923_ab12cd34.jpg</code> (<code>paste</code> for a clipboard image; the key is a content hash, so the same picture dropped twice the same day is one file). Exports keep their readable stems in <code>outputs/exports/</code>.</p>
+<p>Files made before this convention keep their old names for good: a stored path is a reference, and renaming would orphan every cache and pin.</p>
+<p><strong>Path length.</strong> A full name is 55 to 75 characters. Windows caps a whole path at 260 characters unless long paths are enabled, so a project rooted very deep on a server has less room for the name than for the folders. Brut never fails on that: when the full path would not fit, the name drops the project and graph segments, then the node, and keeps the traceable tail (<code>date_job</code>), which is shorter than the old random names ever were. A shallow project root on the server stays the comfortable choice.</p>
+<p><strong>Your own pattern.</strong> <strong>File ▾ → Output file names…</strong> sets a per-project pattern from the tokens <code>{project} {graph} {node} {provider} {model} {model_id} {date} {time} {job}</code> (<code>{model}</code> is the short code above, <code>{model_id}</code> the full model id; <code>{job}</code> is required; the default is <code>{project}_{graph}_{node}_{provider}_{model}_{date}_{job}</code>). The dialog shows what a file would be called; an invalid pattern is refused with the reason. Set per seat: on a shared NAS project each machine names its own writes.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/concepts/nodes-and-graphs.html"><span>← Previous</span><b>Nodes & graphs</b></a><a class="pn next" href="/docs/concepts/never-pay-twice.html"><span>Next →</span><b>Never pay twice</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#durability">Durability</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#durability">Durability</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
 </div>
+<script src="/docs/search.js?v=f9acdbd486" data-index="/docs/search-index.json?v=f681de0ebb" defer></script>
 </body>
 </html>

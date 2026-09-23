@@ -103,6 +103,32 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 .toc li.lvl3{padding-left:12px}
 .toc a{color:var(--muted)}
 .toc a:hover{color:var(--text);text-decoration:none}
+/* anchors land below the sticky top bar, not under it */
+.content [id]{scroll-margin-top:72px}
+/* --- search (docs-search.js) --- */
+.search{position:relative;width:340px;max-width:100%}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted-2);pointer-events:none}
+.search input{width:100%;height:34px;padding:0 34px 0 32px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font-body);font-size:13.5px;outline:none;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted-2)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search-key{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none}
+.search input:focus~.search-key,.search input:not(:placeholder-shown)~.search-key{display:none}
+kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 5px}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;width:560px;max-width:calc(100vw - 32px);max-height:min(70vh,560px);overflow-y:auto;overflow-x:hidden;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:6px}
+.search-results[hidden]{display:none}
+.sr{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:7px;color:var(--body);min-width:0}
+.sr:hover{text-decoration:none}
+.sr.active{background:color-mix(in srgb,var(--accent) 13%,transparent)}
+.sr-path{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-title{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--text);line-height:1.3}
+.sr.active .sr-title{color:var(--accent)}
+.sr-snip{font-size:12.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sr mark{background:none;color:var(--text);font-weight:600;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--accent) 70%,transparent)}
+.sr-empty{padding:14px 12px;font-size:13px;color:var(--muted)}
+.sr-foot{display:flex;gap:16px;padding:8px 12px 4px;margin-top:4px;border-top:1px solid var(--border-soft);font-size:11.5px;color:var(--muted-2)}
+.sr-foot kbd{margin-right:3px}
+.content mark.hit{background:color-mix(in srgb,var(--accent) 26%,transparent);color:var(--text);border-radius:3px;padding:0 1px}
 /* --- prev/next --- */
 .prevnext{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--border-soft)}
 .pn{display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:0;max-width:48%}
@@ -118,7 +144,13 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   .side.open{display:block}
   .top .menu-btn{display:inline-block}
   .content{padding:26px 20px}
+  .top{gap:12px;padding:0 16px}
+  .top .docs-label,.top .spacer{display:none}
+  .search{flex:1;width:auto;min-width:0}
+  .search-results{position:fixed;top:62px;left:16px;right:16px;width:auto;max-width:none}
+  .sr-foot{display:none}
 }
+@media(max-width:560px){.top .home{display:none}}
 </style>
 </head>
 <body>
@@ -126,6 +158,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
   <a class="wordmark" href="/">BRUT<span class="dot"></span></a>
   <span class="docs-label">DOCS</span>
+  <div class="search" role="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-label="Search the docs" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="docs-results">
+    <kbd class="search-key">/</kbd>
+    <div id="docs-results" class="search-results" role="listbox" aria-label="Search results" hidden></div>
+  </div>
   <span class="spacer"></span>
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
@@ -145,14 +183,12 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 </ul>
 <p>Conform runs entirely on your machine (local PIL) — <strong>free</strong>, never metered.</p>
 <h2 id="preview"><a class="anchor" href="#preview" aria-hidden="true">#</a>Preview</h2>
-<p>Inspect any output at screen size. Wire an image or video into a Preview node and it shows inline on a resizable frame; the <code>image</code> inlet displays video too. Hover a tile and its <strong>🔍</strong> opens the lightbox — wheel-zoom, and <strong>←/→ pages through everything on the node</strong>. When several images are shown, the <strong>‹ ›</strong> buttons on each tile reorder them. Preview is the &quot;show me the result&quot; node you&#39;ll drop at the end of most branches; the full-resolution files live in the project&#39;s output folder.</p>
+<p>Inspect any output at screen size. Wire an image or video into a Preview node and it shows inline on a resizable frame, <strong>live</strong>: whatever is plugged in appears the moment it exists — when you open a saved graph, when an upstream node finishes, when you pin a past take — with nothing to press. There is no ▶ on the node (nothing to run; it is a viewing surface, like Compare). The <code>image</code> inlet displays video too. Hover a tile and its <strong>🔍</strong> opens the lightbox — wheel-zoom, and <strong>←/→ pages through everything on the node</strong>. When several images are shown, the <strong>‹ ›</strong> buttons on each tile reorder them. Preview is the &quot;show me the result&quot; node you&#39;ll drop at the end of most branches; the full-resolution files live in the project&#39;s output folder.</p>
 <h2 id="compare"><a class="anchor" href="#compare" aria-hidden="true">#</a>Compare</h2>
 <p><strong>Two images, one verdict.</strong> Wire any two takes into the <strong>A</strong> and <strong>B</strong> inlets — a Gemini attempt against a GPT attempt, an original against an Annotate correction, yesterday&#39;s keeper against today&#39;s re-roll — and the node shows them side by side, live, without running anything. Hover it and the <strong>🔍</strong> opens the real thing: the <strong>before/after wipe slider</strong>, both layers sharing one zoom and pan, so you can drag the divider across a facade while zoomed into the brickwork. The slider labels pick up the source nodes&#39; names, so it reads &quot;Image → Image vs Annotate &amp; Correct&quot;, not &quot;before vs after&quot;.</p>
 <p>Compare is a <strong>viewing surface, not a processor</strong> — free, local, no output port and no ▶ (there is nothing to run; the tiles follow the wires live — route the winner onward from its source node). It&#39;s the generalization of the Upscale node&#39;s built-in input-vs-result compare: same slider, any two wires you choose.</p>
 <h2 id="history"><a class="anchor" href="#history" aria-hidden="true">#</a>History</h2>
-<figure class="media"><video src="/docs/media/utility/history-board.mp4" poster="/docs/media/utility/history-board.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Wire two generation nodes into a History board: every take, grouped per node, pin one</figcaption></figure>
-**Every take a node ever made, on the canvas.** Projects grow hundreds of generations and the good one from Tuesday is somewhere in the outputs folder. Wire any generation node's output into the History board (the **image** inlet takes video nodes too) and the board fills with **every take that node ever produced, newest first**, straight from the project's generation ledger. Wire several nodes in and the board shows **one group per node**, in wire order, each headed by the node's name and id, its take count and what it has cost so far. That is the point of the board: it reads as "what is inside this branch", not as a flat pile.
-
+<p><strong>Every take a node ever made, on the canvas.</strong> Projects grow hundreds of generations and the good one from Tuesday is somewhere in the outputs folder. Wire any generation node&#39;s output into the History board (the <strong>image</strong> inlet takes video nodes too) and the board fills with <strong>every take that node ever produced, newest first</strong>, straight from the project&#39;s generation ledger. Wire several nodes in and the board shows <strong>one group per node</strong>, in wire order, each headed by the node&#39;s name and id, its take count and what it has cost so far. That is the point of the board: it reads as &quot;what is inside this branch&quot;, not as a flat pile.</p>
 <ul>
 <li><strong>Tiles</strong> carry the model, the date, the cost and, where it applies, the shot number of a Multi-Shot take, the card of a Storyboard keyframe or the Director&#39;s proof sheet. The prompt sits under the caption and in the tooltip. Every tile shows the take at its <strong>own aspect</strong>: a 9:16 take is a tall tile, a 16:9 take a wide one, never a crop, so a node that changed format mid-way reads truthfully. A tile&#39;s <strong>🔍</strong> opens the Magnifier, and <strong>←/→</strong> page through that node&#39;s whole history. <strong>Video takes play in place</strong>: a still poster at rest, click ▶ to play (one tile at a time, so a board of forty clips stays light).</li>
 <li><strong>📌 pins on the source node.</strong> The pin is exactly the 🕘 re-pin: the take becomes the source node&#39;s active output on every run, free, until you unpin it there or here. A pinned tile wears the amber ring. Multi-Shot tiles pin their own shot, Storyboard tiles their own keyframe. The board itself has <strong>no output</strong> and never runs anything: pins act on the source, so keep the downstream wires on the source node and use the board to choose.</li>
@@ -160,7 +196,9 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
 <li><strong>Filter by model</strong> when a node has run on several, pick the tiles per row, ↻ re-reads the ledger (it also refreshes on its own whenever a tracked node finishes a run).</li>
 <li>Wires through a <strong>composite card or a reroute dot</strong> resolve to the node that actually generated: the board always shows the generator&#39;s own history.</li>
 </ul>
-<p>Free, local, nothing leaves the machine: the ledger is a file in the project folder. The board shows the newest 200 takes per node.</p>
+<figure class="media"><video src="/docs/media/utility/history-board.mp4" poster="/docs/media/utility/history-board.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Wire two generation nodes into a History board: every take, grouped per node, pin one</figcaption></figure>
+Free, local, nothing leaves the machine: the ledger is a file in the project folder. The board shows the newest 200 takes per node.
+
 <h2 id="note"><a class="anchor" href="#note" aria-hidden="true">#</a>Note</h2>
 <p>A <strong>sticky note</strong> for the canvas — annotate your graph the way you&#39;d annotate a whiteboard: intent for future-you, instructions for a teammate opening the project later, review remarks next to the branch they&#39;re about.</p>
 <p>Notes aren&#39;t nodes — they&#39;re <strong>placement tools</strong>, living in the rail&#39;s Organize section (with Stamp, Group and Composite). Click the rail&#39;s sticky-note icon and the note rides your cursor: <strong>click</strong> the canvas to place it at the default size, or <strong>click-and-drag to draw its size</strong> (Shift places several, Esc or right-click cancels). While you&#39;re placing, the nodes underneath freeze — you can drop a note <strong>on top of anything</strong>.</p>
@@ -187,5 +225,6 @@ pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#conform">Conform</a></li><li class="lvl2"><a href="#preview">Preview</a></li><li class="lvl2"><a href="#compare">Compare</a></li><li class="lvl2"><a href="#history">History</a></li><li class="lvl2"><a href="#note">Note</a></li><li class="lvl2"><a href="#stamp">Stamp</a></li><li class="lvl2"><a href="#pen">Pen</a></li><li class="lvl2"><a href="#text">Text</a></li><li class="lvl2"><a href="#the-ring-menu">The ring menu</a></li></ul></nav>
 </div>
+<script src="/docs/search.js?v=f9acdbd486" data-index="/docs/search-index.json?v=f681de0ebb" defer></script>
 </body>
 </html>
