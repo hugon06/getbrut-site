@@ -175,9 +175,15 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <h2 id="conform"><a class="anchor" href="#conform" aria-hidden="true">#</a>Conform</h2>
 <p>Brings stills to <strong>one aspect ratio</strong> before generation, so a set of mixed-ratio renders becomes a clean, consistent batch (video models in particular want a single ratio).</p>
 <ul>
-<li>Choose a target aspect ratio and a method — <strong>crop</strong> or <strong>pad</strong>.</li>
-<li>Per-image <strong>✂ crop editor</strong>: drag an aspect-locked rectangle to choose <em>which</em> part of each still survives the conform (the default is a center cut — architecture rarely sits dead-center). The crop is stored per image; the engine crops the <strong>original at full resolution</strong>.</li>
-<li>The stills sit on a <strong>resizable board</strong>: pick <strong>2, 3, 4 or 5 per row</strong> from the <code>n / row</code> selector and drag the node&#39;s corner to size the tiles; many stills scroll inside the frame instead of stretching the node into a column.</li>
+<li>Choose a target aspect ratio and a method:<ul>
+<li><strong>crop</strong> trims each still to the ratio. The edges outside the frame are lost; what stays keeps its full resolution.</li>
+<li><strong>pad</strong> keeps the whole still and fills the missing sides with a blurred, darkened copy of itself, the letterbox look, for stills whose edges must survive.</li>
+</ul>
+</li>
+<li>Per-image <strong>✂ crop editor</strong>: drag an aspect-locked rectangle to choose <em>which</em> part of each still survives the conform (the default is a center cut — architecture rarely sits dead-center). The crop is stored per image; the engine crops the <strong>original at full resolution</strong>. A hand crop always wins over the method for its still.</li>
+<li><strong>Free ratio</strong>: pick <strong>free</strong> at the bottom of the Aspect menu when the stills don&#39;t need one shared ratio. Each still&#39;s ✂ editor then crops freely: drag any corner or edge to any shape, the size in pixels shows under the image. Stills you don&#39;t crop pass through as they are, and the Method menu greys out (there is nothing to pick). Crops remember the ratio they were drawn for, so switching back to 16:9 uses your 16:9 crops, never the free ones.</li>
+<li><strong>No ▶ to press</strong>: Conform applies itself. Save a crop, change the ratio or the method, wire a new still in, and the tiles update on their own. Only the stills that changed are re-cut: the others keep their files, so nothing downstream of them runs again.</li>
+<li>The stills sit on a <strong>resizable board</strong>: pick <strong>1 to 5 per row</strong> from the <code>n / row</code> selector (never more columns than stills, so a single still fills the node) and drag the node&#39;s corner to size the tiles; many stills scroll inside the frame instead of stretching the node into a column.</li>
 <li>Each image gets its own output plug, so you can route conformed stills individually.</li>
 <li>Each row&#39;s <strong>🔍</strong> opens the lightbox on the conformed result — <strong>←/→ pages the whole set</strong>, so you can flip through the batch and check every cut.</li>
 </ul>
@@ -225,6 +231,6 @@ Free, local, nothing leaves the machine: the ledger is a file in the project fol
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#conform">Conform</a></li><li class="lvl2"><a href="#preview">Preview</a></li><li class="lvl2"><a href="#compare">Compare</a></li><li class="lvl2"><a href="#history">History</a></li><li class="lvl2"><a href="#note">Note</a></li><li class="lvl2"><a href="#stamp">Stamp</a></li><li class="lvl2"><a href="#pen">Pen</a></li><li class="lvl2"><a href="#text">Text</a></li><li class="lvl2"><a href="#the-ring-menu">The ring menu</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=4a31aaec0a" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=87fe9d6344" defer></script>
 </body>
 </html>
