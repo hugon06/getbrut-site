@@ -173,7 +173,8 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <h1>OpenRouter</h1>
 <p><strong>OpenRouter</strong> is the one aggregator key that can hold <strong>almost the whole of Brut</strong>: every
 text model (planning <strong>and Marcel</strong> — chat, ambient narration, acting), the full Nano Banana
-image family (incl. Nano Banana 2 Lite, the starter graph&#39;s model), GPT Image 2, and the video
+image family (incl. Nano Banana 2 Lite, the starter graph&#39;s model), GPT Image 2, <strong>GPT Image 2.5
+Flare and Sunburst</strong>, and the video
 models — Kling 3.0 and O1, Veo 3.1 / Fast / Lite, Seedance 2.0 and 2.5. Outside it: the
 upscalers (they aren&#39;t resold anywhere, by design), Gemini Omni Flash and the other Kling tiers
 (3.0 Omni / Turbo / 2.6 / 2.5 and older), which OpenRouter doesn&#39;t carry.
@@ -184,18 +185,24 @@ it adds no models to the menu and is always visible: routed nodes show
 keys added later always take their models back automatically, usually at slightly better
 prices.</p>
 <h2 id="text-planning-and-marcel"><a class="anchor" href="#text-planning-and-marcel" aria-hidden="true">#</a>Text — planning and Marcel</h2>
-<p>Every text model in Brut&#39;s catalog runs at <strong>pass-through provider list rates</strong> — the same
+<p>Every text model in Brut&#39;s catalog also runs here, at <strong>pass-through provider list rates</strong> — the same
 per-token prices as the native APIs (OpenRouter&#39;s revenue is a ~5.5% fee when you buy
-credits, not a token markup). Vision-grounded planning works, the GPT-5.6 reasoning dial
-rides along, and <strong>Anthropic prompt caching passes through</strong> — Marcel&#39;s long system context
+credits, not a token markup). Vision-grounded planning works, the GPT reasoning dial
+rides along (Marcel&#39;s tools included: OpenRouter bridges to OpenAI&#39;s Responses API, so the
+<em>tools need none</em> rule of the native chat wire does not apply here), and <strong>Anthropic prompt caching passes through</strong> — Marcel&#39;s long system context
 caches exactly as on a native Anthropic key (write premiums and 0.1× reads verified live),
-so routed conversations cost the same as native ones.</p>
+so routed conversations cost the same as native ones. Every model Brut adds gets its OpenRouter
+route when OpenRouter serves it (GPT-6 Sol and Luna joined the same day they entered the catalog):
+the route is how a seat without provider keys reaches the whole catalog with one key.</p>
 <h2 id="images-native-knobs-no-compromises"><a class="anchor" href="#images-native-knobs-no-compromises" aria-hidden="true">#</a>Images — native knobs, no compromises</h2>
 <p>The Nano Banana family runs with <strong>Brut&#39;s own menus</strong> — the real 512/1K/2K/4K sizes and the
 full aspect list, unlike fal&#39;s preset system — which is why OpenRouter sits <em>first</em> in those
 models&#39; route order. Approximate inpaint masks work (the Gemini convention, verified live).
-Billing is pass-through per image (~$0.069 measured for Nano Banana 2 at 1K, essentially the
-native token price), and <strong>every image job records its exact billed amount</strong> on the ledger.</p>
+Billing is pass-through: on 28 September 2026 we ran every routed image model through Brut and
+each one billed <strong>the same as on the maker&#39;s own key</strong>, to the tenth of a cent. Nano Banana Pro
+cost $0.13 at 1K or 2K and $0.24 at 4K; Nano Banana 2 cost $0.07 / $0.10 / $0.15 at 1K / 2K /
+4K; Lite $0.034 and the original Nano Banana $0.039. So the estimate before a run is the real
+price, and <strong>every image job records its exact billed amount</strong> on the ledger.</p>
 <p>Two OpenRouter-specific limits worth knowing:</p>
 <ul>
 <li><strong>Requests cap at ~52 MB</strong>, and a full-resolution PNG render can eat that alone once
@@ -210,21 +217,66 @@ on their end, not yours). If you hit the timeout: retry, pick a smaller size, or
 native key — which is the first-class lane anyway and takes over automatically the moment
 it&#39;s configured.</li>
 </ul>
-<p>The one exception: <strong>GPT Image 2 via OpenRouter has no size or aspect control</strong> (quality
-only) — so for that model fal and Replicate outrank it. It still works ($0.005 measured at
-low quality), just without sizing.</p>
+<p>The one exception is <strong>GPT Image</strong>, which OpenRouter renders at about 1K only: there&#39;s no size
+knob, so 2K and 4K need your OpenAI key. The aspect ratio and the quality do come through, on
+GPT Image 2 and on the <strong>GPT Image 2.5 pair</strong> alike: 2.5 keeps its full <code>low</code> to <code>max</code> quality
+menu, and image-to-image with aspect <em>auto</em> follows your input&#39;s shape. Masks don&#39;t: inpainting
+on GPT Image needs the OpenAI key. Measured on 28 September 2026: a 1:1 image costs $0.006 at
+low and $0.053 at high on 2.5 (the same on Flare and Sunburst), and 16:9 costs less ($0.004 at
+low). For GPT Image 2, fal and Replicate still outrank OpenRouter because they can size the image.</p>
 <h2 id="video-the-whole-set-with-billing-truth"><a class="anchor" href="#video-the-whole-set-with-billing-truth" aria-hidden="true">#</a>Video — the whole set, with billing truth</h2>
 <p>Kling 3.0 (std/pro) and <strong>Kling O1</strong> (5 or 10 s, 720p, $0.112/s — the REST and subscription
 O1 entries both route here), Veo 3.1 / Fast / <strong>Lite</strong> (OpenRouter is the first route Lite
 has ever had), Seedance 2.0 and <strong>Seedance 2.5</strong> (480p/720p only, 4–30 s, first + last frame,
 no reference images there — the 30-reference and 1080p features need the BytePlus key) —
 image-to-video <strong>with end frames</strong>, text-to-video, reference images where the listing
-declares them. Per-second rates (2026-07-22): Kling std $0.084 / pro $0.112 (audio +$0.042–0.056),
-Veo 3.1 $0.20 (audio doubles it), Fast $0.08–0.10, Lite $0.03–0.05; Seedance bills per
-video token. Where a surcharge can&#39;t be estimated up front the node says so — and it
-matters less than usual here, because <strong>OpenRouter reports the exact billed cost on every
-job</strong>, which lands on the ledger row verbatim (a 4s Lite clip billed $0.12 = 4 × $0.03,
-verified live to the cent).</p>
+declares them. Per-second rates, audio included in the estimate:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Per second</th>
+<th>Audio</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kling 3.0</td>
+<td>std $0.084 · pro $0.112</td>
+<td>+$0.042 · +$0.056</td>
+</tr>
+<tr>
+<td>Veo 3.1</td>
+<td>$0.20</td>
+<td>doubles it</td>
+</tr>
+<tr>
+<td>Veo 3.1 Fast</td>
+<td>$0.08 (720p) · $0.10 (1080p)</td>
+<td>+$0.02</td>
+</tr>
+<tr>
+<td>Veo 3.1 Lite</td>
+<td>$0.03 (720p) · $0.05 (1080p)</td>
+<td>+$0.02 at 720p</td>
+</tr>
+<tr>
+<td>Seedance 2.5</td>
+<td>$0.104 (480p) · $0.233 (720p)</td>
+<td>included</td>
+</tr>
+<tr>
+<td>Seedance 2.0</td>
+<td>$0.071 (480p) · $0.15 (720p) · $0.38 (1080p) · $0.79 (4K)</td>
+<td>not measured</td>
+</tr>
+</tbody></table>
+<p>On 28 September 2026 we ran a clip of each model through Brut. The listed rates held exactly:
+a 4 s Veo 3.1 clip billed $0.80, and $1.60 with audio. Seedance came out close to the BytePlus
+price. One surprise: Kling O1 came back at 1924 × 1076, although the listing says 720p. And
+Kling 3.0 renders at 720p on OpenRouter, pro included, with no 4K: routed nodes offer only std
+and pro. And <strong>OpenRouter reports the exact billed
+cost on every job</strong>, which lands on the ledger row as is (a 4 s Lite clip billed $0.12 = 4 ×
+$0.03 in July, also to the cent).</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
 <p>Create a key at <strong><a href="https://openrouter.ai/keys">openrouter.ai/keys</a></strong> (<code>sk-or-…</code>), buy a few
 dollars of credits, and paste it into <strong>⚙ Settings → OpenRouter</strong> (or set <code>OPENROUTER_API_KEY</code>).</p>
@@ -249,6 +301,6 @@ provider-reported figures (token counts, cache activity, billed cost), marked
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-planning-and-marcel">Text — planning and Marcel</a></li><li class="lvl2"><a href="#images-native-knobs-no-compromises">Images — native knobs, no compromises</a></li><li class="lvl2"><a href="#video-the-whole-set-with-billing-truth">Video — the whole set, with billing truth</a></li><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#the-fine-print">The fine print</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=4a31aaec0a" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=87fe9d6344" defer></script>
 </body>
 </html>

@@ -186,6 +186,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </li>
 </ul>
 <figure class="media"><video src="/docs/media/concepts/snap-grid.mp4" poster="/docs/media/concepts/snap-grid.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Magnet off, a node stops between dots; magnet on, it lands on them and lines up with its neighbor</figcaption></figure>
+- **Pull a wire off** — an input pin holding **one** wire: press it and drag, and you pick that wire up instead of starting a new one. Drop it on another pin to move it there, on empty canvas to remove it (`Ctrl+Z` puts it back), on a pin that refuses it and it snaps back. A click without a drag changes nothing. Inlets holding several wires (a board's stills) keep the usual new-wire drag, and `Alt` on a pin is still the bulk rewire.
 - **Wire menu** — right-click a wire: **Color** (Auto follows the node the wire leaves, None keeps it plain, or one of the six hues — applied to every selected wire when the clicked one is part of a selection), **Add reroute here** (the `Alt`-click split), **Insert node…** (the double-click splice), **Delete wire**.
 - **Node menu** — right-click a node: **Color**, **Run**, **Duplicate**, **Group**, **Collapse to composite**, **Delete**. With several nodes selected, Duplicate and Delete act on all of them, and Group / Collapse light up. Text fields and image previews keep their own menus.
 - **Node color** — pick one of six hues (the same ones group frames use) from the node menu. The whole node takes the color (body, outline and title — readable zoomed far out), and so does **every wire leaving it** — the fastest way to read a dense graph. Right-click one node of a selection and the color lands on all of them. Reroute dots pass the color along; a wire can also be given its own color from the wire menu; a hovered or selected wire still shows the accent.
@@ -263,6 +264,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-canvas">The canvas</a></li><li class="lvl2"><a href="#ports-and-wires">Ports and wires</a></li><li class="lvl3"><a href="#splice-a-node-into-a-wire">Splice a node into a wire</a></li><li class="lvl3"><a href="#split-a-wire-with-a-reroute-dot">Split a wire with a reroute dot</a></li><li class="lvl3"><a href="#move-wires-between-pins-alt-click-a-pin">Move wires between pins (Alt-click a pin)</a></li><li class="lvl2"><a href="#the-execution-model">The execution model</a></li><li class="lvl2"><a href="#node-families">Node families</a></li><li class="lvl2"><a href="#saving-undo">Saving &amp; undo</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=4a31aaec0a" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=87fe9d6344" defer></script>
 </body>
 </html>
