@@ -65,7 +65,7 @@
     });
   });
 
-  // --- Beta form: AJAX to FormSubmit, success state swap ---
+  // --- Beta form: Supabase is the list, FormSubmit the email copy ---
   var form = document.getElementById('beta-form');
   var success = document.getElementById('beta-success');
   function showSuccess() {
@@ -81,9 +81,10 @@
       var btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       var data = new FormData(form);
-      // Store the signup in Supabase (the tracked list) — best-effort; the
-      // FormSubmit email below is the notification + fallback if this fails.
-      fetch('https://stakdmbdkhavrklwetal.supabase.co/rest/v1/beta_signups', {
+      // Supabase holds the list the approvals work from, so its answer decides
+      // success. 409 = this email already applied (unique index), which is
+      // also a success for the visitor.
+      var stored = fetch('https://stakdmbdkhavrklwetal.supabase.co/rest/v1/beta_signups', {
         method: 'POST',
         headers: {
           apikey: 'sb_publishable_Nzh9GMr7SKJA8meKmKzetw_VPY2DlGF',
@@ -95,16 +96,22 @@
           studio: data.get('studio') || null,
           first_run: data.get('first_run') || null
         })
-      }).catch(function () {});
-      fetch('https://formsubmit.co/ajax/1928ea550bd26afd427f7f1be5a94f50', {
+      }).then(function (r) { return r.ok || r.status === 409; })
+        .catch(function () { return false; });
+      // FormSubmit emails a copy. Best-effort: it answered 500 to an
+      // application Supabase had stored (2026-09-29), and the visitor saw
+      // FormSubmit's error page.
+      var emailed = fetch('https://formsubmit.co/ajax/1928ea550bd26afd427f7f1be5a94f50', {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: data
-      }).then(function (r) {
-        if (!r.ok) throw new Error('http ' + r.status);
-        return r.json();
-      }).then(showSuccess).catch(function () {
-        // graceful degradation: plain POST (FormSubmit page flow)
+      }).then(function (r) { return r.ok; })
+        .catch(function () { return false; });
+      stored.then(function (ok) {
+        return ok || emailed;
+      }).then(function (ok) {
+        if (ok) { showSuccess(); return; }
+        // both failed: plain POST (FormSubmit page flow) as the last resort
         fallbackPost = true;
         if (btn) { btn.disabled = false; btn.textContent = 'Apply for beta access'; }
         form.submit();
