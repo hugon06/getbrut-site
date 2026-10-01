@@ -44,7 +44,9 @@ h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clam
 .hidden { display: none !important; }
 
 label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--faint); margin: 0 0 8px; }
-input[type=email] { width: 100%; background: #100f0d; border: 1px solid var(--line); border-radius: 3px; color: var(--text); font-size: 14.5px; padding: 12px 14px; font-family: inherit; }
+input[type=email], input[type=text] { width: 100%; background: #100f0d; border: 1px solid var(--line); border-radius: 3px; color: var(--text); font-size: 14.5px; padding: 12px 14px; font-family: inherit; }
+#code { font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 0.16em; }
+.linkish { background: none; border: none; color: var(--accent); cursor: pointer; font: inherit; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
 .btn { display: block; width: 100%; text-align: center; background: var(--accent); color: #141311; border: none; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 3px; cursor: pointer; font-family: inherit; text-decoration: none; }
 .btn[disabled] { opacity: 0.55; cursor: default; }
 .btn-ghost { display: block; width: 100%; text-align: center; background: none; border: 1px solid var(--line); border-radius: 3px; color: var(--text); font-size: 14px; font-weight: 500; padding: 12px; cursor: pointer; font-family: inherit; text-decoration: none; }
@@ -111,6 +113,7 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
           <a class="btn-ghost" id="oauth-github" href="#">Continue with GitHub</a>
         </div>
         <div id="signin-error" class="error hidden"></div>
+        <div id="code-offer" class="fine hidden">Already have the email? <button class="linkish" id="use-code">Enter its 8-digit code instead</button>.</div>
         <div class="fine">No account yet? Signing in creates one — the same account you'll use inside Brut. Not applied yet? <a href="/#beta">Apply for the beta</a> first.</div>
       </div>
     </section>
@@ -118,9 +121,29 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
     <!-- ============ LINK SENT ============ -->
     <section id="s-sent" class="hidden">
       <h1>Check your inbox.</h1>
-      <p class="sub">We sent a sign-in link to <b id="sent-to" style="color: var(--text); font-weight: 600;"></b>. Click it and you'll land right back here, signed in.</p>
+      <p class="sub">We sent a sign-in link and an 8-digit code to <b id="sent-to" style="color: var(--text); font-weight: 600;"></b>. Click the link and press <b style="color: var(--text); font-weight: 600;">Continue</b> on the page it opens — or type the code here.</p>
       <div class="card">
-        <div class="fine" style="margin-top: 0;">Nothing arriving? Check spam, or <button id="sent-back" style="background:none;border:none;color:var(--accent);cursor:pointer;font:inherit;padding:0;text-decoration:underline;text-underline-offset:3px;">try again</button> — links expire after a while.</div>
+        <form id="code-form">
+          <label for="code">CODE FROM THE EMAIL</label>
+          <div class="stack">
+            <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="12345678" required>
+            <button class="btn" id="code-btn" type="submit">Sign in with the code</button>
+          </div>
+        </form>
+        <div id="code-error" class="error hidden"></div>
+        <div class="fine">Nothing arriving? Check spam, or <button class="linkish" id="sent-back">try again</button>. The link and the code work once and expire after an hour.</div>
+      </div>
+    </section>
+
+    <!-- ============ CONFIRM (the emailed link lands here) ============ -->
+    <section id="s-confirm" class="hidden">
+      <h1>One more click.</h1>
+      <p class="sub">Press Continue to finish signing in. This click is what keeps automated link scanners in company mail systems from using your sign-in link before you do.</p>
+      <div class="card">
+        <div class="stack">
+          <button class="btn" id="confirm-btn">Continue to the download</button>
+        </div>
+        <div class="fine">Not you? Just close this page — nothing happens without the click.</div>
       </div>
     </section>
 
@@ -191,6 +214,13 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
   var KEY = 'sb_publishable_Nzh9GMr7SKJA8meKmKzetw_VPY2DlGF';
   var FN_DOWNLOAD = SB + '/functions/v1/download';
   var STORE = 'brut.dl.session';
+  /* The address a link + code was just sent to, kept for this tab so the code
+     form knows whose code it is checking (sessionStorage: a reload keeps it). */
+  var PENDING = 'brut.dl.pending';
+  function pendingEmail() { try { return sessionStorage.getItem(PENDING) || ''; } catch (e) { return ''; } }
+  function setPending(email) {
+    try { if (email) sessionStorage.setItem(PENDING, email); else sessionStorage.removeItem(PENDING); } catch (e) {}
+  }
 
   function redirectUri() {
     var p = location.pathname.endsWith('/') ? location.pathname : location.pathname + '/';
@@ -198,7 +228,7 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
   }
 
   // --- tiny state machine over the sections ---
-  var sections = ['loading', 'signin', 'sent', 'download', 'notapproved', 'error'];
+  var sections = ['loading', 'signin', 'sent', 'confirm', 'download', 'notapproved', 'error'];
   function show(name) {
     sections.forEach(function (s) {
       document.getElementById('s-' + s).classList.toggle('hidden', s !== name);
@@ -235,6 +265,66 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
     }
     if (cleaned) history.replaceState({}, '', location.pathname + location.search);
     return out;
+  }
+
+  /* --- the token hash arriving in the query (the emailed link) ---
+     The email's link points HERE with ?token_hash=…&type=…, not at GoTrue's
+     /verify: GoTrue only consumes the hash when this page POSTs it, and the
+     page does that on the Continue click alone. Mail-security scanners
+     (Microsoft Safe Links and the like) open every link in an email on
+     delivery — a direct /verify link was used up ~20 s after sending and the
+     human got "invalid or expired" (2026-10-01, a beta tester on company
+     mail). The query is cleaned at once; an unclicked link stays valid, so
+     a reload just means clicking the email again. */
+  function adoptFromQuery() {
+    var q = new URLSearchParams(location.search);
+    var hash = q.get('token_hash');
+    if (!hash) return null;
+    var type = q.get('type') || 'email';
+    if (!/^(email|magiclink|signup|recovery|invite|email_change)$/.test(type)) type = 'email';
+    history.replaceState({}, '', location.pathname);
+    return { type: type, token_hash: hash };
+  }
+
+  /* One POST, two shapes: {type, token_hash} for the emailed link,
+     {type:'email', email, token} for the 8-digit code. 200 = a session;
+     anything else carries GoTrue's own words (msg / error_description). */
+  function verifyOtp(body) {
+    return fetch(SB + '/auth/v1/verify', {
+      method: 'POST',
+      headers: { apikey: KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; });
+    }).then(function (res) {
+      if (res.status === 200 && res.body.access_token) {
+        var s = { access_token: res.body.access_token, refresh_token: res.body.refresh_token || '' };
+        saveSession(s);
+        return s;
+      }
+      throw new Error(res.body.msg || res.body.error_description || res.body.error || ('HTTP ' + res.status));
+    });
+  }
+
+  /* GoTrue's words for a used-up or stale link/code; the page says what to do. */
+  var USED_UP = /invalid|expired|not found|already/i;
+  function friendlyAuthError(msg) {
+    msg = String(msg || '').replace(/\+/g, ' ');
+    if (!USED_UP.test(msg)) return msg;
+    return 'That sign-in link had already been used, or had expired. Company mail systems often open links to scan them before you see the email, which uses a one-time link up. Request a new one below: the email also carries an 8-digit code you can type here.';
+  }
+  function showSignInError(msg, offerCode) {
+    var err = document.getElementById('signin-error');
+    err.textContent = friendlyAuthError(msg);
+    err.classList.remove('hidden');
+    document.getElementById('code-offer').classList.toggle('hidden', !offerCode);
+    show('signin');
+  }
+  function openSent(email) {
+    document.getElementById('sent-to').textContent = email;
+    document.getElementById('code').value = '';
+    document.getElementById('code-error').classList.add('hidden');
+    show('sent');
   }
 
   function refresh(session) {
@@ -327,8 +417,8 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
       if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) {
         throw new Error(j.msg || j.error_description || 'The sign-in email could not be sent.');
       });
-      document.getElementById('sent-to').textContent = email;
-      show('sent');
+      setPending(email);
+      openSent(email);
     }).catch(function (ex) {
       err.textContent = ex.message;
       err.classList.remove('hidden');
@@ -344,6 +434,62 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
 
   document.getElementById('sent-back').addEventListener('click', function () { show('signin'); });
   document.getElementById('retry-btn').addEventListener('click', function () { init(); });
+
+  /* The emailed link: one try per link — it is single-use either way. */
+  var pendingHash = null;
+  document.getElementById('confirm-btn').addEventListener('click', function () {
+    var btn = this;
+    var body = pendingHash;
+    pendingHash = null;
+    if (!body) return show('signin');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    verifyOtp(body).then(function (s) {
+      setPending('');
+      checkAccess(s, true);
+    }, function (ex) {
+      btn.disabled = false; btn.textContent = 'Continue to the download';
+      showSignInError(ex.message, true);
+    });
+  });
+
+  /* The 8-digit code from the same email, for the address it was sent to. */
+  document.getElementById('code-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = pendingEmail();
+    var code = document.getElementById('code').value.replace(/\D/g, '');
+    var err = document.getElementById('code-error');
+    var btn = document.getElementById('code-btn');
+    err.classList.add('hidden');
+    if (!email) return showSignInError('Type your email first, then enter the code.', true);
+    if (code.length < 6) {
+      err.textContent = 'The code is the 8 digits shown in the email.';
+      err.classList.remove('hidden');
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Checking…';
+    verifyOtp({ type: 'email', email: email, token: code }).then(function (s) {
+      setPending('');
+      checkAccess(s, true);
+    }, function (ex) {
+      btn.disabled = false; btn.textContent = 'Sign in with the code';
+      err.textContent = USED_UP.test(ex.message)
+        ? 'That code did not work: codes are the 8 digits in the email, work once and expire after an hour. Check the digits, or request a new email.'
+        : ex.message;
+      err.classList.remove('hidden');
+    });
+  });
+
+  /* "Enter its 8-digit code instead" after a dead link: the code form needs
+     to know the address, which the sign-in field or this tab's memory has. */
+  document.getElementById('use-code').addEventListener('click', function () {
+    var email = pendingEmail() || document.getElementById('email').value.trim();
+    if (!email) {
+      document.getElementById('email').focus();
+      return showSignInError('Type your email first, then enter the code.', true);
+    }
+    setPending(email);
+    openSent(email);
+  });
   ['signout-1', 'signout-2', 'signout-3'].forEach(function (id) {
     document.getElementById(id).addEventListener('click', function () {
       /* Local drop only — mirrors the app: never call GoTrue /logout, it
@@ -354,12 +500,11 @@ footer a { color: var(--dim); text-decoration: none; } footer a:hover { color: v
 
   // --- boot ---
   function init() {
+    var fromQuery = adoptFromQuery();
+    if (fromQuery) { pendingHash = fromQuery; show('confirm'); return; }
     var fromHash = adoptFromHash();
     if (fromHash && fromHash.authError) {
-      var err = document.getElementById('signin-error');
-      err.textContent = fromHash.authError.replace(/\+/g, ' ');
-      err.classList.remove('hidden');
-      show('signin');
+      showSignInError(fromHash.authError, USED_UP.test(fromHash.authError));
       return;
     }
     var session = (fromHash && fromHash.access_token) ? fromHash : loadSession();
