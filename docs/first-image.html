@@ -198,7 +198,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Add a Preview node</strong> the same way, wired from the Text→Image output.</li>
 <li><strong>Run.</strong> Click <strong>▶ Run</strong> (or the ▶ on the Text→Image node to run just it). <strong>▶ Run</strong> never generates blindly: it first replays everything that is already cached (free), then asks once, with the estimate, before anything is generated. On a fresh graph that is one dialog: <strong>Generate</strong> calls Gemini with your key, downloads the image to your project&#39;s outputs folder, and shows it inline. The node badge reports the cost.</li>
 </ol>
-<p>That&#39;s the whole loop: <strong>prompt → generate → preview.</strong></p>
+<figure class="media"><video src="/docs/media/first-image/drag-to-connect.mp4" poster="/docs/media/first-image/drag-to-connect.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Drag from an output onto empty canvas: the menu opens filtered to what fits, and the pick arrives wired</figcaption></figure>
+That's the whole loop: **prompt → generate → preview.**
+
 <h2 id="what-just-happened"><a class="anchor" href="#what-just-happened" aria-hidden="true">#</a>What just happened</h2>
 <ul>
 <li>The engine made <strong>one call to Gemini on your key</strong> and saved the result to <code>outputs/</code> in your active project.</li>
@@ -222,6 +224,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-fastest-path-the-starter-graph">The fastest path: the starter graph</a></li><li class="lvl2"><a href="#build-it-by-hand">Build it by hand</a></li><li class="lvl2"><a href="#what-just-happened">What just happened</a></li><li class="lvl2"><a href="#troubleshooting">Troubleshooting</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=8b3f18ef8e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=80b6c1ec8d" defer></script>
 </body>
 </html>

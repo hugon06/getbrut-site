@@ -187,7 +187,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>Brut is <strong>bring-your-own-key</strong>. You add a key for each provider you want to use; the engine calls that provider directly, on your key, at their price. Brut never holds a key that bills anyone but you, and never marks up a token.</p>
 <h2 id="adding-keys"><a class="anchor" href="#adding-keys" aria-hidden="true">#</a>Adding keys</h2>
 <p><strong>⚙ Settings</strong> on the left rail (or the setup wizard) shows every provider as a <strong>card</strong> — its role, and one status line — grouped by what it does (generation, aggregators, upscalers). Click a card to paste a key (validated on save); the <strong>switch on the card</strong> turns a provider off without deleting anything. Keys live in your <strong>OS keychain</strong> — never in a graph, never sent anywhere but the provider. You can also set them via environment variables before launching the engine.</p>
-<h2 id="the-one-rule-that-trips-everyone-up"><a class="anchor" href="#the-one-rule-that-trips-everyone-up" aria-hidden="true">#</a>The one rule that trips everyone up</h2>
+<figure class="media"><img src="/docs/media/providers/settings-cards.png" alt="Settings, Providers: one card per provider, its status and on/off switch on the card" loading="lazy"><figcaption>Settings, Providers: one card per provider, its status and on/off switch on the card</figcaption></figure>
+## The one rule that trips everyone up
+
 <p><strong>Image and video models need a billing-enabled key.</strong> Free tiers usually have <strong>zero</strong> generation quota, so your very first call returns a <code>429</code> — that&#39;s <em>billing not enabled</em>, not throttling. Turn on billing in the provider&#39;s console and it clears.</p>
 <h2 id="the-providers-at-a-glance"><a class="anchor" href="#the-providers-at-a-glance" aria-hidden="true">#</a>The providers at a glance</h2>
 <table>
@@ -322,8 +324,8 @@ capability matrix live on <strong><a href="/docs/providers/access-paths.html">Ke
 
 <div class="prevnext"><a class="pn prev" href="/docs/nodes/utility.html"><span>← Previous</span><b>Utility</b></a><a class="pn next" href="/docs/providers/access-paths.html"><span>Next →</span><b>Keys vs aggregators</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#adding-keys">Adding keys</a></li><li class="lvl2"><a href="#the-one-rule-that-trips-everyone-up">The one rule that trips everyone up</a></li><li class="lvl2"><a href="#the-providers-at-a-glance">The providers at a glance</a></li><li class="lvl2"><a href="#model-routes-native-first-aggregator-fallback">Model routes — native first, aggregator fallback</a></li><li class="lvl2"><a href="#text-vs-generation">Text vs generation</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#adding-keys">Adding keys</a></li><li class="lvl2"><a href="#the-providers-at-a-glance">The providers at a glance</a></li><li class="lvl2"><a href="#model-routes-native-first-aggregator-fallback">Model routes — native first, aggregator fallback</a></li><li class="lvl2"><a href="#text-vs-generation">Text vs generation</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=8b3f18ef8e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=80b6c1ec8d" defer></script>
 </body>
 </html>
