@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What Brut is · Brut docs</title>
-<meta name="description" content="What Brut is — Brut documentation. Local-first, bring-your-own-key AI orchestration.">
+<title>Ideogram · Brut docs</title>
+<meta name="description" content="Ideogram — Brut documentation. Local-first, bring-your-own-key AI orchestration.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://getbrut.app/docs/index.html">
+<link rel="canonical" href="https://getbrut.app/docs/providers/ideogram.html">
 <style>
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
@@ -181,47 +181,104 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html" class="active">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html" class="active">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
-<h1>What Brut is</h1>
-<p>Brut is a <strong>local-first, bring-your-own-key node canvas</strong> for orchestrating generative-AI providers: Google Gemini, OpenAI, Anthropic (text), Kling, Veo, Seedance and Seedream (BytePlus), Black Forest Labs (FLUX) and Ideogram for generation; Magnific and Topaz for upscaling; OpenRouter, fal and Replicate as <a href="/docs/providers/access-paths.html">aggregator routes</a> when you&#39;d rather hold one key than six.</p>
-<p class="lead">Your keys. Your machine. Zero markup. Brut never sits between you and the provider — every generation call goes straight from your computer to the provider, billed to your own account at their price.</p>
-
-<figure class="media"><video src="/docs/media/index/hero-canvas.mp4" poster="/docs/media/index/hero-canvas.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>A working archviz graph: stills in, a contact sheet of viewpoints, a correction pass, a 4K upscale, every step on your own keys</figcaption></figure>
-## The idea in one breath
-
-<p>Most AI tools are a website that holds your key, runs the model on their servers, and marks up the price. Brut inverts that:</p>
+<h1>Ideogram</h1>
+<p><strong>Ideogram</strong> makes the Ideogram image models, known for readable lettering and layout. Brut calls their own API with your key, for <strong>Ideogram 4.5</strong> in two forms:</p>
 <ul>
-<li><strong>Bring your own key (BYOK).</strong> You paste your provider keys once; they live in your OS keychain and are used only for direct calls from your machine.</li>
-<li><strong>Local-first.</strong> Brut runs entirely on <em>your</em> computer. Graphs, outputs and projects live on your disk (or your NAS). Nothing routes through a server anyone pays for.</li>
-<li><strong>Zero markup, ever.</strong> Calls go from your machine to Google/OpenAI/Kling/etc. at <em>their</em> price. Brut is never in the call path.</li>
-<li><strong>Never pay twice.</strong> Every node remembers what it was given: if nothing changed, the last result is reused for free. Re-run a graph after a client note and only what actually changed costs money.</li>
+<li><strong>Ideogram 4.5</strong>, in every image menu (Text → Image, Image → Image, Inpaint, Compose, Multi-Shot, the Storyboard&#39;s keyframes, the Sketchpad&#39;s generation layers, the workflow cards&#39; Model knobs): text-to-image at 1K or 2K, and an edit that re-renders the picture with your instruction.</li>
+<li><strong>Ideogram 4.5 Precise Edit</strong>, on the edit menus (Image → Image, Inpaint, Compose, Annotate &amp; Correct): the picture comes back at <strong>its exact size</strong>, and every pixel the edit does not touch is copied from it. It is the model&#39;s own claim, measured below, and the reason to try it on corrections: several passes on one picture without the drift every re-render adds.</li>
+<li><strong>Ideogram 4.0 Transparent</strong>, in every text-to-image menu: a picture on a transparent background, a PNG with alpha, for cutouts, entourage and lettering to place on a layer.</li>
 </ul>
-<p>If you work under NDA, this matters: your renders go only to the provider you pick, on your key — never to us.</p>
-<h2 id="how-it-works"><a class="anchor" href="#how-it-works" aria-hidden="true">#</a>How it works</h2>
-<p>Brut runs entirely on your machine. A small local engine holds your keys, talks to each provider directly and writes every output to your disk. There is no Brut server in between and no hosted version, by design.</p>
-<h2 id="what-you-can-make"><a class="anchor" href="#what-you-can-make" aria-hidden="true">#</a>What you can make</h2>
+<h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
+<p>Log in on <strong><a href="https://ideogram.ai">ideogram.ai</a></strong>, open the API dashboard, create a key under <strong>API Keys</strong> (the full key is shown once, when it is created) and paste it into <strong>⚙ Settings → Ideogram</strong>.</p>
+<p>Billing is <strong>prepaid credits</strong> on that account: one-time amounts from $10, or an auto-recharge; a key pauses when the balance reaches $0, and if you hold an Ideogram subscription its monthly credits are spent first. There is no free tier. No aggregator carries Ideogram, so the key is the only way in.</p>
+<h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Sizes</th>
+<th>Quality and price per picture</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ideogram 4.5</strong>, text-to-image</td>
+<td>1K · 2K</td>
+<td>low $0.03 · medium $0.06 · high $0.10</td>
+<td>none</td>
+</tr>
+<tr>
+<td><strong>Ideogram 4.5</strong>, edit</td>
+<td><em>Same as the picture</em> · 1K · 2K</td>
+<td>very_low $0.008 · low $0.03 · medium $0.06 · high $0.22</td>
+<td>the picture + up to 4 references (3 beside a mask)</td>
+</tr>
+<tr>
+<td><strong>Ideogram 4.5 Precise Edit</strong></td>
+<td>the picture&#39;s own, always</td>
+<td>very_low $0.008 · low $0.03 · medium $0.06 · high $0.22</td>
+<td>the picture + up to 4 references (3 beside a mask)</td>
+</tr>
+<tr>
+<td><strong>Ideogram 4.0 Transparent</strong>, text-to-image</td>
+<td>1K · 2K · 4K · 8K</td>
+<td>turbo $0.03 · default $0.06 · quality $0.10 at 1K and 2K; 4K $0.19 / $0.22 / $0.26; 8K $0.35 / $0.38 / $0.42</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<p>The prices are <strong>Ideogram&#39;s own</strong>: a quality costs the same at 1K and at 2K, at the picture&#39;s own size, with a mask and with reference pictures. Masks and references add nothing. The node shows the price before a run and the ledger row carries it after.</p>
+<p>Things worth knowing:</p>
 <ul>
-<li><strong>Images</strong> — text-to-image, image-to-image, inpainting, composition, and multi-shot exploration (a whole contact sheet of viewpoints from one scene, with a deck of surprise cards so the takes never repeat).</li>
-<li><strong>Corrections</strong> — <a href="/docs/nodes/image-generation.html">Annotate &amp; Correct</a>: draw arrows and notes on a render, attach a reference, and the model applies exactly those changes; <a href="/docs/nodes/image-generation.html">Layers</a> paints the original back wherever the model overreached — local and free.</li>
-<li><strong>Compose by hand first</strong> — the <a href="/docs/nodes/sketchpad.html">Sketchpad</a>: brush strokes and wired images as movable layers on one canvas, flattened locally into the image you generate from. Free.</li>
-<li><strong>Video</strong> — animate stills into clips with Kling, Veo or Seedance, with an itemized cost quote before a cent is spent.</li>
-<li><strong>Whole films</strong> — the <a href="/docs/cinema/index.html">Cinema Sessions</a>: a crew of AI agents (scenarist, art director, DoP, script supervisor) that plan a sequence from your stills, which you then render as clips and edit together on your machine (the edit is free).</li>
-<li><strong>Delivery resolution</strong> — <a href="/docs/nodes/upscale.html">upscale</a> stills and clips to 4K/8K with Magnific or Topaz (or your own local Topaz Video AI, free).</li>
-<li><strong>Ready-made workflows</strong> — a shipped bank of pre-wired chains for the recurring jobs (clay to photoreal, day to dusk, populate, weather, an editorial sheet, a hero still to a clip, and more): each drops as one card with knobs, on named models, from the home screen or the library. See <a href="/docs/workflows.html">Workflows</a>.</li>
-<li><strong>A studio companion</strong> — <a href="/docs/concepts/marcel.html">Marcel</a> reads your canvas, narrates what happened, advises on models and looks, and can build graphs for you on request — on your own key, every call in the ledger.</li>
+<li><strong>Your prompt is sent as written.</strong> Ideogram can rewrite and expand prompts on its side (&quot;magic prompt&quot;); Brut turns that off, so what the node says is what the model gets.</li>
+<li><strong>Sizes.</strong> On text-to-image, a 16:9 picture comes back at 1280 × 720 at 1K and 2560 × 1440 at 2K, a square at 1024 or 2048. <strong>21:9 exists at 2K only</strong> (3072 × 1280): at 1K the ratio is greyed in the menu with the reason, and a node already set to it shows a line with the two ways out. On an edit, <em>Same as the picture</em> returns the picture at its own size (a picture too large for the model comes back scaled down, proportions kept); a picked size with aspect <strong>auto</strong> keeps the picture&#39;s proportions at that size, and a picked ratio reshapes it.</li>
+<li><strong>Masks are real masks here.</strong> On the <a href="/docs/nodes/image-generation.html#inpaint">Inpaint</a> node, Ideogram paints inside the mask and keeps the rest; the result is always the picture&#39;s own size, so the Size menu must stay on <em>Same as the picture</em> beside a mask (the run says so otherwise). On Precise Edit, the pixels outside the edit are copied from the original, mask or not. Measured on a 2048 × 1143 interior with one instruction, the sofa recolored to green velvet: the result came back at 2048 × 1143 with 95 percent of its pixels identical to the input, byte for byte, and every changed pixel inside the sofa&#39;s part of the frame. That is the behavior every other edit model only approximates, and the reason to try it first on a correction.</li>
+<li><strong>References are references.</strong> On Compose and Image → Image, the pictures wired after the first guide the edit and are never edited themselves.</li>
+<li><strong>The quality menu is the model&#39;s.</strong> Text-to-image offers low, medium and high; both edits add very_low, the fastest and cheapest, for a first look. In our runs a text-to-image took about 7 seconds, a precise edit about 9.</li>
+<li><strong>On Annotate &amp; Correct, one pass per mark.</strong> Pick Ideogram and the Precise Edit on the Annotate node and Brut runs one precise edit per mark, in marker order, each on the previous pass&#39;s result: a box, circle or lasso confines its edit with a mask of its shape; an arrow or a point names its object and where it sits in the picture. The picture outside each edit is copied as it is, so five marks leave a picture that differs from the original only where you marked. Five marks cost five passes at the quality you picked (5 × $0.03 at low). The drawn-marks approach every other model uses came back here with the markers painted into the result, which is why the marks travel this way on this model.</li>
+<li><strong>Pictures by Ideogram.</strong> Every picture these models make is generated by Ideogram&#39;s models, as their terms ask every app to say.</li>
 </ul>
-<h2 id="next-steps"><a class="anchor" href="#next-steps" aria-hidden="true">#</a>Next steps</h2>
+<h2 id="ideogram-40-transparent"><a class="anchor" href="#ideogram-40-transparent" aria-hidden="true">#</a>Ideogram 4.0 Transparent</h2>
+<p>A text-to-image that comes back as a <strong>PNG with alpha</strong>: the subject alone, nothing behind it. It is the one for cutouts and entourage (a tree, a chair, a person, a car), logos and lettering to place on a layer. In every text-to-image menu.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sizes</td>
+<td>1K · 2K · 4K · 8K. 4K and 8K are upscales of the render, priced accordingly.</td>
+</tr>
+<tr>
+<td>Ratios</td>
+<td>Every ratio on Brut&#39;s menu but 21:9, which this model has no size for: greyed in place with the reason.</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>turbo · default · quality, the model&#39;s own speeds.</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>1K and 2K: turbo $0.03, default $0.06, quality $0.10. 4K: $0.19 / $0.22 / $0.26. 8K: $0.35 / $0.38 / $0.42. Ideogram&#39;s own quotes.</td>
+</tr>
+</tbody></table>
+<p>A cutout keeps its transparency wherever Brut composites it: on a <a href="/docs/nodes/image-generation.html#layers">Layers</a> node it shows the stack below through its transparent pixels, with or without a mask, and in the <a href="/docs/nodes/sketchpad.html">Sketchpad</a>&#39;s tray it places as an image layer with nothing around the subject.</p>
+<h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
-<li><strong><a href="/docs/install.html">Install &amp; first run</a></strong> — get Brut running and sign in.</li>
-<li><strong><a href="/docs/first-image.html">Your first image</a></strong> — a three-node graph, start to finish.</li>
-<li><strong><a href="/docs/concepts/nodes-and-graphs.html">Nodes &amp; graphs</a></strong> — how the canvas thinks.</li>
-<li><strong><a href="/docs/concepts/marcel.html">Marcel</a></strong> — the companion that lives beside the canvas.</li>
+<li>Pictures in: JPEG, PNG or WEBP up to 25 MB each (other common formats work too, with no quality lost), with an aspect ratio between 1:6 and 6:1.</li>
+<li>Results are saved to your project as soon as they&#39;re ready.</li>
+<li>Ideogram&#39;s safety check can refuse a prompt (nothing is charged) or withhold a result; the node shows which.</li>
+<li>Ideogram runs ten requests at a time per account by default; past that, runs wait their turn instead of failing.</li>
 </ul>
+<h2 id="privacy"><a class="anchor" href="#privacy" aria-hidden="true">#</a>Privacy</h2>
+<p>Calls go from your machine to Ideogram&#39;s servers with your key, and nowhere else. Ideogram&#39;s own terms govern what they keep of the pictures you send and receive.</p>
 
-<div class="prevnext"><span></span><a class="pn next" href="/docs/install.html"><span>Next →</span><b>Install & first run</b></a></div>
+<div class="prevnext"><a class="pn prev" href="/docs/providers/bfl.html"><span>← Previous</span><b>Black Forest Labs</b></a><a class="pn next" href="/docs/providers/magnific.html"><span>Next →</span><b>Magnific</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it-works">How it works</a></li><li class="lvl2"><a href="#what-you-can-make">What you can make</a></li><li class="lvl2"><a href="#next-steps">Next steps</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#ideogram-40-transparent">Ideogram 4.0 Transparent</a></li><li class="lvl2"><a href="#limits">Limits</a></li><li class="lvl2"><a href="#privacy">Privacy</a></li></ul></nav>
 </div>
 <script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=8df6601473" defer></script>
 </body>
