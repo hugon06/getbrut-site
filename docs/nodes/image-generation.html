@@ -215,10 +215,10 @@ Painting works like the Sketchpad:
 <h3 id="what-the-mask-does-and-does-not-do"><a class="anchor" href="#what-the-mask-does-and-does-not-do" aria-hidden="true">#</a>What the mask does and does not do</h3>
 <p>The mask steers the edit; it doesn&#39;t lock the rest. Every provider redraws the <strong>whole image</strong>, so the area outside the mask comes back close to the original but not pixel-identical: fine texture changes everywhere, and sometimes structural changes near the edit (a window mullion redrawn, a door frame half kept). We measured it on GPT Image 2 and 2.5 as well as on Gemini, and OpenAI&#39;s own guide says so: &quot;Masking with GPT Image is entirely prompt-based.&quot;</p>
 <ul>
-<li><strong>OpenAI</strong> receives the mask as its native mask input. <strong>Gemini</strong> receives it as a guide image, with an instruction to keep the edit inside it. Neither confines the change to the painted pixels.</li>
+<li>On <strong>OpenAI</strong> and <strong>Gemini</strong> alike, the mask guides the edit; neither confines the change to the painted pixels.</li>
 <li><strong>Paint the whole object</strong> you want changed, with its shadow or reflection and a small margin. A thin stroke on one edge of an object leaves the model to guess the rest, and it will change pixels outside the mask to finish the job.</li>
 <li><strong>Need the rest pixel-exact?</strong> Wire the original and the result into a <a href="#layers">Layers</a> node, with the original as the base, give the result layer a black mask (<strong>Alt+click ＋ mask</strong>) and paint it white over the region you wanted changed. Everything outside comes from the original, locally and for free.</li>
-<li>The mask convention is white-on-transparent = editable. The same guide-image convention rides the <strong>fal.ai / Replicate routes</strong> for the Nano Banana models, so a fal-only or Replicate-only seat can still inpaint. GPT Image masks never route: inpainting on GPT Image needs your OpenAI key, and the node says so instead of guessing.</li>
+<li>On the <strong>fal.ai / Replicate routes</strong> the Nano Banana models inpaint too, so a fal-only or Replicate-only seat can still inpaint. GPT Image masks never route: inpainting on GPT Image needs your OpenAI key, and the node says so instead of guessing.</li>
 <li>The mask remembers which image it was painted on; changing the input fails the run loudly (&quot;repaint&quot;) rather than applying a stale region.</li>
 </ul>
 <h2 id="annotate-correct"><a class="anchor" href="#annotate-correct" aria-hidden="true">#</a>Annotate &amp; Correct</h2>
@@ -235,10 +235,10 @@ Painting works like the Sketchpad:
    **Wheel zooms, middle-drag pans** — for detailed work at native resolution. In **Select**, a selected lasso or polygon shows a handle on every corner, so the outline can be refined point by point.
 3. Run. No prompt needed — the marks *are* the prompt. A wired `prompt` is optional and rides along as a global instruction ("keep the late-afternoon light").
 
-<p>Under the hood the node is a compiler, and it speaks to each model in the form that model reads best:</p>
+<p>Each model gets your marks in the form it reads best, and the result always comes back clean, with no markers in it:</p>
 <ul>
-<li><strong>Nano Banana and GPT Image: a drawn copy.</strong> Your marks are <strong>burned into a copy of the image</strong> (numbered red markers, arrows, outlines, color swatches) and the model receives <em>both</em> images, the untouched original and the annotated copy, plus a numbered instruction per mark. Drawn-on-image pointing is spatially unambiguous in a way prose never is. The output is a clean edited image, no markers.</li>
-<li><strong>Seedream 5.0 Pro and Flash: coordinates.</strong> These two read positions written straight into the prompt, so the node sends the <strong>clean picture alone</strong> and writes each mark&#39;s place as coordinates in its numbered instruction. Nothing is drawn on anything the model sees, so there is no markup for it to copy into the result. An <strong>arrow</strong> or a <strong>point</strong> becomes a spot (the arrow&#39;s tip), a <strong>box, circle, lasso or polygon</strong> becomes its bounding box. Reference images follow the picture; a color chip goes by its name and hex value.</li>
+<li><strong>Nano Banana and GPT Image</strong> read the marks as you drew them.</li>
+<li><strong>Seedream 5.0 Pro and Flash</strong> read each mark as a place in the picture: an <strong>arrow</strong> or a <strong>point</strong> is a spot (the arrow&#39;s tip), a <strong>box, circle, lasso or polygon</strong> is the rectangle around it.</li>
 </ul>
 <h3 id="seedream-on-this-node"><a class="anchor" href="#seedream-on-this-node" aria-hidden="true">#</a>Seedream on this node</h3>
 <p>Pick <strong>Seedream (BytePlus)</strong> as the provider: Pro and Flash are on the menu (Lite does not read coordinates and stays off). What we measured on a 2048 × 1143 interior with five marks, one of each kind (recolor the sofa to a RAL green, remove the coffee table, hang a painting at a point on the wall, lay a rug inside a circle, fill a shelf outlined with a lasso), then with a reference armchair placed in a box:</p>
@@ -282,14 +282,14 @@ Painting works like the Sketchpad:
 <li><strong>The same size is not the same pixels.</strong> The model redraws the whole frame, as every generative edit does: on a 2752 × 1536 park scene we measured the result sitting 3 to 6 px off the original (a small shift and a 0.3 % vertical stretch) with the grass and foliage re-rendered in detail. You see it as a slight jump in a Compare wipe. Where the rest must stay exactly as it was, use <strong>🗇 Reconcile with input</strong> (below): it lays the result back over the original and keeps only the edits, so everything else is the original&#39;s own pixels.</li>
 <li><strong>No 4K here.</strong> Seedream 5.0 Pro and Flash render up to 4.6 MP (2K); only Lite goes to 3K and 4K, and Lite does not read coordinates, so it is not on this node. For a 4K result, correct at the picture&#39;s size and finish with an <a href="/docs/nodes/upscale.html">Upscale Image</a> node.</li>
 <li><strong>A box that holds several things</strong>: say which one in the note (&quot;the lamp on the left&quot;). The model gets a rectangle, not your outline, so a lasso drawn tightly around one object among others still needs the name.</li>
-<li><strong>A reference image</strong> on a mark is sent after the picture and named in that mark&#39;s instruction. On Pro each input after the first adds $0.003; on Flash inputs are free.</li>
+<li><strong>A reference image</strong> on a mark is one more input: on Pro each input after the first adds $0.003; on Flash inputs are free.</li>
 <li>Up to 9 reference images (Seedream takes 10 pictures per request).</li>
-<li>Through an <a href="/docs/providers/openrouter.html">OpenRouter</a> key the same prompt goes to the same models, at OpenRouter&#39;s sizes (1K / 2K); that path has not been run by us yet.</li>
+<li>Through an <a href="/docs/providers/openrouter.html">OpenRouter</a> key the node reaches the same models, at OpenRouter&#39;s sizes (1K / 2K); that path has not been run by us yet.</li>
 </ul>
 <p>Notes:</p>
 <ul>
 <li><strong>Nano Banana 2.1 (the node&#39;s default since October 2026, Nano Banana 2&#39;s successor), Nano Banana 2 &amp; Pro and GPT Image</strong> follow drawn instructions well, reference images included. On our five-mark test room, 2.1 put every edit where its mark was drawn (the painting on the marked wall, a rug the size of its circle, the vases inside the shelf), three things Nano Banana 2 had got wrong on the same marks. The original Nano Banana (<code>gemini-2.5-flash-image</code>) applied only some edits and left markup in the output when we tested it, so it is deliberately not on this node&#39;s menu. In the field, <strong>Nano Banana Pro is the strongest multi-mark performer</strong> of the drawn-copy models; GPT Image is best with a handful of marks at a time.</li>
-<li>Aspect <strong>auto</strong> pins the input image&#39;s measured ratio explicitly on Gemini — reference images would otherwise be allowed to sway the output&#39;s aspect.</li>
+<li>Aspect <strong>auto</strong> keeps the input image&#39;s shape on Gemini, whatever the reference images look like.</li>
 <li>Reference images go through the same content filters as everything else — a photo of a real person (children especially) can trigger Gemini&#39;s <code>IMAGE_SAFETY</code> refusal. The node surfaces it loudly; swap the reference.</li>
 <li>Marks are strong guidance, not a hard mask, and the model redraws the whole image (Inpaint&#39;s mask doesn&#39;t lock the rest either). When the untouched areas must stay pixel-exact, use <strong>🗇 Reconcile with input</strong> under the result (see below).</li>
 <li>Annotations remember which image they were drawn on. If the input changes, the run fails loudly (&quot;re-anchor&quot;) instead of applying stale geometry — reopen the editor and mark the new image.</li>
@@ -303,8 +303,8 @@ Painting works like the Sketchpad:
 <p>One click spawns a <a href="#layers">Layers</a> node, already set up and composited:</p>
 <ol>
 <li><strong>The original is the base.</strong> Everything the edit did not touch stays the original&#39;s own pixels.</li>
-<li><strong>The result sits on top, laid back over the original.</strong> Brut measures how the result moved (a shift and a slight stretch) and undoes it on a copy, to under a pixel, so an edit meets its surroundings without a step. The layer&#39;s row says <em>aligned</em>.</li>
-<li><strong>A mask shows only what changed, where you asked for it.</strong> Brut compares the two pictures and keeps the changed areas that touch one of your marks: the new object, the opened door, with a little room for a shadow. A facade that came back slightly warmer, a hedge re-rendered leaf by leaf: those stay the original&#39;s.</li>
+<li><strong>The result sits on top, lined up with the original</strong>, so an edit meets its surroundings without a step. The layer&#39;s row says <em>aligned</em>.</li>
+<li><strong>A mask shows only what changed, where you asked for it</strong>: the new object, the opened door, with a little room for a shadow. A facade that came back slightly warmer, a hedge re-rendered leaf by leaf: those stay the original&#39;s.</li>
 </ol>
 <figure class="media"><video src="/docs/media/image-generation/reconcile.mp4" poster="/docs/media/image-generation/reconcile.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Reconcile with input: the Layers node opens with the original as base, the result aligned on top and masked to the two edits; a brush stroke reveals a little more</figcaption></figure>
 Then the Layers editor opens on that mask, an ordinary one: paint white to show more of the edit (a longer shadow, a reflection), black to give an area back to the original. **✓ Use this stack** composites again, free.
@@ -314,7 +314,7 @@ Then the Layers editor opens on that mask, an ordinary one: paint white to show 
 <li><strong>Free and local.</strong> No provider is called; it takes a few seconds.</li>
 <li><strong>The picture comes out at the original&#39;s size.</strong> If the model returned another size (Nano Banana at 2K on a smaller input, say), the result is fitted to the original first.</li>
 <li>When Brut finds nothing to match (two pictures with little in common), it leaves the result as it is and says so in Activity; when it finds no change at your marks, the mask starts empty and you paint it.</li>
-<li>The marks tell Brut where to look only while they belong to that very input; otherwise every changed area is kept.</li>
+<li>If the marks were drawn on another input, every changed area is kept.</li>
 </ul>
 <h2 id="layers"><a class="anchor" href="#layers" aria-hidden="true">#</a>Layers</h2>
 <p>Photoshop-style compositing, <strong>local and free</strong> — the node never calls a provider.</p>
@@ -333,7 +333,7 @@ Then the Layers editor opens on that mask, an ordinary one: paint white to show 
 Notes:
 
 <ul>
-<li>A layer tagged <strong>aligned</strong> (the result layer of <a href="#reconcile-with-input">Reconcile with input</a>) is drawn from a copy that Brut laid back over the base; it stays so as long as that base is the bottom of the stack.</li>
+<li>A layer tagged <strong>aligned</strong> (the result layer of <a href="#reconcile-with-input">Reconcile with input</a>) stays lined up with the base as long as that base is the bottom of the stack.</li>
 <li>The <strong>base defines the canvas</strong>. A layer of another size <strong>auto-fits</strong>: scaled to cover and center-cropped — never distorted (the editor labels it &quot;auto-fit&quot;). This is the common case: a 4K generation never exactly matches its source&#39;s dimensions. Masks stay strict — a stale mask fails loudly, never applies misaligned.</li>
 <li>Masks remember which image they belong to. If an upstream node re-generates (new output), the run fails loudly instead of silently applying or dropping a stale mask — reopen the editor to repaint.</li>
 <li><strong>✓ Use this stack composites right away</strong>: the node&#39;s face shows the result the moment the editor closes — there is no ▶ on a Layers node (nothing upstream is run or re-billed; a whole-graph ▶ Run still passes through it for free). The composite is cached like any node output, and re-runs are free anyway.</li>
@@ -355,6 +355,6 @@ It is also the house tool for **grade transfer**: scene = your shot, reference =
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-image">Text → Image</a></li><li class="lvl2"><a href="#image-image">Image → Image</a></li><li class="lvl2"><a href="#inpaint">Inpaint</a></li><li class="lvl3"><a href="#what-the-mask-does-and-does-not-do">What the mask does and does not do</a></li><li class="lvl2"><a href="#annotate-correct">Annotate &amp; Correct</a></li><li class="lvl3"><a href="#seedream-on-this-node">Seedream on this node</a></li><li class="lvl3"><a href="#reconcile-with-input">Reconcile with input</a></li><li class="lvl2"><a href="#layers">Layers</a></li><li class="lvl2"><a href="#compose">Compose</a></li><li class="lvl2"><a href="#choosing-a-model">Choosing a model</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=19ff43e2f5" defer></script>
 </body>
 </html>

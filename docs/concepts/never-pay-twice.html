@@ -189,7 +189,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>When a node runs, Brut computes a <strong>stable hash</strong> of everything that affects its output — the prompt, the model, the parameters, the input images, the mask. If that hash matches the last successful run <em>and</em> the node still holds that output, the node is <strong>skipped</strong>: status <code>cached</code>, cost <code>$0</code>.</p>
 <p>Change any input and the hash changes, so that node — and only that node — re-pays. A revision round that touches three shots costs you three shots, not the whole graph.</p>
 <figure class="media"><video src="/docs/media/concepts/cache-hit.mp4" poster="/docs/media/concepts/cache-hit.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Change one prompt in a four-node graph and Run: only that node bills, the rest answer from cache</figcaption></figure>
-Moving a graph is not a change. The hash includes the input files' paths, so a project that moves (**Save project as…**, a `.brutpack` opened on another machine, a NAS share under a different drive letter) would look entirely stale — Brut remembers the former location in the graph file and checks each node against it before calling it stale, so a move stays free.
+Moving a graph is not a change. A project that moves (**Save project as…**, a `.brutpack` opened on another machine, a NAS share under a different drive letter) keeps its cache: a move stays free.
 
 <blockquote>
 <p>Re-run a finished graph and everything shows <code>cached</code>. That&#39;s the point: your outputs are already on disk, and replaying them is free.</p>
@@ -219,6 +219,6 @@ Multi-Shot tiles pin individually, so you can lock the three keepers from a cont
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it-works">How it works</a></li><li class="lvl2"><a href="#what-counts-as-an-input">What counts as an input</a></li><li class="lvl2"><a href="#pins-freezing-a-result">Pins — freezing a result</a></li><li class="lvl2"><a href="#re-roll-a-fresh-take-on-purpose">Re-roll — a fresh take on purpose</a></li><li class="lvl2"><a href="#local-operations-are-always-free">Local operations are always free</a></li><li class="lvl2"><a href="#seeing-the-spend">Seeing the spend</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=19ff43e2f5" defer></script>
 </body>
 </html>
