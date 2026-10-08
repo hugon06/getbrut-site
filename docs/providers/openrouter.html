@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OpenRouter (text routes) · Brut docs</title>
-<meta name="description" content="OpenRouter (text routes) — Brut documentation. Local-first, bring-your-own-key AI orchestration.">
+<title>OpenRouter (routes) · Brut docs</title>
+<meta name="description" content="OpenRouter (routes) — Brut documentation. Local-first, bring-your-own-key AI orchestration.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://getbrut.app/docs/providers/openrouter.html">
 <style>
@@ -181,14 +181,14 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   <a class="home" href="/">getbrut.app ↗</a>
 </header>
 <div class="layout">
-  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/higgsfield.html">Higgsfield (subscription)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li><li><a href="/docs/providers/openrouter.html" class="active">OpenRouter (text routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/veo.html">Google Veo</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html" class="active">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
 <h1>OpenRouter</h1>
 <p><strong>OpenRouter</strong> is the one aggregator key that can hold <strong>almost the whole of Brut</strong>: every
 text model (planning <strong>and Marcel</strong> — chat, ambient narration, acting), the full Nano Banana
 image family (incl. Nano Banana 2 Lite, the starter graph&#39;s model), GPT Image 2, <strong>GPT Image 2.5
-Flare and Sunburst</strong>, the <strong>Seedream 5.0</strong> trio (Pro / Flash / Lite at 1K / 2K, Lite 2K / 4K,
-since 2026-10-02), and the video
+Flare and Sunburst</strong>, the <strong>Seedream 5.0</strong> trio (Pro / Flash / Lite at 1K / 2K, Lite 2K / 4K),
+and the video
 models — Kling 3.0 and O1, Veo 3.1 / Fast / Lite, Seedance 2.0 and 2.5. Outside it: the
 upscalers (they aren&#39;t resold anywhere, by design), Gemini Omni Flash and the other Kling tiers
 (3.0 Omni / Turbo / 2.6 / 2.5 and older), which OpenRouter doesn&#39;t carry.
@@ -201,50 +201,41 @@ prices.</p>
 <h2 id="text-planning-and-marcel"><a class="anchor" href="#text-planning-and-marcel" aria-hidden="true">#</a>Text — planning and Marcel</h2>
 <p>Every text model in Brut&#39;s catalog also runs here, at <strong>pass-through provider list rates</strong> — the same
 per-token prices as the native APIs (OpenRouter&#39;s revenue is a ~5.5% fee when you buy
-credits, not a token markup). Vision-grounded planning works, the GPT reasoning dial
-rides along (Marcel&#39;s tools included: OpenRouter bridges to OpenAI&#39;s Responses API, so the
-<em>tools need none</em> rule of the native chat wire does not apply here), and <strong>Anthropic prompt caching passes through</strong> — Marcel&#39;s long system context
-caches exactly as on a native Anthropic key (write premiums and 0.1× reads verified live),
-so routed conversations cost the same as native ones. Every model Brut adds gets its OpenRouter
-route when OpenRouter serves it (GPT-6 Sol and Luna joined the same day they entered the catalog):
-the route is how a seat without provider keys reaches the whole catalog with one key.</p>
+credits, not a token markup). Planning that reads your pictures works, the GPT reasoning dial
+rides along (including while Marcel acts on the canvas), and <strong>Anthropic prompt caching passes through</strong> — Marcel&#39;s long system context
+caches exactly as on a native Anthropic key, so routed conversations cost the same as native
+ones. New models usually arrive here too.</p>
 <h2 id="images-native-knobs-no-compromises"><a class="anchor" href="#images-native-knobs-no-compromises" aria-hidden="true">#</a>Images — native knobs, no compromises</h2>
 <p>The Nano Banana family runs with <strong>Brut&#39;s own menus</strong> — the real 512/1K/2K/4K sizes and the
-full aspect list, unlike fal&#39;s preset system — which is why OpenRouter sits <em>first</em> in those
-models&#39; route order. Approximate inpaint masks work (the Gemini convention, verified live).
-Billing is pass-through: on 28 September 2026 we ran every routed image model through Brut and
-each one billed <strong>the same as on the maker&#39;s own key</strong>, to the tenth of a cent. Nano Banana Pro
-cost $0.13 at 1K or 2K and $0.24 at 4K; Nano Banana 2 cost $0.07 / $0.10 / $0.15 at 1K / 2K /
+full aspect list. Approximate inpaint masks work (the Gemini convention).
+Billing is pass-through: every routed image model bills <strong>the same as on the maker&#39;s own
+key</strong>, to the tenth of a cent. Nano Banana Pro
+costs $0.13 at 1K or 2K and $0.24 at 4K; Nano Banana 2 costs $0.07 / $0.10 / $0.15 at 1K / 2K /
 4K; Lite $0.034 and the original Nano Banana $0.039. So the estimate before a run is the real
 price, and <strong>every image job records its exact billed amount</strong> on the ledger.</p>
 <p>Two OpenRouter-specific limits worth knowing:</p>
 <ul>
-<li><strong>Requests cap at ~52 MB</strong>, and a full-resolution PNG render can eat that alone once
-base64-encoded. When an image stack wouldn&#39;t fit, Brut transcodes the largest PNG inputs
-to <strong>full-resolution JPEG (q95) for that request only</strong> — never downscaled, never touching
-your files, logged in the engine console. If even that can&#39;t fit, the run fails loudly;
-export the source smaller or use a native key.</li>
-<li><strong>Heavy 4K image jobs can be slow.</strong> OpenRouter&#39;s image endpoint is synchronous, and its
-queue sometimes stalls on large 4K multi-image jobs (measured in the field: a 4K edit that
-takes ~55 s on a native Gemini key can exceed Brut&#39;s 570 s route timeout entirely — that&#39;s
-on their end, not yours). If you hit the timeout: retry, pick a smaller size, or use the
-native key — which is the first-class lane anyway and takes over automatically the moment
-it&#39;s configured.</li>
+<li><strong>Very large pictures</strong> may be sent as high-quality JPEG for that one request; your files
+are untouched. If even that can&#39;t fit, the run stops with a clear message; export the source
+smaller or use a native key.</li>
+<li><strong>Heavy 4K image jobs can be slow.</strong> OpenRouter&#39;s queue sometimes stalls on large 4K
+multi-image jobs (a 4K edit that takes ~55 s on a native Gemini key can take much longer
+there). Brut gives up after about ten minutes. If that happens: retry, pick a smaller size,
+or use the native key, which takes over automatically the moment it&#39;s configured.</li>
 </ul>
 <p>The one exception is <strong>GPT Image</strong>, which OpenRouter renders at about 1K only: there&#39;s no size
 knob, so 2K and 4K need your OpenAI key. The aspect ratio and the quality do come through, on
-GPT Image 2 and on the <strong>GPT Image 2.5 pair</strong> alike: 2.5 keeps its full <code>low</code> to <code>max</code> quality
+GPT Image 2 and on the <strong>GPT Image 2.5 pair</strong> alike: 2.5 keeps its full <em>low</em> to <em>max</em> quality
 menu, and image-to-image with aspect <em>auto</em> follows your input&#39;s shape. Masks don&#39;t: inpainting
-on GPT Image needs the OpenAI key. Measured on 28 September 2026: a 1:1 image costs $0.006 at
+on GPT Image needs the OpenAI key. Measured: a 1:1 image costs $0.006 at
 low and $0.053 at high on 2.5 (the same on Flare and Sunburst), and 16:9 costs less ($0.004 at
-low). For GPT Image 2, fal and Replicate still outrank OpenRouter because they can size the image.</p>
+low).</p>
 <h2 id="video-the-whole-set-with-billing-truth"><a class="anchor" href="#video-the-whole-set-with-billing-truth" aria-hidden="true">#</a>Video — the whole set, with billing truth</h2>
-<p>Kling 3.0 (std/pro) and <strong>Kling O1</strong> (5 or 10 s, 720p, $0.112/s — the REST and subscription
-O1 entries both route here), Veo 3.1 / Fast / <strong>Lite</strong> (OpenRouter is the first route Lite
-has ever had), Seedance 2.0 and <strong>Seedance 2.5</strong> (480p/720p only, 4–30 s, first + last frame,
+<p>Kling 3.0 (std/pro) and <strong>Kling O1</strong> (5 or 10 s, $0.112/s), Veo 3.1 / Fast / <strong>Lite</strong>,
+Seedance 2.0 and <strong>Seedance 2.5</strong> (480p/720p only, 4–30 s, first + last frame,
 no reference images there — the 30-reference and 1080p features need the BytePlus key) —
-image-to-video <strong>with end frames</strong>, text-to-video, reference images where the listing
-declares them. Per-second rates, audio included in the estimate:</p>
+image-to-video <strong>with end frames</strong>, text-to-video, reference images where OpenRouter
+offers them. Per-second rates, audio included in the estimate:</p>
 <table>
 <thead>
 <tr>
@@ -284,37 +275,30 @@ declares them. Per-second rates, audio included in the estimate:</p>
 <td>not measured</td>
 </tr>
 </tbody></table>
-<p>On 28 September 2026 we ran a clip of each model through Brut. The listed rates held exactly:
-a 4 s Veo 3.1 clip billed $0.80, and $1.60 with audio. Seedance came out close to the BytePlus
-price. One surprise: Kling O1 came back at 1924 × 1076, although the listing says 720p. And
-Kling 3.0 renders at 720p on OpenRouter, pro included, with no 4K: routed nodes offer only std
-and pro. And <strong>OpenRouter reports the exact billed
-cost on every job</strong>, which lands on the ledger row as is (a 4 s Lite clip billed $0.12 = 4 ×
-$0.03 in July, also to the cent).</p>
+<p>The listed rates hold: a 4 s Veo 3.1 clip bills $0.80, and $1.60 with audio. Seedance comes
+out close to the BytePlus price. Kling O1 renders at 1924 × 1076. Kling 3.0 renders at 720p on
+OpenRouter, pro included, with no 4K: routed nodes offer only std and pro. And <strong>OpenRouter
+reports the exact billed cost on every job</strong>, which lands on the ledger row as is.</p>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
 <p>Create a key at <strong><a href="https://openrouter.ai/keys">openrouter.ai/keys</a></strong> (<code>sk-or-…</code>), buy a few
-dollars of credits, and paste it into <strong>⚙ Settings → OpenRouter</strong> (or set <code>OPENROUTER_API_KEY</code>).</p>
+dollars of credits, and paste it into <strong>⚙ Settings → OpenRouter</strong>.</p>
 <h2 id="the-fine-print"><a class="anchor" href="#the-fine-print" aria-hidden="true">#</a>The fine print</h2>
 <ul>
 <li><strong>Your native key always wins.</strong> Add a Gemini/OpenAI/Kling/… key later and those models
 bill direct again automatically.</li>
-<li><strong>A fal.ai key can also run text</strong> (fal resells the same router) — but fal&#39;s text lane
-takes <strong>no images</strong> and no reasoning dial, so OpenRouter outranks it when both keys exist.</li>
-<li><strong>Marcel routes here and only here</strong>: his lanes stream, and OpenRouter is the one
-aggregator whose wire supports Brut&#39;s streaming + tool-call + prompt-cache contract.</li>
+<li><strong>Marcel works through OpenRouter only</strong> (among aggregators).</li>
 <li><strong>Kling&#39;s 4K master tier, Seedance&#39;s Smart Length, Seedance 2.5&#39;s 1080p and reference
-images aren&#39;t on OpenRouter</strong>; Kling O1 takes only 5 or 10 s there. For video,
-fal outranks OpenRouter when both keys exist (fal&#39;s Kling rates run cheaper). Missing
-knobs always fail loud, never silently.</li>
+images aren&#39;t on OpenRouter</strong>; Kling O1 takes only 5 or 10 s there. A missing
+setting always stops the run with a clear message, never silently.</li>
 <li>Every routed call — text, image, or video — lands in the spend ledger with
 provider-reported figures (token counts, cache activity, billed cost), marked
 &quot;via openrouter&quot;.</li>
 </ul>
 
-<div class="prevnext"><a class="pn prev" href="/docs/providers/replicate.html"><span>← Previous</span><b>Replicate (routes)</b></a><a class="pn next" href="/docs/cinema/index.html"><span>Next →</span><b>Full walkthrough</b></a></div>
+<div class="prevnext"><a class="pn prev" href="/docs/providers/topaz.html"><span>← Previous</span><b>Topaz Labs</b></a><a class="pn next" href="/docs/providers/fal.html"><span>Next →</span><b>fal.ai (routes)</b></a></div>
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-planning-and-marcel">Text — planning and Marcel</a></li><li class="lvl2"><a href="#images-native-knobs-no-compromises">Images — native knobs, no compromises</a></li><li class="lvl2"><a href="#video-the-whole-set-with-billing-truth">Video — the whole set, with billing truth</a></li><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#the-fine-print">The fine print</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=cf1ed9d8f6" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=8d6dd3aa28" defer></script>
 </body>
 </html>
