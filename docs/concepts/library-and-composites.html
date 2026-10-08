@@ -189,7 +189,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>Select two or more nodes and press <code>Ctrl+G</code> (or <strong>Group</strong> in the floating selection bar, or the rail&#39;s Organize section) to wrap them in a labeled frame. A group is purely visual — it moves as a unit and keeps things tidy. <code>✕</code> on the frame ungroups.</p>
 <p>Select a group to style its identity: <strong>six frame colors</strong> (dashed line + background wash) and a <strong>label size</strong> up to genuinely gigantic — big enough to read the group&#39;s name zoomed all the way out.</p>
 <p>Groups also <strong>adopt</strong>: drop a node inside a group&#39;s area (or add one there from the Tab menu) and it joins the group automatically — drag it out and it leaves. No re-grouping ceremony.</p>
-<h2 id="composites"><a class="anchor" href="#composites" aria-hidden="true">#</a>Composites</h2>
+<figure class="media"><video src="/docs/media/concepts/group.mp4" poster="/docs/media/concepts/group.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Ctrl+G frames a selection; rename it, color it, and a node dropped inside joins the group</figcaption></figure>
+## Composites
+
 <p>A <strong>composite</strong> is a subgraph collapsed into a single node (select nodes → <strong>📦 Collapse to composite</strong>). Cut wires become labeled <strong>ports</strong>, and a result that is wired to nothing, or only to a Preview, Compare or History inside, becomes an output port too, so the closed card shows it and you can wire it on; the inner nodes are still real (just hidden), so caching, pins and ledger history keep working <em>inside</em> the composite exactly as outside.</p>
 <ul>
 <li><strong>Open / Close</strong> — ⤢ opens a composite into a live frame you can edit inside, then ⇱ packs it back up, exactly where it was, with the same ports (new outside wires you made while it was open become new ports). Only nodes that are <em>members</em> of the frame close into it — a node you add or drag inside joins automatically; a node that merely overlaps the frame&#39;s area stays out.</li>
@@ -200,7 +202,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Knob controls.</strong> A <strong>select</strong> (a menu of whole values, a prompt variant per entry), a <strong>text</strong> box, a <strong>number</strong>, a <strong>model</strong> menu (route-aware, like the stage&#39;s own picker) and a <strong>tick list</strong> (several toggle chips plus a free line that takes anything you type, commas between items, written as one labeled line, the Character Lab&#39;s Accessories). A text knob may carry a label (&quot;Materials: &quot;), so several knobs compose a structured brief that the refiner reads line by line; an empty field writes nothing, and the house rules say that means the model&#39;s call. A clip stage&#39;s <strong>Duration</strong>, <strong>Resolution</strong>, <strong>Ratio</strong> and <strong>Audio</strong> knobs take their menus from the catalog for the video model picked on the card, and grey out in place when that model has no such setting (an Omni clip has no audio switch, Seedance 2.5 follows its start frame); an image stage&#39;s <strong>Size</strong> and <strong>Quality</strong> knobs do the same (Quality lights up on the OpenAI models, which take one). A <strong>Prompt style</strong> knob greys the refiners written for another video model than the one picked; a pick that no longer fits stays, with a warning line, never swapped behind your back.</li>
 <li><strong>Dropped from the library</strong> — a card dropped from the library remembers where it came from. Its meta line shows the version it was dropped at, and a small chip says when the library holds a newer one; nothing is rewritten under you, drop the workflow again to get the new recipe. If a stage inside is set to a model your seat cannot reach, the card itself shows the ⚠ button that opens Settings on that provider (the node that needs it is hidden inside). And once the card has a result, a workflow that ships with a suggested follow-up offers it as a chip under the picture: one click drops the next workflow beside the card, wired to its result.</li>
 </ul>
-<p>Composites are how any tuned chain — say, your <a href="/docs/nodes/cinema-crew.html">Director</a> with its house style plus its Storyboard — becomes one droppable node.</p>
+<figure class="media"><video src="/docs/media/concepts/collapse-composite.mp4" poster="/docs/media/concepts/collapse-composite.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Collapse a selection into one card with labeled ports; Open it in place to edit, Close packs it back</figcaption></figure>
+Composites are how any tuned chain — say, your [Director](/docs/nodes/cinema-crew.html) with its house style plus its Storyboard — becomes one droppable node.
+
 <h2 id="the-global-library"><a class="anchor" href="#the-global-library" aria-hidden="true">#</a>The global library</h2>
 <p>The library opens as a <strong>gallery</strong>: the book icon on the left rail, or <strong>File ▾ → Browse library…</strong>. Every workflow is a card with its picture.</p>
 <ul>
@@ -230,8 +234,8 @@ Library items carry an optional **category** (a shelf label you pick on save) an
 
 <div class="prevnext"><a class="pn prev" href="/docs/concepts/never-pay-twice.html"><span>← Previous</span><b>Never pay twice</b></a><a class="pn next" href="/docs/concepts/marcel.html"><span>Next →</span><b>Marcel, the companion</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#groups">Groups</a></li><li class="lvl2"><a href="#composites">Composites</a></li><li class="lvl2"><a href="#the-global-library">The global library</a></li><li class="lvl2"><a href="#templates-vs-composites">Templates vs composites</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#groups">Groups</a></li><li class="lvl2"><a href="#the-global-library">The global library</a></li><li class="lvl2"><a href="#templates-vs-composites">Templates vs composites</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>

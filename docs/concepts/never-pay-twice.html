@@ -188,7 +188,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <h2 id="how-it-works"><a class="anchor" href="#how-it-works" aria-hidden="true">#</a>How it works</h2>
 <p>When a node runs, Brut computes a <strong>stable hash</strong> of everything that affects its output — the prompt, the model, the parameters, the input images, the mask. If that hash matches the last successful run <em>and</em> the node still holds that output, the node is <strong>skipped</strong>: status <code>cached</code>, cost <code>$0</code>.</p>
 <p>Change any input and the hash changes, so that node — and only that node — re-pays. A revision round that touches three shots costs you three shots, not the whole graph.</p>
-<p>Moving a graph is not a change. The hash includes the input files&#39; paths, so a project that moves (<strong>Save project as…</strong>, a <code>.brutpack</code> opened on another machine, a NAS share under a different drive letter) would look entirely stale — Brut remembers the former location in the graph file and checks each node against it before calling it stale, so a move stays free.</p>
+<figure class="media"><video src="/docs/media/concepts/cache-hit.mp4" poster="/docs/media/concepts/cache-hit.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Change one prompt in a four-node graph and Run: only that node bills, the rest answer from cache</figcaption></figure>
+Moving a graph is not a change. The hash includes the input files' paths, so a project that moves (**Save project as…**, a `.brutpack` opened on another machine, a NAS share under a different drive letter) would look entirely stale — Brut remembers the former location in the graph file and checks each node against it before calling it stale, so a move stays free.
+
 <blockquote>
 <p>Re-run a finished graph and everything shows <code>cached</code>. That&#39;s the point: your outputs are already on disk, and replaying them is free.</p>
 </blockquote>
@@ -203,7 +205,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>What <em>doesn&#39;t</em> count: cosmetic things like node position or size. Moving a node never re-pays.</p>
 <h2 id="pins-freezing-a-result"><a class="anchor" href="#pins-freezing-a-result" aria-hidden="true">#</a>Pins — freezing a result</h2>
 <p>Sometimes you want a specific past result to stay, even as you tinker upstream. Click the <strong>🕘 history</strong> button on a generation node to open its ledger history — every result that node ever produced — and <strong>📌 pin</strong> one. A pinned node emits that exact output on every run, free, until you unpin. Pins beat both the cache and a fresh generation. Hover a row&#39;s thumbnail for a quick preview; click it for the <strong>lightbox</strong>, where <strong>←/→ walks the node&#39;s whole history</strong> at screen size.</p>
-<p>Multi-Shot tiles pin individually, so you can lock the three keepers from a contact sheet and keep re-rolling the rest.</p>
+<figure class="media"><video src="/docs/media/first-image/history-pin.mp4" poster="/docs/media/first-image/history-pin.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Pin any past result from the node's history; it stays the output, free, until you unpin</figcaption></figure>
+Multi-Shot tiles pin individually, so you can lock the three keepers from a contact sheet and keep re-rolling the rest.
+
 <h2 id="re-roll-a-fresh-take-on-purpose"><a class="anchor" href="#re-roll-a-fresh-take-on-purpose" aria-hidden="true">#</a>Re-roll — a fresh take on purpose</h2>
 <p>The cache answers ▶ for free, which is right until you <em>want</em> another take of the same prompt. Generation nodes (Text → Image, Image → Image, Compose, Inpaint, Annotate &amp; Correct, Image → Video) carry a <strong>↻ re-roll</strong> button in their title bar: it forces one fresh generation with the inputs unchanged (this node bills again; everything upstream still replays from cache). The take it replaces is not lost: it stays in the node&#39;s <strong>🕘 history</strong>, pinnable like any past result. A pinned node can&#39;t be re-rolled (the pin would win): unpin first, the button says so.</p>
 <h2 id="local-operations-are-always-free"><a class="anchor" href="#local-operations-are-always-free" aria-hidden="true">#</a>Local operations are always free</h2>
@@ -215,6 +219,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it-works">How it works</a></li><li class="lvl2"><a href="#what-counts-as-an-input">What counts as an input</a></li><li class="lvl2"><a href="#pins-freezing-a-result">Pins — freezing a result</a></li><li class="lvl2"><a href="#re-roll-a-fresh-take-on-purpose">Re-roll — a fresh take on purpose</a></li><li class="lvl2"><a href="#local-operations-are-always-free">Local operations are always free</a></li><li class="lvl2"><a href="#seeing-the-spend">Seeing the spend</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>

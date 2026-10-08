@@ -203,7 +203,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li>Click <strong>🖌 Paint mask</strong> to open the mask editor. Brush over what should <em>change</em> (red overlay), at the image&#39;s native resolution. Erase to correct.</li>
 <li>Type a prompt describing the change and run.</li>
 </ol>
-<p>Painting works like the Sketchpad:</p>
+<figure class="media"><video src="/docs/media/image-generation/inpaint.mp4" poster="/docs/media/image-generation/inpaint.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Paint the region, write what changes, run: the change lands where you painted</figcaption></figure>
+Painting works like the Sketchpad:
+
 <ul>
 <li><strong>Shift+click</strong> draws a straight stroke from the end of the last stroke. Chain Shift+clicks to trace a window frame or a column edge.</li>
 <li><strong>Ctrl+Z</strong> undoes a stroke (or a Clear), <strong>Ctrl+Y</strong> or <strong>Ctrl+Shift+Z</strong> redoes it. The ↶ ↷ buttons in the bar do the same. These keys belong to the editor while it is open, so they never undo a step on the canvas behind it.</li>
@@ -222,18 +224,17 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <h2 id="annotate-correct"><a class="anchor" href="#annotate-correct" aria-hidden="true">#</a>Annotate &amp; Correct</h2>
 <p>Point at things on the image and say what changes — Inpaint&#39;s smarter sibling, and the way clients already brief: markup on a picture.</p>
 <ol>
-<li><p>Wire an image into the Annotate node and run upstream once so it has an output.</p>
-</li>
-<li><p>Click <strong>✏ Annotate</strong> to open the editor. Draw <strong>arrows</strong> (point at the exact object), <strong>boxes / circles</strong> (hold <strong>Alt</strong> to draw from the center), a freehand <strong>lasso</strong> or a click-placed <strong>polygon</strong> (click corners; close on the first corner or double-click — Backspace undoes a corner, Esc cancels), or drop a numbered <strong>point</strong> marker. Give each mark a note (&quot;change this chair to a deep red&quot;, &quot;remove this lamp&quot;) and, optionally:</p>
-<ul>
+<li>Wire an image into the Annotate node and run upstream once so it has an output.</li>
+<li>Click <strong>✏ Annotate</strong> to open the editor. Draw <strong>arrows</strong> (point at the exact object), <strong>boxes / circles</strong> (hold <strong>Alt</strong> to draw from the center), a freehand <strong>lasso</strong> or a click-placed <strong>polygon</strong> (click corners; close on the first corner or double-click — Backspace undoes a corner, Esc cancels), or drop a numbered <strong>point</strong> marker. Give each mark a note (&quot;change this chair to a deep red&quot;, &quot;remove this lamp&quot;) and, optionally:<ul>
 <li>a <strong>color chip</strong> — pick on the color wheel, browse the <strong>RAL Classic</strong> swatch grid (216 colors with search — the archviz-native vocabulary clients actually speak; approximate sRGB, since RAL is a physical standard), or use the <strong>eyedropper</strong> to sample a color straight from the image (&quot;make it THIS color&quot;);</li>
 <li>a <strong>reference image</strong> — drop or browse an image onto the mark&#39;s card: &quot;replace THIS with the object shown&quot;. References are lettered (A, B, …) and sent to the model alongside the original. Exotic formats (AVIF from a Google Images drag, for instance) are converted automatically.</li>
 </ul>
-<p><strong>Wheel zooms, middle-drag pans</strong> — for detailed work at native resolution. In <strong>Select</strong>, a selected lasso or polygon shows a handle on every corner, so the outline can be refined point by point.</p>
-</li>
-<li><p>Run. No prompt needed — the marks <em>are</em> the prompt. A wired <code>prompt</code> is optional and rides along as a global instruction (&quot;keep the late-afternoon light&quot;).</p>
 </li>
 </ol>
+<figure class="media"><video src="/docs/media/image-generation/annotate.mp4" poster="/docs/media/image-generation/annotate.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>A box with its note and a reference image, an arrow with its note; Seedream Flash applies the two edits where they were drawn</figcaption></figure>
+   **Wheel zooms, middle-drag pans** — for detailed work at native resolution. In **Select**, a selected lasso or polygon shows a handle on every corner, so the outline can be refined point by point.
+3. Run. No prompt needed — the marks *are* the prompt. A wired `prompt` is optional and rides along as a global instruction ("keep the late-afternoon light").
+
 <p>Under the hood the node is a compiler, and it speaks to each model in the form that model reads best:</p>
 <ul>
 <li><strong>Nano Banana and GPT Image: a drawn copy.</strong> Your marks are <strong>burned into a copy of the image</strong> (numbered red markers, arrows, outlines, color swatches) and the model receives <em>both</em> images, the untouched original and the annotated copy, plus a numbered instruction per mark. Drawn-on-image pointing is spatially unambiguous in a way prose never is. The output is a clean edited image, no markers.</li>
@@ -305,7 +306,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>The result sits on top, laid back over the original.</strong> Brut measures how the result moved (a shift and a slight stretch) and undoes it on a copy, to under a pixel, so an edit meets its surroundings without a step. The layer&#39;s row says <em>aligned</em>.</li>
 <li><strong>A mask shows only what changed, where you asked for it.</strong> Brut compares the two pictures and keeps the changed areas that touch one of your marks: the new object, the opened door, with a little room for a shadow. A facade that came back slightly warmer, a hedge re-rendered leaf by leaf: those stay the original&#39;s.</li>
 </ol>
-<p>Then the Layers editor opens on that mask, an ordinary one: paint white to show more of the edit (a longer shadow, a reflection), black to give an area back to the original. <strong>✓ Use this stack</strong> composites again, free.</p>
+<figure class="media"><video src="/docs/media/image-generation/reconcile.mp4" poster="/docs/media/image-generation/reconcile.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Reconcile with input: the Layers node opens with the original as base, the result aligned on top and masked to the two edits; a brush stroke reveals a little more</figcaption></figure>
+Then the Layers editor opens on that mask, an ordinary one: paint white to show more of the edit (a longer shadow, a reflection), black to give an area back to the original. **✓ Use this stack** composites again, free.
+
 <ul>
 <li><strong>The Annotate node&#39;s own result is not changed.</strong> The aligned picture is a separate file that only the Layers node uses; anything else wired to the Annotate node keeps receiving the model&#39;s picture as it came.</li>
 <li><strong>Free and local.</strong> No provider is called; it takes a few seconds.</li>
@@ -326,7 +329,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Wheel zooms</strong> (past ~1.5× the preview switches to full native resolution), <strong>middle-drag pans</strong>.</li>
 </ul>
 <p>Why it matters beyond convenience: generative edits keep &quot;everything else unchanged&quot; only <em>approximately</em> — the whole frame regenerates and untouched regions drift subtly. Layers clamps every unpainted region back to the <strong>source pixels</strong>. Stack the original under a generation, mask in just the part you wanted changed, and the deliverable is pixel-faithful everywhere else.</p>
-<p>Notes:</p>
+<figure class="media"><video src="/docs/media/image-generation/layers.mp4" poster="/docs/media/image-generation/layers.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Paint the original back wherever the model overreached, feathered, local and free</figcaption></figure>
+Notes:
+
 <ul>
 <li>A layer tagged <strong>aligned</strong> (the result layer of <a href="#reconcile-with-input">Reconcile with input</a>) is drawn from a copy that Brut laid back over the base; it stays so as long as that base is the bottom of the stack.</li>
 <li>The <strong>base defines the canvas</strong>. A layer of another size <strong>auto-fits</strong>: scaled to cover and center-cropped — never distorted (the editor labels it &quot;auto-fit&quot;). This is the common case: a 4K generation never exactly matches its source&#39;s dimensions. Masks stay strict — a stale mask fails loudly, never applies misaligned.</li>
@@ -337,7 +342,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </ul>
 <h2 id="compose"><a class="anchor" href="#compose" aria-hidden="true">#</a>Compose</h2>
 <p>Blend a <strong>scene</strong> with one or more <strong>reference</strong> images. Wire the base image into <code>scene</code>, the sources you want to pull from into <code>reference</code>, and a prompt describing the blend. Compose is handy for dropping entourage, materials or mood from references into a render.</p>
-<p>It is also the house tool for <strong>grade transfer</strong>: scene = your shot, reference = the image whose look you want, prompt = the built-in <strong>Grade match</strong> preset (in the Prompt node&#39;s Presets menu) — the palette, tones and mood carry over while the architecture stays untouched. This is the recommended finishing pass after a Multi-Shot exploration.</p>
+<figure class="media"><img src="/docs/media/image-generation/compose.png" alt="Scene, reference and prompt in; the reference rendered into the scene, not pasted" loading="lazy"><figcaption>Scene, reference and prompt in; the reference rendered into the scene, not pasted</figcaption></figure>
+It is also the house tool for **grade transfer**: scene = your shot, reference = the image whose look you want, prompt = the built-in **Grade match** preset (in the Prompt node's Presets menu) — the palette, tones and mood carry over while the architecture stays untouched. This is the recommended finishing pass after a Multi-Shot exploration.
+
 <p>The same pass can borrow the reference&#39;s <em>camera</em> too: the <strong>Grade &amp; camera match</strong> preset asks for its &quot;filmic point of view&quot; as well, and the shot is reframed to the reference&#39;s way of seeing — angle, symmetry, distance — while the building stays yours. Field-proven on a daytime pool shot turned into a frontal mirror composition in one call.</p>
 <h2 id="choosing-a-model"><a class="anchor" href="#choosing-a-model" aria-hidden="true">#</a>Choosing a model</h2>
 <p>Every model and its default parameters come from Brut&#39;s catalog, so the menu is always current. Cheapest-to-richest on Gemini: <code>gemini-3.1-flash-lite-image</code> (Nano Banana 2 Lite, ~$0.03, <strong>text-to-image only</strong> — it can&#39;t edit) → <code>gemini-nano-banana-2.1</code> (Nano Banana 2.1, ~$0.034 at 1K, up to 4K, edits and up to 14 references; it replaces <code>gemini-3.1-flash-image</code>, Nano Banana 2, which Google retires on 2026-10-29) → <code>gemini-3-pro-image</code> (Nano Banana Pro, up to 4K). For <strong>edits</strong>, the legacy <code>gemini-2.5-flash-image</code> (Nano Banana, ~$0.04) is still the cheapest and stays on the edit menus. On the BytePlus key, <strong><a href="/docs/providers/seedream.html">Seedream 5.0</a></strong> undercuts all of them: Flash at $0.018 per image for exploration, Pro at $0.045 (2K $0.09) for photoreal keepers, Lite at $0.035 up to 4K and the one model whose text-to-image <strong>people</strong> Seedance accepts as start frames. See <a href="/docs/providers/index.html">Providers</a> for the full list and billing notes.</p>
@@ -348,6 +355,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#text-image">Text → Image</a></li><li class="lvl2"><a href="#image-image">Image → Image</a></li><li class="lvl2"><a href="#inpaint">Inpaint</a></li><li class="lvl3"><a href="#what-the-mask-does-and-does-not-do">What the mask does and does not do</a></li><li class="lvl2"><a href="#annotate-correct">Annotate &amp; Correct</a></li><li class="lvl3"><a href="#seedream-on-this-node">Seedream on this node</a></li><li class="lvl3"><a href="#reconcile-with-input">Reconcile with input</a></li><li class="lvl2"><a href="#layers">Layers</a></li><li class="lvl2"><a href="#compose">Compose</a></li><li class="lvl2"><a href="#choosing-a-model">Choosing a model</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>

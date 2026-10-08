@@ -192,7 +192,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Log in to Kling</strong> — your browser opens on kling.ai; sign in there. Tokens are stored by the CLI itself in <code>~/.kling/.credentials</code>.</li>
 <li><strong>Check login</strong> confirms the session any time, and <strong>Log out</strong> (shown while signed in) drops it — switch accounts by logging out, then logging back in with the other one. Finished generations stay on disk.</li>
 </ol>
-<p>If you run Brut from source instead of the installer, the classic route still works and takes precedence: <code>npm i -g @klingai/cli-global</code>, then <code>kling login</code> — a CLI already on your PATH is always used as-is.</p>
+<figure class="media"><img src="/docs/media/providers/kling-cli-card.png" alt="The Kling (subscription) card: Install the CLI, Log in to Kling, and your plan balance once signed in" loading="lazy"><figcaption>The Kling (subscription) card: Install the CLI, Log in to Kling, and your plan balance once signed in</figcaption></figure>
+If you run Brut from source instead of the installer, the classic route still works and takes precedence: `npm i -g @klingai/cli-global`, then `kling login` — a CLI already on your PATH is always used as-is.
+
 <p>Brut talks to Kling through the CLI (an MCP client) and <strong>never keychains those tokens</strong> — the vault just reports a <code>cli-oauth</code> sentinel when the session file exists. The engine downloads the <strong>watermark-free master</strong> (result URLs expire in 24 h).</p>
 <h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
 <p>The subscription model ids differ from REST — <code>kling-video-v2_5</code>, <code>…-v3_0</code>, <code>…-v3_0_omni</code>, <code>…-v3_0_turbo</code>, <code>…-v2_6</code>, <code>…-o1</code> — and cover both image-to-video and text-to-video.</p>
@@ -215,6 +217,7 @@ Kling sign-in or the REST key.</p>
 <h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
 <li><strong>5 QPS</strong>, <strong>Personal workspace only</strong>, and tasks <strong>can&#39;t be cancelled</strong> provider-side.</li>
+<li><strong>A plan without a subscription runs one clip at a time</strong> (even with credits on it: kling.ai treats it as a trial, and the clip carries a watermark). Film Shots sends its clips in parallel; the ones Kling refuses for running beside another are re-queued and run after the others, one by one, and their row says so on hover. Subscribe on kling.ai for parallel clips and the watermark-free master.</li>
 <li>Each seat signs in once (the CLI session lives per-machine, per-user).</li>
 </ul>
 <p>For higher throughput or Team workspaces, use the <strong><a href="/docs/providers/kling.html">REST API</a></strong> instead.</p>
@@ -223,6 +226,6 @@ Kling sign-in or the REST key.</p>
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#how-it39s-authenticated-no-key-to-paste">How it&#39;s authenticated (no key to paste)</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#pricing-your-plan-balance">Pricing &amp; your plan balance</a></li><li class="lvl2"><a href="#no-kling-sign-in-the-menu-still-works">No Kling sign-in? The menu still works</a></li><li class="lvl2"><a href="#limits">Limits</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>

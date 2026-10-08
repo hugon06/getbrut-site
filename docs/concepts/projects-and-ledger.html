@@ -199,7 +199,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>NAS-rooted projects</strong> store their data at any absolute path (a <code>project.json</code> marker inside makes it portable). A second seat can <strong>Open project…</strong> on the same folder and adopt it — that&#39;s how a studio shares live work.</li>
 <li><strong>Default project</strong> keeps the legacy <code>outputs/</code> location, so nothing you already made ever moves.</li>
 </ul>
-<p>Projects can be <strong>exported</strong> whole (outputs + graphs + ledger) to an empty folder — the copy is itself openable — or packed into a single <strong><a href="/docs/concepts/brutpack.html">.brutpack</a></strong> file.</p>
+<figure class="media"><video src="/docs/media/concepts/project-switcher.mp4" poster="/docs/media/concepts/project-switcher.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>File holds the actions; the two switchers beside it only switch, project and graph</figcaption></figure>
+Projects can be **exported** whole (outputs + graphs + ledger) to an empty folder — the copy is itself openable — or packed into a single **[.brutpack](/docs/concepts/brutpack.html)** file.
+
 <h2 id="the-generation-ledger"><a class="anchor" href="#the-generation-ledger" aria-hidden="true">#</a>The generation ledger</h2>
 <p>Every terminal generation — success, failure, or cancel — is appended to the project&#39;s ledger (<code>ledger/generations.jsonl</code>). Each row carries the full request context: node id, provider, model, prompt, the output paths, and the cost estimate.</p>
 <p><strong>Text and planning calls are ledgered too</strong>: Text → Text, Refine, the Multi-Shot planner and the cinema crew each write a <code>planning</code>-lane row with the provider-reported token counts, priced from the catalog&#39;s per-token rates (Marcel&#39;s own calls have their separate <code>companion</code> lane). No spend is invisible.</p>
@@ -209,7 +211,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Spend.</strong> The toolbar readout aggregates the ledger into a running total, broken down by provider — and <strong>clicking it opens the full ledger</strong>: per-lane totals (generations vs Marcel&#39;s own calls) and every row newest-first with its model, status, and estimated cost.</li>
 <li><strong>Budgets.</strong> <strong>File ▾ → Project budget…</strong> sets a spend ceiling for the project. The readout shows <code>$spent / $budget</code> and tints as you approach it (amber past 80%, red past 100%), and every paid confirmation dialog adds an honest budget line near the cap. Budgets are <strong>soft by default</strong> — they inform, you still hold the OK. Tick <strong>hard cap</strong> and paid confirmations refuse instead until you raise or clear the budget. Comparisons use the ledger&#39;s estimates; leave the amount empty to remove the budget.</li>
 </ul>
-<p>Because the ledger is written at the moment a job <em>finalizes</em> (not when it&#39;s submitted), jobs that were reattached after an engine restart still price and record correctly — paid work is never lost.</p>
+<figure class="media"><video src="/docs/media/concepts/ledger-panel.mp4" poster="/docs/media/concepts/ledger-panel.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Click the spend readout: the ledger panel, per provider and per node, with the budget cap on top</figcaption></figure>
+Because the ledger is written at the moment a job *finalizes* (not when it's submitted), jobs that were reattached after an engine restart still price and record correctly — paid work is never lost.
+
 <h2 id="durability"><a class="anchor" href="#durability" aria-hidden="true">#</a>Durability</h2>
 <p>Video jobs are asynchronous — you submit, then poll. Brut <strong>journals</strong> every async submission and <strong>reattaches</strong> in-flight jobs when the engine restarts, under the same job ids. If you kill the engine mid-render, the job recovers on the next launch — one ledger row, correct price. Unreadable journal entries are quarantined loudly rather than silently dropped.</p>
 <h2 id="where-things-live"><a class="anchor" href="#where-things-live" aria-hidden="true">#</a>Where things live</h2>
@@ -311,6 +315,6 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#durability">Durability</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>

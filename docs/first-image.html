@@ -187,7 +187,9 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>Let&#39;s make one image end to end. This takes about a minute and costs roughly <strong>$0.03</strong> on Gemini&#39;s cheapest image model.</p>
 <h2 id="the-fastest-path-the-starter-graph"><a class="anchor" href="#the-fastest-path-the-starter-graph" aria-hidden="true">#</a>The fastest path: the starter graph</h2>
 <p>The setup wizard offers a <strong>starter graph</strong> on its last step, right after it has you create your first project — a ready-wired <strong>Prompt → Refine → Text→Image → Preview</strong> chain on <code>gemini-3.1-flash-lite-image</code> (Nano Banana 2 Lite). Click <strong>Add starter graph</strong>, then hit <strong>▶ Run</strong> in the toolbar. Done. (Re-open the wizard any time from <strong>File ▾ → Setup wizard…</strong>.)</p>
-<p>If you&#39;d rather build it by hand, here&#39;s the same thing in three nodes.</p>
+<figure class="media"><video src="/docs/media/first-image/starter-run.mp4" poster="/docs/media/first-image/starter-run.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Add the starter graph, press Run, watch the image land with its cost on the badge</figcaption></figure>
+If you'd rather build it by hand, here's the same thing in three nodes.
+
 <h2 id="build-it-by-hand"><a class="anchor" href="#build-it-by-hand" aria-hidden="true">#</a>Build it by hand</h2>
 <ol>
 <li><strong>Add a Prompt node.</strong> Press <code>Tab</code> over the canvas (or <strong>+ Node</strong>) and pick <strong>Prompt</strong>. Type a description:<blockquote>
@@ -207,7 +209,9 @@ That's the whole loop: **prompt → generate → preview.**
 <li>The node cached the result against a hash of its inputs. <strong>Run again and it&#39;s free</strong> — nothing changed, so nothing is re-billed. Change the prompt and only that node re-pays. See <a href="/docs/concepts/never-pay-twice.html">Never pay twice</a>.</li>
 <li>The generation was recorded in your project <strong>ledger</strong> — click the 🕘 on the node to see its history and re-pin any past result.</li>
 </ul>
-<h2 id="troubleshooting"><a class="anchor" href="#troubleshooting" aria-hidden="true">#</a>Troubleshooting</h2>
+<figure class="media"><video src="/docs/media/first-image/history-pin.mp4" poster="/docs/media/first-image/history-pin.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>The 🕘 on any paid node: every past result, and one click pins it back as the output, free</figcaption></figure>
+## Troubleshooting
+
 <ul>
 <li><strong><code>429 RESOURCE_EXHAUSTED</code> on the first call</strong> → your Gemini key isn&#39;t billing-enabled (the free tier has zero image quota). Enable billing in Google AI Studio. See <a href="/docs/providers/gemini.html">Google Gemini</a>.</li>
 <li><strong>A ⚠ &quot;Add your … key&quot; button on the node</strong> → that provider isn&#39;t configured; click it to jump to the wizard.</li>
@@ -222,8 +226,8 @@ That's the whole loop: **prompt → generate → preview.**
 
 <div class="prevnext"><a class="pn prev" href="/docs/install.html"><span>← Previous</span><b>Install & first run</b></a><a class="pn next" href="/docs/workflows.html"><span>Next →</span><b>Workflows</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-fastest-path-the-starter-graph">The fastest path: the starter graph</a></li><li class="lvl2"><a href="#build-it-by-hand">Build it by hand</a></li><li class="lvl2"><a href="#what-just-happened">What just happened</a></li><li class="lvl2"><a href="#troubleshooting">Troubleshooting</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-fastest-path-the-starter-graph">The fastest path: the starter graph</a></li><li class="lvl2"><a href="#build-it-by-hand">Build it by hand</a></li><li class="lvl2"><a href="#what-just-happened">What just happened</a></li><li class="lvl2"><a href="#next">Next</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=6c62007e28" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=fb36a53294" defer></script>
 </body>
 </html>
