@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elements, the references vault · Brut docs</title>
+<meta name="description" content="Elements, the references vault — Brut documentation. Local-first, bring-your-own-key AI orchestration.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://getbrut.app/docs/concepts/elements.html">
+<style>
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk.woff2) format("woff2");}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans.woff2) format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/JetBrainsMono.woff2) format("woff2");}
+:root{
+  --bg:#141311;--panel:#1c1a17;--panel-2:#211f1b;--border:#35322c;--border-soft:#262421;
+  --text:#eae7e0;--body:#b9b4ab;--muted:#94908a;--muted-2:#6d6961;--accent:#4f9dff;
+  --font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--body);font-family:var(--font-body);-webkit-font-smoothing:antialiased;line-height:1.65}
+/* --- scrollbars: thin + themed everywhere (the Windows default was a bright
+   gray slab against the dark theme); scrollbar-color inherits from html,
+   ::-webkit-* covers older engines --- */
+html{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--muted-2)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--text)}
+pre{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.6;color:var(--body)}
+/* --- top bar --- */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;height:56px;padding:0 20px;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-soft)}
+.wordmark{display:flex;align-items:baseline;gap:5px;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--text)}
+.wordmark .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.top .docs-label{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.top .spacer{flex:1}
+.top .home{font-size:13.5px;color:var(--muted)}
+.top .menu-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);padding:5px 9px;cursor:pointer;font-size:13px}
+/* --- layout --- */
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr) 200px;gap:0;max-width:1240px;margin:0 auto}
+.side{border-right:1px solid var(--border-soft);padding:26px 18px;height:calc(100vh - 56px);position:sticky;top:56px;overflow-y:auto;scrollbar-gutter:stable}
+/* nav + toc scrollbars stay invisible until hovered — the rail reads as a
+   clean menu, the affordance appears exactly when you can use it */
+.side,.toc{scrollbar-color:transparent transparent}
+.side:hover,.toc:hover{scrollbar-color:var(--border) transparent}
+.side::-webkit-scrollbar-thumb,.toc::-webkit-scrollbar-thumb{background:transparent;border:none}
+.side:hover::-webkit-scrollbar-thumb,.toc:hover::-webkit-scrollbar-thumb{background:var(--border);border:2px solid var(--bg)}
+.nav-section{margin-bottom:18px}
+.nav-head{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:8px}
+.side ul{list-style:none;margin:0;padding:0}
+.side li a{display:block;padding:4px 10px;border-radius:6px;font-size:14px;color:var(--muted)}
+.side li a:hover{color:var(--text);background:var(--panel);text-decoration:none}
+.side li a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);font-weight:600}
+/* --- content --- */
+.content{padding:38px 44px;min-width:0;max-width:820px}
+.content h1{font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.02em;color:var(--text);margin:0 0 6px;line-height:1.1}
+.content h2{font-family:var(--font-display);font-weight:600;font-size:24px;letter-spacing:-.01em;color:var(--text);margin:42px 0 12px;padding-top:8px;border-top:1px solid var(--border-soft)}
+.content h3{font-family:var(--font-display);font-weight:600;font-size:18px;color:var(--text);margin:28px 0 8px}
+.content p{margin:0 0 15px}
+.content ul,.content ol{margin:0 0 15px;padding-left:22px}
+.content li{margin:5px 0}
+.content strong{color:var(--text)}
+.content blockquote{margin:18px 0;padding:2px 16px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 8px 8px 0;color:var(--body)}
+.content table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:13px;line-height:1.45;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}
+.content th{background:var(--panel);color:var(--text);font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;white-space:nowrap}
+.content h2 .anchor,.content h3 .anchor{opacity:0;margin-left:-18px;padding-right:6px;color:var(--muted-2);font-weight:400;text-decoration:none}
+.content h2:hover .anchor,.content h3:hover .anchor{opacity:1}
+.content hr{border:none;border-top:1px solid var(--border-soft);margin:32px 0}
+.content img{max-width:100%;border:1px solid var(--border);border-radius:8px}
+/* --- collapsible Q&A (COLLAPSIBLE pages) --- */
+.content details.faq{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:10px 0;padding:0 18px}
+.content details.faq summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:14px 0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--text);line-height:1.3}
+.content details.faq summary::-webkit-details-marker{display:none}
+.content details.faq summary::before{content:"▸";flex:none;color:var(--accent);font-size:14px;transition:transform .15s ease}
+.content details.faq[open] summary::before{transform:rotate(90deg)}
+.content details.faq summary:hover{color:var(--accent)}
+.content details.faq .faq-body{padding:0 0 6px 26px;border-top:1px solid var(--border-soft);margin-top:-2px;padding-top:12px}
+.content details.faq .faq-body p:last-child{margin-bottom:10px}
+.faq-controls{display:flex;gap:8px;margin:6px 0 16px}
+.faq-controls button{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:5px 11px;font-size:12.5px;font-family:var(--font-body);cursor:pointer}
+.faq-controls button:hover{color:var(--text);border-color:var(--accent)}
+/* --- illustrations (@video / @image shorthand) --- */
+.content figure.media{margin:18px 0 22px;padding:0}
+.content figure.media video,.content figure.media img{display:block;width:100%;max-width:100%;border:1px solid var(--border);border-radius:8px;background:var(--panel)}
+.content figure.media figcaption{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.45}
+@media(prefers-reduced-motion:reduce){.content figure.media video{display:none}}
+.lead{font-size:17px;line-height:1.6;color:var(--body)}
+/* --- workflow cards (@workflows shorthand) --- */
+.content .wf-card{border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:18px 20px 14px;margin:18px 0}
+.content .wf-card h3{margin:0 0 4px}
+.content .wf-card .wf-meta{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin:0 0 10px}
+.content .wf-card p{margin:0 0 12px}
+.content .wf-pics{display:flex;gap:10px;margin:0 0 14px}
+.content .wf-pics figure{flex:1;min-width:0;margin:0}
+.content .wf-pics img,.content .wf-pics video{display:block;width:100%;background:var(--panel-2)}
+.content .wf-pics figcaption{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
+.content .wf-fields{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 14px;margin:0;font-size:13.5px;line-height:1.5}
+.content .wf-fields dt{grid-column:1;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.content .wf-fields dd{grid-column:2;margin:0;min-width:0}
+@media(max-width:560px){.content .wf-pics{flex-direction:column}}
+.content pre.license{white-space:pre-wrap;word-break:break-word}
+.content pre.license code{font-size:12.5px;color:var(--body)}
+/* callouts via blockquote starting with **Note** etc handled by authors */
+/* --- right TOC --- */
+.toc{padding:32px 14px;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;font-size:12.5px}
+.toc-head{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:10px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:4px 0}
+.toc li.lvl3{padding-left:12px}
+.toc a{color:var(--muted)}
+.toc a:hover{color:var(--text);text-decoration:none}
+/* anchors land below the sticky top bar, not under it */
+.content [id]{scroll-margin-top:72px}
+/* --- search (docs-search.js) --- */
+.search{position:relative;width:340px;max-width:100%}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted-2);pointer-events:none}
+.search input{width:100%;height:34px;padding:0 34px 0 32px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font-body);font-size:13.5px;outline:none;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted-2)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search-key{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none}
+.search input:focus~.search-key,.search input:not(:placeholder-shown)~.search-key{display:none}
+kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 5px}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;width:560px;max-width:calc(100vw - 32px);max-height:min(70vh,560px);overflow-y:auto;overflow-x:hidden;background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:6px}
+.search-results[hidden]{display:none}
+.sr{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:7px;color:var(--body);min-width:0}
+.sr:hover{text-decoration:none}
+.sr.active{background:color-mix(in srgb,var(--accent) 13%,transparent)}
+.sr-path{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-title{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--text);line-height:1.3}
+.sr.active .sr-title{color:var(--accent)}
+.sr-snip{font-size:12.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sr mark{background:none;color:var(--text);font-weight:600;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--accent) 70%,transparent)}
+.sr-empty{padding:14px 12px;font-size:13px;color:var(--muted)}
+.sr-foot{display:flex;gap:16px;padding:8px 12px 4px;margin-top:4px;border-top:1px solid var(--border-soft);font-size:11.5px;color:var(--muted-2)}
+.sr-foot kbd{margin-right:3px}
+.content mark.hit{background:color-mix(in srgb,var(--accent) 26%,transparent);color:var(--text);border-radius:3px;padding:0 1px}
+/* --- prev/next --- */
+.prevnext{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--border-soft)}
+.pn{display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:0;max-width:48%}
+.pn:hover{border-color:var(--accent);text-decoration:none}
+.pn.next{margin-left:auto;text-align:right;align-items:flex-end}
+.pn span{font-size:12px;color:var(--muted)}
+.pn b{color:var(--text);font-size:14.5px}
+/* --- responsive --- */
+@media(max-width:1080px){.layout{grid-template-columns:230px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .side{position:fixed;top:56px;left:0;right:0;bottom:0;z-index:15;background:var(--bg);height:auto;display:none}
+  .side.open{display:block}
+  .top .menu-btn{display:inline-block}
+  .content{padding:26px 20px}
+  .top{gap:12px;padding:0 16px}
+  .top .docs-label,.top .spacer{display:none}
+  .search{flex:1;width:auto;min-width:0}
+  .search-results{position:fixed;top:62px;left:16px;right:16px;width:auto;max-width:none}
+  .sr-foot{display:none}
+}
+@media(max-width:560px){.top .home{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
+  <a class="wordmark" href="/">BRUT<span class="dot"></span></a>
+  <span class="docs-label">DOCS</span>
+  <div class="search" role="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="docs-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-label="Search the docs" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="docs-results">
+    <kbd class="search-key">/</kbd>
+    <div id="docs-results" class="search-results" role="listbox" aria-label="Search results" hidden></div>
+  </div>
+  <span class="spacer"></span>
+  <a class="home" href="/">getbrut.app ↗</a>
+</header>
+<div class="layout">
+  <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/elements.html" class="active">Elements, the references vault</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li><li><a href="/docs/nodes/scene.html">Scene & Camera (3D)</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
+  <main class="content">
+<h1>Elements, the references vault</h1>
+<p>Your references, in one place, beside the canvas: film frames, photographs, the renders you were proud of, the people and places a project keeps coming back to. Elements reads <strong>folders on your disk</strong> as they are and shows them as a panel; tiles drag straight onto the canvas.</p>
+<p>Open it from the rail (the pictures icon, above Library). It slides in on the right, left of Marcel, as wide as you drag it; the slider at the bottom right (between the two zoom glyphs) sets the size of the tiles, the bar between the two sections of the list drags up or down to give one of them more room, and the line between the list and the tiles drags sideways to widen the list (double-click resets either). The list keeps its width whatever a folder is called; long names are cut short.</p>
+<h2 id="two-levels-your-elements-your-folders"><a class="anchor" href="#two-levels-your-elements-your-folders" aria-hidden="true">#</a>Two levels: your elements, your folders</h2>
+<p>The list on the left has two sections.</p>
+<p><strong>Elements</strong>, on top, is what the canvas can name: <strong>Cast</strong> (a person or character: their character sheet, their face, a turnaround), <strong>Sets</strong> (places), <strong>Props</strong> (objects or products that must stay themselves), <strong>Styles</strong> (looks), and <strong>Saved</strong> (pictures you saved from the canvas with no type yet). Each category shows <strong>blocks</strong>, one card per element with its first picture, its name and how many pictures it holds. Click a block to select it (its name, type and descriptor are editable in the drawer), click it again to open it and see its pictures. Drag a block onto the canvas and the whole element lands as one Image In.</p>
+<p><strong>Folders</strong>, below, is the file explorer: every folder you added to the vault, with the folders inside it as collections and shelves, unfolded with the chevrons like any file explorer (a click on a name opens it and shows it; the chevron only folds or unfolds, and what you unfolded stays that way while you browse the elements above). Your folders are read as they are: <code>Movies/</code>, <code>Office/</code>, <code>Mood/</code>, whatever you keep. A film works best as one folder per film, named <code>&lt;Title&gt; (&lt;Year&gt;) - &lt;Director&gt;</code>, with an <code>info.txt</code> beside the frames holding a few <code>key: value</code> lines (title, year, director, dop, kind, moods, a <code>look:</code> paragraph): the panel reads the folder name and the file, so the credits, the moods and the look you typed once filter the vault forever.</p>
+<h2 id="folders-add-remove-where-brut-saves"><a class="anchor" href="#folders-add-remove-where-brut-saves" aria-hidden="true">#</a>Folders: add, remove, where Brut saves</h2>
+<p>The 📁 button (and <strong>Add a folder…</strong> on a right-click in the list) adds a folder of references to the vault: your references share, a project&#39;s folder, any number of them. The files stay where they are, nothing is moved, and each folder keeps its own small index inside it, so a shared folder brings its index along. <strong>Take out of Elements</strong> on a folder&#39;s right-click removes it from the list; its files and its index stay on disk.</p>
+<p>What Brut adds goes into <strong>one</strong> of these folders, under <code>Brut/</code>: a picture you save from the canvas lands in <code>Brut/Saved/</code>, a character in <code>Brut/Cast/</code>, a place in <code>Brut/Sets/</code>, an object in <code>Brut/Props/</code>, a look in <code>Brut/Styles/</code>. That folder is marked with a dot in the list and named in the panel&#39;s head; <strong>Keep Brut&#39;s elements here</strong> on a right-click moves the choice to another folder. A studio that points this at its share shares its elements; a solo seat keeps them beside its library. The same picture saved twice is one element, whatever it was called.</p>
+<p><strong>⟳ reads the folders again</strong>: new and changed pictures come in, deleted ones leave. Dropping files into a folder from Explorer is the normal way to fill it; the first read of a thousand frames takes a few seconds (every picture gets its palette), later reads are instant.</p>
+<p>Each picture gets a <strong>palette</strong> at reading time, free and local: the hue chips in the filter bar find &quot;the blue frames&quot;, &quot;the pink ones&quot;, by the nearest swatch. The filter bar (search, the type chips, Seedance-approved, a hue) narrows whatever the list shows; <strong>✕ clear</strong> drops the chips and keeps your place in the list.</p>
+<h2 id="brut39s-starter-elements"><a class="anchor" href="#brut39s-starter-elements" aria-hidden="true">#</a>Brut&#39;s starter elements</h2>
+<p>A fresh vault can start with a few elements made of pictures Brut ships: some sets and a character. <strong>Add Brut&#39;s starter elements…</strong> on the list&#39;s right-click (or the button on the empty-vault card) asks first, then copies them into the folder Brut saves into and opens the Sets category; adding them twice adds nothing twice. Never film frames, never anyone&#39;s client work.</p>
+<h2 id="importing-from-the-web-from-a-video"><a class="anchor" href="#importing-from-the-web-from-a-video" aria-hidden="true">#</a>Importing: from the web, from a video</h2>
+<p>Two more ways to fill a folder without Explorer. Both run in the background: a line under the filter bar shows the progress with a <strong>Cancel</strong> (what is already written stays), and the Activity panel gets one line when it ends.</p>
+<p><strong>Import from the web…</strong> (the ⇩ button in the panel&#39;s head, or the list&#39;s right-click) takes web addresses, one per line:</p>
+<ul>
+<li>A <strong>film-grab.com gallery</strong> becomes one film folder named <code>&lt;Title&gt; (&lt;Year&gt;) - &lt;Director&gt;</code> with every frame in gallery order and an <code>info.txt</code> holding the credits the page states (director, cinematographer, production and costume design, year, aspect ratio, country, genre), plus empty <code>look:</code>, <code>moods:</code> and <code>references_for:</code> lines for you. The frames land under <code>Movies/</code> unless you name another collection.</li>
+<li>A <strong>film-grab director, cinematographer, year or tag page</strong> brings every film it lists, across its pages; the films already in the vault are skipped.</li>
+<li>Any <strong>picture address</strong> is downloaded into a named set (<code>Web/&lt;the name you give&gt;/</code>), each picture keeping its address as its source.</li>
+<li>Any <strong>other page</strong> is read for the pictures it shows: they land as a set named after the page (or after the name you give, for one page alone), icons and thumbnails left out. Brut reads only the pages you paste, never the pages they link to. A page that builds itself in the browser or sits behind a sign-in shows no pictures to Brut: it is listed as a failure at the end, with the reason, and the import goes on with the next address.</li>
+</ul>
+<p>A film already in the vault is left alone; tick <strong>rewrite the credits the page states</strong> to refresh the credit lines of its <code>info.txt</code> from the page while every line you typed yourself (the look, the moods, anything else) stays as it is.</p>
+<p><strong>Frames to Elements…</strong> on a clip&#39;s right-click, or <strong>Frames from a video file…</strong> on the list&#39;s right-click for a video anywhere on your disk, takes stills out of a video into a set of the vault: <strong>after every cut</strong> (one frame per shot; the threshold says how different two frames must be, 0.35 to start, higher keeps only the sharper cuts), <strong>every N seconds</strong>, or <strong>at the times you name</strong>. A clip of a project or of the vault plays in the dialog: scrub, <strong>+ Add this time</strong>, as many times as you want. The dialog says how many frames the run would take; a run over the cap (300 to start) stops before writing anything and says what to change. The frames are JPEGs named after the set, each one&#39;s source being the video and its time; the folder&#39;s <code>info.txt</code> names the video. The video stays where it is, never copied in.</p>
+<p>Film frames are copyrighted material for private study: they stay on your disk and never enter Brut.</p>
+<h2 id="elements-the-typed-ones"><a class="anchor" href="#elements-the-typed-ones" aria-hidden="true">#</a>Elements, the typed ones</h2>
+<p>Any picture is a reference you can drag. A <strong>typed element</strong> is a block the canvas can name. Select one or several pictures (Ctrl-click adds, Shift-click ranges), click <strong>Make an element…</strong>, give it a type, a name and one line about it in your words (&quot;a woman of 35, short grey hair, navy coat&quot;). The pictures keep their own names; the element&#39;s name is on the block and on each picture&#39;s second line. The drawer edits all of it later; <strong>Untype</strong> returns the pictures to plain references. An element lives in one folder of the vault: pictures from two folders are saved to Elements first, then made into one element.</p>
+<p>Typing is never required. It is what makes an element addressable: an Image In titled after it, and that one line riding into every generation the element&#39;s pictures feed (below).</p>
+<p><strong>Describe…</strong> in the drawer writes the line for you: a vision call on your own text-model key (Gemini 3.8 Flash by default, a fraction of a cent, in the ledger) reads up to six of the element&#39;s pictures and proposes one line and a few tags (the category, the dominant colors, the era, moods as <code>mood:word</code>). You edit, then <strong>Keep</strong>: the line goes on the element, the tags on its pictures as proposed tags (your own tags stay yours), and the panel&#39;s search finds them. Cancel writes nothing.</p>
+<p><strong>Promote to style…</strong> in the same drawer turns an element into a named look in your style library, the one Marcel cites and writes prompt language for: a name, a shelf (archviz, photography, cinema, trend), the look in a sentence or two and its prompt language, both prefilled from the element&#39;s line, references if you have them. Free, local; the element stays in the vault, the style joins the looks Marcel knows.</p>
+<h2 id="onto-the-canvas"><a class="anchor" href="#onto-the-canvas" aria-hidden="true">#</a>Onto the canvas</h2>
+<ul>
+<li><strong>Drag a tile, a selection or a block</strong> onto the canvas. An element lands as <strong>one Image In holding all its pictures</strong>, titled after it and wearing its type; a single picture lands as an Image In titled after it; several loose pictures land together in one plain Image In. Onto an existing Image In, the pictures append. A <strong>look</strong> is the exception: it lands as an Image → Image node (below).</li>
+<li><strong>Add to canvas</strong> in the drawer does the same at the center of the view.</li>
+<li><strong>Elements…</strong> on an Image In, <strong>+ Elements</strong> on a Reference Board, and <strong>Pick from Elements…</strong> on a Seedance assets node open the same picker: tick, <strong>Use</strong>. On the board the picks arrive as an Image In wired in.</li>
+<li><strong>Right-click any picture on the canvas → Save to Elements…</strong>: pick a shelf (or a type, which makes an element on the spot), a name, a line, and a copy goes into the vault.</li>
+</ul>
+<h2 id="looks-dropped-on-a-picture"><a class="anchor" href="#looks-dropped-on-a-picture" aria-hidden="true">#</a>Looks: dropped on a picture</h2>
+<p>A <strong>look</strong> is a Style element that carries what it does to a picture: a family (time of day, weather, season, atmosphere, finish), the words it sends and the model it was made on. Its picture is a menu picture, the look shown on one sample scene so the list reads at a glance; it is never sent with a request.</p>
+<ul>
+<li><strong>Brut&#39;s looks.</strong> Thirty-four of them: times of day from dawn to night, weathers from clear to light snow, seasons from early spring to deep winter, atmospheres (calm, dramatic clouds, storm light, a warm evening…) and finishes (filmic, editorial, matte, high key, moody…). <strong>Add Brut&#39;s looks…</strong> on the list&#39;s right-click, on the card an empty vault shows, or on the card in Styles while no look is there yet, asks first, then copies them into <code>Brut/Styles/</code> of the folder Brut saves into. Adding them again adds nothing twice and never undoes an edit of yours. In <strong>Styles</strong> the looks sit under their family, each card with its picture and its family; your plain styles follow.</li>
+<li><strong>Drop one on a picture.</strong> Drag a look onto any picture on the canvas: an Image In&#39;s picture, a node&#39;s result, a Reference Board tile, a Shot Board tile. Brut adds an <strong>Image → Image</strong> node wired from the plug that picture comes from, with a Prompt holding the look&#39;s words, on the look&#39;s model when your keys reach it, else on the first image model they reach (the Activity line says which). A model that can keep the picture&#39;s size gets <em>Same as the picture</em>. <strong>Nothing runs</strong>: ▶ on the node renders it, and ▶ Run prices it first like any node that has not run. A picture with no plug of its own (a tile of a Multi-Shot sheet, one of an Image In&#39;s several pictures, a hidden Reference Board tile, the frame of a muted Storyboard card) first gets an Image In of its own. The new nodes land beside the picture, clear of every node already there and with room left for the result each one will show once it has run, even when you drop several looks in a row. On a Preview or a Compare, the node is wired from the node that picture comes from, so a new take flows on. Dropped on empty canvas, the look lands as the node alone, waiting for a picture. A second look dropped on the first look&#39;s node chains a second node from it, even before the first has run (its face shows only the picture it takes in; the second waits for the first&#39;s result). A clip, or a video node, takes no look: take a frame of the clip first.</li>
+<li><strong>Edit a look.</strong> Its drawer shows the family, the words (edit them, leave the field: saved) and the model it runs on, with the fallback named when that model is out of reach. A look is a starting point: change the words to make it yours.</li>
+<li><strong>Your own looks.</strong> Right-click a picture you generated → <strong>Save to Elements…</strong> → tick <strong>Save as a look</strong> and pick a family: the look keeps the prompt and the model of the run that made that picture, read from the ledger, and the picture becomes its menu picture. A picture Brut did not make (an import, a paste) has no run to keep; the dialog says so and saves nothing.</li>
+</ul>
+<p><strong>Cost and limits.</strong> Adding looks and dropping them is free; the render costs what the model costs, shown before anything runs (Brut&#39;s looks were made on Nano Banana 2.1, about three cents a picture at 1K). The model redraws the whole frame, so fine details can move; when the rest must stay exactly as it was, <a href="/docs/nodes/image-generation.html#reconcile-with-input">Reconcile with input</a> lays the original back where nothing was asked to change.</p>
+<h2 id="into-generations-the-line-rides"><a class="anchor" href="#into-generations-the-line-rides" aria-hidden="true">#</a>Into generations: the line rides</h2>
+<p>A generation node fed by an element&#39;s Image In (Image → Image, Adjust, Compose, Image → Video) adds one sentence to the prompt it sends, naming the pictures that element occupies among the pictures sent and its line: <em>Images 2 to 3 show Maria (cast): a woman of 35, short grey hair.</em> The model then knows what each reference is for, which is the whole point of a typed element. The face shows a ✦ line naming the elements the prompt names; untick it to send the pictures without a word (the node alone, nothing else changes). A line edited in the panel reaches every Image In made from that element, and the next run carries it: that is a new prompt, so the node renders again.</p>
+<p>Numbering follows the pictures as the node sends them: on Image → Image the wired pictures in order; on Adjust the picture, then the references; on Compose the scene first, then the references; on Image → Video the start frame, the end frame, then the references. An element whose line is empty is still named with its type.</p>
+<p>How many references a model reads was measured on one scene (2026-10-19: fourteen distinct objects, each a reference, one prompt asking for all of them on a table; the pictures looked at by hand): Seedream 5.0 Pro and Flash kept all 10 of their 10, FLUX 3 all 10 of 10, Nano Banana 2.1 all 14 of 14 (smaller, reordered), Ideogram 4.5 all 5 of 5, GPT Image 2.5 Flare 12 of 14 (the vase and the clock gone, every object drawn smaller). Up to each model&#39;s cap, a reference is not lost for being the ninth. Image → Image and Compose warn on the face when more pictures are wired than the model takes per request.</p>
+<h2 id="describe-the-library-then-search-by-meaning"><a class="anchor" href="#describe-the-library-then-search-by-meaning" aria-hidden="true">#</a>Describe the library, then search by meaning</h2>
+<p>The search box matches words: every word you type must appear in a title, a line, a tag, a credit, a folder name, or a picture&#39;s description (below). The <strong>≈ by meaning</strong> chip beside it ranks instead by what the pictures <em>show</em>: &quot;a snowy night drive&quot; finds the frame of a car&#39;s headlights on a snowy forest road at night, whatever the file is called.</p>
+<p>For that, each picture is <strong>described once</strong>. The line under the panel&#39;s count offers <strong>Describe the library…</strong> with the number of pictures and the price before anything is spent: Gemini 3.8 Flash looks at a small copy of each picture on your Gemini key and writes what it shows (a few sentences, then subjects, setting, time of day, light, weather, colors, mood, shot). About $0.0009 a picture, so a library of a thousand pictures costs under a dollar and takes a few minutes in the background, with a progress line and Cancel; every call is in the ledger. The description is stored in the folder&#39;s index, travels with the folder, and is written again only if the file itself changes. It shows in the drawer under <strong>What it shows</strong>, its tags (time of day, weather, shot, moods) join the panel&#39;s tags in their own list, and the word search reads it too.</p>
+<p>After that first run, <strong>pictures you add are described as they arrive</strong>: drop frames into one of your folders, import a page, save a render to Elements, and a few seconds later they are described. Pictures added while Brut was closed are described when it starts. More than a thousand new pictures at once wait for a click instead. The switch <strong>Describe new pictures as they arrive</strong>, at the end of the count line, turns this off and on again.</p>
+<p>A meaning search then compares your words with the stored descriptions. A query you have not asked before is first rewritten into the kind of description the library stores and kept for good, a few seconds and a fraction of a cent once; asked again, it answers at once and for free. Every picture whose description stands out from the rest comes back, best first, with no fixed number. Without a Gemini key the line says so; with only an OpenAI key, descriptions made earlier (they travel with the folder) can still be searched.</p>
+<h2 id="marcel-and-your-elements"><a class="anchor" href="#marcel-and-your-elements" aria-hidden="true">#</a>Marcel and your elements</h2>
+<p><a href="/docs/concepts/marcel.html">Marcel</a> reads the vault: its folders with their counts, the typed elements by name with their lines, the tags in use. Ask him what you have (&quot;a rainy neon street?&quot;, &quot;every cast element&quot;, &quot;something in that blue&quot;) and he searches it the way the panel does, by words, type, tag, hue, Seedance approval or meaning, and answers with what he found, each picture&#39;s description included. Ask him to use a picture or an element and he puts it on the canvas exactly as a drag would: one Image In per element, titled after it, its line riding into the generations it feeds. He never invents a path; what he places comes from his search. The other way works too: point him at a render on the canvas (&quot;make a style element of this one and describe it&quot;) and he saves it into the vault&#39;s <code>Brut</code> folder as a typed element with a name and a line written from what the picture shows, or turns vault pictures he found into an element, or rewrites an element&#39;s line. The panel and the element&#39;s Image Ins follow at once.</p>
+<p>The vault also hosts <strong>Marcel&#39;s notebook</strong>, a <code>Notebook</code> folder inside your primary Elements folder: your own taste as short markdown notes (a look, a subject, a client, something to avoid, a habit), written only when you agree to keep one, read back by Marcel before he cites them, editable in any text editor, with a <code>README.md</code> index Obsidian reads as a vault. The 🧠 Memory window in Marcel&#39;s panel says where the folder is and what it holds. Nothing in the notebook or the vault leaves your machine on its own: a search runs locally, and only what Marcel then says about it travels to your text model, like any chat message.</p>
+<h2 id="seedance-approved"><a class="anchor" href="#seedance-approved" aria-hidden="true">#</a>Seedance-approved</h2>
+<p>Pictures Seedance accepts the people in (the ones registered in your BytePlus asset library through a <a href="/docs/providers/seedance.html#people-register-your-pictures-as-byteplus-assets">Seedance assets</a> node, or by hand in the console) carry a ✓ in the vault and a <strong>Seedance-approved</strong> filter; the pictures you registered are kept in <code>Brut/Cast/</code>, and every asset of your BytePlus account is brought in the first time you pick from a Seedance assets node. An approved element keeps its approval wherever it goes: dropped on the canvas, its Image In says so, and a Seedance pick downstream accepts it in every role. The approval follows the picture&#39;s content, so a copy under another name is the same asset.</p>
+<h2 id="a-folder-shared-by-several-machines"><a class="anchor" href="#a-folder-shared-by-several-machines" aria-hidden="true">#</a>A folder shared by several machines</h2>
+<p>A folder on a studio share can be added to Elements on several machines. They all read the same index inside it, so what one machine does there (descriptions, tags, notes, elements and their lines) the others see, and a library described once is never described or paid for again on another machine.</p>
+<ul>
+<li><strong>Each folder has one describer</strong>: the machine whose Gemini key pays for its descriptions. The first machine to describe a folder becomes it. The other machines leave that folder&#39;s new pictures to it; their count line says so (&quot;12 new pictures in References wait for OFFICE-PC (seen 3 days ago)&quot;) with a <strong>Describe them here</strong> button, priced, for when that machine is away. Right-click a folder to see who describes it, and <strong>Describe this folder from this machine</strong> to take it over: its new pictures are then described on this machine&#39;s key. <strong>Describe new pictures as they arrive</strong> on each machine covers the folders that machine describes.</li>
+<li><strong>Never twice at once.</strong> While a machine describes, Brut leaves a small file in the folder naming it, so another machine that clicks at the same moment waits; the file goes when the work ends, and one left by a machine that went away is ignored after a few minutes.</li>
+<li><strong>A moment without the network loses nothing.</strong> A folder Brut cannot read during a pass keeps its pictures and everything they carry; a picture moved or renamed keeps its description, tags, notes and element.</li>
+<li><strong>A shared graph keeps its elements.</strong> An Image In made from an element stays tied to that element on every machine, even when the machines list their folders in another order.</li>
+<li><strong>The folder Brut saves into (the dot) is each machine&#39;s choice.</strong> Point it at the share and that machine&#39;s saved elements and Marcel&#39;s notebook go there too, shared with everyone who uses it; keep it on the machine&#39;s own disk to keep them personal.</li>
+</ul>
+<h2 id="hide-delete"><a class="anchor" href="#hide-delete" aria-hidden="true">#</a>Hide, delete</h2>
+<p>A picture of your own folders is <strong>hidden</strong> from the vault with <strong>Hide</strong>, never touched on disk. The red <strong>Delete file…</strong> deletes the selected pictures from disk, after a confirm, wherever they sit (an imported page brings every picture it shows; the ones you do not want go this way). A picture Brut copied in (under <code>Brut/</code>) has only the red button.</p>
+<h2 id="what-stays-on-your-machine"><a class="anchor" href="#what-stays-on-your-machine" aria-hidden="true">#</a>What stays on your machine</h2>
+<p>Everything. The folders, their indexes (one small database file inside each), the palettes, the descriptions. The one thing Elements fetches from the web is what you paste into <strong>Import from the web…</strong>, read straight from those sites by your machine, one page deep. Describing the library, <strong>Describe…</strong> and the meaning search call Gemini (or OpenAI) on your own key, after your click, as described above; nothing reaches us.</p>
+
+<div class="prevnext"><a class="pn prev" href="/docs/concepts/library-and-composites.html"><span>← Previous</span><b>Library & composites</b></a><a class="pn next" href="/docs/concepts/marcel.html"><span>Next →</span><b>Marcel, the companion</b></a></div>
+  </main>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#two-levels-your-elements-your-folders">Two levels: your elements, your folders</a></li><li class="lvl2"><a href="#folders-add-remove-where-brut-saves">Folders: add, remove, where Brut saves</a></li><li class="lvl2"><a href="#brut39s-starter-elements">Brut&#39;s starter elements</a></li><li class="lvl2"><a href="#importing-from-the-web-from-a-video">Importing: from the web, from a video</a></li><li class="lvl2"><a href="#elements-the-typed-ones">Elements, the typed ones</a></li><li class="lvl2"><a href="#onto-the-canvas">Onto the canvas</a></li><li class="lvl2"><a href="#looks-dropped-on-a-picture">Looks: dropped on a picture</a></li><li class="lvl2"><a href="#into-generations-the-line-rides">Into generations: the line rides</a></li><li class="lvl2"><a href="#describe-the-library-then-search-by-meaning">Describe the library, then search by meaning</a></li><li class="lvl2"><a href="#marcel-and-your-elements">Marcel and your elements</a></li><li class="lvl2"><a href="#seedance-approved">Seedance-approved</a></li><li class="lvl2"><a href="#a-folder-shared-by-several-machines">A folder shared by several machines</a></li><li class="lvl2"><a href="#hide-delete">Hide, delete</a></li><li class="lvl2"><a href="#what-stays-on-your-machine">What stays on your machine</a></li></ul></nav>
+</div>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+</body>
+</html>
