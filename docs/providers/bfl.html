@@ -184,16 +184,17 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/elements.html">Elements, the references vault</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li><li><a href="/docs/nodes/scene.html">Scene & Camera (3D)</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html" class="active">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
 <h1>Black Forest Labs</h1>
-<p><strong>Black Forest Labs</strong> makes the FLUX models. Brut calls their own API with your key, for three things:</p>
+<p><strong>Black Forest Labs</strong> makes the FLUX models. Brut calls their own API with your key, for four things:</p>
 <ul>
 <li><strong>FLUX 3 Image</strong>, their flagship image model, in every image menu (Text → Image, Image → Image, Compose, Adjust, Multi-Shot, the Storyboard&#39;s keyframes, the Sketchpad&#39;s generation layers).</li>
 <li><strong>FLUX 3 Image Klein</strong>, its small sibling, in the same menus: the same sizes, frames and pictures in, for about a fifth of the price at 1K.</li>
+<li><strong>FLUX 3 Video</strong>, their video model, in <a href="/docs/nodes/video.html#image-video">Image → Video</a>, <a href="/docs/nodes/video.html#text-video">Text → Video</a> and <a href="/docs/nodes/video.html#film-shots-the-cinema-batch-executor">Film Shots</a>: clips of 5 to 20 seconds from 720p to 4K, with sound.</li>
 <li><strong>FLUX Outpaint</strong>, their outpainting tool, as a painter in <a href="/docs/nodes/utility.html#conform">Conform</a>&#39;s extend. It is the one painter in Brut that <strong>holds your picture in place</strong> and generates only what the frame adds.</li>
 </ul>
 <h2 id="get-a-key"><a class="anchor" href="#get-a-key" aria-hidden="true">#</a>Get a key</h2>
 <p>Create an account on the <strong><a href="https://dashboard.bfl.ai">Black Forest Labs dashboard</a></strong>, add credits, make an API key and paste it into <strong>⚙ Settings → Black Forest Labs</strong>.</p>
 <p>Billing is <strong>prepaid credits</strong>: 1 credit is $0.01, and a call on an empty balance answers &quot;not enough credits&quot;. There is no subscription. Every answer says what the call cost, and that number is what Brut writes on the ledger row.</p>
-<p>No key? FLUX 3 Image and Klein also run <strong>through OpenRouter</strong> on an OpenRouter key (the node says &quot;⇄ via OpenRouter&quot;). FLUX Outpaint is on Black Forest Labs&#39; own API only: no aggregator carries it.</p>
+<p>No key? FLUX 3 Image, Klein and FLUX 3 Video also run <strong>through OpenRouter</strong> on an OpenRouter key (the node says &quot;⇄ via OpenRouter&quot;). FLUX Outpaint is on Black Forest Labs&#39; own API only: no aggregator carries it.</p>
 <h2 id="flux-3-image"><a class="anchor" href="#flux-3-image" aria-hidden="true">#</a>FLUX 3 Image</h2>
 <table>
 <thead>
@@ -222,7 +223,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>Things worth knowing:</p>
 <ul>
 <li><strong>It can look things up.</strong> By default FLUX 3 searches the web before it draws, which is how it gets a real building or a real product right. Brut leaves that on, except when Conform uses FLUX 3 to extend a picture (there is nothing to look up).</li>
-<li><strong>It has no mask input.</strong> On a mask step of the Adjust node the mask steers the edit, as on Gemini. Like every mask in Brut it is guidance: the model redraws the frame.</li>
+<li><strong>It has no mask input.</strong> On a mask step of the Adjust node the mask steers the edit, as on Gemini. Like every mask in Brut it is guidance: the model redraws the frame. On a picture over 16 megapixels the mask goes out reduced with the picture.</li>
 <li><strong>It is an edit model, not a fill model.</strong> Asked to extend a picture, it sometimes keeps your picture exactly where it was and sometimes recomposes the room. For an extension where the original must not move, use FLUX Outpaint.</li>
 <li><strong>4K is priced six times 2K.</strong> &quot;Same as the picture&quot; on a large frame lands on 4K; the frame editor shows the price before you paint, and 2K is one pick away.</li>
 </ul>
@@ -268,6 +269,45 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>High or Fast.</strong> <em>High</em> (the default) gives the best continuation of the picture. <em>Fast</em> answers in seconds for about a sixth of the price; your picture is held just as well, but the painted part is rougher: on an interior, a grittier floor and a wall that stops at the seam where High carries it on. Fast suits a first look, and scenes that extend easily (sky, lawn, water, a plain background).</li>
 <li><strong>Price.</strong> Black Forest Labs publishes no rate for this tool. Measured through Brut, counted on the whole frame, your picture included: <strong>High, $0.10 per megapixel</strong> ($0.10 at 1 MP, $0.20 at 2 MP, $0.40 at 4 MP); <strong>Fast, about $0.05</strong> ($0.045 at 1 MP, $0.051 at 2 MP, $0.063 at 4 MP). The frame editor shows the price for your frame, size and mode before the paint; the ledger row carries the billed amount after it.</li>
 </ul>
+<h2 id="flux-3-video"><a class="anchor" href="#flux-3-video" aria-hidden="true">#</a>FLUX 3 Video</h2>
+<p>A clip from a prompt alone (Text → Video), or from a start frame with an optional end frame (Image → Video). Film Shots offers it like any video model, and writes each clip&#39;s prompt for it before the clip is shot.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Length</td>
+<td>5 to 20 seconds, or <strong>smart</strong>: the model picks the length that fits the prompt.</td>
+</tr>
+<tr>
+<td>Sizes</td>
+<td><strong>720p</strong>, <strong>1080p</strong>, <strong>2K</strong> and <strong>4K</strong>, one price per second for each. At 16:9: 1280 × 704, 1920 × 1088, 2560 × 1440, 3840 × 2176.</td>
+</tr>
+<tr>
+<td>Ratios</td>
+<td>21:9, 2:1, 16:9, 4:3, 1:1, 3:4, 9:16 and 9:21. On Image → Video, <strong>follow the input</strong> keeps the start frame&#39;s shape; a ratio you pick is honored.</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>A start frame, and an end frame where the clip should land. With both, Black Forest Labs notes more variation from one take to the next.</td>
+</tr>
+<tr>
+<td>Sound</td>
+<td>Made with the picture, <strong>at no extra charge</strong>. The audio box decides; untick it for a silent clip.</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>Per second of clip: <strong>$0.15</strong> at 720p, <strong>$0.24</strong> at 1080p, <strong>$0.28</strong> at 2K, <strong>$0.41</strong> at 4K (Black Forest Labs&#39; list rates). A 5 s 720p clip is $0.75, 10 s at 4K is $4.10. With <em>smart</em> length the node shows no estimate before the run. The ledger row carries what the run cost.</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Five at a time.</strong> Black Forest Labs runs five video generations at once per account. A sixth waits and retries for about a minute, then the node says the limit was reached: run it again once one has finished.</li>
+<li><strong>Through OpenRouter</strong> the menus follow OpenRouter&#39;s: six ratios (no 2:1, no 9:21), no smart length, and OpenRouter&#39;s own prices per second ($0.17 at 720p, $0.29 at 1080p, $0.28 at 2K, $0.41 at 4K).</li>
+<li><strong>A clip takes minutes</strong>, longer at 4K. The node keeps waiting even if you close the app and open it again.</li>
+</ul>
 <h2 id="limits"><a class="anchor" href="#limits" aria-hidden="true">#</a>Limits</h2>
 <ul>
 <li>Results are saved to your project as soon as they&#39;re ready.</li>
@@ -278,8 +318,8 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/seedream.html"><span>← Previous</span><b>Seedream</b></a><a class="pn next" href="/docs/providers/ideogram.html"><span>Next →</span><b>Ideogram</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#flux-3-image">FLUX 3 Image</a></li><li class="lvl2"><a href="#flux-3-image-klein">FLUX 3 Image Klein</a></li><li class="lvl2"><a href="#flux-outpaint">FLUX Outpaint</a></li><li class="lvl2"><a href="#limits">Limits</a></li><li class="lvl2"><a href="#privacy">Privacy</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#flux-3-image">FLUX 3 Image</a></li><li class="lvl2"><a href="#flux-3-image-klein">FLUX 3 Image Klein</a></li><li class="lvl2"><a href="#flux-outpaint">FLUX Outpaint</a></li><li class="lvl2"><a href="#flux-3-video">FLUX 3 Video</a></li><li class="lvl2"><a href="#limits">Limits</a></li><li class="lvl2"><a href="#privacy">Privacy</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

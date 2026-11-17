@@ -192,7 +192,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </blockquote>
 <h2 id="models"><a class="anchor" href="#models" aria-hidden="true">#</a>Models</h2>
 <ul>
-<li><strong>GPT Image 2</strong> — text-to-image and image-to-image. Set the aspect ratio and quality on the node.</li>
+<li><strong>GPT Image 2</strong>: text-to-image and image-to-image. Set the aspect ratio and quality on the node. <strong>OpenAI shuts this model down on February 10, 2027</strong>: move a node that uses it to GPT Image 2.6 before then.</li>
 <li><strong>GPT Image 2.6 Sunburst</strong>: the <strong>detail</strong> tier of OpenAI&#39;s newest image generation. Dense compositions, text-heavy layouts and many objects that have to stay in their place, in text-to-image and in edits. Aspect, sizes up to 4K, the five-step <strong>quality</strong> menu (low · medium · high · xhigh · max) and a <strong><a href="#complexity-gpt-image-26">Complexity</a></strong> setting.</li>
 <li><strong>GPT Image 2.6 Flare</strong>: the <strong>speed</strong> tier of the same generation, with the same settings. On release day a 1K picture at <em>high</em> came back in about 10 seconds on Flare and about 50 on Sunburst. Use Flare to explore, then render the keeper on Sunburst.</li>
 <li><strong>GPT Image 2.5 Sunburst</strong> — the <strong>quality</strong> tier: higher image quality than GPT Image 2, stronger subject preservation, OpenAI&#39;s pick &quot;where editing precision matters most&quot;. Same aspect and size knobs, and a longer <strong>quality</strong> menu: low · medium · high · xhigh · max.</li>
@@ -236,6 +236,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>GPT Image 2</strong> keeps the earlier technique, and so does any of these models when it runs through OpenRouter. Marks drawn before this build also keep it until you save them again in the editor; nothing you already rendered runs again.</li>
 <li><strong>A mark, or a mask, with a reference picture on GPT Image 2.6</strong> (Flare and Sunburst) runs at medium Complexity unless you picked low: at high the model sometimes returns the reference picture itself instead of your edited picture (most runs on Sunburst, about one in three on Flare in our use). On 2.5, which has no Complexity setting, it can still happen now and then: Brut keeps your original when it does and marks the take <em>not used</em>, and a new take usually comes out right.</li>
 <li><strong>Marks or a mask, not both</strong>: a step is one or the other, as before.</li>
+<li><strong>Very large pictures.</strong> With marks or a mask, these models take pictures of up to about 16.7 megapixels. A larger one (a 5000 × 4000 render) is sent reduced to that size, your marks or mask with it, so the step runs instead of being refused; Adjust lays the result back over your original as usual.</li>
 </ul>
 <h2 id="inpainting-with-a-mask"><a class="anchor" href="#inpainting-with-a-mask" aria-hidden="true">#</a>Inpainting with a mask</h2>
 <p>A mask step of the <a href="/docs/nodes/image-generation.html#a-mask-where-the-change-goes">Adjust</a> node says where the change goes. What the model receives depends on the model:</p>
@@ -256,6 +257,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models">Models</a></li><li class="lvl2"><a href="#what-gpt-image-2-25-and-26-cost">What GPT Image 2, 2.5 and 2.6 cost</a></li><li class="lvl2"><a href="#complexity-gpt-image-26">Complexity (GPT Image 2.6)</a></li><li class="lvl2"><a href="#text-planning-models">Text / planning models</a></li><li class="lvl2"><a href="#the-reasoning-dial-gpt-56-and-gpt-6">The reasoning dial (GPT-5.6 and GPT-6)</a></li><li class="lvl2"><a href="#marks-on-gpt-image-25-and-26">Marks on GPT Image 2.5 and 2.6</a></li><li class="lvl2"><a href="#inpainting-with-a-mask">Inpainting with a mask</a></li><li class="lvl2"><a href="#notes">Notes</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

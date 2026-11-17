@@ -214,6 +214,11 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><p><strong>Node color</strong> — pick one of six hues (the same ones group frames use) from the node menu. The whole node takes the color (body, outline and title — readable zoomed far out), and so does <strong>every wire leaving it</strong> — the fastest way to read a dense graph. Right-click one node of a selection and the color lands on all of them. Reroute dots pass the color along; a wire can also be given its own color from the wire menu; a hovered or selected wire still shows the accent.</p>
 </li>
 <li><p><strong>Run</strong> — <strong>▶ Run</strong> executes the whole graph; the ▶ on a node runs just that node and everything it depends on.</p>
+<ul>
+<li><strong>A node&#39;s own ▶ never pays for another node without asking.</strong> Before it runs, Brut checks everything above the node, free. If a node above would bill (its prompt changed, it never ran), one dialog lists what is above with prices and offers: <strong>Only this node, on the pictures it shows now</strong> (the default: nothing above is sent, the nodes above keep their pictures and their <em>needs a run</em> badge), <strong>This node and what changed above</strong>, or <strong>Cancel</strong>. The same goes for <strong>↻</strong> and for <strong>Generate</strong> in the Adjust editor. Answer <em>Only this node</em> once and Brut stops asking for that node while the same nodes above are waiting; the Activity says it each time.</li>
+<li>A node above that would bill and has no result yet is named in the dialog, and <em>Only this node</em> is greyed: there is nothing to run on.</li>
+<li>Nothing above would bill: no dialog, the node runs as it always did.</li>
+</ul>
 </li>
 <li><p><strong>Copy, paste, duplicate</strong> — <code>Ctrl+C</code> copies the selected nodes, <code>Ctrl+V</code> pastes fresh copies, <code>Ctrl+D</code> duplicates in one step. Copies keep their <strong>incoming wires</strong>: a duplicated node arrives already fed by the same upstream nodes as the original (outgoing wires are not duplicated — that would double-feed whatever the original feeds). <code>Ctrl+V</code> pastes <strong>at your cursor</strong> — point where you want the copies and paste; a multi-node selection keeps its arrangement, and a copy pasted inside a group frame&#39;s area joins that group (exactly like dropping it there). <code>Ctrl+D</code> still lands the duplicate just beside the original.</p>
 </li>
@@ -261,6 +266,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <li><strong>Run</strong> starts each node as soon as its inputs are ready, so independent branches run at the same time.</li>
 <li>A node whose inputs haven&#39;t changed answers from its last result, for free. See <a href="/docs/concepts/never-pay-twice.html">Never pay twice</a>.</li>
 <li>Two runs can happen at once, and nothing is ever paid twice.</li>
+<li><strong>When a node fails, what it feeds waits.</strong> A node that generates never runs on fewer inputs than you wired into it: if a node above it failed, it keeps its last result, its badge reads <em>waits on</em> with the name of the node that failed, and nothing is sent or billed. Fix the node that failed and run again. Boards, previews and other free nodes still show what reaches them; a pinned node hands its pinned result on as usual.</li>
 </ul>
 <figure class="media"><video src="/docs/media/concepts/parallel-run.mp4" poster="/docs/media/concepts/parallel-run.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Run: independent branches execute at the same time, unchanged nodes answer from cache instantly</figcaption></figure>
 
@@ -316,6 +322,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-canvas">The canvas</a></li><li class="lvl2"><a href="#ports-and-wires">Ports and wires</a></li><li class="lvl3"><a href="#splice-a-node-into-a-wire">Splice a node into a wire</a></li><li class="lvl3"><a href="#split-a-wire-with-a-reroute-dot">Split a wire with a reroute dot</a></li><li class="lvl3"><a href="#move-wires-between-pins-alt-click-a-pin">Move wires between pins (Alt-click a pin)</a></li><li class="lvl2"><a href="#how-a-run-works">How a run works</a></li><li class="lvl2"><a href="#node-families">Node families</a></li><li class="lvl2"><a href="#saving-undo">Saving &amp; undo</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

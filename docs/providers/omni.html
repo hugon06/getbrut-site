@@ -184,26 +184,64 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/elements.html">Elements, the references vault</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li><li><a href="/docs/nodes/scene.html">Scene & Camera (3D)</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/omni.html" class="active">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
 <h1>Gemini Omni</h1>
-<p>Google&#39;s <strong>Gemini Omni Flash</strong> is a fast natively-multimodal video model: picture and sound generated together, a clip in under a minute, about <strong>$1 per clip</strong>.</p>
+<p>Google&#39;s <strong>Gemini Omni 1.2 Flash</strong> is a fast natively-multimodal video model: picture and sound generated together, a clip in about half a minute to a minute, billed by the second: about <strong>$0.07 a second at 720p</strong>.</p>
 <h2 id="the-key-it-rides-your-gemini-key"><a class="anchor" href="#the-key-it-rides-your-gemini-key" aria-hidden="true">#</a>The key: it rides your Gemini key</h2>
 <p>Omni uses the <strong>same Google key as <a href="/docs/providers/gemini.html">Gemini</a></strong> by default. If you&#39;ve added a Gemini key, Omni just works; Settings shows it uses your Gemini key. Add a dedicated key in <strong>⚙ Settings → Gemini Omni</strong> only to split the billing.</p>
 <h2 id="what-it-does-in-brut"><a class="anchor" href="#what-it-does-in-brut" aria-hidden="true">#</a>What it does in Brut</h2>
 <ul>
 <li><strong>Image-to-video</strong> from a start frame, optionally with an <strong>end frame</strong> (the two-image interpolation), and <strong>text-to-video</strong>.</li>
-<li><strong>3 to 10 seconds</strong>, <strong>16:9 or 9:16</strong>, output at <strong>360p, 720p, 1080p or 4k</strong>. Note that 1080p and 4k are <em>upscales</em> of the 720p render, not a sharper generation; if you plan a Topaz pass anyway, generate at 720p.</li>
-<li><strong>Reference images</strong> on the references inlet: extra images of a subject (a product, a character, a facade) the clip should stay faithful to. Name them in the prompt.</li>
+<li><strong>3 to 15 seconds</strong> (3 to 10 with an end frame, see below), <strong>16:9 or 9:16</strong>, output at <strong>360p, 720p, 1080p or 4k</strong>. Note that 1080p and 4k are <em>upscales</em> of the 720p render, not a sharper generation; if you plan a Topaz pass anyway, generate at 720p.</li>
+<li><strong>Reference images</strong> on the references inlet, up to six: extra images of a subject (a product, a character, a facade) the clip should stay faithful to. Name them in the prompt.</li>
+<li><strong>A start and an end frame run up to 10 seconds.</strong> Google stops two-frame clips there, while a clip from one frame or from text runs to 15. Pick a longer duration with an end frame wired and the node says so before anything is sent; in Film Shots the row is blocked with the same line. Set 10 seconds or less, or unwire the end frame.</li>
 <li><strong>Audio is always on.</strong> There is no switch; describe the sound you want, or say &quot;no dialogue, no music, natural ambience only&quot;. Every clip carries Google&#39;s invisible <strong>SynthID</strong> watermark.</li>
 <li>Omni has no negative prompt of its own: what you type in the node&#39;s negative prompt still reaches the model, as part of the prompt.</li>
 </ul>
 <p>The <strong>Gemini Omni video prompt</strong> preset in <a href="/docs/nodes/utility.html">Refine</a> writes the flowing-prose prompt style Omni reads best.</p>
-<h2 id="pricing-flat-per-clip-so-ask-for-10-seconds"><a class="anchor" href="#pricing-flat-per-clip-so-ask-for-10-seconds" aria-hidden="true">#</a>Pricing: flat per clip, so ask for 10 seconds</h2>
-<p>Google&#39;s page says &quot;about $0.10 per second at 720p&quot;, but Google bills every clip the same, about $1.01, whatever its length or resolution (360p and 720p measured; 1080p and 4K show $?). The practical rule: <strong>ask for 10 seconds</strong> (the node defaults to it) and trim in the Sequence node if you want less. Your spend panel shows the amount Google billed; if Google&#39;s billing page shows you something different, tell us.</p>
+<h2 id="pricing-by-the-second"><a class="anchor" href="#pricing-by-the-second" aria-hidden="true">#</a>Pricing: by the second</h2>
+<p>Omni 1.2 bills each second of video at the rate of its resolution. We measured it on the day we added it: a 3-second clip at 360p cost <strong>$0.07</strong>, a 10-second clip at 720p <strong>$0.70</strong>, a 15-second clip at 720p <strong>$1.04</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Resolution</th>
+<th>Per second</th>
+<th>A 5 s clip</th>
+<th>A 10 s clip</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>360p</td>
+<td>$0.023</td>
+<td>$0.12</td>
+<td>$0.23</td>
+</tr>
+<tr>
+<td>720p</td>
+<td>$0.07</td>
+<td>$0.35</td>
+<td>$0.70</td>
+</tr>
+<tr>
+<td>1080p (upscaled)</td>
+<td>$0.104</td>
+<td>$0.52</td>
+<td>$1.04</td>
+</tr>
+<tr>
+<td>4k (upscaled)</td>
+<td>$0.209</td>
+<td>$1.04</td>
+<td>$2.09</td>
+</tr>
+</tbody></table>
+<p>The 360p and 720p rows are measured; the 1080p and 4k rows are Google&#39;s published rates. The node defaults to 5 seconds. Your spend panel shows the amount Google billed.</p>
+<h3 id="omni-11-became-12"><a class="anchor" href="#omni-11-became-12" aria-hidden="true">#</a>Omni 1.1 became 1.2</h3>
+<p>Until November 2026 Brut carried Omni 1.1, which billed every clip the same (about $1.01 whatever its length), so the advice was to always ask for 10 seconds. That advice no longer holds: on 1.2 a shorter clip costs less. Google answers every Omni 1.1 call from 1.2 from December 3, 2026, so Brut moved first: a saved graph with an Omni 1.1 node opens on 1.2 with its settings kept (the Activity panel says so), and its next run asks before it pays.</p>
 <p>Google keeps the interaction (your prompt, inputs and the clip) on its side for a while after it completes; that is what lets Omni edit its own earlier clips. Brut doesn&#39;t use that yet: editing and extending clips arrive with the <strong>Video → Video</strong> node later, together with the region note that matters for European users (Google doesn&#39;t allow editing or extending <em>uploaded</em> videos from the EEA, Switzerland or the UK; editing clips Omni generated itself is allowed).</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/kling-subscription.html"><span>← Previous</span><b>Kling (subscription)</b></a><a class="pn next" href="/docs/providers/anthropic.html"><span>Next →</span><b>Anthropic</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-key-it-rides-your-gemini-key">The key: it rides your Gemini key</a></li><li class="lvl2"><a href="#what-it-does-in-brut">What it does in Brut</a></li><li class="lvl2"><a href="#pricing-flat-per-clip-so-ask-for-10-seconds">Pricing: flat per clip, so ask for 10 seconds</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#the-key-it-rides-your-gemini-key">The key: it rides your Gemini key</a></li><li class="lvl2"><a href="#what-it-does-in-brut">What it does in Brut</a></li><li class="lvl2"><a href="#pricing-by-the-second">Pricing: by the second</a></li><li class="lvl3"><a href="#omni-11-became-12">Omni 1.1 became 1.2</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

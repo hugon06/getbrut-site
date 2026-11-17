@@ -222,7 +222,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </tr>
 <tr>
 <td><strong><a href="/docs/providers/omni.html">Gemini Omni</a></strong></td>
-<td>Fast video with native audio (3–10 s, flat ≈$1 per clip: ask for 10 s)</td>
+<td>Fast video with native audio (3–15 s, about $0.07 a second at 720p)</td>
 <td>rides your Gemini key</td>
 </tr>
 <tr>
@@ -242,7 +242,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </tr>
 <tr>
 <td><strong><a href="/docs/providers/bfl.html">Black Forest Labs</a></strong></td>
-<td>Images (FLUX 3 Image and its small sibling Klein, 768 px to 4K) + FLUX Outpaint, the painter that holds your picture when Conform extends it</td>
+<td>Images (FLUX 3 Image and its small sibling Klein, 768 px to 4K) + FLUX 3 Video (5 to 20 s, 720p to 4K, sound included) + FLUX Outpaint, the painter that holds your picture when Conform extends it</td>
 <td>dashboard.bfl.ai key</td>
 </tr>
 <tr>
@@ -267,7 +267,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 </tr>
 <tr>
 <td><strong><a href="/docs/providers/fal.html">fal.ai</a></strong></td>
-<td><em>Route only</em> — serves Nano Banana, GPT Image 2, Kling 3.0 and Seedance 2.0 when you hold no native key for them</td>
+<td><em>Route</em> for Nano Banana, GPT Image 2, Kling 3.0 and Seedance 2.0 when you hold no native key for them, and a provider in its own right for <strong>FLUX 3 Max</strong>, the fast video model fal Research made with Black Forest Labs</td>
 <td>fal.ai dashboard key</td>
 </tr>
 <tr>
@@ -291,8 +291,9 @@ goes straight to the provider, exactly as before. Routes only activate for a mod
 you have <strong>no</strong> native key but <em>do</em> hold the aggregator&#39;s credential.</li>
 <li><strong>Routing is always visible.</strong> A routed model shows a <strong>⇄ runs via …</strong> chip on the node,
 the run confirm says who bills, and the ledger records it. Nothing routes silently.</li>
-<li><strong>The catalog stays curated.</strong> An aggregator credential never adds models to Brut — the
-model list is exactly the one Brut ships, whatever route serves it. Estimates for routed
+<li><strong>The catalog stays curated.</strong> An aggregator credential never adds another maker&#39;s models to
+Brut: the model list is exactly the one Brut ships, whatever route serves it. (A model the
+service made itself is listed under it like any provider&#39;s: fal&#39;s FLUX 3 Max.) Estimates for routed
 runs come from the route&#39;s own <strong>measured</strong> price, or are absent; aggregators typically
 charge a margin over the direct API, and the node says so.</li>
 </ol>
@@ -318,6 +319,6 @@ capability matrix live on <strong><a href="/docs/providers/access-paths.html">Ke
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#adding-keys">Adding keys</a></li><li class="lvl2"><a href="#the-one-rule-that-trips-everyone-up">The one rule that trips everyone up</a></li><li class="lvl2"><a href="#the-providers-at-a-glance">The providers at a glance</a></li><li class="lvl2"><a href="#model-routes-native-first-aggregator-fallback">Model routes — native first, aggregator fallback</a></li><li class="lvl2"><a href="#text-vs-generation">Text vs generation</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

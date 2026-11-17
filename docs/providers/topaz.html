@@ -214,9 +214,14 @@ into <strong>⚙ Settings → Topaz Labs</strong>.</p>
 <td>the everyday default</td>
 </tr>
 <tr>
+<td>Gigapixel High Fidelity 3</td>
+<td>precision</td>
+<td>maximum source preservation, Topaz&#39;s newest</td>
+</tr>
+<tr>
 <td>Gigapixel High Fidelity 2</td>
 <td>precision</td>
-<td>maximum source preservation</td>
+<td>the previous one, <strong>deprecated by Topaz</strong>: pick High Fidelity 3</td>
 </tr>
 <tr>
 <td>Gigapixel Art &amp; CGI</td>
@@ -244,24 +249,27 @@ into <strong>⚙ Settings → Topaz Labs</strong>.</p>
 <td>damaged / heavily compressed sources</td>
 </tr>
 <tr>
-<td>Wonder 3.5</td>
+<td>Wonder 4</td>
 <td>generative</td>
-<td>Topaz&#39;s newest: rebuilds detail with one <strong>Enhancement</strong> setting (low, medium, high or auto)</td>
+<td>Topaz&#39;s flagship: one pass that upscales and repairs noise, blur, compression and faces, <strong>nothing to tune</strong></td>
 </tr>
 <tr>
-<td>Wonder 3</td>
+<td>Wonder 3.5</td>
 <td>generative</td>
-<td>the same family with a guidance prompt, a 1–9 creativity dial and the Enhancement setting</td>
+<td>rebuilds detail with one <strong>Enhancement</strong> setting (low, medium, high or auto)</td>
 </tr>
 </tbody></table>
 <p>Generative models cap input around 24–256 MP and cost more per pixel; the node stops with a <strong>clear message</strong>
 if your input × scale exceeds a model&#39;s cap — it never downscales your work silently.</p>
 <h2 id="billing-credits"><a class="anchor" href="#billing-credits" aria-hidden="true">#</a>Billing — credits</h2>
 <p>Topaz bills <strong>credits by output megapixel</strong>: the standard class covers ~24 MP per credit, the
-generative class ~4 MP per credit, minimum one credit per job. <strong>Wonder 3.5 and Wonder 3 are cheaper and
-priced in steps</strong>: 1 credit up to 8 MP of output, 2 up to 16, 3 up to 24, 4 up to 32, 5 up to 40, 7 up to
-50, 8 up to 64, 13 up to 100. A 2048-wide render upscaled 2× (about 9 MP) is 2 credits; Brut stops a
-Wonder job past 100 MP, where Topaz publishes no price. Credits come from one-off packs or
+generative class ~4 MP per credit, minimum one credit per job. <strong>The Wonder models are cheaper.</strong>
+<strong>Wonder 4</strong> is 1 credit for every 8 MP of output, rounded up, at any size up to 256 MP: we measured 2
+credits for a 9.4 MP output. <strong>Wonder 3.5</strong> is priced in steps: 1 credit up to 8 MP of output, 2 up to 16,
+3 up to 24, 4 up to 32, 5 up to 40, 7 up to 50, 8 up to 64, 13 up to 100; Brut stops a Wonder 3.5 job past
+100 MP, where Topaz publishes no price. A 2048-wide render upscaled 2× (about 9 MP) is 2 credits on both.
+<strong>Wonder 3 left the menu in November 2026</strong>: Topaz deprecated it and names Wonder 3.5 as its replacement, so
+a saved node that used it opens on Wonder 3.5 (the Activity panel says so). Credits come from one-off packs or
 a subscription&#39;s monthly allowance — <strong>the per-credit price depends on how you buy</strong> (packs run
 roughly $0.195 down to $0.158 per credit; subscriptions less).</p>
 <p>Brut shows a pre-run estimate in credits (with an approximate $ at a representative rate), the
@@ -296,6 +304,6 @@ your app license covers it. If you install it mid-session, hit
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#models-in-brut">Models in Brut</a></li><li class="lvl2"><a href="#billing-credits">Billing — credits</a></li><li class="lvl2"><a href="#behavior-notes">Behavior notes</a></li><li class="lvl2"><a href="#topaz-video-ai-local">Topaz Video AI (local)</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

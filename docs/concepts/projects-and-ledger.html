@@ -217,12 +217,33 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>If Brut closes while a video is still rendering at the provider, it picks the job back up on the next launch and records it once, at the right price. Paid work is never lost.</p>
 <h2 id="where-things-live"><a class="anchor" href="#where-things-live" aria-hidden="true">#</a>Where things live</h2>
 <pre><code>&lt;project&gt;/
-  outputs/        your images and clips
-  graphs/         your saved graphs (.history/ holds their last five versions)
-  ledger/         history and spend
-  project.json    lets another computer open the project
+  outputs/                your images and clips
+    &lt;graph&gt;/              a folder per graph: what that graph makes
+      inputs/             the pictures you bring into it
+      masks/              the Adjust node&#39;s masks and cuts (cleans itself)
+    inputs/               pictures brought into a canvas not saved as a graph yet
+    masks/                the same, for a canvas not saved as a graph yet
+    exports/              your JPG and PSD exports
+  graphs/                 your saved graphs (.history/ holds their last five versions)
+  ledger/                 history and spend
+  project.json            lets another computer open the project
 </code></pre>
-<p>Keys are <strong>never</strong> here — they live in your OS keychain.</p>
+<p>Keys are <strong>never</strong> here: they live in your OS keychain.</p>
+<p><strong>A folder per graph.</strong> Every picture and clip a graph makes goes into a folder named after the graph, and the pictures you drop into it go into that folder&#39;s <code>inputs/</code>. A canvas not saved as a graph yet writes straight into <code>outputs/</code>, as before. The file names stay the same (they still say the project and the graph), so a file copied elsewhere still tells where it came from. Two graphs can end up in the same folder when their names differ only by accents, case or punctuation, or are very long and start the same; that does no harm. A graph named like one of the project&#39;s own folders (<code>inputs</code>, <code>exports</code> or <code>masks</code>) gets a folder of its own. A graph saved under a new name writes its new files into the new name&#39;s folder; what it made before stays where it is.</p>
+<p><strong>Files made before stay where they are.</strong> Graphs, pins and the ledger point at files by their place on disk, so nothing written before this layout is ever moved or renamed: an older project keeps its flat <code>outputs/</code>, and a graph saved earlier opens exactly as it did, with nothing to pay again.</p>
+<h3 id="the-masks-folder"><a class="anchor" href="#the-masks-folder" aria-hidden="true">#</a>The masks folder</h3>
+<p><code>masks/</code> holds the Adjust node&#39;s working files, apart from your pictures, with no thumbnails. Inside it, two folders keep what only you made (the masks you painted with the brush, the wand or any mask tool, and the cuts you drew by hand) apart from what Brut makes again by itself, for free, on your machine (each take laid on the picture&#39;s grid and its automatic cuts).</p>
+<p>The wand writes nothing while you click: its selection stays in the editor, and the step&#39;s mask is written once, when it is saved.</p>
+<p><strong>It cleans itself.</strong> When a project opens, and at most once a day in a long session (never during a run), Brut tidies the project&#39;s <code>masks</code> folders in the background. When it freed some space, a line in the studio timeline says how much (shown with <strong>Raw events</strong> on):</p>
+<ul>
+<li>what Brut can make again is kept for the takes picked in your saved graphs and on the open canvas; past <strong>1 GB per project</strong>, the rest goes oldest first;</li>
+<li>a mask or a cut you painted is kept as long as a saved graph, one of its earlier versions or the open canvas uses it, and goes <strong>7 days</strong> after nothing uses it any more;</li>
+<li>nothing made in the last hour goes, and nothing outside a <code>masks</code> folder is ever touched (your pictures, the steps&#39; pictures, an older project&#39;s files).</li>
+</ul>
+<p><strong>Deleting it by hand costs almost nothing.</strong> Every step keeps its pictures and its takes, and nothing is paid again. What Brut makes again comes back by itself, for free, the next time it is needed (a cut opened, an edit above flowing down, Reset, Take it in). Only what you made yourself is lost: a step whose painted mask is gone says <em>This step’s mask is no longer on disk: paint it again to make a new take.</em>, and its Generate button stays greyed until you paint one; a take whose hand cut is gone keeps its picture, says so, and follows an edit above through its automatic cut. If the take&#39;s own picture is gone too, the step says it cannot make its cut again, Edit the cut stays greyed, and ↻ makes a new take.</p>
+<p><strong>Two files per take.</strong> A take of an Adjust step keeps two files: the model&#39;s own file, and its picture (the take laid back over the picture it was made on). Each time you edit a cut, Brut lays the take back again and writes a new picture, and one for every step after it that follows; the picture a take showed before is removed a moment later. So whatever you edit, the folder holds the picture you plugged in plus two files for each take: a step with three takes and two steps with one take are eleven files. Two things can keep an earlier picture a little longer: a saved graph or one of its earlier versions that still shows it (discarding your changes or restoring that version must bring it back), and a paid run of another node that was made from it. It goes when the masks folders are next tidied, once neither holds. Only pictures Brut made itself, for free, are ever removed; a model&#39;s own file never is.</p>
+<p>One thing follows: once you have edited a cut, the steps after it no longer have the picture their model worked from. Everything keeps working (they follow your edits through their own cuts), but if you then delete the <code>masks</code> folder by hand, those steps can no longer have their cut made again: they keep their picture, say so, and a new take is the way on.</p>
+<p><strong>One limit.</strong> Brut only sees the graphs inside the project. A graph file you saved outside it and open months later may find a painted mask gone (its takes and pictures stay, and the step says what is missing).</p>
 <h2 id="what-a-filename-tells-you"><a class="anchor" href="#what-a-filename-tells-you" aria-hidden="true">#</a>What a filename tells you</h2>
 <p>Every file Brut writes into <code>outputs/</code> is named so the folder reads on its own, without opening anything:</p>
 <pre><code>&lt;project&gt;_&lt;graph&gt;_&lt;node&gt;_&lt;provider&gt;_&lt;model&gt;_&lt;date&gt;_&lt;job&gt;.&lt;ext&gt;
@@ -249,8 +270,8 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
 <tbody><tr>
 <td><code>NBP</code></td>
 <td>Nano Banana Pro</td>
-<td><code>K40</code> <code>K30</code> <code>K30O</code> <code>K30T</code></td>
-<td>Kling 4.0 · 3.0 · 3.0 Omni · 3.0 Turbo</td>
+<td><code>K40</code> <code>K40F</code> <code>K30</code> <code>K30O</code> <code>K30T</code></td>
+<td>Kling 4.0 · 4.0 Flash · 3.0 · 3.0 Omni · 3.0 Turbo</td>
 </tr>
 <tr>
 <td><code>NB21</code> <code>NB2</code></td>
@@ -273,14 +294,14 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
 <tr>
 <td><code>GI2</code></td>
 <td>GPT Image 2</td>
-<td><code>OMNI</code></td>
-<td>Gemini Omni Flash</td>
+<td><code>OM12</code> <code>OMNI</code></td>
+<td>Gemini Omni 1.2 Flash · Omni 1.1 (files made before November 2026)</td>
 </tr>
 <tr>
 <td><code>GI25F</code></td>
 <td>GPT Image 2.5 Flare</td>
-<td><code>SD25</code> <code>SD20</code></td>
-<td>Seedance 2.5 · 2.0</td>
+<td><code>SD25</code> <code>SD25F</code> <code>SD20</code></td>
+<td>Seedance 2.5 · 2.5 Flash · 2.0</td>
 </tr>
 <tr>
 <td><code>GI25SB</code></td>
@@ -295,8 +316,8 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
 <td></td>
 </tr>
 <tr>
-<td><code>SR5P</code> <code>SR5F</code> <code>SR5L</code></td>
-<td>Seedream 5.0 Pro · Flash · Lite</td>
+<td><code>SR55</code> <code>SR5P</code> <code>SR5F</code> <code>SR5L</code></td>
+<td>Seedream 5.5 · 5.0 Pro · Flash · Lite</td>
 <td><code>MGC</code> <code>MGP2</code></td>
 <td>Magnific Creative · Precision V2</td>
 </tr>
@@ -323,15 +344,15 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
 <li><strong>date</strong> is the day it was written, <code>yymmdd</code>.</li>
 <li><strong>job</strong> is the first eight characters of the ledger&#39;s job id: the traceability key. It is what makes every name unique (two graphs called the same thing collide on nothing), and it is how a file finds its row: <strong>right-click any picture → Find in ledger</strong> shows the run that made it — model, node, graph, prompt, parameters, cost, date — and opens the node&#39;s 🕘 history on that row when the node is on the canvas and the take was made on this graph (a node with the same id on another graph is another node: the button says which graph made the take). It works for files with the older random names too, as long as a ledger row lists them.</li>
 </ul>
-<p>Files you bring in (<code>outputs/inputs/</code>) keep your own filename: <code>tournesol_facade-study_facade-photo_in_260923_ab12cd34.jpg</code> (<code>paste</code> for a clipboard image; the same picture dropped twice on the same day is kept once). Exports keep their readable stems in <code>outputs/exports/</code>.</p>
+<p>Files you bring in (the graph&#39;s <code>inputs/</code> folder) keep your own filename: <code>tournesol_facade-study_facade-photo_in_260923_ab12cd34.jpg</code> (<code>paste</code> for a clipboard image; the same picture dropped twice on the same day is kept once). Exports keep their readable stems in <code>outputs/exports/</code>.</p>
 <p>Files made before this convention keep their old names for good: renaming them would break the graphs that use them.</p>
-<p><strong>Path length.</strong> A full name is 55 to 75 characters. Windows caps a whole path at 260 characters unless long paths are enabled, so a project rooted very deep on a server has less room for the name than for the folders. Brut never fails on that: when the full path would not fit, the name drops the project and graph segments, then the node, and keeps the traceable tail (<code>date_job</code>), which is shorter than the old random names ever were. A shallow project root on the server stays the comfortable choice.</p>
+<p><strong>Path length.</strong> A full name is 55 to 75 characters. Windows caps a whole path at 260 characters unless long paths are enabled, so a project rooted very deep on a server has less room for the name than for the folders. Brut never fails on that: when the full path would not fit, the name drops the project and graph segments, then the node, and keeps the traceable tail (<code>date_job</code>), which is shorter than the old random names ever were; when even that would not fit inside the graph&#39;s folder, the file goes one folder up. A shallow project root on the server stays the comfortable choice.</p>
 <p><strong>Your own pattern.</strong> <strong>File ▾ → Output file names…</strong> sets a per-project pattern from the tokens <code>{project} {graph} {node} {provider} {model} {model_id} {date} {time} {job}</code> (<code>{model}</code> is the short code above, <code>{model_id}</code> the full model id; <code>{job}</code> is required; the default is <code>{project}_{graph}_{node}_{provider}_{model}_{date}_{job}</code>). The dialog shows what a file would be called; an invalid pattern is refused with the reason. It is set on each computer: on a shared NAS project each machine names its own files.</p>
 
 <div class="prevnext"><a class="pn prev" href="/docs/concepts/nodes-and-graphs.html"><span>← Previous</span><b>Nodes & graphs</b></a><a class="pn next" href="/docs/concepts/never-pay-twice.html"><span>Next →</span><b>Never pay twice</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl3"><a href="#the-masks-folder">The masks folder</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>

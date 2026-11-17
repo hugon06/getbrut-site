@@ -184,10 +184,15 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   <aside class="side"><div class="nav-section"><div class="nav-head">Getting started</div><ul><li><a href="/docs/index.html">What Brut is</a></li><li><a href="/docs/install.html">Install & first run</a></li><li><a href="/docs/first-image.html">Your first image</a></li><li><a href="/docs/workflows.html">Workflows</a></li></ul></div><div class="nav-section"><div class="nav-head">Concepts</div><ul><li><a href="/docs/concepts/nodes-and-graphs.html">Nodes & graphs</a></li><li><a href="/docs/concepts/projects-and-ledger.html">Projects & the ledger</a></li><li><a href="/docs/concepts/never-pay-twice.html">Never pay twice</a></li><li><a href="/docs/concepts/library-and-composites.html">Library & composites</a></li><li><a href="/docs/concepts/elements.html">Elements, the references vault</a></li><li><a href="/docs/concepts/marcel.html">Marcel, the companion</a></li><li><a href="/docs/concepts/brutpack.html">.brutpack & portability</a></li></ul></div><div class="nav-section"><div class="nav-head">Nodes</div><ul><li><a href="/docs/nodes/inputs.html">Inputs</a></li><li><a href="/docs/nodes/image-generation.html">Image generation</a></li><li><a href="/docs/nodes/sketchpad.html">Sketchpad</a></li><li><a href="/docs/nodes/multishot-and-boards.html">Multi-Shot & boards</a></li><li><a href="/docs/nodes/cinema-crew.html">The cinema crew</a></li><li><a href="/docs/nodes/video.html">Video</a></li><li><a href="/docs/nodes/upscale.html">Upscale</a></li><li><a href="/docs/nodes/utility.html">Utility</a></li><li><a href="/docs/nodes/scene.html">Scene & Camera (3D)</a></li></ul></div><div class="nav-section"><div class="nav-head">Providers</div><ul><li><a href="/docs/providers/index.html">Overview</a></li><li><a href="/docs/providers/access-paths.html">Keys vs aggregators</a></li><li><a href="/docs/providers/gemini.html">Google Gemini</a></li><li><a href="/docs/providers/openai.html">OpenAI</a></li><li><a href="/docs/providers/kling.html">Kling</a></li><li><a href="/docs/providers/kling-subscription.html">Kling (subscription)</a></li><li><a href="/docs/providers/omni.html">Gemini Omni</a></li><li><a href="/docs/providers/anthropic.html">Anthropic</a></li><li><a href="/docs/providers/seedance.html">Seedance</a></li><li><a href="/docs/providers/seedream.html">Seedream</a></li><li><a href="/docs/providers/bfl.html">Black Forest Labs</a></li><li><a href="/docs/providers/ideogram.html">Ideogram</a></li><li><a href="/docs/providers/magnific.html">Magnific</a></li><li><a href="/docs/providers/topaz.html">Topaz Labs</a></li><li><a href="/docs/providers/openrouter.html">OpenRouter (routes)</a></li><li><a href="/docs/providers/fal.html" class="active">fal.ai (routes)</a></li><li><a href="/docs/providers/replicate.html">Replicate (routes)</a></li></ul></div><div class="nav-section"><div class="nav-head">The Cinema Sessions</div><ul><li><a href="/docs/cinema/index.html">Full walkthrough</a></li></ul></div><div class="nav-section"><div class="nav-head">Reference</div><ul><li><a href="/docs/faq.html">FAQ</a></li><li><a href="/docs/privacy.html">Privacy</a></li><li><a href="/docs/beta-license.html">Beta license</a></li></ul></div></aside>
   <main class="content">
 <h1>fal.ai</h1>
-<p><strong>fal.ai</strong> is an <strong>aggregator</strong> — a usage-billed API that resells many generation models under
-one key. Brut uses it as a <strong><a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a></strong>,
-not a provider in its own right: it never adds a single model to the menu, it just serves
-models Brut already carries when you hold <strong>no native key</strong> for them.</p>
+<p><strong>fal.ai</strong> is an <strong>aggregator</strong>: a usage-billed API that resells many generation models under
+one key. Brut uses it two ways:</p>
+<ul>
+<li>as a <strong><a href="/docs/providers/index.html#model-routes--native-first-aggregator-fallback">route</a></strong> for
+other makers&#39; models: it serves models Brut already carries when you hold <strong>no native key</strong> for them;</li>
+<li>as a <strong>provider</strong> for one video model, <strong><a href="#flux-3-max">FLUX 3 Max</a></strong>, which fal Research
+trained with Black Forest Labs. That one is listed under <strong>fal.ai</strong> in the video menus and runs
+directly on your fal key, like any provider&#39;s model.</li>
+</ul>
 <p><a href="/docs/providers/openrouter.html">OpenRouter</a> is Brut&#39;s main aggregator, and fal.ai is optional.
 It serves the Nano Banana image family, GPT Image 2, Kling 3.0 and Seedance 2.0. When
 you hold both keys, GPT Image 2 and those video models run through fal, the Nano Banana models
@@ -197,6 +202,48 @@ through OpenRouter. A node always says which: <strong>⇄ runs via fal.ai</stron
 into <strong>⚙ Settings → fal.ai</strong>. fal has <strong>no free generation
 tier</strong> — add billing to the fal account before the first call, or the first run answers with a
 provider error (shown verbatim, as always).</p>
+<h2 id="flux-3-max"><a class="anchor" href="#flux-3-max" aria-hidden="true">#</a>FLUX 3 Max</h2>
+<p>The fast version of FLUX 3 Video, made by fal Research with Black Forest Labs. Pick <strong>fal.ai</strong> and
+<strong>FLUX 3 Max</strong> in <a href="/docs/nodes/video.html#image-video">Image → Video</a>, <a href="/docs/nodes/video.html#text-video">Text → Video</a>
+or <a href="/docs/nodes/video.html#film-shots-the-cinema-batch-executor">Film Shots</a>. It runs on your fal key
+(no &quot;runs via&quot; chip: fal made it), and without a fal key the node asks for one.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Length</td>
+<td>5 to 20 seconds (no automatic length).</td>
+</tr>
+<tr>
+<td>Sizes</td>
+<td><strong>720p</strong>, <strong>1080p</strong>, <strong>2K</strong> and <strong>4K</strong>. fal makes every clip at 720p and enlarges it for the three sizes above (the menu says so on hover): a larger size adds pixels, not a new render. <a href="/docs/nodes/upscale.html#upscale-video">Upscale Video</a> does the same job on a 720p clip, with the upscaler you choose.</td>
+</tr>
+<tr>
+<td>Ratios</td>
+<td>21:9, 2:1, 16:9, 4:3, 1:1, 3:4 and 9:16. On Image → Video, <strong>follow the input</strong> keeps the start frame&#39;s shape.</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>A start frame, and an optional end frame.</td>
+</tr>
+<tr>
+<td>Sound</td>
+<td>Made with the picture; the audio box decides.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td><strong>high</strong> (the default) or <strong>low</strong>: how much the model thinks about your prompt before it renders. Low is faster.</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>Per second of clip: <strong>$0.17</strong> at 720p, <strong>$0.29</strong> at 1080p, <strong>$0.40</strong> at 2K, <strong>$0.80</strong> at 4K (a 5 s clip is $0.85 at 720p, $4 at 4K). fal is running half price through November 22, 2026. Sound is included. The 720p and 1080p rates are fal&#39;s list; fal lists none for 2K and 4K, so those two come from our own fal bills (a 5 s clip billed $1 at 2K and $2 at 4K during the half-price weeks). fal&#39;s answer carries no cost: the bill is on your fal dashboard.</td>
+</tr>
+</tbody></table>
+<p>Film Shots writes each clip&#39;s prompt for it, as for FLUX 3 Video.</p>
 <h2 id="the-three-route-rules"><a class="anchor" href="#the-three-route-rules" aria-hidden="true">#</a>The three route rules</h2>
 <ol>
 <li><strong>Your direct key always wins.</strong> The moment you add a native key (Gemini, Kling, BytePlus,
@@ -226,8 +273,8 @@ bill for it).</li>
 
 <div class="prevnext"><a class="pn prev" href="/docs/providers/openrouter.html"><span>← Previous</span><b>OpenRouter (routes)</b></a><a class="pn next" href="/docs/providers/replicate.html"><span>Next →</span><b>Replicate (routes)</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#the-three-route-rules">The three route rules</a></li><li class="lvl2"><a href="#what-the-routes-can-and-can39t-do">What the routes can and can&#39;t do</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#get-a-key">Get a key</a></li><li class="lvl2"><a href="#flux-3-max">FLUX 3 Max</a></li><li class="lvl2"><a href="#the-three-route-rules">The three route rules</a></li><li class="lvl2"><a href="#what-the-routes-can-and-can39t-do">What the routes can and can&#39;t do</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=575be9923e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
 </body>
 </html>
