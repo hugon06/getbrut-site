@@ -209,11 +209,57 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <p>The ledger powers three things:</p>
 <ul>
 <li><strong>Per-node history &amp; re-pin.</strong> Click the <strong>🕘</strong> on any generation node to see everything it ever produced on this graph, and pin a past result as the active output. See <a href="/docs/concepts/never-pay-twice.html">Never pay twice</a>.</li>
-<li><strong>Spend.</strong> The toolbar readout aggregates the ledger into a running total, broken down by provider — and <strong>clicking it opens the full ledger</strong>: totals for generations and for Marcel&#39;s own calls and every row newest-first with its model, status, and estimated cost.</li>
+<li><strong>Spend.</strong> The toolbar readout aggregates the ledger into a running total, broken down by provider. <strong>Clicking it opens The books</strong>, the one place for money, on three tabs. <strong>Spend</strong>: <a href="#where-the-money-goes">where the money goes</a>. <strong>Prices</strong>: <a href="#what-every-model-costs">what every model costs</a>. <strong>Rows</strong>: every call of the period, newest first, with its model, status and estimated cost. <strong>Export</strong>, at the right of the tabs, <a href="#taking-the-books-out">takes any of it out</a> as a spreadsheet file or a report.</li>
 <li><strong>Budgets.</strong> <strong>File ▾ → Project budget…</strong> sets a spend ceiling for the project. The readout shows <code>$spent / $budget</code> and tints as you approach it (amber past 80%, red past 100%), and every paid confirmation dialog adds a budget line near the cap. Budgets are <strong>soft by default</strong> — they inform, you still hold the OK. Tick <strong>hard cap</strong> and paid confirmations refuse instead until you raise or clear the budget. Comparisons use the ledger&#39;s estimates; leave the amount empty to remove the budget.</li>
 </ul>
 <figure class="media"><video src="/docs/media/concepts/ledger-panel.mp4" poster="/docs/media/concepts/ledger-panel.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Click the spend readout: the ledger panel, per provider and per node, with the budget cap on top</figcaption></figure>
 
+<h3 id="where-the-money-goes"><a class="anchor" href="#where-the-money-goes" aria-hidden="true">#</a>Where the money goes</h3>
+<p>The <strong>Spend</strong> tab of The books answers three questions: how much, when, and on what.</p>
+<ul>
+<li><strong>The period.</strong> Today, the last 7 or 30 days, this month, this year, everything since the first call, or two dates of your choice.</li>
+<li><strong>The bars.</strong> Spend over time, one bar per day, week, month or year (chosen for you by the period, changeable by hand); Today is drawn hour by hour. Hover a bar, or reach it with the keyboard, to read what is in it.</li>
+<li><strong>The split.</strong> Each bar is stacked by <strong>model</strong> (the default), <strong>maker</strong>, <strong>kind</strong> (image, video, text, upscale), <strong>graph</strong>, <strong>project</strong> or <strong>lane</strong> (generations, planning, Marcel, Elements). The eight largest have a color, the rest is &quot;Other&quot;. A color belongs to its model: it is the same in every period and in both scopes.</li>
+<li><strong>The scope.</strong> This project, or every project on this computer.</li>
+</ul>
+<p>Four figures sit on top: what was spent in the period, the average a day, the number of paid calls, and the model that cost the most. Beside the chart, <strong>Where the money goes</strong> lists every line of the split with its amount, its share and its number of calls. Click a line to follow it in the chart, then <strong>see its rows</strong> to read its calls one by one on the Rows tab.</p>
+<p>What the total is, and what it is not:</p>
+<ul>
+<li>The figures are <strong>estimates from measured prices</strong>; a call through OpenRouter carries the cost it was billed.</li>
+<li>A clip made <strong>on a plan</strong> (Kling on your subscription) has a dollar figure that is an equivalent, not money that left your card. It is drawn apart, under the chart and at the foot of the list, and is <strong>never added to the total</strong>.</li>
+<li>A call with <strong>no measured price</strong> is counted as a call, never as $0. <strong>Failed</strong> calls are counted apart, and so is what ran <strong>free on your machine</strong>.</li>
+<li><strong>Days are your days</strong>: they turn at midnight on your computer, and weeks start on Monday. The toolbar&#39;s &quot;today&quot; follows the same rule.</li>
+</ul>
+<p>When a project has a budget, a meter under the figures shows how much of it is used. With <strong>Every project</strong>, a project whose folder cannot be reached (a network share that is offline) is named under the chart and left out; the others still add up.</p>
+<p>Nothing here leaves your computer: the tab reads your ledgers and does its sums on the spot.</p>
+<h3 id="what-every-model-costs"><a class="anchor" href="#what-every-model-costs" aria-hidden="true">#</a>What every model costs</h3>
+<p>The <strong>Prices</strong> tab of The books lists every model Brut carries, one row each, with the price it is billed at:</p>
+<ul>
+<li>a <strong>picture</strong> by size, and by quality where the price follows it;</li>
+<li>a <strong>clip</strong> by the second at each resolution or mode, with what a 5 s and a 10 s clip come to, and what sound adds;</li>
+<li>a <strong>text</strong> model per million tokens, in and out;</li>
+<li>an <strong>upscaler</strong> per megapixel out with its minimum, and what doubling a 2K picture comes to.</li>
+</ul>
+<p>A model billed in credits says so. A dated introductory price shows today&#39;s price, its last day and the price after. The last column gives what the same model costs <strong>through OpenRouter</strong>, where that was measured; where OpenRouter serves a model and no price was measured, the row says the bill gives the cost.</p>
+<p>Filter by kind (image, video, text, upscale), search a model or a maker, or sort by price. A price compares within its unit, so a sort keeps pictures with pictures and clips with clips. A model whose maker you have no key for is listed greyed, never hidden.</p>
+<p>Two things the table never does. It never guesses: a case nobody has run and read the bill of says <strong>not measured yet</strong>. And it never passes a plan off as money: a model that runs on your Kling subscription is tagged <strong>plan credits</strong>, and its dollar figure is an equivalent. A tool that runs on your own machine says it is free.</p>
+<p>The same tab opens from <strong>⚙ Settings → Providers → Prices of every model</strong>. A node still shows its own price before it runs; the table is for comparing.</p>
+<h3 id="taking-the-books-out"><a class="anchor" href="#taking-the-books-out" aria-hidden="true">#</a>Taking the books out</h3>
+<p><strong>Export</strong>, at the right of the tabs, offers what fits the tab you are on.</p>
+<p>On <strong>Spend</strong> and on <strong>Rows</strong>:</p>
+<ul>
+<li><strong>The rows of the period (.csv).</strong> One line per call: when, the project, the graph, the model (its name, and the maker&#39;s own name for it), the maker, its status, what it counts as (money, a plan&#39;s equivalent, free, failed, no price) and its cost. A plan&#39;s equivalent has a column of its own, so the cost column adds up to the total of the Spend tab. When a line is picked on Spend, the file holds that line&#39;s rows alone, and the menu says so.</li>
+<li><strong>The summary (.csv).</strong> One line per bar of the chart and per value of the split, with its calls and its cost. Every value is listed: where the chart folds the smaller ones into &quot;Other&quot;, the file names each of them. A plan&#39;s equivalent is on lines of its own.</li>
+<li><strong>The report of the Spend tab (.pdf).</strong> The period, the scope, the four figures, the chart, and the ranked list in full with its total, on A4, light whatever your theme. What ran on a plan is listed apart, under its own subtotal, and never added to the total. The date the report was made is on it.</li>
+</ul>
+<p>On <strong>Prices</strong>:</p>
+<ul>
+<li><strong>The prices table (.csv).</strong> The table as you filtered and sorted it, one line per case of a model (a size, a resolution, a remark), with the cases through OpenRouter on lines of their own.</li>
+</ul>
+<p>How a file is saved depends on where Brut runs, and the menu tells you before you click. In the desktop app a .csv asks where to save it, and the report <strong>saves a file</strong> the same way. In a browser tab a .csv goes to your downloads, and the report <strong>opens the print dialog</strong>: choose &quot;Save as PDF&quot; there. A desktop app installed before this feature does the same for the report until it is updated.</p>
+<p>A .csv opens in any spreadsheet. Amounts are plain numbers in US dollars with a dot for the decimals; if your spreadsheet expects a comma there, import the file and pick the dot instead of opening it with a double click.</p>
+<p>Three things an export never holds: a prompt, a file path, and anything a spreadsheet could run. A project or a graph named like a formula (a name that starts with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code>) is written with an apostrophe in front, so it shows as the text it is.</p>
+<p>Nothing is sent anywhere: an export is a file on your computer, written where you choose.</p>
 <p>If Brut closes while a video is still rendering at the provider, it picks the job back up on the next launch and records it once, at the right price. Paid work is never lost.</p>
 <h2 id="where-things-live"><a class="anchor" href="#where-things-live" aria-hidden="true">#</a>Where things live</h2>
 <pre><code>&lt;project&gt;/
@@ -223,7 +269,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
       masks/              the Adjust node&#39;s masks and cuts (cleans itself)
     inputs/               pictures brought into a canvas not saved as a graph yet
     masks/                the same, for a canvas not saved as a graph yet
-    exports/              your JPG and PSD exports
+    exports/              your JPG and PSD exports (a Selection node&#39;s export: one folder each)
   graphs/                 your saved graphs (.history/ holds their last five versions)
   ledger/                 history and spend
   project.json            lets another computer open the project
@@ -351,8 +397,8 @@ tournesol_facade-study_sb-2-kf-s3_gemini_NB2_260923_5d10aa07.png
 
 <div class="prevnext"><a class="pn prev" href="/docs/concepts/nodes-and-graphs.html"><span>← Previous</span><b>Nodes & graphs</b></a><a class="pn next" href="/docs/concepts/never-pay-twice.html"><span>Next →</span><b>Never pay twice</b></a></div>
   </main>
-  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl3"><a href="#the-masks-folder">The masks folder</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
+  <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#projects">Projects</a></li><li class="lvl2"><a href="#the-generation-ledger">The generation ledger</a></li><li class="lvl3"><a href="#where-the-money-goes">Where the money goes</a></li><li class="lvl3"><a href="#what-every-model-costs">What every model costs</a></li><li class="lvl3"><a href="#taking-the-books-out">Taking the books out</a></li><li class="lvl2"><a href="#where-things-live">Where things live</a></li><li class="lvl3"><a href="#the-masks-folder">The masks folder</a></li><li class="lvl2"><a href="#what-a-filename-tells-you">What a filename tells you</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=1d5bde0a8f" defer></script>
 </body>
 </html>

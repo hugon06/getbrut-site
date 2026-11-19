@@ -186,7 +186,7 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
 <h1>Video nodes</h1>
 <p>Where stills become motion. Brut treats video like the expensive thing it is — every clip is <strong>quoted and confirmed before a cent is spent</strong>.</p>
 <h2 id="image-video"><a class="anchor" href="#image-video" aria-hidden="true">#</a>Image → Video</h2>
-<p>The footer of every video node reads the clip&#39;s <strong>size, duration and frame rate</strong> (<code>1920 × 1080 · 5.0 s · 24 fps</code>) at the bottom left, on the output pin&#39;s row.</p>
+<p>The footer of every video node reads the clip&#39;s <strong>size, aspect, duration and frame rate</strong> (<code>1920 × 1080 · 16:9 · 5.0 s · 24 fps</code>) at the bottom left, on the output pin&#39;s row. On a narrow node where the whole line would run into the output label, the aspect is left out first, never the size.</p>
 <p>Animate a single image into a clip. Wire an image into the node, pick a provider and model, set duration/resolution and (where supported) audio and an <strong>end frame</strong>, and run.</p>
 <figure class="media"><video src="/docs/media/video/i2v-quote.mp4" poster="/docs/media/video/i2v-quote.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Pick the model and duration, read the estimate, run, and the clip plays on the node</figcaption></figure>
 
@@ -293,6 +293,6 @@ kbd{font-family:var(--font-mono);font-size:11px;line-height:1;color:var(--muted)
   </main>
   <nav class="toc" aria-label="On this page"><div class="toc-head">On this page</div><ul><li class="lvl2"><a href="#image-video">Image → Video</a></li><li class="lvl3"><a href="#draft-mode-seedance-25">Draft mode (Seedance 2.5)</a></li><li class="lvl3"><a href="#reference-images">Reference images</a></li><li class="lvl3"><a href="#voice-seedance-25">Voice (Seedance 2.5)</a></li><li class="lvl2"><a href="#text-video">Text → Video</a></li><li class="lvl2"><a href="#video-video">Video → Video</a></li><li class="lvl2"><a href="#seedance-assets">Seedance assets</a></li><li class="lvl2"><a href="#film-shots-the-cinema-batch-executor">Film Shots — the cinema batch executor</a></li><li class="lvl2"><a href="#clip-board">Clip Board</a></li><li class="lvl2"><a href="#extract-frame">Extract frame</a></li><li class="lvl2"><a href="#sequence-local-assembly-free">Sequence — local assembly, free</a></li><li class="lvl2"><a href="#the-full-flow">The full flow</a></li></ul></nav>
 </div>
-<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=e4f44e675e" defer></script>
+<script src="/docs/search.js?v=ac35796b6a" data-index="/docs/search-index.json?v=1d5bde0a8f" defer></script>
 </body>
 </html>
